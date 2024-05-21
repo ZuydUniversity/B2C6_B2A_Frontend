@@ -90,3 +90,140 @@ nav ul {
 .data-display {
     margin-top: 65px;
 }
+
+h1 {
+    top: 0;
+    text-align: center;
+}
+
+
+
+/* ---------------------------- */
+/* Patientenoverzicht table css */
+/* ---------------------------- */
+
+table {
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    font-size: 22px;
+    font-family: Arial;
+    /* Easily adjustable colors for the whole component, bg=background, th= tableheader, td= tabledata */
+    --main-bg-color: white;
+    --main-th-color: cornflowerblue;
+    --main-td-color: lightsteelblue;
+    --main-hover-color: powderblue;
+}
+
+.scrollable-table {
+    overflow-y: scroll;
+    width: 100%;
+    height: 650px;
+}
+
+th, td {
+    border: transparent;
+}
+
+th {
+    cursor: default;
+}
+
+.image-cell {
+    height: 125px;
+    width: 125px;
+    padding: 0;
+    line-height: 0;
+    background-color: var(--main-bg-color);
+}
+
+    .grid-image {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+    }
+
+        .image-header {
+            background-color: var(--main-bg-color);
+            border: none;
+        }
+
+        .spacer {
+            width: 10px;
+            background-color: var(--main-bg-color);
+            border: none;
+        }
+
+.text-cell {
+    padding: 0;
+    background: var(--main-bg-color);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-all;
+}
+
+.rounded-left,
+.middle-text-cell,
+.rounded-right {
+    height: 125px;
+    background: var(--main-td-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+}
+.rounded-left {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.rounded-right {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.header-item,
+.header-rounded-left,
+.header-rounded-right {
+    padding: 10px 0px 10px 0px;
+    background: var(--main-th-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+}
+
+    .header-rounded-left {
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+
+    .header-rounded-right {
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+.th-header-left,
+.th-header-middle,
+.th-header-right {
+    background-color: var(--main-bg-color);
+    padding: 0px;
+    width: 200px;
+}
+
+tr:hover {
+    background-color: lightgray; /* Change this to the desired hover color */
+    cursor: pointer;
+}
+
+    tr:hover .rounded-left,
+    tr:hover .middle-text-cell,
+    tr:hover .rounded-right {
+        background-color: var(--main-hover-color);
+    }
+
+
+    /* ---------------------------- */
+
+
+
+
