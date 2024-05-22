@@ -17,7 +17,7 @@ const DataRow = ({ imageSrc, name, birthdate, diagnosis }) => (
 
 
 const DataTable = ({ data }) => (
-    <div className="scrollable-table">
+    <>
         <table>
             <thead>
                 <tr>
@@ -28,11 +28,17 @@ const DataTable = ({ data }) => (
                     <th className="th-header-right"><div className="header-rounded-right header-item">Diagnosis</div></th>
                 </tr>
             </thead>
+        </table>
+
+
+    <div className="scrollable-table">
+        <table>
             <tbody>
                 {data.map((row, index) => <DataRow key={index} {...row} />)}
             </tbody>
         </table>
     </div>
+    </>
 );
 
 function App() {
@@ -84,6 +90,7 @@ function App() {
 
       <>
           <h1>Patientenoverzicht</h1>
+
           <DataTable data={data} />
       </>
   );
