@@ -5,6 +5,11 @@
   text-align: center;
 }
 
+html, body {
+    --main-bg-color: white;
+    background-color: var(--main-bg-color);
+}
+
 .app {
     display: flex;
     flex-direction: column;
@@ -108,7 +113,6 @@ table {
     font-size: 22px;
     font-family: Arial;
     /* Easily adjustable colors for the whole component, bg=background, th= tableheader, td= tabledata */
-    --main-bg-color: initial;
     --main-th-color: cornflowerblue;
     --main-td-color: lightsteelblue;
     --main-hover-color: powderblue;
