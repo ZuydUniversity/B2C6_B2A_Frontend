@@ -108,7 +108,7 @@ table {
     font-size: 22px;
     font-family: Arial;
     /* Easily adjustable colors for the whole component, bg=background, th= tableheader, td= tabledata */
-    --main-bg-color: white;
+    --main-bg-color: initial;
     --main-th-color: cornflowerblue;
     --main-td-color: lightsteelblue;
     --main-hover-color: powderblue;
