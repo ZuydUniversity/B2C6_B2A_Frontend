@@ -1,3 +1,5 @@
+import Navbar from '../components/Navbar';
+
 function PatientOverview() {
     const DataRow = ({ imageSrc, name, birthdate, diagnosis }) => (
         <tr onClick={() => window.alert('Row clicked!')}>
@@ -54,10 +56,11 @@ function PatientOverview() {
         
     return (
         <>
+            <Navbar/>
             <h1>Patientenoverzicht</h1>
             <DataTable data={data} />
         </>
     );
 }
 
-export default MyPage;
+export default PatientOverview;
