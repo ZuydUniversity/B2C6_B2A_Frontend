@@ -1,0 +1,15 @@
+/* src/MyPage.css */
+.my-page {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .my-page h1 {
+    color: #333;
+  }
+  
+  .my-page p {
+    font-size: 18px;
+    color: #666;
+  }
+  
