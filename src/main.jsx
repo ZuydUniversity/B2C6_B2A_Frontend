@@ -6,12 +6,15 @@ import './index.css';
 
 import PatientOverview from './routes/PatientOverview.jsx';
 import ResultOverview from './routes/ResultOverview.jsx';
+import PatientView from './routes/PatientView.jsx';
 
 
 const router = createBrowserRouter([
     { path: "/", element: <App /> },
     { path: "/patientoverview", element: <PatientOverview /> },
+    { path: "/patientview", element: <PatientView /> },
     { path: "/resultoverview", element: <ResultOverview /> },
+
 ]);
 
 
