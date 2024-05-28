@@ -1,15 +1,15 @@
 // src/MyPage.js
-import './ResultOverview.css'; // Import the CSS file
 import Navbar from '../components/Navbar'; //double period to go back one directory
+import '../App.css';
 
-function ResultOverview() {
+function PatientView() {
   return (
-     <div className="ResultOverview">
+     <div className="PatientView">
       <Navbar />
-      <h1>Welcome to My Page</h1>
+      <h1>Patient</h1>
       <p>This is a new React page with CSS styling.</p>
     </div>
   );
 }
 
-export default ResultOverview;
+export default PatientView;
