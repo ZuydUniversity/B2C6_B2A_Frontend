@@ -8,6 +8,7 @@
 html, body {
     --main-bg-color: white;
     background-color: var(--main-bg-color);
+    color: black;
 }
 
 .app {
@@ -25,7 +26,6 @@ html, body {
     border: 1px solid #ddd;
     border-radius: 5px;
 }
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 table {
     width: 100%;
@@ -107,7 +107,8 @@ h1 {
 /* Patientenoverzicht table css */
 /* ---------------------------- */
 
-table {
+table,
+.table_2 {
     border-collapse: separate;
     border-spacing: 0 10px;
     font-size: 22px;
@@ -119,14 +120,6 @@ table {
 }
 
 .table_2 {
-    border-collapse: separate;
-    border-spacing: 0 10px;
-    font-size: 22px;
-    font-family: Arial;
-    /* Easily adjustable colors for the whole component, bg=background, th= tableheader, td= tabledata */
-    --main-th-color: cornflowerblue;
-    --main-td-color: lightsteelblue;
-    --main-hover-color: powderblue;
     width: 400px;
 }
 
@@ -250,7 +243,9 @@ tr:hover {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: white;
+    background-color: cornflowerblue;
+    padding:20px;
+    color:white;
 }
 
 .header-empty-middle
@@ -263,4 +258,64 @@ tr:hover {
 {
     width: 0px;
     background-color: var(--main-bg-color);
+}
+
+.PageTop {
+    width:1000px    ;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 10px;
+}
+
+.PageTop h1 {
+    flex-grow: 1;
+}
+
+.patient-image {
+    height: 125px;
+    width: 125px;
+    padding: 0;
+    line-height: 0;
+    background-color: var(--main-bg-color);
+}
+
+.PageBottom {
+    width:1000px    ;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 10px;
+    font-size:22px;
+}
+
+.Block {
+    border:solid;
+    border-radius: 5px;
+    border-width: 2px;
+    color: black;
+    width:200px;
+}
+
+.textual-data-row {
+    display: flex;
+}
+
+.textual-data-row p {
+    margin: 0;
+    padding: 0;
+    margin-right: 5px;
+}
+
+.textual-data-row:hover {
+    background-color: lightgray;
+    cursor: pointer;
+}
+
+.Block button {
+    margin: 20px;
+    color: white;
+    background-color: cornflowerblue;
 }
