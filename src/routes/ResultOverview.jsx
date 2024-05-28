@@ -1,6 +1,5 @@
 // src/MyPage.js
-import React from 'react';
-import '../App.css'; // Import the CSS file
+import './ResultOverview.css'; // Import the CSS file
 import Navbar from '../components/Navbar'; //double period to go back one directory
 
 function ResultOverview() {
