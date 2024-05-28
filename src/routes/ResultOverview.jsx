@@ -1,26 +1,15 @@
+// src/MyPage.js
+import React from 'react';
 import '../App.css'; // Import the CSS file
-import Navbar from '../components/Navbar'; // Double period to go back one directory
-import { useNavigate } from 'react-router-dom';
+import Navbar from '../components/Navbar'; //double period to go back one directory
 
 function ResultOverview() {
-  const DataRow = ({ type, date }) => {
-    const navigate = useNavigate();
-
-    const handleClick = () => {
-      if (type === 'Myometrie') {
-        navigate('/myometriepage');
-      } else {
-        window.alert(`Row clicked: ${type}`);
-      }
-    };
-
-    return (
-      <tr onClick={handleClick}>
-        <td className="text-cell"><div className="rounded-left">{type}</div></td>
-        <td className="text-cell"><div className="rounded-right">{date}</div></td>
-      </tr>
-    );
-  };
+  const DataRow = ({ type, date }) => (
+    <tr onClick={() => window.alert('Row clicked!')}>
+      <td className="text-cell"><div className="rounded-left">{type}</div></td>
+      <td className="text-cell"><div className="rounded-right">{date}</div></td>
+    </tr>
+  );
 
   const DataTable = ({ data }) => (
     <>
@@ -42,7 +31,6 @@ function ResultOverview() {
       </div>
     </>
   );
-
   const data = [
     { type: 'Myometrie', date: '19/03/2024' },
     { type: 'Radiologie', date: '01/07/2022' },
@@ -50,8 +38,8 @@ function ResultOverview() {
     { type: 'Myometrie', date: '09/10/2019' },
   ];
 
+
   return (
-    <>
     <>
       <Navbar />
       <h1>Resultatenoverzicht</h1>
