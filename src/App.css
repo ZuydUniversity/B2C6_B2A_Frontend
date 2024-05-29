@@ -135,6 +135,10 @@ table,
     padding: 5px;
 }
 
+.myometrietable th {
+    padding: 5px;
+}
+
 .scrollable-table {
     overflow-y: auto;
     width: 100%;
@@ -299,7 +303,9 @@ tr:hover {
 
 .PageTopResults {
     width: 1150px;
+    display: flex;
     justify-content: flex-end; /* Align items to the right */
+    align-items: center; /* Vertically align items */
 }
 
 .patient-image,
@@ -315,7 +321,7 @@ tr:hover {
     padding-left: 10px;
 }
 
-.patient-name-results {
+.patient-results {
     color: black;
 }
 

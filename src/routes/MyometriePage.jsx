@@ -24,18 +24,9 @@ function MyometriePage() {
     });
 
     const [note, setNote] = useState('');
-    const [notes, setNotes] = useState([]);
 
     const handleNoteChange = (e) => {
         setNote(e.target.value);
-    };
-
-    const handleNoteSubmit = (e) => {
-        e.preventDefault();
-        if (note.trim()) {
-            setNotes([...notes, note]);
-            setNote('');
-        }
     };
 
     const totalItemScore = Object.values(cmasScores).reduce((total, { left, right }) => {
@@ -46,7 +37,7 @@ function MyometriePage() {
         <>
             <Navbar />
             <div className="PageTopResults">
-                <h3 className="patient-name-results">{patientName}</h3>
+                <h3 className="patient-results">{patientName}</h3>
                 <img className="patient-image-results" src={imageSrc} alt="patient" />
             </div>
             <h1>Myometrie</h1>
@@ -81,25 +72,20 @@ function MyometriePage() {
                 </div>
             </div>
             <div>
-                <h2>Totaalscore</h2>
-                <p>{totalItemScore}</p>
+                <h2 className='patient-results'>Totaalscore</h2>
+                <p className='patient-results'>{totalItemScore}</p>
             </div>
             <div>
-                <h2>Voeg een notitie toe</h2>
-                <form onSubmit={handleNoteSubmit}>
-                    <input
-                        type="text"
+                <h2 className='patient-results'>Voeg een notitie toe</h2>
+                <form onSubmit={(e) => e.preventDefault()}>
+                    <textarea
                         value={note}
                         onChange={handleNoteChange}
                         placeholder="Voeg een notitie toe"
+                        rows="4" /* Set the desired number of rows */
+                        cols="50" /* Set the desired number of columns */
                     />
-                    <button type="submit">Toevoegen</button>
                 </form>
-                <ul>
-                    {notes.map((note, index) => (
-                        <li key={index}>{note}</li>
-                    ))}
-                </ul>
             </div>
         </>
     );
