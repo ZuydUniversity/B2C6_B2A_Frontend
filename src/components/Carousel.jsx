@@ -1,5 +1,6 @@
 // src/Carousel.js
 import React, { useState } from 'react';
+
 const Carousel = ({ images }) => {
     const [activeIndex, setActiveIndex] = useState(0);
     const nextSlide = () => {
@@ -12,6 +13,7 @@ const Carousel = ({ images }) => {
             prevIndex === 0 ? images.length - 1 : prevIndex - 1
         );
     };
+
     return (
         <div className="carousel">
             <button onClick={prevSlide} className="carousel__btn carousel__btn--prev">

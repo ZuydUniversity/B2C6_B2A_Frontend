@@ -138,7 +138,8 @@ table,
 .scrollable-table {
     overflow-y: auto;
     width: 100%;
-    height: 650px;
+    max-height: 650px;
+    margin-bottom:100px;
 }
 
 th, td {
@@ -370,10 +371,12 @@ tr:hover {
     text-align: start;
 }
 
-/* Carousel.css */
+/* Carousel css */
+/* for the radiology page. */
+
 .carousel {
     position: relative;
-    max-width: 100%;
+    max-width: 300px;
     overflow: hidden;
 }
 
@@ -414,3 +417,117 @@ tr:hover {
     .carousel__img:hover {
         transform: scale(1.05);
     }
+
+    /* ---------------------------- */
+
+.bottom-page{
+    display : flex;
+    justify-content: space-between;
+    font-size:22px;
+}
+
+.bottom-page textarea {
+    width: 45%;
+    height: auto;
+    font-size: 22px;
+}
+
+.top-page {
+    width:1250px;
+    display:flex;
+    justify-content: space-between;
+}
+
+.patient-data-block {
+    display: flex;
+    justify-content: space-between;
+}
+
+.content{
+    color:black;
+}
+
+.card {
+    background-color: #f8f8f8; /* Light gray */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px; /* Space inside the card */
+    margin: 20px 0; /* Space outside the card */
+    margin-bottom:0;
+    width: 80%; /* Adjust as needed */
+    max-width: 600px; /* Adjust as needed */
+    margin-left: auto; /* Center the card */
+    margin-right: auto; /* Center the card */
+}
+
+.patient-card {
+    margin-right: 20px;
+}
+
+.patient-data-row {
+    display: flex; /* Align items in a row */
+    justify-content: space-between; /* Space items evenly */
+    margin-bottom: 10px; /* Space between rows */
+}
+
+.patient-information {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.card-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom:10px;
+}
+
+.card-buttons button {
+    margin-left: 10px;
+}
+
+button:hover {
+    background-color: #e0e0e0; /* Darker gray */
+}
+
+.medication-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.medication-card {
+    flex: 0 0 calc(33.33% - 15px); /* 33.33% for 3 items per row, 10px for margin */
+    margin: 10px; /* Adjust as needed */
+    box-sizing: border-box; /* Include padding and border in the width */
+}
+
+/*The pattern can be defined using the formula an + b, where a and b are constants, and n is a counter starting from 0.
+In the case of :nth-child(3n+1), it selects every third element starting from the first one. Here's how it works:
+• For n=0, it selects the 1st element (because 3*0+1 = 1).
+• For n=1, it selects the 4th element (because 3*1+1 = 4).
+• For n=2, it selects the 7th element (because 3*2+1 = 7).
+• And so on...
+Similarly, :nth-child(3n) selects every third element starting from the third one:
+• For n=0, it doesn't select any element (because 3*0 = 0).
+• For n=1, it selects the 3rd element (because 3*1 = 3).
+• For n=2, it selects the 6th element (because 3*2 = 6).
+• And so on...*/
+
+/* This math makes it so it doesnt matter how many medication cards you add they keep getting formatted without margin
+    on the left and right side of the row 
+*/
+/* Remove left margin from the first card in each row */
+.medication-card:nth-child(3n+1) {
+    margin-left: 0;
+}
+
+/* Remove right margin from the last card in each row */
+.medication-card:nth-child(3n) {
+    margin-right: 0;
+}
+
+.patient-card .patient-data-row p,
+.contactperson-card .patient-data-row p,
+.medication-card p {
+    line-height: 0.3; /* Adjust as needed */
+}

@@ -46,7 +46,7 @@ function PatientView() {
                             <p>Mail: {mail}</p>
                             <p>Diagnose: {diagnosis}</p>
                         </div>
-                        <button>Zie alles</button>
+                        <Link to="/patientsettingspage"><button>Zie alles</button></Link>
                     </div>
                 </div>
             </div>
