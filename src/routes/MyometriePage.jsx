@@ -46,7 +46,7 @@ function MyometriePage() {
         <>
             <Navbar />
             <div className="PageTopResults">
-                <h3>{patientName}</h3>
+                <h3 className="patient-name-results">{patientName}</h3>
                 <img className="patient-image-results" src={imageSrc} alt="patient" />
             </div>
             <h1>Myometrie</h1>

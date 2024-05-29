@@ -316,6 +316,10 @@ tr:hover {
     padding-left: 10px;
 }
 
+.patient-name-results {
+    color: black;
+}
+
 .PageBottom {
     width:1000px    ;
     display:flex;
