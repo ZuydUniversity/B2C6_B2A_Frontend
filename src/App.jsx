@@ -3,40 +3,7 @@ import './Login/App.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Navbar from './components/Navbar';
 
-const App = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [loginError, setLoginError] = useState(null);
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        try {
-            const response = await fetch('http://127.0.0.1:5000/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email, password })
-            });
-
-            if (!response.ok) { 
-                if(response.status === 500) {
-                    throw new Error('Server error, probeer het later opnieuw');
-                }
-                throw new Error('Inloggen mislukt, probeer het opnieuw');
-            }
-
-            if (response.ok) { // code : 200-299
-                setLoginError('Inloggen successvol')
-            }
-
-        } catch (error) {
-            console.error('Login error:', error);
-            setLoginError(error.message)
-        }
-    };
-
+function App() {
     return (
         <>
             <Navbar />
