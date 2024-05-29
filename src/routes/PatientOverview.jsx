@@ -1,8 +1,13 @@
 import Navbar from '../components/Navbar';
+import { useNavigate } from 'react-router-dom';
+import TopPage from '../components/TopPage';
+
 
 function PatientOverview() {
+    const navigate = useNavigate();
+
     const DataRow = ({ imageSrc, name, birthdate, diagnosis }) => (
-        <tr onClick={() => window.alert('Row clicked!')}>
+        <tr onClick={() => navigate('/patientview')}>
             <td className="image-cell"><img src={imageSrc} alt="Profile" className="grid-image" /></td>
             <td className="spacer"></td>
             <td className="text-cell"><div className="rounded-left">{name}</div></td>
@@ -15,7 +20,7 @@ function PatientOverview() {
 
     const DataTable = ({ data }) => (
         <>
-            <table>
+            <table className="patientoverview-datatable">
                 <thead>
                     <tr>
                         <th className="image-header"></th>
@@ -28,7 +33,7 @@ function PatientOverview() {
             </table>
 
 
-            <div className="scrollable-table">
+            <div className="patientoverview-scrollable-table">
                 <table>
                     <tbody>
                         {data.map((row, index) => <DataRow key={index} {...row} />)}
@@ -56,8 +61,8 @@ function PatientOverview() {
         
     return (
         <>
-            <Navbar/>
-            <h1>Patientenoverzicht</h1>
+            <Navbar />
+            <TopPage headerName="Patientenoverzicht"/>
             <DataTable data={data} />
         </>
     );

@@ -2,6 +2,7 @@ import '../App.css'; // Import the CSS file
 import Navbar from '../components/Navbar'; //double period to go back one directory
 import React from 'react';
 import Carousel from '../components/Carousel';
+import TopPage from '../components/TopPage';
 
 //more information about the carousel used in this file can be found here:
 //https://stackademic.com/blog/mastering-react-carousel-building-dynamic-image-sliders
@@ -34,7 +35,7 @@ function RadiologyPage() {
 
     const DataTable = ({ data }) => (
         <>
-            <table>
+            <table className="radiology-datatable">
                 <thead>
                     <tr>
                         <th className="th-header-left"><div className="header-rounded-left header-item">Aspect</div></th>
@@ -61,20 +62,8 @@ function RadiologyPage() {
     return (
         <>
             <Navbar />
-            <div className="top-page">
-                <div>
-                    <h1>Radiologie resultaten:</h1>
-                    <DataTable data={data} />
-                </div>
-                <div className="patient-data-block">
-                    <h3 className="patient-name-results">{patientName}</h3>
-                    <img className="patient-image-results" src={imageSrc} alt="patient" />
-                </div>
-                
-            </div>
-
-
-
+            <TopPage headerName="Radiologie resultaten" patientName={patientName} imageSrc={imageSrc} />
+            <DataTable data={data}/>
             <div className="bottom-page">
                 <Carousel images={images} />
                 <textarea placeholder="Notities gaan hier..."></textarea>

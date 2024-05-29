@@ -1,6 +1,7 @@
 import Navbar from '../components/Navbar'; //double period to go back one directory
 import App from '../App';
 import { Link } from 'react-router-dom';
+import TopPage from '../components/TopPage';
 
 function PatientView() {
     const imageSrc = '../src/assets/kid_1.png';
@@ -14,10 +15,7 @@ function PatientView() {
         <>
             <Navbar />
             <div className="PatientView">
-                <div className="PageTop">
-                    <h1>{patientName}</h1>
-                    <img className="patient-image" src={imageSrc}></img>
-                </div>
+                <TopPage headerName="Patient Opties" patientName={patientName} imageSrc={imageSrc} />
                 <div className='PageBottom'>
                     <div className="ResultsBlock Block">
                         <p>Resultaten</p>

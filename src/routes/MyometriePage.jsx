@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../App.css';
 import Navbar from '../components/Navbar';
+import TopPage from '../components/TopPage';
 
 function MyometriePage() {
     const imageSrc = '../src/assets/kid_1.png';
@@ -45,11 +46,7 @@ function MyometriePage() {
     return (
         <>
             <Navbar />
-            <div className="PageTopResults">
-                <h3 className="patient-name-results">{patientName}</h3>
-                <img className="patient-image-results" src={imageSrc} alt="patient" />
-            </div>
-            <h1>Myometrie</h1>
+            <TopPage headerName="Myometrie" patientName={patientName} imageSrc={imageSrc} />
             <div>
                 <h2>CMAS Scores</h2>
                 <div>

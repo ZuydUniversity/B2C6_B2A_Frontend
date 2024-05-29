@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import TopPage from '../components/TopPage';
 
 const PatientSettingsPage = () => {
     const imageSrc = '../src/assets/kid_1.png';
@@ -87,14 +88,7 @@ const PatientSettingsPage = () => {
     return (
         <>
             <Navbar />
-            <div className="top-page">
-                <h1>Patientgegevens</h1>
-                <p>This is the content of the home page.</p>
-                <div className="patient-data-block">
-                    <h3 className="patient-name-results">{patientName}</h3>
-                    <img className="patient-image-results" src={imageSrc} alt="patient" />
-                </div>
-            </div>
+            <TopPage headerName="Gegevens" patientName={patientName} imageSrc={imageSrc} />
             <div className="content">
                 <div className="patient-information">
                     <div className="patient-card card">

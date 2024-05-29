@@ -135,11 +135,28 @@ table,
     padding: 5px;
 }
 
+.patientoverview-scrollable-table {
+    overflow-y: auto;
+    width: 100%;
+    max-height: 650px;
+    max-width: 730px;
+    margin-bottom: 100px;
+}
+
 .scrollable-table {
     overflow-y: auto;
     width: 100%;
     max-height: 650px;
-    margin-bottom:100px;
+    max-width:610px;
+    margin-bottom:25px;
+}
+
+.radiology-datatable {
+    width: 610px;
+}
+
+.patientoverview-datatable {
+    width: 730px;
 }
 
 th, td {
@@ -254,15 +271,16 @@ tr:hover {
 
 .Navbar {
     top:0;
+    left:0;
     position:absolute;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: flex-start;
     background-color: cornflowerblue;
     padding:20px;
     color:white;
     margin: 0;
     z-index: 100;
+    width:100%;
 
 }
 
@@ -321,12 +339,11 @@ tr:hover {
 }
 
 .PageBottom {
-    width:1500px    ;
     display:flex;
     justify-content: space-between;
     background-color: white;
-    padding: 10px;
     font-size:22px;
+    margin-top:20px;
 }
 
 .Block {
@@ -421,21 +438,46 @@ tr:hover {
     /* ---------------------------- */
 
 .bottom-page{
+    margin-top:0;
     display : flex;
     justify-content: space-between;
     font-size:22px;
 }
 
 .bottom-page textarea {
-    width: 45%;
+    flex-grow:1;
+    margin-left:20px;
     height: auto;
     font-size: 22px;
 }
 
 .top-page {
-    width:1250px;
-    display:flex;
-    justify-content: space-between;
+    width: 1250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-button {
+    margin-right:20px;
+    width:15%;
+}
+
+.top-page h1 {
+    text-align: left;
+    flex-grow:1;
+    margin:0;
+    padding:0;
+}
+
+.top-page-nav-info {
+    display: flex;
+    flex-direction: column; /* Stack the children vertically */
+    justify-content: center; /* Center the children vertically */
+    align-items: flex-start; /* Center the children horizontally */
+    gap: 15px; /* Adjust as needed to control the space between the children */
+    width: 100%;
+    height:125px;
 }
 
 .patient-data-block {
@@ -531,3 +573,4 @@ Similarly, :nth-child(3n) selects every third element starting from the third on
 .medication-card p {
     line-height: 0.3; /* Adjust as needed */
 }
+

@@ -1,8 +1,12 @@
 import '../App.css'; // Import the CSS file
 import Navbar from '../components/Navbar'; // Double period to go back one directory
 import { useNavigate } from 'react-router-dom';
+import TopPage from '../components/TopPage';
 
 function ResultOverview() {
+    const imageSrc = '../src/assets/kid_1.png';
+    const patientName = 'John Doe';
+
   const DataRow = ({ type, date }) => {
     const navigate = useNavigate();
 
@@ -54,9 +58,9 @@ function ResultOverview() {
 
   return (
     <>
-      <Navbar />
-      <h1>Resultatenoverzicht</h1>
-      <DataTable data={data} />
+        <Navbar />
+        <TopPage headerName="Resultatenoverzicht" patientName={patientName} imageSrc={imageSrc} />
+        <DataTable data={data} />
     </>
   );
 }
