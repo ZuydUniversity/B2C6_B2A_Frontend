@@ -10,6 +10,7 @@ import PatientView from './routes/PatientView.jsx';
 import MyometriePage from './routes/MyometriePage.jsx';
 import EssayPage from './routes/EssayPage.jsx';
 import RadiologyPage from './routes/RadiologyPage.jsx';
+import PatientSettingsPage from './routes/PatientSettingsPage.jsx';
 
 
 const router = createBrowserRouter([
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
     { path: "/myometriepage", element: <MyometriePage /> },
     { path: "/essaypage", element: <EssayPage /> },
     { path: "/radiologypage", element: <RadiologyPage /> },
+    { path: "/patientsettingspage", element: <PatientSettingsPage /> },
 ]);
 
 
