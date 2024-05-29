@@ -9,6 +9,8 @@ function ResultOverview() {
     const handleClick = () => {
       if (type === 'Myometrie') {
         navigate('/myometriepage');
+      } else if (type === 'Radiologie') {
+        navigate('/radiologypage');
       } else {
         window.alert(`Row clicked: ${type}`);
       }
