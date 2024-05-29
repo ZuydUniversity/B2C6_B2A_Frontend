@@ -1,14 +1,16 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   text-align: center;
 }
 
 html, body {
     --main-bg-color: white;
     background-color: var(--main-bg-color);
-    color: black;
+    color: white;
+    margin:0;
+    padding:0;
 }
 
 .app {
@@ -98,7 +100,6 @@ nav ul {
 
 h1 {
     top: 0;
-    text-align: center;
 }
 
 
@@ -251,12 +252,23 @@ tr:hover {
     /* ---------------------------- */
 
 .Navbar {
+    top:0;
+    position:absolute;
     display: flex;
     justify-content: space-around;
     align-items: center;
     background-color: cornflowerblue;
     padding:20px;
     color:white;
+    margin: 0;
+    z-index: 100;
+
+}
+
+.link {
+    margin-right:20px;
+    color: white;
+    font-size:22px;
 }
 
 .header-empty-middle
@@ -276,13 +288,14 @@ tr:hover {
     width:1000px    ;
     display:flex;
     justify-content: space-between;
-    align-items: center;
+    margin:0;
     background-color: white;
     padding: 10px;
 }
 
 .PageTop h1 {
     flex-grow: 1;
+    text-align: left;
 }
 
 .PageTopResults {
@@ -307,7 +320,6 @@ tr:hover {
     width:1000px    ;
     display:flex;
     justify-content: space-between;
-    align-items: center;
     background-color: white;
     padding: 10px;
     font-size:22px;
