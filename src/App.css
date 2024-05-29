@@ -273,7 +273,7 @@ tr:hover {
 }
 
 .PageTop {
-    width:1000px    ;
+    width:1500px    ;
     display:flex;
     justify-content: space-between;
     margin:0;
@@ -295,7 +295,7 @@ tr:hover {
 }
 
 .PageBottom {
-    width:1000px    ;
+    width:1500px    ;
     display:flex;
     justify-content: space-between;
     background-color: white;
@@ -308,7 +308,9 @@ tr:hover {
     border-radius: 5px;
     border-width: 2px;
     color: black;
-    width:200px;
+    width:350px;
+    height: 600px;
+    font-size:26px;
 }
 
 .textual-data-row {
@@ -331,3 +333,59 @@ tr:hover {
     color: white;
     background-color: cornflowerblue;
 }
+
+.DataBlockData div p,
+.DataBlock div p {
+    margin: 0;
+    align-items: start;
+}
+
+.DataBlock div{
+    margin-left:10px;
+    text-align: start;
+}
+
+/* Carousel.css */
+.carousel {
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.carousel__btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 1.5rem;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    z-index: 1;
+    transition: background-color 0.3s;
+}
+
+    .carousel__btn:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+.carousel__btn--prev {
+    left: 0;
+}
+
+.carousel__btn--next {
+    right: 0;
+}
+
+.carousel__img {
+    width: 300px;
+    height: 300px;
+    object-fit: fill;
+    display: block;
+    transition: transform 0.3s ease-in-out;
+}
+
+    .carousel__img:hover {
+        transform: scale(1.05);
+    }
