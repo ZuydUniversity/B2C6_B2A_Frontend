@@ -10,7 +10,7 @@ const TopPage = ({ headerName, patientName, imageSrc }) => {
                 <h1>{headerName}</h1>
             </div>
             <div className="patient-data-block">
-                <h3 className="patient-name-results">{patientName}</h3>
+                <h3 className="patient-results">{patientName}</h3>
                 <img className="patient-image-results" src={imageSrc} alt="patient" />
             </div>
         </div>

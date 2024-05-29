@@ -62,8 +62,10 @@ function PatientOverview() {
     return (
         <>
             <Navbar />
-            <TopPage headerName="Patientenoverzicht"/>
-            <DataTable data={data} />
+            <TopPage headerName="Patientenoverzicht" />
+            <div className="content">
+                <DataTable data={data} />
+            </div>
         </>
     );
 }

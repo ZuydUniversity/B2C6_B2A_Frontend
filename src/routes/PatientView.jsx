@@ -17,27 +17,29 @@ function PatientView() {
             <div className="PatientView">
                 <TopPage headerName="Patient Opties" patientName={patientName} imageSrc={imageSrc} />
                 <div className='PageBottom'>
-                    <div className="ResultsBlock Block">
+                    <div className="ResultsBlock Block card">
                         <p>Resultaten</p>
-                        {Array.from({ length: 3 }, (_, i) => (
-                            <div className="textual-data-row" key={i}>
-                                <p>{i} result {i}</p>
-                            </div>
-                        ))}
-                        <Link to="/resultoverview"><button>Zie alles</button></Link>
+                        <div className="DataBlockData">
+                            {Array.from({ length: 3 }, (_, i) => (
+                                <div className="textual-data-row" key={i + 1}>
+                                    <p>{i + 1}: Result {i + 1}</p>
+                                </div>
+                            ))}
+                        </div>
+                        <Link to="/resultoverview" className="resultoverview-button"><button>Zie alles</button></Link>
                     </div>
-                    <div className="EssayBlock Block">
+                    <div className="EssayBlock Block card">
                         <p>Verslagen</p>
                         <div className="DataBlockData">
                             {Array.from({ length: 3 }, (_, i) => (
-                                <div className="textual-data-row" key={i}>
-                                    <p>{i}: Verslag {i}</p>
+                                <div className="textual-data-row" key={i + 1}>
+                                    <p>{i + 1}: Verslag {i + 1}</p>
                                 </div>
                             ))}
                         </div>
                         <Link to="/essaypage"><button>Zie alles</button></Link>
                     </div>
-                    <div className="DataBlock Block">
+                    <div className="DataBlock Block card">
                         <p>Gegevens</p>
                         <div className="DataBlockData">
                             <p>Nummer: {phoneNumber}</p>

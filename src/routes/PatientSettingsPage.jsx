@@ -29,8 +29,8 @@ const PatientSettingsPage = () => {
     const [medications, setMedications] = useState([
         { id: 1, medicine: "Paracetamol", use: "50mg", frequency: "3 keer per week", isEditing: false },
         { id: 2, medicine: "Ibuprofen", use: "200mg", frequency: "2 keer per dag", isEditing: false },
-        { id: 3, medicine: "Ibuprofen", use: "200mg", frequency: "2 keer per dag", isEditing: false },
-        { id: 4, medicine: "Ibuprofen", use: "200mg", frequency: "2 keer per dag", isEditing: false },
+        { id: 3, medicine: "Amoxicillin", use: "500mg", frequency: "2 keer per dag", isEditing: false },
+        { id: 4, medicine: "Metformin", use: "850mg", frequency: "1 keer per dag", isEditing: false },
         // Add more medication objects here...
     ]);
 
@@ -129,7 +129,7 @@ const PatientSettingsPage = () => {
                 </div>
                 <div className="medication-cards-container">
                 {medications.map((medication, index) => (
-                    <div key={index} className="medication-card card">
+                    <div key={index} className="medication-card medication card">
                         <div className="card-buttons">
                             {medication.isEditing ? (
                                 <>
@@ -145,8 +145,11 @@ const PatientSettingsPage = () => {
                         <div className="patient-data-row"><p>Frequentie</p>{medication.isEditing ? <input type="text" defaultValue={medication.frequency} /> : <p>{medication.frequency}</p>}</div>
                     </div>
                 ))}
+                    <div className="medication-card placeholder-card card medication">
+                        <i class="bi bi-plus"></i>
+                    </div>
                 </div>
-
+               
             </div>
         </>
     );

@@ -59,8 +59,10 @@ function ResultOverview() {
   return (
     <>
         <Navbar />
-        <TopPage headerName="Resultatenoverzicht" patientName={patientName} imageSrc={imageSrc} />
-        <DataTable data={data} />
+          <TopPage headerName="Resultatenoverzicht" patientName={patientName} imageSrc={imageSrc} />
+          <div className="content">
+              <DataTable data={data} />
+          </div>
     </>
   );
 }

@@ -8,15 +8,14 @@ import TopPage from '../components/TopPage';
 //https://stackademic.com/blog/mastering-react-carousel-building-dynamic-image-sliders
 
 function RadiologyPage() {
-    const kid_1_img = '../src/assets/kid_1.png';
-    const kid_2_img = '../src/assets/kid_2.png';
-    const kid_3_img = '../src/assets/kid_3.png';
-    const imageSrc = kid_1_img
+    const shoulder_1 = '../src/assets/shoulder_1.jpg';
+    const shoulder_2 = '../src/assets/shoulder_2.jpg';
+    const imageSrc = '../src/assets/kid_1.png';
     const patientName = 'John Doe';
 
 
     const images = [
-        kid_1_img, kid_2_img, kid_3_img,
+        shoulder_1, shoulder_2,
     ];
 
     const data = [
@@ -47,7 +46,7 @@ function RadiologyPage() {
             </table>
 
 
-            <div className="scrollable-table">
+            <div className="radiology-scrollable-table">
                 <table>
                     <tbody>
                         {data.map((row, index) => <DataRow key={index} {...row} />)}
@@ -66,7 +65,7 @@ function RadiologyPage() {
             <DataTable data={data}/>
             <div className="bottom-page">
                 <Carousel images={images} />
-                <textarea placeholder="Notities gaan hier..."></textarea>
+                <textarea placeholder="Voeg een notitie toe"></textarea>
             </div>
         </>
     );

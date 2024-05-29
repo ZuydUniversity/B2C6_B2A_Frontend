@@ -38,7 +38,7 @@ function MyometriePage() {
         <>
             <Navbar />
             <TopPage headerName="Myometrie" patientName={patientName} imageSrc={imageSrc} />
-            <div>
+            <div className="content">
                 <h2>CMAS Scores</h2>
                 <div>
                     <table className="myometrietable">
@@ -75,7 +75,7 @@ function MyometriePage() {
             <div>
                 <h2 className='patient-results'>Voeg een notitie toe</h2>
                 <form onSubmit={(e) => e.preventDefault()}>
-                    <textarea
+                    <textarea className='myometrie-textarea'
                         value={note}
                         onChange={handleNoteChange}
                         placeholder="Voeg een notitie toe"
