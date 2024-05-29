@@ -113,6 +113,8 @@ h1 {
 table,
 .table_2,
 .myometrietable {
+.table_2,
+.myometrietable {
     border-collapse: separate;
     border-spacing: 0 10px;
     font-size: 22px;
@@ -286,8 +288,9 @@ tr:hover {
     background-color: var(--main-bg-color);
 }
 
-.PageTop {
-    width:1500px    ;
+.PageTop,
+.PageTopResults {
+    width:1000px    ;
     display:flex;
     justify-content: space-between;
     margin:0;
@@ -298,6 +301,11 @@ tr:hover {
 .PageTop h1 {
     flex-grow: 1;
     text-align: left;
+}
+
+.PageTopResults {
+    width: 1150px;
+    justify-content: flex-end; /* Align items to the right */
 }
 
 .PageTopResults {
@@ -316,10 +324,6 @@ tr:hover {
 
 .patient-image-results {
     padding-left: 10px;
-}
-
-.patient-name-results {
-    color: black;
 }
 
 .PageBottom {
