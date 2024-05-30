@@ -7,7 +7,7 @@ const App = ({ message }) => {
         <div>
             <h1 className="centered-title"><i className="bi bi-person-circle"></i> Loginpagina</h1>
 
-            <div className="formdiv">
+            <div className="login_style">
                 <form action="/" method="POST">
                     <label htmlFor="email"><i className="bi bi-envelope-at-fill"></i> E-mailadres</label><br />
                     <input type="email" id="email" name="email" className='login_input'/><br />
@@ -17,8 +17,8 @@ const App = ({ message }) => {
                 </form>
             </div> 
 
-            <div className="formdiv">
-                <form action="/create" method="GET">
+            <div className="login_style">
+                <form action="/register" method="GET">
                     <button type="submit" className='login_button'><i className="bi bi-person-plus-fill"></i> Account aanmaken</button>
                 </form>
                 <form action="/forgot-password" method="GET">
