@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../App.css';
 import { useNavigate } from 'react-router-dom';
 
 function Register() {
@@ -84,39 +85,41 @@ function Register() {
         switch (accountType) {
             case 'Doctor':
                 return (
-                    <div className="formdiv">
+                <div className="container doctor-register-form">    
+                    <div >
                         <div>
                             <label>Personeelsnummer</label>
-                            <input type="number" id="employeeNumber" name="employeeNumber" value={employeeNumber} onChange={(e) => setEmployeeNumber(e.target.value)} required />
+                            <input type="number" id="employeeNumber" name="employeeNumber" className='login_input' value={employeeNumber} onChange={(e) => setEmployeeNumber(e.target.value)} required />
                         </div>
                         <div>
                             <label>Specialisatie</label>
-                            <input type="text" id="specialization" name="specialization" value={specialization} onChange={(e) => setSpecialization(e.target.value)} required />
+                            <input type="text" id="specialization" name="specialization" className='login_input' value={specialization} onChange={(e) => setSpecialization(e.target.value)} required />
                         </div>
                         <div>
                             <label>Telefoonnummer</label>
-                            <input type="tel" id="phoneNumber" name="phoneNumber" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
+                            <input type="tel" id="phoneNumber" name="phoneNumber" className='login_input' value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
                         </div>
                     </div>
+                </div>    
                 );
             case 'Patient':
                 return (
-                    <div className="formdiv">
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <label>Patiëntnummer</label>
-                            <input type="number" id="patientNumber" name="patientNumber" value={patientNumber} onChange={(e) => setPatientNumber(e.target.value)} required />
+                    <div className="formdiv patient-register-form">
+                        <div>
+                            <label>Patiëntnummer</label>
+                            <input type="number" id="patientNumber" name="patientNumber"className='login_input' value={patientNumber} onChange={(e) => setPatientNumber(e.target.value)} required />
                         </div>
                         <div>
                             <label>Geslacht</label>
-                            <input type="text" id="gender" name="gender" value={gender} onChange={(e) => setGender(e.target.value)} required />
+                            <input type="text" id="gender" name="gender" className='login_input' value={gender} onChange={(e) => setGender(e.target.value)} required />
                         </div>
                         <div>
                             <label>Geboortedatum</label>
-                            <input type="date" id="birthday" name="birthday" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} required />
+                            <input type="date" id="birthday" name="birthday" className='login_input' value={birthDate} onChange={(e) => setBirthDate(e.target.value)} required />
                         </div>
                         <div>
                             <label>Telefoonnummer</label>
-                            <input type="tel" id="phoneNumber" name="phoneNumber" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
+                            <input type="tel" id="phoneNumber" name="phoneNumber" className='login_input' value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
                         </div>
                     </div>
                 );
@@ -146,42 +149,51 @@ function Register() {
         <h1 className="centered-title"><i className="bi bi-person-circle"></i> Account aanmaken</h1>
         <div className='formdiv'>
           <form onSubmit={register}>
-            <div style={{marginBottom: '20px'}}>
-              <label>Accounttype</label>
-              <select value={accountType} onChange={changeAccount} required>
-                <option value="" disabled>Selecteer een accounttype</option>
-                <option value="Doctor">Dokter</option>
-                <option value="Patient">Patiënt</option>
-                <option value="Admin">Beheerder</option>
-                <option value="Researcher">Onderzoeker</option>
-              </select>
+            <div className='register_style'>
+                <div className='register_form'>
+                    <div className='register_left'>
+                        <div style={{marginBottom: '20px'}}>
+                        <label>Accounttype</label>
+                        <select value={accountType} onChange={changeAccount} required>
+                            <option value="" disabled>Selecteer een accounttype</option>
+                            <option value="Doctor">Dokter</option>
+                            <option value="Patient">Patiënt</option>
+                            <option value="Admin">Beheerder</option>
+                            <option value="Researcher">Onderzoeker</option>
+                        </select>
+                        </div>
+                        <div>
+                            <label>Voornaam</label>
+                            <input type="text" id="firstName" name="firstName" className='login_input' value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
+                        </div>
+                        <div>
+                            <label>Achternaam</label>
+                            <input type="text" id="lastName" name="lastName" className='login_input' value={lastName} onChange={(e) => setLastName(e.target.value)} required />
+                        </div>
+                        <div>
+                            <label>E-mailadres</label>
+                            <input type="email" id="email" name="email" className='login_input' value={email} onChange={(e) => setEmail(e.target.value)} required />
+                        </div>
+                        <div>
+                            <label>Wachtwoord</label>
+                            <input type="password" id="password" name="password" className='login_input' value={password} onChange={(e) => setPassword(e.target.value)} required />
+                        </div>
+                        <div>
+                            <label>Profielfoto</label>
+                            <input type="file" accept=".jpg,.jpeg,.png" id="photo" name="photo" className='login_input' onChange={(e) => setPhoto(e.target.files[0])} required />
+                        </div>
+                    </div>
+                    <div className='register_right'>
+                        {accountType && renderForm()}
+                    </div>
+                </div>
+                <button type="submit" className='login_button'><i className="bi bi-person-plus-fill"></i> Registreren</button>
             </div>
-            <div>
-              <label>Voornaam</label>
-              <input type="text" id="firstName" name="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
-            </div>
-            <div>
-              <label>Achternaam</label>
-              <input type="text" id="lastName" name="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} required />
-            </div>
-            <div>
-              <label>E-mailadres</label>
-              <input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-            </div>
-            <div>
-              <label>Wachtwoord</label>
-              <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-            </div>
-            <div>
-                <label>Profielfoto</label>
-                <input type="file" accept=".jpg,.jpeg,.png" id="photo" name="photo" onChange={(e) => setPhoto(e.target.files[0])} required />
-            </div>
-            {accountType && renderForm()}
-            <button type="submit"><i className="bi bi-person-plus-fill"></i> Registreren</button>
           </form>
           
           {message && <p>{message}</p>}
         </div>
+        
     </div>    
       );
 }

@@ -10,19 +10,19 @@ const App = ({ message }) => {
             <div className="formdiv">
                 <form action="/" method="POST">
                     <label htmlFor="email"><i className="bi bi-envelope-at-fill"></i> E-mailadres</label><br />
-                    <input type="email" id="email" name="email" /><br />
+                    <input type="email" id="email" name="email" className='login_input'/><br />
                     <label htmlFor="password"><i className="bi bi-key-fill"></i> Wachtwoord</label><br />
-                    <input type="password" id="password" name="password" /><br />
-                    <button type="submit"><i className="bi bi-box-arrow-right"></i> Inloggen</button>
+                    <input type="password" id="password" name="password" className='login_input' /><br />
+                    <button type="submit"className='login_button'><i className="bi bi-box-arrow-right"></i> Inloggen</button>
                 </form>
             </div> 
 
             <div className="formdiv">
                 <form action="/create" method="GET">
-                    <button type="submit"><i className="bi bi-person-plus-fill"></i> Account aanmaken</button>
+                    <button type="submit" className='login_button'><i className="bi bi-person-plus-fill"></i> Account aanmaken</button>
                 </form>
                 <form action="/forgot-password" method="GET">
-                    <button type="submit"><i className="bi bi-question-circle-fill"></i> Wachtwoord vergeten?</button>
+                    <button type="submit"className='login_button'><i className="bi bi-question-circle-fill"></i> Wachtwoord vergeten?</button>
                 </form>
             </div>
 

@@ -18,21 +18,23 @@
         text-shadow: 7px 7px 4px rgba(0,0,0,0.1);
     }
     
-    input {
+    .login_input {
         width: 325px;
         padding: 10px;
         margin-bottom: 30px;
         border-radius: 5px;
+        background: white;
+        color: black;
         border: 2px solid #ccc;
         box-shadow: 7px 7px 2px 0px rgba(0,0,0,0.1);
     }
-    input:focus {
+    .login_input:focus {
         outline: none;
         border: 2px solid #FB3D0E; 
     }   
 
     
-    button {
+    .login_button { 
         background-color: #FC6039;
         color: white;
         padding: 10px 20px;
@@ -50,22 +52,49 @@
         background-color: #FB3D0E;
         transform: scale(1.02); 
     }
+    /* .container {
+        display: flex;
+        justify-content: space-between; Dit zorgt voor ruimte tussen de elementen */
     
-    .formdiv {
+
+    .register_left, .register_right{  
+        display: flex;
+        flex-direction: column; 
+        padding: 0px 0px 0px 0px;
+        border-radius: 5px;
+        background-color: white;
+    }
+
+    .doctor-register-form{
+        margin-top: 64px;
+        margin-left: 40px;
+    }
+
+    .patient-register-form{
+        margin-top: 64px;
+        margin-left: 40px;
+    }
+
+    .register_form{
         display: flex;
         justify-content: space-between;
-        flex-direction: column;
         background-color: white;
-        padding: 20px;
+        padding: 20px 20px 0px 20px;
         border-radius: 5px;
-        box-shadow: 7px 7px 2px 0px rgba(0,0,0,0.1); /* schaduw voor de windows*/
-        width: 350px;
-        margin-bottom: 30px;
+        width:auto;
+    }
+
+    .register_style{
+        background-color: white;
+        padding: 0px 20px 20px 20px;
+        border-radius: 5px;
+        box-shadow: 7px 7px 2px 0px rgba(0,0,0,0.1);
+        height:auto;
     }
 
     .centered-title {
         text-align: center;
-        color: black;
+        color: #FC6039;
         text-shadow: 7px 7px 4px rgba(0,0,0,0.1);
     }
 
