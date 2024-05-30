@@ -52,10 +52,7 @@
         background-color: #FB3D0E;
         transform: scale(1.02); 
     }
-    /* .container {
-        display: flex;
-        justify-content: space-between; Dit zorgt voor ruimte tussen de elementen */
-    
+       
 
     .register_left, .register_right{  
         display: flex;
@@ -82,6 +79,16 @@
         padding: 20px 20px 0px 20px;
         border-radius: 5px;
         width:auto;
+    }
+
+    .forget_form{
+        display: flex;
+        justify-content: space-between;
+        background-color: white;
+        padding: 20px 20px 0px 20px;
+        border-radius: 5px;
+        width:auto;
+        flex-direction: column;
     }
 
     .login_style{

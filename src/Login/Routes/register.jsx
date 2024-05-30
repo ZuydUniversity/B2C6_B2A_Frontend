@@ -146,7 +146,7 @@ function Register() {
 
     return (
     <div> 
-        <h1 className="centered-title"><i className="bi bi-person-circle"></i> Account aanmaken</h1>
+        <h1 className="centered-title"><i className="bi bi-person-plus-fill"></i> Account aanmaken</h1>
         <div className='formdiv'>
           <form onSubmit={register}>
             <div className='register_style'>

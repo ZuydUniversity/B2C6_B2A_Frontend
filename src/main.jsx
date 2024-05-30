@@ -3,11 +3,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Register from './Login/Routes/register.jsx';
 import App from './Login/App.jsx';
+import ForgotPassword from './Login/Routes/forgotpassword.jsx';
 import './Login/App.css';
 
 const router = createBrowserRouter([
     { path: "/", element: <App /> },
     { path: "/register", element: <Register /> },
+    { path: "/forgot-password", element: <ForgotPassword /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
