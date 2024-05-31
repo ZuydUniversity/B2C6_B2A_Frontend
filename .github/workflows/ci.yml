@@ -3,10 +3,10 @@ name: CI
 on:
   push:
     branches:
-      - Youneselajjouri-patch-1
+      - add-ci-pipeline
   pull_request:
     branches:
-      - Youneselajjouri-patch-1
+      - add-ci-pipeline
 
 jobs:
   build-and-test:
