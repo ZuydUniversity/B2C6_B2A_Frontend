@@ -26,7 +26,9 @@ const App = ({ message }) => {
                 </form>
             </div>
 
-            <div className="bottom-right-text">Klas B2A</div>
+            <div className="bottom-right-text" style={{ whiteSpace: 'pre-wrap' }}>
+                {`Mogelijk gemaakt door: \n \t \t      Klas B2A`}
+            </div>
         </div>
     );
 };

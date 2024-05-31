@@ -14,7 +14,7 @@ function Login() {
     e.preventDefault();
 
     if (password !== password2) {
-        setMessage('Passwords do not match, try again');
+        setMessage('Wachtwoorden komen niet overeen, probeer het opnieuw');
         return;
     }
 
@@ -28,15 +28,15 @@ function Login() {
         });
 
         if (response.ok) { // code : 200-299
-            setMessage('Password changed!')
+            setMessage('Wachtwoord is veranderd')
         }
 
         if (!response.ok) { 
-            throw new Error('Email not found, try again');
+            throw new Error('E-mailadres niet gevonden, probeeer het opnieuw');
         }
     } catch (error) {
       console.error('Email not found:', error);
-      setMessage('Email not found, try again')
+      setMessage('E-mailadres niet gevonden, probeeer het opnieuw')
     }
   }
 
