@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import TopPage from '../components/TopPage';
 
-const PatientSettingsPage = () => {
+const PatientSettingsPage = ({ patients }) => {
     const imageSrc = '../src/assets/kid_1.png';
     const patientName = 'John Doe';
 
@@ -20,11 +20,6 @@ const PatientSettingsPage = () => {
     const lastNameContact = 'Doe';
     const emailContact = 'eric_doe@gmail.com';
     const telephoneContact = '0612345678';
-
-    //medicine
-    const medicine = "Paracetamol";
-    const use = "50mg";
-    const frequency = "3 keer per week";
 
     const [medications, setMedications] = useState([
         { id: 1, medicine: "Paracetamol", use: "50mg", frequency: "3 keer per week", isEditing: false },

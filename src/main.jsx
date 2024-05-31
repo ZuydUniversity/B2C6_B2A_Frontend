@@ -11,10 +11,11 @@ import MyometriePage from './routes/MyometriePage.jsx';
 import EssayPage from './routes/EssayPage.jsx';
 import RadiologyPage from './routes/RadiologyPage.jsx';
 import PatientSettingsPage from './routes/PatientSettingsPage.jsx';
+import PatientList from './components/PatientList.jsx';
 
 
 const router = createBrowserRouter([
-    { path: "/", element: <App /> },
+    { path: "/", element: <App/> },
     { path: "/patientoverview", element: <PatientOverview /> },
     { path: "/patientview", element: <PatientView /> },
     { path: "/resultoverview", element: <ResultOverview /> },
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
     { path: "/essaypage", element: <EssayPage /> },
     { path: "/radiologypage", element: <RadiologyPage /> },
     { path: "/patientsettingspage", element: <PatientSettingsPage /> },
+    { path: "/patientlist", element: <PatientList /> },
 ]);
 
 
