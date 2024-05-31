@@ -20,8 +20,8 @@ function Register() {
 
     const navigate = useNavigate();
 
-    const navigateToLogindaan = () => {
-      navigate('/logindaan'); 
+    const navigateToLogin = () => {
+      navigate('/'); 
     };
 
     const register = async (e) => {
@@ -43,7 +43,7 @@ function Register() {
         formData.append('photo', photo);
 
         try {
-            const response = await fetch('/register', {
+            const response = await fetch('http://127.0.0.1:5000/register', {
                 method: 'POST',
                 body: formData,
             });
@@ -57,7 +57,7 @@ function Register() {
             }
 
             setMessage('Registration successful');
-            navigateToLogindaan();
+            navigateToLogin();
 
         } catch (error) {
             console.error('Registration error:', error);
