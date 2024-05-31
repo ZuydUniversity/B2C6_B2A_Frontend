@@ -1,33 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import TopPage from '../components/TopPage';
 
-const PatientSettingsPage = ({ patients }) => {
-    const imageSrc = '../src/assets/kid_1.png';
-    const patientName = 'John Doe';
+const PatientSettingsPage = () => {
+    const [patients, setPatients] = useState([]);
 
-    //patient
-    const firstName = 'John';
-    const lastName = 'Doe';
-    const age = 5;
-    const gender = "Male";
-    const diagnosis = "JDM";
-    const birthdate = '14/03/2019';
+    useEffect(() => {
+        const getPatients = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/get_patients');
+                const data = await response.json();
+                setPatients(data);
+            } catch (error) {
+                console.error('Error fetching patients:', error);
+            }
+        };
+
+        getPatients();
+    }, []);
+
+    const [medications, setMedications] = useState([]);
+
+    const getMedication = async (patientId) => {
+        try {
+            const response = await fetch(`http://localhost:5000/patients/${patientId}/medication`);
+            const data = await response.json();
+            setMedications(data);
+        } catch (error) {
+            console.error('Error fetching medication:', error);
+        }
+    };
+    
+    // const patient = patients[0];
+    const imageSrc = '../src/assets/kid_1.png';
+    const patient = patients.length > 0 ? patients[0] : null;
+
+    useEffect(() => {
+        if (patient) {
+            getMedication(patient.Id);
+        }
+    }, [patient]);
+
+    const patientName = patient ? patient.Name : '';
+    const firstName = patient ? patient.Name : '';
+    const lastName = patient ? patient.Lastname : '';
+    const age = patient ? patient.Age : null;
+    const gender = patient ? patient.Gender : '';
+    const diagnosis = patient ? patient.Diagnosis : '';
+    const birthdate = patient ? patient.Birthdate : '';
 
     //contactpersoon
     const firstNameContact = 'Eric';
     const lastNameContact = 'Doe';
     const emailContact = 'eric_doe@gmail.com';
     const telephoneContact = '0612345678';
-
-    const [medications, setMedications] = useState([
-        { id: 1, medicine: "Paracetamol", use: "50mg", frequency: "3 keer per week", isEditing: false },
-        { id: 2, medicine: "Ibuprofen", use: "200mg", frequency: "2 keer per dag", isEditing: false },
-        { id: 3, medicine: "Amoxicillin", use: "500mg", frequency: "2 keer per dag", isEditing: false },
-        { id: 4, medicine: "Metformin", use: "850mg", frequency: "1 keer per dag", isEditing: false },
-        // Add more medication objects here...
-    ]);
 
     //Logic for editing patient data
     const [isEditing, setIsEditing] = useState(false);
@@ -135,9 +162,9 @@ const PatientSettingsPage = ({ patients }) => {
                                 <button onClick={() => handleEditMedicationClick(medication.id)}><i className="bi bi-pencil-square"></i></button>
                             )}
                         </div>
-                        <div className="patient-data-row"><p>Medicijn</p>{medication.isEditing ? <input type="text" defaultValue={medication.medicine} /> : <p>{medication.medicine}</p>}</div>
-                        <div className="patient-data-row"><p>Gebruik</p>{medication.isEditing ? <input type="text" defaultValue={medication.use} /> : <p>{medication.use}</p>}</div>
-                        <div className="patient-data-row"><p>Frequentie</p>{medication.isEditing ? <input type="text" defaultValue={medication.frequency} /> : <p>{medication.frequency}</p>}</div>
+                        <div className="patient-data-row"><p>Medicijn</p>{medication.isEditing ? <input type="text" defaultValue={medication.Name} /> : <p>{medication.Name}</p>}</div>
+                        <div className="patient-data-row"><p>Gebruik</p>{medication.isEditing ? <input type="text" defaultValue={medication.Dosis} /> : <p>{medication.Dosis}</p>}</div>
+                        <div className="patient-data-row"><p>Frequentie</p>{medication.isEditing ? <input type="text" defaultValue={medication.Frequency} /> : <p>{medication.Frequency}</p>}</div>
                     </div>
                 ))}
                     <div className="medication-card placeholder-card card medication">

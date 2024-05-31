@@ -28,6 +28,8 @@ const PatientList = () => {
                         <p>name: {patient.Gender}</p>
                         <p>name: {patient.Lastname}</p>
                         <p>name: {patient.Phone_number}</p>
+                        <p>D: {patient.Diagnosis}</p>
+                        <p>A: {patient.Age}</p>
                     </div>
 
                 </li>
