@@ -11,6 +11,8 @@ import MyometriePage from './routes/MyometriePage.jsx';
 import EssayPage from './routes/EssayPage.jsx';
 import RadiologyPage from './routes/RadiologyPage.jsx';
 import PatientSettingsPage from './routes/PatientSettingsPage.jsx';
+import Kalender from './routes/Kalender.jsx';
+
 
 
 const router = createBrowserRouter([
@@ -22,6 +24,7 @@ const router = createBrowserRouter([
     { path: "/essaypage", element: <EssayPage /> },
     { path: "/radiologypage", element: <RadiologyPage /> },
     { path: "/patientsettingspage", element: <PatientSettingsPage /> },
+    { path: "/kalender", element: <Kalender /> },
 ]);
 
 

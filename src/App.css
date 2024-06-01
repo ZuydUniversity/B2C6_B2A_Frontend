@@ -611,15 +611,15 @@ button:hover {
 
 /*The pattern can be defined using the formula an + b, where a and b are constants, and n is a counter starting from 0.
 In the case of :nth-child(3n+1), it selects every third element starting from the first one. Here's how it works:
-• For n=0, it selects the 1st element (because 3*0+1 = 1).
-• For n=1, it selects the 4th element (because 3*1+1 = 4).
-• For n=2, it selects the 7th element (because 3*2+1 = 7).
-• And so on...
+ï¿½ For n=0, it selects the 1st element (because 3*0+1 = 1).
+ï¿½ For n=1, it selects the 4th element (because 3*1+1 = 4).
+ï¿½ For n=2, it selects the 7th element (because 3*2+1 = 7).
+ï¿½ And so on...
 Similarly, :nth-child(3n) selects every third element starting from the third one:
-• For n=0, it doesn't select any element (because 3*0 = 0).
-• For n=1, it selects the 3rd element (because 3*1 = 3).
-• For n=2, it selects the 6th element (because 3*2 = 6).
-• And so on...*/
+ï¿½ For n=0, it doesn't select any element (because 3*0 = 0).
+ï¿½ For n=1, it selects the 3rd element (because 3*1 = 3).
+ï¿½ For n=2, it selects the 6th element (because 3*2 = 6).
+ï¿½ And so on...*/
 
 /* This math makes it so it doesnt matter how many medication cards you add they keep getting formatted without margin
     on the left and right side of the row 
@@ -639,3 +639,68 @@ Similarly, :nth-child(3n) selects every third element starting from the third on
     line-height: 0.3; /* Adjust as needed */
 }
 
+/*below is css for Kalender.jsx page*/
+
+.calendar-datatable {
+    width: 1000px;
+}
+
+.header-button {
+    background-color: cornflowerblue;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.header-button:hover {
+    background-color: lightsteelblue;
+}
+
+.calendar-container {
+    width: 100%; /* Increase width to make the container twice as large horizontally */
+    margin: 20px auto; /* Center horizontally within its container */
+    display: flex;
+    justify-content: center;
+}
+
+.react-calendar {
+    width: 100%; /* Make the calendar take full width of its container */
+    max-width: 100%; /* Ensure the calendar doesn't exceed the container's width */
+    border: 1px solid #a0a096;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.react-calendar__navigation button {
+    color: #007BFF;
+}
+
+.react-calendar__tile {
+    height: 100px; /* Increase tile height for larger calendar */
+    font-size: 1.2em; /* Increase font size for better readability */
+}
+
+.react-calendar__tile--now {
+    background: lightblue !important;
+    color: black;
+}
+
+.react-calendar__tile--active {
+    background: cornflowerblue !important;
+    color: white;
+}
+
+.rounded-square {
+    position: fixed;
+    top: 60%;
+    right: 0;
+    transform: translateY(-50%);
+    width: 400px; /* Adjust width as needed */
+    height: 500px; /* Adjust height as needed */
+    background-color: rgb(180, 201, 241);
+    border-radius: 20px;
+    z-index: 1000; /* Ensure it's above other content */
+}
