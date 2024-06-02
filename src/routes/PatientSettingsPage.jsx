@@ -66,6 +66,7 @@ const PatientSettingsPage = () => {
     const handleSaveClick = () => {
         // Save changes here
         setIsEditing(false);
+        sendDataToBackend();
     };
 
     const handleCancelClick = () => {
@@ -103,6 +104,35 @@ const PatientSettingsPage = () => {
     const handleCancelMedicationClick = (id) => {
         // Revert changes here
         setMedications(medications.map(medication => medication.id === id ? { ...medication, isEditing: false } : medication));
+    };
+
+    // Function to send edited data to the backend
+    const sendDataToBackend = () => {
+        const editedData = {
+            // Gather edited data here
+        };
+
+        fetch('/update_patient/<int:patient_id>', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(editedData),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to send data to the server');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Data successfully sent to the server:', data);
+            // Handle response from backend if needed
+        })
+        .catch(error => {
+            console.error('Error sending data to the server:', error);
+            // Handle error if needed
+        });
     };
 
 
