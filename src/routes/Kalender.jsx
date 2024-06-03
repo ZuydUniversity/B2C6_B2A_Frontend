@@ -128,11 +128,12 @@ function Kalender() {
         const [time, patient] = appointment.split('u ');
         const startTime = time.trim();
         const endTime = calculateEndTime(startTime);
+        const cleanedPatient = patient.trim().replace(/ My$| Ra$/, ''); // Remove ' My' or ' Ra'
         setSelectedAppointment({
             day,
             startTime,
             endTime,
-            patient,
+            patient: cleanedPatient,
             staff: 'Dr. Koenen',
             type: patient.endsWith('My') ? 'Myometrie' : patient.endsWith('Ra') ? 'Radiologie' : ''
         });
@@ -157,6 +158,14 @@ function Kalender() {
         ));
     };
 
+    const renderMonth = () => {
+        return <div className="month-display">June</div>;
+    };
+
+    const renderYear = () => {
+        return <div className="year-display">2024</div>;
+    };
+
     return (
         <>
             <Navbar />
@@ -168,6 +177,12 @@ function Kalender() {
                     <div className="header-dropdown">
                         <button className="header-button" onClick={handleNewAppointmentButtonClick}>Nieuwe Afspraak</button>
                     </div>
+                    <button className="header-button" onClick={handleDayButtonClick}>Vorige</button>
+                    <button className="header-button" onClick={handleDayButtonClick}>Volgende</button>
+                </div>
+                <div className="month-year-container">
+                    {renderMonth()}
+                    {renderYear()}
                 </div>
                 <div className="days-of-week">
                     {renderDaysOfWeek()}
@@ -179,21 +194,16 @@ function Kalender() {
             <div className="rounded-square">
                 {selectedAppointment && (
                     <div className="appointment-details">
-                        <p>Naam patiënt: {selectedAppointment.patient}</p>
-                        <p>Tijd afspraak: {selectedAppointment.startTime}u tot {selectedAppointment.endTime}u</p>
-                        <p>Medewerker: {selectedAppointment.staff}</p>
-                        {selectedAppointment.type && (
-                            <p>Type Afspraak: {selectedAppointment.type}</p>
-                        )}
+                        <p><strong>Afspraak details</strong></p>
+                        <p><strong>Datum:</strong> 3 juni 2024</p>
+                        <p><strong>Begintijd:</strong> {selectedAppointment.startTime}</p>
+                        <p><strong>Eindtijd:</strong> {selectedAppointment.endTime}</p>
+                        <p><strong>Patiënt:</strong> {selectedAppointment.patient}</p>
+                        <p><strong>Medewerker:</strong> {selectedAppointment.staff}</p>
+                        <p><strong>Type:</strong> {selectedAppointment.type}</p>
                     </div>
                 )}
             </div>
-            {showNewAppointment && (
-                <div className="appointment-section">
-                    {/* Content for the new appointment section */}
-                    New Appointment Section
-                </div>
-            )}
         </>
     );
 }
