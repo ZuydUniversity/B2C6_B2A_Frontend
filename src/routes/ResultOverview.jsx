@@ -2,8 +2,10 @@ import '../App.css'; // Import the CSS file
 import Navbar from '../components/Navbar'; // Double period to go back one directory
 import { useNavigate } from 'react-router-dom';
 import TopPage from '../components/TopPage';
+import { useParams } from 'react-router-dom';
 
 function ResultOverview() {
+    const { patientId } = useParams();
     const imageSrc = '../src/assets/kid_1.png';
     const patientName = 'John Doe';
 

@@ -17,12 +17,12 @@ import PatientList from './components/PatientList.jsx';
 const router = createBrowserRouter([
     { path: "/", element: <App/> },
     { path: "/patientoverview", element: <PatientOverview /> },
-    { path: "/patientview", element: <PatientView /> },
-    { path: "/resultoverview", element: <ResultOverview /> },
+    { path: "/patientview/:patientId", element: <PatientView /> },
+    { path: "/resultoverview/:patientId", element: <ResultOverview /> },
     { path: "/myometriepage", element: <MyometriePage /> },
-    { path: "/essaypage", element: <EssayPage /> },
+    { path: "/essaypage/:patientId", element: <EssayPage /> },
     { path: "/radiologypage", element: <RadiologyPage /> },
-    { path: "/patientsettingspage", element: <PatientSettingsPage /> },
+    { path: "/patientsettingspage/:patientId", element: <PatientSettingsPage /> },
     { path: "/patientlist", element: <PatientList /> },
 ]);
 

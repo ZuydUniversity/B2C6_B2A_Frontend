@@ -2,25 +2,38 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import TopPage from '../components/TopPage';
+import { useParams } from 'react-router-dom';
 
 const PatientSettingsPage = () => {
-    const [patients, setPatients] = useState([]);
-
+    const { patientId } = useParams();
+    const [patient, setPatient] = useState(null);
+    const [diagnosis, setDiagnosis] = useState([]);
+    const [medications, setMedications] = useState([]);
+    
     useEffect(() => {
-        const getPatients = async () => {
+        const fetchPatient = async (patientId) => {
             try {
-                const response = await fetch('http://localhost:5000/get_patients');
-                const data = await response.json();
-                setPatients(data);
+                const response = await fetch(`http://localhost:5000/get_patient/${patientId}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const patientData = await response.json();
+                const patient = {
+                    "Birthdate": patientData.Birthdate,
+                    "Email": patientData.Email,
+                    "Gender": patientData.Gender,
+                    "Lastname": patientData.Lastname,
+                    "Name": patientData.Name,
+                    "Phone_number": patientData.Phone_number,
+                };
+                setPatient(patient);
             } catch (error) {
-                console.error('Error fetching patients:', error);
+                console.error(`Failed to fetch patient: ${error}`);
             }
         };
 
-        getPatients();
-    }, []);
-
-    const [medications, setMedications] = useState([]);
+        fetchPatient(patientId);
+    }, [patientId]);
 
     const getMedication = async (patientId) => {
         try {
@@ -32,22 +45,40 @@ const PatientSettingsPage = () => {
         }
     };
     
+    const getDiagnosis = async (patientId) => {
+        try {
+            const response = await fetch(`http://localhost:5000/patients/${patientId}/diagnosis`);
+            const data = await response.json();
+            setDiagnosis(data); // set the entire data array to the diagnosis state
+        } catch (error) {
+            console.error('Error fetching diagnoses:', error);
+        }
+    };
+
+
     // const patient = patients[0];
     const imageSrc = '../src/assets/kid_1.png';
-    const patient = patients.length > 0 ? patients[0] : null;
 
     useEffect(() => {
         if (patient) {
-            getMedication(patient.Id);
+            getMedication(patientId);
         }
     }, [patient]);
+
+    useEffect(() => {
+        if (patient) {
+            getDiagnosis(patientId);
+        }
+    }, [patient]);
+
+
 
     const patientName = patient ? patient.Name : '';
     const firstName = patient ? patient.Name : '';
     const lastName = patient ? patient.Lastname : '';
     const age = patient ? patient.Age : null;
     const gender = patient ? patient.Gender : '';
-    const diagnosis = patient ? patient.Diagnosis : '';
+    // const diagnosis = patient ? patient.Diagnosis : '';
     const birthdate = patient ? patient.Birthdate : '';
 
     //contactpersoon
@@ -156,9 +187,25 @@ const PatientSettingsPage = () => {
                         </div>
                         <div className="patient-data-row"><p>Naam</p>{isEditing ? <input type="text" defaultValue={lastName} /> : <p>{lastName}</p>}</div>
                         <div className="patient-data-row"><p>Voornaam</p>{isEditing ? <input type="text" defaultValue={firstName} /> : <p>{firstName}</p>}</div>
-                        <div className="patient-data-row"><p>Leeftijd</p>{isEditing ? <input type="text" defaultValue={age} /> : <p>{age}</p>}</div>
+                        <div className="patient-data-row">
+                            <p>Leeftijd</p>
+                            {isEditing ? (
+                                <input type="text" defaultValue={new Date().getFullYear() - new Date(birthdate).getFullYear()} />
+                            ) : (
+                                <p>{new Date().getFullYear() - new Date(birthdate).getFullYear()}</p>
+                            )}
+                        </div>
                         <div className="patient-data-row"><p>Geslacht</p>{isEditing ? <input type="text" defaultValue={gender} /> : <p>{gender}</p>}</div>
-                        <div className="patient-data-row"><p>Diagnose</p>{isEditing ? <input type="text" defaultValue={diagnosis} /> : <p>{diagnosis}</p>}</div>
+                        <div className="patient-data-row">
+                            <p>Diagnose</p>
+                            {isEditing ? 
+                                diagnosis.map((diag, index) => (
+                                    <input key={index} type="text" defaultValue={diag.Diagnosis} />
+                                )) 
+                                : 
+                                <p>{diagnosis.map(diag => diag.Diagnosis).join(', ')}</p>
+                            }
+                        </div>
                         <div className="patient-data-row"><p>Geboortedatum</p>{isEditing ? <input type="text" defaultValue={birthdate} /> : <p>{birthdate}</p>}</div>
                     </div>
 
@@ -193,7 +240,7 @@ const PatientSettingsPage = () => {
                             )}
                         </div>
                         <div className="patient-data-row"><p>Medicijn</p>{medication.isEditing ? <input type="text" defaultValue={medication.Name} /> : <p>{medication.Name}</p>}</div>
-                        <div className="patient-data-row"><p>Gebruik</p>{medication.isEditing ? <input type="text" defaultValue={medication.Dosis} /> : <p>{medication.Dosis}</p>}</div>
+                        <div className="patient-data-row"><p>Gebruik</p>{medication.isEditing ? <input type="text" defaultValue={medication.Dose} /> : <p>{medication.Dose}</p>}</div>
                         <div className="patient-data-row"><p>Frequentie</p>{medication.isEditing ? <input type="text" defaultValue={medication.Frequency} /> : <p>{medication.Frequency}</p>}</div>
                     </div>
                 ))}

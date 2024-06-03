@@ -2,8 +2,10 @@ import Navbar from '../components/Navbar'; //double period to go back one direct
 import App from '../App';
 import { Link } from 'react-router-dom';
 import TopPage from '../components/TopPage';
+import { useParams } from 'react-router-dom';
 
 function PatientView() {
+    const { patientId } = useParams();
     const imageSrc = '../src/assets/kid_1.png';
     const patientName = 'John Doe';
     const phoneNumber = '0612345678';
@@ -15,7 +17,7 @@ function PatientView() {
         <>
             <Navbar />
             <div className="PatientView">
-                <TopPage headerName="Patient Opties" patientName={patientName} imageSrc={imageSrc} />
+                <TopPage headerName="Patient" patientId={patientId} imageSrc={imageSrc} />
                 <div className='PageBottom'>
                     <div className="ResultsBlock Block card">
                         <p>Resultaten</p>
@@ -26,7 +28,7 @@ function PatientView() {
                                 </div>
                             ))}
                         </div>
-                        <Link to="/resultoverview" className="resultoverview-button"><button>Zie alles</button></Link>
+                        <Link to={`/resultoverview/${patientId}`} className="resultoverview-button"><button>Zie alles</button></Link>
                     </div>
                     <div className="EssayBlock Block card">
                         <p>Verslagen</p>
@@ -46,7 +48,7 @@ function PatientView() {
                             <p>Mail: {mail}</p>
                             <p>Diagnose: {diagnosis}</p>
                         </div>
-                        <Link to="/patientsettingspage"><button>Zie alles</button></Link>
+                        <Link to={`/patientsettingspage/${patientId}`}><button>Zie alles</button></Link>
                     </div>
                 </div>
             </div>

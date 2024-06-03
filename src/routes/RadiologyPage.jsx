@@ -61,8 +61,10 @@ function RadiologyPage() {
     return (
         <>
             <Navbar />
-            <TopPage headerName="Radiologie resultaten" patientName={patientName} imageSrc={imageSrc} />
-            <DataTable data={data}/>
+            <TopPage headerName="Radiologie resultaten" patientId={patientId} imageSrc={imageSrc} />
+            <div className='content'>
+                <DataTable data={data}/>
+            </div>
             <div className="bottom-page">
                 <Carousel images={images} />
                 <textarea placeholder="Voeg een notitie toe"></textarea>

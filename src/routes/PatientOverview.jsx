@@ -24,8 +24,8 @@ function PatientOverview() {
 
     const navigate = useNavigate();
 
-    const DataRow = ({ imageSrc, name, birthdate, diagnosis }) => (
-        <tr onClick={() => navigate('/patientview')}>
+    const DataRow = ({ imageSrc, name, birthdate, diagnosis, id}) => (
+        <tr onClick={() => navigate(`/patientview/${id}`)}>
             <td className="image-cell"><img src={imageSrc} alt="Profile" className="grid-image" /></td>
             <td className="spacer"></td>
             <td className="text-cell"><div className="rounded-left">{name}</div></td>
@@ -87,7 +87,8 @@ function PatientOverview() {
             name: patient.Name,
             birthdate: patient.Birthdate,
             // diagnosis: patient.Diagnosis
-            diagnosis: "jdm"
+            diagnosis: "jdm",
+            id: patient.Id
         });
     });
 

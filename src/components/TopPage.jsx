@@ -1,8 +1,26 @@
 import React from 'react';
 import BackButton from './BackButton'; // Make sure to import the BackButton component
+import { useState, useEffect } from 'react';
 
+const TopPage = ({ headerName, imageSrc, patientId }) => {
+    const [patientName, setPatientName] = useState('');
+    useEffect(() => {
+        const fetchPatientName = async (patientId) => {
+            try {
+                const response = await fetch(`http://localhost:5000/get_patient/${patientId}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const patientData = await response.json();
+                setPatientName(patientData.Name); 
+            } catch (error) {
+                console.error(`Failed to fetch patient: ${error}`);
+            }
+        };
 
-const TopPage = ({ headerName, patientName, imageSrc }) => {
+        fetchPatientName(patientId);
+    }, [patientId]);
+
     return (
         <div className="top-page">
             <div className="top-page-nav-info">
