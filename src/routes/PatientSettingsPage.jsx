@@ -171,7 +171,7 @@ const PatientSettingsPage = () => {
     return (
         <>
             <Navbar />
-            <TopPage headerName="Gegevens" patientName={patientName} imageSrc={imageSrc} />
+            <TopPage headerName="Patient" patientId={patientId} imageSrc={imageSrc} />
             <div className="content">
                 <div className="patient-information">
                     <div className="patient-card card">

@@ -3,11 +3,14 @@ import Navbar from '../components/Navbar'; //double period to go back one direct
 import React from 'react';
 import Carousel from '../components/Carousel';
 import TopPage from '../components/TopPage';
+import { useParams } from 'react-router-dom';
+
 
 //more information about the carousel used in this file can be found here:
 //https://stackademic.com/blog/mastering-react-carousel-building-dynamic-image-sliders
 
 function RadiologyPage() {
+    const { patientId } = useParams();
     const shoulder_1 = '../src/assets/shoulder_1.jpg';
     const shoulder_2 = '../src/assets/shoulder_2.jpg';
     const imageSrc = '../src/assets/kid_1.png';
@@ -61,7 +64,7 @@ function RadiologyPage() {
     return (
         <>
             <Navbar />
-            <TopPage headerName="Radiologie resultaten" patientId={patientId} imageSrc={imageSrc} />
+            <TopPage headerName="Patient" patientId={patientId} imageSrc={imageSrc} />
             <div className='content'>
                 <DataTable data={data}/>
             </div>

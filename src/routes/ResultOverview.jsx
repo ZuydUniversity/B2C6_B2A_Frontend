@@ -3,16 +3,18 @@ import '../App.css'; // Import the CSS file
 import Navbar from '../components/Navbar'; // Double period to go back one directory
 import { useNavigate } from 'react-router-dom';
 import TopPage from '../components/TopPage';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+
 
 function ResultOverview() {
   const { patientId } = useParams();
   const imageSrc = '../src/assets/kid_1.png';
   const patientName = 'John Doe';
-
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async (patientId) => {
       try {
         const response = await axios.get(`http://localhost:5000/patients/${patientId}/get_results`);
         setData(response.data);
@@ -21,7 +23,7 @@ function ResultOverview() {
       }
     };
 
-    fetchData();
+    fetchData(patientId);
   }, [patientId]);
 
   const DataRow = ({ Type, Date }) => {
@@ -29,9 +31,9 @@ function ResultOverview() {
 
     const handleClick = () => {
       if (Type === 'Myometrie') {
-        navigate('/myometriepage');
+        navigate(`/myometriepage/${patientId}`);
       } else if (Type === 'Radiologie') {
-        navigate('/radiologypage');
+        navigate(`/radiologypage/${patientId}`);
       } else {
         window.alert(`Row clicked: ${Type}`);
       }
@@ -72,7 +74,7 @@ function ResultOverview() {
   return (
     <>
       <Navbar />
-      <TopPage headerName="Resultatenoverzicht" patientName={patientName} imageSrc={imageSrc} />
+      <TopPage headerName="Patient" patientId={patientId} imageSrc={imageSrc} />
       <div className="content">
         <DataTable data={data} />
       </div>

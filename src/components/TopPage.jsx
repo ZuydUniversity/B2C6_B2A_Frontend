@@ -12,7 +12,7 @@ const TopPage = ({ headerName, imageSrc, patientId }) => {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const patientData = await response.json();
-                setPatientName(patientData.Name); 
+                setPatientName(patientData.Name + " " + patientData.Lastname); 
             } catch (error) {
                 console.error(`Failed to fetch patient: ${error}`);
             }

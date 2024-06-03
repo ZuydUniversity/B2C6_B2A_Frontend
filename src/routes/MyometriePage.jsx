@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import '../App.css';
 import Navbar from '../components/Navbar';
 import TopPage from '../components/TopPage';
+import { useParams } from 'react-router-dom';
 
 function MyometriePage() {
+    const { patientId } = useParams();
     const imageSrc = '../src/assets/kid_1.png';
     const patientName = 'John Doe';
 
@@ -37,7 +39,7 @@ function MyometriePage() {
     return (
         <>
             <Navbar />
-            <TopPage headerName="Myometrie" patientName={patientName} imageSrc={imageSrc} />
+            <TopPage headerName="Patient" patientId={patientId} imageSrc={imageSrc} />
             <div className="content">
                 <h2>CMAS Scores</h2>
                 <div>

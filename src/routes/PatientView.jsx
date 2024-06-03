@@ -39,7 +39,7 @@ function PatientView() {
                                 </div>
                             ))}
                         </div>
-                        <Link to="/essaypage"><button>Zie alles</button></Link>
+                        <Link to={`/essaypage/${patientId}`}><button>Zie alles</button></Link>
                     </div>
                     <div className="DataBlock Block card">
                         <p>Gegevens</p>
