@@ -646,6 +646,50 @@ Similarly, :nth-child(3n) selects every third element starting from the third on
 }
 
 .header-button {
+<<<<<<< Updated upstream
+=======
+    background-color: rgb(222, 230, 245);
+    color: rgb(10, 10, 10);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.header-button:hover {
+    background-color: lightsteelblue;
+}
+
+/* Center the calendar grid on the screen */
+.calendar-grid-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh + 400px); /* Full viewport height minus navbar */
+    width: 130%; /* Set the width to 75% of the screen */
+    margin-left: -30%; /* Center the grid within the left 75% of the screen */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.greybutton-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 5px;
+    font-size: 0.7em;
+}
+
+.header-button {
+>>>>>>> Stashed changes
     background-color: cornflowerblue;
     color: white;
     border: none;
@@ -659,6 +703,7 @@ Similarly, :nth-child(3n) selects every third element starting from the third on
     background-color: lightsteelblue;
 }
 
+<<<<<<< Updated upstream
 .calendar-container {
     width: 100%; /* Increase width to make the container twice as large horizontally */
     margin: 20px auto; /* Center horizontally within its container */
@@ -692,6 +737,48 @@ Similarly, :nth-child(3n) selects every third element starting from the third on
     background: cornflowerblue !important;
     color: white;
 }
+=======
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 200px); /* Adjust row height here */
+    gap: 5px;
+    width: 100%; /* Set width to 100% to match parent container */
+    max-width: 1400px; /* Limit max width */
+}
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: top;
+    background-color: cornflowerblue;
+    color: white;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 1.2em;
+}
+
+.days-of-week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    width: 100%; /* Set width to 100% to match parent container */
+    max-width: 1400px; /* Limit max width */
+    margin-bottom: 10px;
+}
+
+.day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: black; /* Set the text color to black */
+}
+
+
+>>>>>>> Stashed changes
 
 .rounded-square {
     position: fixed;
@@ -700,7 +787,11 @@ Similarly, :nth-child(3n) selects every third element starting from the third on
     transform: translateY(-50%);
     width: 400px; /* Adjust width as needed */
     height: 500px; /* Adjust height as needed */
+<<<<<<< Updated upstream
     background-color: rgb(180, 201, 241);
+=======
+    background-color: rgb(50, 107, 211);
+>>>>>>> Stashed changes
     border-radius: 20px;
     z-index: 1000; /* Ensure it's above other content */
 }
