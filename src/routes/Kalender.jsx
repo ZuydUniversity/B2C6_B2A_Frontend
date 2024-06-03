@@ -43,35 +43,35 @@ function Kalender() {
         let dayNumber = 1;
 
         const appointments = {
-            1: ["10:00u John Doe", "14:00u Jane Smith"],
+            1: ["10:00u John Doe My", "14:00u Jane Smith Ra"],
             2: [],
-            3: ["11:00u Carol White", "15:00u Dave Black"],
-            4: ["08:00u Eve Green", "16:00u Frank Blue"],
-            5: ["12:00u Grace Pink", "17:00u Hank Yellow"],
-            6: ["07:00u Ida Red", "18:00u Jack Orange"],
-            7: ["10:30u Kate Violet", "14:30u Leo Indigo"],
-            8: ["09:30u Mike Gray", "13:30u Nina Teal"],
+            3: ["11:00u Carol White My", "15:00u Dave Black Ra"],
+            4: ["08:00u Eve Green My", "16:00u Frank Blue Ra"],
+            5: ["12:00u Grace Pink My", "17:00u Hank Yellow Ra"],
+            6: ["07:00u Ida Red My", "18:00u Jack Orange Ra"],
+            7: ["10:30u Kate Violet My", "14:30u Leo Indigo Ra"],
+            8: ["09:30u Mike Gray My", "13:30u Nina Teal Ra"],
             9: [],
-            10: ["08:30u Quinn Brown", "16:30u Rob Black"],
-            11: ["12:30u Sam Green", "17:30u Tom Blue"],
-            12: ["07:30u Uma Red", "18:30u Vic Orange"],
-            13: ["10:45u Walt Violet", "14:45u Xena Indigo"],
-            14: ["09:45u Yan Gray", "13:45u Zoe Teal"],
-            15: ["11:45u Amy Gold", "15:45u Ben Silver"],
+            10: ["08:30u Quinn Brown My", "16:30u Rob Black Ra"],
+            11: ["12:30u Sam Green My", "17:30u Tom Blue Ra"],
+            12: ["07:30u Uma Red My", "18:30u Vic Orange Ra"],
+            13: ["10:45u Walt Violet My", "14:45u Xena Indigo Ra"],
+            14: ["09:45u Yan Gray My", "13:45u Zoe Teal Ra"],
+            15: ["11:45u Amy Gold My", "15:45u Ben Silver Ra"],
             16: [],
-            17: ["12:45u Ed Green", "17:45u Fay Blue"],
-            18: ["07:45u Gus Red", "18:45u Hal Orange"],
-            19: ["10:15u Ian Violet", "14:15u Jen Indigo"],
-            20: ["09:15u Kim Gray", "13:15u Lou Teal"],
-            21: ["11:15u Max Gold", "15:15u Ned Silver"],
-            22: ["08:15u Oli Brown", "16:15u Pat Black"],
+            17: ["12:45u Ed Green My", "17:45u Fay Blue Ra"],
+            18: ["07:45u Gus Red My", "18:45u Hal Orange Ra"],
+            19: ["10:15u Ian Violet My", "14:15u Jen Indigo Ra"],
+            20: ["09:15u Kim Gray My", "13:15u Lou Teal Ra"],
+            21: ["11:15u Max Gold My", "15:15u Ned Silver Ra"],
+            22: ["08:15u Oli Brown My", "16:15u Pat Black Ra"],
             23: [],
-            24: ["07:15u Tim Red", "18:15u Uma Orange"],
-            25: ["10:55u Val Violet", "14:55u Wes Indigo"],
-            26: ["09:55u Xim Gray", "13:55u Yul Teal"],
-            27: ["11:55u Zed Gold", "15:55u Amy Silver"],
-            28: ["08:55u Ben Brown", "16:55u Carl Black"],
-            29: ["12:55u Dan Green", "17:55u Ed Blue"],
+            24: ["07:15u Tim Red My", "18:15u Uma Orange Ra"],
+            25: ["10:55u Val Violet My", "14:55u Wes Indigo Ra"],
+            26: ["09:55u Xim Gray My", "13:55u Yul Teal Ra"],
+            27: ["11:55u Zed Gold My", "15:55u Amy Silver Ra"],
+            28: ["08:55u Ben Brown My", "16:55u Carl Black Ra"],
+            29: ["12:55u Dan Green My", "17:55u Ed Blue Ra"],
             30: []
         };
 
@@ -133,7 +133,8 @@ function Kalender() {
             startTime,
             endTime,
             patient,
-            staff: 'Dr. Koenen'
+            staff: 'Dr. Koenen',
+            type: patient.endsWith('My') ? 'Myometrie' : patient.endsWith('Ra') ? 'Radiologie' : ''
         });
     };
 
@@ -188,6 +189,9 @@ function Kalender() {
                         <p>Naam patiënt: {selectedAppointment.patient}</p>
                         <p>Tijd afspraak: {selectedAppointment.startTime}u tot {selectedAppointment.endTime}u</p>
                         <p>Medewerker: {selectedAppointment.staff}</p>
+                        {selectedAppointment.type && (
+                            <p>Type Afspraak: {selectedAppointment.type}</p>
+                        )}
                     </div>
                 )}
             </div>
