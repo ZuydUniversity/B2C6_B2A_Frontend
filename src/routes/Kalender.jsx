@@ -166,14 +166,7 @@ function Kalender() {
                     <button className="header-button" onClick={handleWeekButtonClick}>Week</button>
                     <button className="header-button" onClick={handleDayButtonClick}>Dag</button>
                     <div className="header-dropdown">
-                        <button className="header-button" onClick={handleDropdownToggle}>Selecteer type</button>
                         <button className="header-button" onClick={handleNewAppointmentButtonClick}>Nieuwe Afspraak</button>
-                        {dropdownOpen && (
-                            <div className="dropdown-content">
-                                <button onClick={() => handleOptionChange('Radiologie')} className="header-button">Radiologie</button>
-                                <button onClick={() => handleOptionChange('Myometrie')} className="header-button">Myometrie</button>
-                            </div>
-                        )}
                     </div>
                 </div>
                 <div className="days-of-week">
