@@ -35,6 +35,8 @@
 
 // export default App;
 
+// NIEUWE CODE --> samengevoegde code van Daan en Alens
+
 import React, { useState } from 'react';
 import './App.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -57,16 +59,16 @@ const App = () => {
             });
 
             if (!response.ok) { 
-                throw new Error('Login failed');
+                throw new Error('Inloggen mislukt, probeer het opnieuw');
             }
 
             if (response.ok) { // code : 200-299
-                setLoginError('Login successful')
+                setLoginError('Inloggen successvol')
             }
 
         } catch (error) {
             console.error('Login error:', error);
-            setLoginError('Login failed')
+            setLoginError('Inloggen mislukt, probeer het opnieuw')
         }
     };
 
@@ -94,7 +96,7 @@ const App = () => {
             </div>
 
             <div className="bottom-right-text" style={{ whiteSpace: 'pre-wrap' }}>
-                {`Mogelijk gemaakt door: \n \t \t      Klas B2A`}
+                {`Mogelijk gemaakt door \n \t \t     Klas B2A`}
             </div>
 
             {loginError && <p>{loginError}</p>}
