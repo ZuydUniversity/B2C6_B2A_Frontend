@@ -1,8 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 nav.navbar {
     background: #D8EBFE;
     color: #565FA4;
-    font-family: "Montserrat"; 
+    font-family: "Roboto";
     height: 100px;
+    width: 100%;
+}
+
+.navbar-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 1rem; /* Voeg padding toe voor wat ruimte aan de zijkanten */
 }
 
 .btn {
