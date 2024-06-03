@@ -1,38 +1,91 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import TopPage from '../components/TopPage';
+import { useParams } from 'react-router-dom';
 
 const PatientSettingsPage = () => {
-    const imageSrc = '../src/assets/kid_1.png';
-    const patientName = 'John Doe';
+    const { patientId } = useParams();
+    const [patient, setPatient] = useState(null);
+    const [diagnosis, setDiagnosis] = useState([]);
+    const [medications, setMedications] = useState([]);
+    
+    useEffect(() => {
+        const fetchPatient = async (patientId) => {
+            try {
+                const response = await fetch(`http://localhost:5000/get_patient/${patientId}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const patientData = await response.json();
+                const patient = {
+                    "Birthdate": patientData.Birthdate,
+                    "Email": patientData.Email,
+                    "Gender": patientData.Gender,
+                    "Lastname": patientData.Lastname,
+                    "Name": patientData.Name,
+                    "Phone_number": patientData.Phone_number,
+                };
+                setPatient(patient);
+            } catch (error) {
+                console.error(`Failed to fetch patient: ${error}`);
+            }
+        };
 
-    //patient
-    const firstName = 'John';
-    const lastName = 'Doe';
-    const age = 5;
-    const gender = "Male";
-    const diagnosis = "JDM";
-    const birthdate = '14/03/2019';
+        fetchPatient(patientId);
+    }, [patientId]);
+
+    const getMedication = async (patientId) => {
+        try {
+            const response = await fetch(`http://localhost:5000/patients/${patientId}/medication`);
+            const data = await response.json();
+            setMedications(data);
+        } catch (error) {
+            console.error('Error fetching medication:', error);
+        }
+    };
+    
+    const getDiagnosis = async (patientId) => {
+        try {
+            const response = await fetch(`http://localhost:5000/patients/${patientId}/diagnosis`);
+            const data = await response.json();
+            setDiagnosis(data); // set the entire data array to the diagnosis state
+        } catch (error) {
+            console.error('Error fetching diagnoses:', error);
+        }
+    };
+
+
+    // const patient = patients[0];
+    const imageSrc = '../src/assets/kid_1.png';
+
+    useEffect(() => {
+        if (patient) {
+            getMedication(patientId);
+        }
+    }, [patient]);
+
+    useEffect(() => {
+        if (patient) {
+            getDiagnosis(patientId);
+        }
+    }, [patient]);
+
+
+
+    const patientName = patient ? patient.Name : '';
+    const firstName = patient ? patient.Name : '';
+    const lastName = patient ? patient.Lastname : '';
+    const age = patient ? patient.Age : null;
+    const gender = patient ? patient.Gender : '';
+    // const diagnosis = patient ? patient.Diagnosis : '';
+    const birthdate = patient ? patient.Birthdate : '';
 
     //contactpersoon
     const firstNameContact = 'Eric';
     const lastNameContact = 'Doe';
     const emailContact = 'eric_doe@gmail.com';
     const telephoneContact = '0612345678';
-
-    //medicine
-    const medicine = "Paracetamol";
-    const use = "50mg";
-    const frequency = "3 keer per week";
-
-    const [medications, setMedications] = useState([
-        { id: 1, medicine: "Paracetamol", use: "50mg", frequency: "3 keer per week", isEditing: false },
-        { id: 2, medicine: "Ibuprofen", use: "200mg", frequency: "2 keer per dag", isEditing: false },
-        { id: 3, medicine: "Amoxicillin", use: "500mg", frequency: "2 keer per dag", isEditing: false },
-        { id: 4, medicine: "Metformin", use: "850mg", frequency: "1 keer per dag", isEditing: false },
-        // Add more medication objects here...
-    ]);
 
     //Logic for editing patient data
     const [isEditing, setIsEditing] = useState(false);
@@ -44,6 +97,7 @@ const PatientSettingsPage = () => {
     const handleSaveClick = () => {
         // Save changes here
         setIsEditing(false);
+        sendDataToBackend();
     };
 
     const handleCancelClick = () => {
@@ -83,12 +137,41 @@ const PatientSettingsPage = () => {
         setMedications(medications.map(medication => medication.id === id ? { ...medication, isEditing: false } : medication));
     };
 
+    // Function to send edited data to the backend
+    const sendDataToBackend = () => {
+        const editedData = {
+            // Gather edited data here
+        };
+
+        fetch('/update_patient/<int:patient_id>', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(editedData),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to send data to the server');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Data successfully sent to the server:', data);
+            // Handle response from backend if needed
+        })
+        .catch(error => {
+            console.error('Error sending data to the server:', error);
+            // Handle error if needed
+        });
+    };
+
 
 
     return (
         <>
             <Navbar />
-            <TopPage headerName="Gegevens" patientName={patientName} imageSrc={imageSrc} />
+            <TopPage headerName="Patient" patientId={patientId} imageSrc={imageSrc} />
             <div className="content">
                 <div className="patient-information">
                     <div className="patient-card card">
@@ -104,9 +187,25 @@ const PatientSettingsPage = () => {
                         </div>
                         <div className="patient-data-row"><p>Naam</p>{isEditing ? <input type="text" defaultValue={lastName} /> : <p>{lastName}</p>}</div>
                         <div className="patient-data-row"><p>Voornaam</p>{isEditing ? <input type="text" defaultValue={firstName} /> : <p>{firstName}</p>}</div>
-                        <div className="patient-data-row"><p>Leeftijd</p>{isEditing ? <input type="text" defaultValue={age} /> : <p>{age}</p>}</div>
+                        <div className="patient-data-row">
+                            <p>Leeftijd</p>
+                            {isEditing ? (
+                                <input type="text" defaultValue={new Date().getFullYear() - new Date(birthdate).getFullYear()} />
+                            ) : (
+                                <p>{new Date().getFullYear() - new Date(birthdate).getFullYear()}</p>
+                            )}
+                        </div>
                         <div className="patient-data-row"><p>Geslacht</p>{isEditing ? <input type="text" defaultValue={gender} /> : <p>{gender}</p>}</div>
-                        <div className="patient-data-row"><p>Diagnose</p>{isEditing ? <input type="text" defaultValue={diagnosis} /> : <p>{diagnosis}</p>}</div>
+                        <div className="patient-data-row">
+                            <p>Diagnose</p>
+                            {isEditing ? 
+                                diagnosis.map((diag, index) => (
+                                    <input key={index} type="text" defaultValue={diag.Diagnosis} />
+                                )) 
+                                : 
+                                <p>{diagnosis.map(diag => diag.Diagnosis).join(', ')}</p>
+                            }
+                        </div>
                         <div className="patient-data-row"><p>Geboortedatum</p>{isEditing ? <input type="text" defaultValue={birthdate} /> : <p>{birthdate}</p>}</div>
                     </div>
 
@@ -140,9 +239,9 @@ const PatientSettingsPage = () => {
                                 <button onClick={() => handleEditMedicationClick(medication.id)}><i className="bi bi-pencil-square"></i></button>
                             )}
                         </div>
-                        <div className="patient-data-row"><p>Medicijn</p>{medication.isEditing ? <input type="text" defaultValue={medication.medicine} /> : <p>{medication.medicine}</p>}</div>
-                        <div className="patient-data-row"><p>Gebruik</p>{medication.isEditing ? <input type="text" defaultValue={medication.use} /> : <p>{medication.use}</p>}</div>
-                        <div className="patient-data-row"><p>Frequentie</p>{medication.isEditing ? <input type="text" defaultValue={medication.frequency} /> : <p>{medication.frequency}</p>}</div>
+                        <div className="patient-data-row"><p>Medicijn</p>{medication.isEditing ? <input type="text" defaultValue={medication.Name} /> : <p>{medication.Name}</p>}</div>
+                        <div className="patient-data-row"><p>Gebruik</p>{medication.isEditing ? <input type="text" defaultValue={medication.Dose} /> : <p>{medication.Dose}</p>}</div>
+                        <div className="patient-data-row"><p>Frequentie</p>{medication.isEditing ? <input type="text" defaultValue={medication.Frequency} /> : <p>{medication.Frequency}</p>}</div>
                     </div>
                 ))}
                     <div className="medication-card placeholder-card card medication">
