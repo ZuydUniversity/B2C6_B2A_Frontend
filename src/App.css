@@ -1,641 +1,776 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0;
-  text-align: center;
-}
-
-html, body {
-    --main-bg-color: white;
-    background-color: var(--main-bg-color);
-    color: white;
-    margin:0;
-    padding:0;
-}
-
-.content {
-    margin: 0;
-    color: black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.app {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
-
-.data-display,
-.data-sender,
-.data-grid-filler {
-    width: 80%;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse; /* This removes the double borders */
-    font-family: 'Roboto', sans-serif;
-}
-
-th, td {
-    border: 1px solid #000;
-    padding: 0px 0px 10px 0px;
-    text-align: left;
-}
-
-th {
-    background-color: cornflowerblue; /* This gives the header cells a blue background */
-}
-
-tr:nth-child(even) {
-    background-color: lightsteelblue; /* This gives every other row a light blue background */
-}
-
-tr:nth-child(odd) {
-    background-color: lightgray; /* This gives the other rows a blue background */
-}
-
-
-h1 {
-    color: #007BFF; /* This changes the color of the h1 elements */
-}
-
-html, body {
-    margin: 0;
+    max-width: 1280px;
+    margin: 0 auto;
     padding: 0;
-    width: 100%;
-}
-
-nav {
-    background-color: #007BFF;
-    padding: 10px;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0; /* Ensure the nav bar starts from the left edge */
-}
-
-
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: space-around;
-}
-
-    nav h1, nav a {
-        font-size: 20px; /* Adjust as needed */
-        color: #fff;
-        text-decoration: none;
-    }
-
-.navitems {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-}
-
-.data-display {
-    margin-top: 65px;
-}
-
-h1 {
-    top: 0;
-}
-
-
-
-/* ---------------------------- */
-/* Patientenoverzicht table css */
-/* ---------------------------- */
-
-table,
-.table_2,
-.myometrietable {
-    border-collapse: separate;
-    border-spacing: 0 10px;
-    font-size: 22px;
-    font-family: Arial;
-    /* Easily adjustable colors for the whole component, bg=background, th= tableheader, td= tabledata */
-    --main-th-color: cornflowerblue;
-    --main-td-color: lightsteelblue;
-    --main-hover-color: powderblue;
-    width: 70% auto;
-    border-spacing: 0 2px;
-    margin-top:0;
-    color:white;
-}
-
-.table_2 {
-    width: 400px;
-}
-
-.myometrietable td {
-    font-size:18px;
-    line-height:1;
-    background-color: var(--main-td-color);
-    padding: 5px;
-}
-
-.myometrietable th {
-    padding: 5px;
-}
-
-.myometrie-textarea{
-    width:100%;
-}
-
-.patientoverview-scrollable-table {
-    overflow-y: auto;
-    width: 100%;
-    max-height: 650px;
-    max-width: 730px;
-    margin-bottom: 100px;
-}
-
-.scrollable-table {
-    overflow-y: auto;
-    width: 100%;
-    max-height: 650px;
-    max-width:400px;
-    margin-bottom:25px;
-}
-
-.radiology-scrollable-table {
-    overflow-y: auto;
-    width: 100%;
-    max-height: 650px;
-    max-width: 610px;
-    margin-bottom: 25px;
-}
-
-.radiology-datatable {
-    width: 610px;
-}
-
-.patientoverview-datatable {
-    width: 730px;
-}
-
-th, td {
-    border: transparent;
-}
-
-th {
-    cursor: default;
-}
-
-.image-cell {
-    height: 125px;
-    width: 125px;
-    margin-top:10px;
-    padding: 0;
-    line-height: 0;
-    background-color: var(--main-bg-color);
-}
-
-    .grid-image {
-        width: 100%;
-        height: 100%;
-        border-radius: 10px;
-        margin-top: 10px;
-    }
-
-        .image-header {
-            background-color: var(--main-bg-color);
-            border: none;
-        }
-
-        .spacer {
-            width: 10px;
-            background-color: var(--main-bg-color);
-            border: none;
-        }
-
-.text-cell {
-    padding: 0;
-    margin-top:100px !important;
-    background: var(--main-bg-color);
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    word-break: break-all;
-}
-
-.rounded-left,
-.middle-text-cell,
-.rounded-right {
-    height: 125px;
-    background: var(--main-td-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 200px;
-    margin-top:10px;
-}
-.rounded-left {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-}
-
-.rounded-right {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-.empty-text-cell {
-    padding: 0;
-    background: var(--main-bg-color);
-    width: 0px;
-    margin: 0px;
-}
-
-.header-item,
-.header-rounded-left,
-.header-rounded-right {
-    padding: 10px 0px 10px 0px;
-    background: var(--main-th-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 200px;
-}
-
-    .header-rounded-left {
-        border-top-left-radius: 10px;
-        border-bottom-left-radius: 10px;
-    }
-
-    .header-rounded-right {
-        border-top-right-radius: 10px;
-        border-bottom-right-radius: 10px;
-    }
-
-.th-header-left,
-.th-header-middle,
-.th-header-right {
-    background-color: var(--main-bg-color);
-    padding: 0px;
-    width: 200px;
-}
-
-tr:hover {
-    background-color: lightgray; /* Change this to the desired hover color */
-    cursor: pointer;
-}
-
-    tr:hover .rounded-left,
-    tr:hover .middle-text-cell,
-    tr:hover .rounded-right {
-        background-color: var(--main-hover-color);
-    }
-
-
-    /* ---------------------------- */
-
-.Navbar {
-    top:0;
-    left:0;
-    position:absolute;
-    display: flex;
-    justify-content: flex-start;
-    background-color: cornflowerblue;
-    padding:20px 0px 20px 20px;
-    color:white;
-    margin: 0;
-    z-index: 100;
-    width: 100%;
-    box-sizing: border-box;
-
-}
-
-.link {
-    margin-right:20px;
-    color: white;
-    font-size:22px;
-}
-
-.header-empty-middle
-{
-    width: 0px;
-    background-color: var(--main-bg-color);
-}
-
-.th-header-middle-empty
-{
-    width: 0px;
-    background-color: var(--main-bg-color);
-}
-
-.PageTop {
-    width:1500px    ;
-    display:flex;
-    justify-content: space-between;
-    margin:0;
-    background-color: white;
-    padding: 10px;
-}
-
-.PageTop h1 {
-    flex-grow: 1;
-    text-align: left;
-}
-
-.PageTopResults {
-    width: 1150px;
-    display: flex;
-    justify-content: flex-end; /* Align items to the right */
-    align-items: center; /* Vertically align items */
-}
-
-.patient-image,
-.patient-image-results{
-    height: 125px;
-    width: 125px;
-    padding: 0;
-    line-height: 0;
-    background-color: var(--main-bg-color);
-}
-
-.patient-image-results {
-    padding-left: 10px;
-}
-
-.patient-results {
-    color: black;
-}
-
-.PageBottom {
-    display:flex;
-    justify-content: space-between;
-    background-color: white;
-    font-size:22px;
-    margin-top:20px;
-}
-
-.Block {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border-radius: 5px;
-    border-width: 2px;
-    color: black;
-    margin-right: 10px;
-    height: 600px;
-    font-size: 26px;
-    padding: 20px; /* Add padding to prevent the button from touching the border */
-}
-
-.Block button {
-    width: 90%;
-    margin: 20px;
-    color: white;
-    background-color: cornflowerblue;
-}
-
-.DataBlockData{
-    flex-grow:1;
-}
-
-.textual-data-row {
-    display: flex;
-}
-
-.textual-data-row p {
-    margin: 0;
-    padding: 0;
-    margin-right: 5px;
-}
-
-.textual-data-row:hover {
-    background-color: lightgray;
-    cursor: pointer;
-}
-
-
-
-.DataBlockData div p,
-.DataBlock div p {
-    margin: 0;
-    align-items: start;
-}
-
-.DataBlock div{
-    margin-left:10px;
-    text-align: start;
-}
-
-/* Carousel css */
-/* for the radiology page. */
-
-.carousel {
-    position: relative;
-    max-width: 300px;
-    overflow: hidden;
-}
-
-.carousel__btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    font-size: 1.5rem;
-    border: none;
-    padding: 1rem;
-    cursor: pointer;
-    z-index: 1;
-    transition: background-color 0.3s;
-}
-
-    .carousel__btn:hover {
-        background-color: rgba(0, 0, 0, 0.8);
-    }
-
-.carousel__btn--prev {
-    left: 0;
-}
-
-.carousel__btn--next {
-    right: 0;
-}
-
-.carousel__img {
-    width: 300px;
-    height: 300px;
-    object-fit: fill;
-    display: block;
-    transition: transform 0.3s ease-in-out;
-}
-
-    .carousel__img:hover {
-        transform: scale(1.05);
-    }
-
-    /* ---------------------------- */
-
-.bottom-page{
-    margin-top:0;
-    display : flex;
-    justify-content: space-between;
-    font-size:22px;
-}
-
-.bottom-page textarea {
-    flex-grow:1;
-    margin-left:20px;
-    height: auto;
-    font-size: 22px;
-}
-
-.top-page {
-    width: 1250px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.back-button {
-    margin-right:20px;
-    width:15%;
-}
-
-.top-page h1 {
-    text-align: left;
-    flex-grow:1;
-    margin:0;
-    padding:0;
-}
-
-.top-page-nav-info {
-    display: flex;
-    flex-direction: column; /* Stack the children vertically */
-    justify-content: center; /* Center the children vertically */
-    align-items: flex-start; /* Center the children horizontally */
-    gap: 15px; /* Adjust as needed to control the space between the children */
-    width: 100%;
-    height:125px;
-}
-
-.patient-data-block {
-    display: flex;
-    justify-content: space-between;
-}
-
-
-
-.card {
-    background-color: #f8f8f8; /* Light gray */
-    border-radius: 10px; /* Rounded corners */
-    padding: 20px; /* Space inside the card */
-    margin: 20px 0; /* Space outside the card */
-    margin-bottom:0;
-    width: 80%; /* Adjust as needed */
-    max-width: 600px; /* Adjust as needed */
-    margin-left: auto; /* Center the card */
-    margin-right: auto; /* Center the card */
-}
-
-.placeholder-card {
-    font-size: 150px;
-    display: flex;
-    justify-content: center; /* Centers content horizontally */
-    align-items: center;
-    padding:0;
-}
-
-.placeholder-card:hover {
-    background-color: #e0e0e0;
-}
-
-.placeholder-card i {
-    height: 200px;
-    display: flex;
-    justify-content: center; /* Centers content horizontally */
-    align-items: center;
-}
-
-.Block:not(:last-child) {
-    margin-right: 20px; /* Adjust as needed */
-}
-
-.patient-card {
-    margin-right: 20px;
-}
-
-.patient-data-row {
-    display: flex; /* Align items in a row */
-    justify-content: space-between; /* Space items evenly */
-    margin-bottom: 10px; /* Space between rows */
-}
-
-.patient-information {
-    width:100%;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.card-buttons {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom:10px;
-}
-
-.card-buttons button {
-    margin-left: 10px;
-}
-
-button:hover {
-    background-color: #e0e0e0; /* Darker gray */
-}
-
-.medication-cards-container {
-    width:100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-}
-
-.medication-card {
-    height:230px;
-    flex: 0 0 calc(33.33% - 15px); /* 33.33% for 3 items per row, 10px for margin */
-    margin: 10px; /* Adjust as needed */
-    box-sizing: border-box; /* Include padding and border in the width */
-}
-
-/*The pattern can be defined using the formula an + b, where a and b are constants, and n is a counter starting from 0.
-In the case of :nth-child(3n+1), it selects every third element starting from the first one. Here's how it works:
-• For n=0, it selects the 1st element (because 3*0+1 = 1).
-• For n=1, it selects the 4th element (because 3*1+1 = 4).
-• For n=2, it selects the 7th element (because 3*2+1 = 7).
-• And so on...
-Similarly, :nth-child(3n) selects every third element starting from the third one:
-• For n=0, it doesn't select any element (because 3*0 = 0).
-• For n=1, it selects the 3rd element (because 3*1 = 3).
-• For n=2, it selects the 6th element (because 3*2 = 6).
-• And so on...*/
-
-/* This math makes it so it doesnt matter how many medication cards you add they keep getting formatted without margin
-    on the left and right side of the row 
-*/
-/* Remove left margin from the first card in each row */
-.medication-card.medication:nth-of-type(3n+1) {
-    margin-left: 0;
-}
-
-.medication-card.medication:nth-of-type(3n) {
-    margin-right: 0;
-}
-
-.patient-card .patient-data-row p,
-.contactperson-card .patient-data-row p,
-.medication-card p {
-    line-height: 0.3; /* Adjust as needed */
-}
-
+    text-align: center;
+  }
+  
+  html, body {
+      --main-bg-color: white;
+      background-color: var(--main-bg-color);
+      color: white;
+      margin:0;
+      padding:0;
+  }
+  
+  .content {
+      margin: 0;
+      color: black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+  
+  .app {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+  }
+  
+  .data-display,
+  .data-sender,
+  .data-grid-filler {
+      width: 80%;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+  }
+  
+  table {
+      width: 100%;
+      border-collapse: collapse; /* This removes the double borders */
+      font-family: 'Roboto', sans-serif;
+  }
+  
+  th, td {
+      border: 1px solid #000;
+      padding: 0px 0px 10px 0px;
+      text-align: left;
+  }
+  
+  th {
+      background-color: cornflowerblue; /* This gives the header cells a blue background */
+  }
+  
+  tr:nth-child(even) {
+      background-color: lightsteelblue; /* This gives every other row a light blue background */
+  }
+  
+  tr:nth-child(odd) {
+      background-color: lightgray; /* This gives the other rows a blue background */
+  }
+  
+  
+  h1 {
+      color: #007BFF; /* This changes the color of the h1 elements */
+  }
+  
+  html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+  }
+  
+  nav {
+      background-color: #007BFF;
+      padding: 10px;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0; /* Ensure the nav bar starts from the left edge */
+  }
+  
+  
+  nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: space-around;
+  }
+  
+      nav h1, nav a {
+          font-size: 20px; /* Adjust as needed */
+          color: #fff;
+          text-decoration: none;
+      }
+  
+  .navitems {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+  }
+  
+  .data-display {
+      margin-top: 65px;
+  }
+  
+  h1 {
+      top: 0;
+  }
+  
+  
+  
+  /* ---------------------------- */
+  /* Patientenoverzicht table css */
+  /* ---------------------------- */
+  
+  table,
+  .table_2,
+  .myometrietable {
+      border-collapse: separate;
+      border-spacing: 0 10px;
+      font-size: 22px;
+      font-family: Arial;
+      /* Easily adjustable colors for the whole component, bg=background, th= tableheader, td= tabledata */
+      --main-th-color: cornflowerblue;
+      --main-td-color: lightsteelblue;
+      --main-hover-color: powderblue;
+      width: 70% auto;
+      border-spacing: 0 2px;
+      margin-top:0;
+      color:white;
+  }
+  
+  .table_2 {
+      width: 400px;
+  }
+  
+  .myometrietable td {
+      font-size:18px;
+      line-height:1;
+      background-color: var(--main-td-color);
+      padding: 5px;
+  }
+  
+  .myometrietable th {
+      padding: 5px;
+  }
+  
+  .myometrie-textarea{
+      width:100%;
+  }
+  
+  .patientoverview-scrollable-table {
+      overflow-y: auto;
+      width: 100%;
+      max-height: 650px;
+      max-width: 730px;
+      margin-bottom: 100px;
+  }
+  
+  .scrollable-table {
+      overflow-y: auto;
+      width: 100%;
+      max-height: 650px;
+      max-width:400px;
+      margin-bottom:25px;
+  }
+  
+  .radiology-scrollable-table {
+      overflow-y: auto;
+      width: 100%;
+      max-height: 650px;
+      max-width: 610px;
+      margin-bottom: 25px;
+  }
+  
+  .radiology-datatable {
+      width: 610px;
+  }
+  
+  .patientoverview-datatable {
+      width: 730px;
+  }
+  
+  th, td {
+      border: transparent;
+  }
+  
+  th {
+      cursor: default;
+  }
+  
+  .image-cell {
+      height: 125px;
+      width: 125px;
+      margin-top:10px;
+      padding: 0;
+      line-height: 0;
+      background-color: var(--main-bg-color);
+  }
+  
+      .grid-image {
+          width: 100%;
+          height: 100%;
+          border-radius: 10px;
+          margin-top: 10px;
+      }
+  
+          .image-header {
+              background-color: var(--main-bg-color);
+              border: none;
+          }
+  
+          .spacer {
+              width: 10px;
+              background-color: var(--main-bg-color);
+              border: none;
+          }
+  
+  .text-cell {
+      padding: 0;
+      margin-top:100px !important;
+      background: var(--main-bg-color);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      word-break: break-all;
+  }
+  
+  .rounded-left,
+  .middle-text-cell,
+  .rounded-right {
+      height: 125px;
+      background: var(--main-td-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 200px;
+      margin-top:10px;
+  }
+  .rounded-left {
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+  }
+  
+  .rounded-right {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+  }
+  .empty-text-cell {
+      padding: 0;
+      background: var(--main-bg-color);
+      width: 0px;
+      margin: 0px;
+  }
+  
+  .header-item,
+  .header-rounded-left,
+  .header-rounded-right {
+      padding: 10px 0px 10px 0px;
+      background: var(--main-th-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 200px;
+  }
+  
+      .header-rounded-left {
+          border-top-left-radius: 10px;
+          border-bottom-left-radius: 10px;
+      }
+  
+      .header-rounded-right {
+          border-top-right-radius: 10px;
+          border-bottom-right-radius: 10px;
+      }
+  
+  .th-header-left,
+  .th-header-middle,
+  .th-header-right {
+      background-color: var(--main-bg-color);
+      padding: 0px;
+      width: 200px;
+  }
+  
+  tr:hover {
+      background-color: lightgray; /* Change this to the desired hover color */
+      cursor: pointer;
+  }
+  
+      tr:hover .rounded-left,
+      tr:hover .middle-text-cell,
+      tr:hover .rounded-right {
+          background-color: var(--main-hover-color);
+      }
+  
+  
+      /* ---------------------------- */
+  
+  .Navbar {
+      top:0;
+      left:0;
+      position:absolute;
+      display: flex;
+      justify-content: flex-start;
+      background-color: cornflowerblue;
+      padding:20px 0px 20px 20px;
+      color:white;
+      margin: 0;
+      z-index: 100;
+      width: 100%;
+      box-sizing: border-box;
+  
+  }
+  
+  .link {
+      margin-right:20px;
+      color: white;
+      font-size:22px;
+  }
+  
+  .header-empty-middle
+  {
+      width: 0px;
+      background-color: var(--main-bg-color);
+  }
+  
+  .th-header-middle-empty
+  {
+      width: 0px;
+      background-color: var(--main-bg-color);
+  }
+  
+  .PageTop {
+      width:1500px    ;
+      display:flex;
+      justify-content: space-between;
+      margin:0;
+      background-color: white;
+      padding: 10px;
+  }
+  
+  .PageTop h1 {
+      flex-grow: 1;
+      text-align: left;
+  }
+  
+  .PageTopResults {
+      width: 1150px;
+      display: flex;
+      justify-content: flex-end; /* Align items to the right */
+      align-items: center; /* Vertically align items */
+  }
+  
+  .patient-image,
+  .patient-image-results{
+      height: 125px;
+      width: 125px;
+      padding: 0;
+      line-height: 0;
+      background-color: var(--main-bg-color);
+  }
+  
+  .patient-image-results {
+      padding-left: 10px;
+  }
+  
+  .patient-results {
+      color: black;
+  }
+  
+  .PageBottom {
+      display:flex;
+      justify-content: space-between;
+      background-color: white;
+      font-size:22px;
+      margin-top:20px;
+  }
+  
+  .Block {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-radius: 5px;
+      border-width: 2px;
+      color: black;
+      margin-right: 10px;
+      height: 600px;
+      font-size: 26px;
+      padding: 20px; /* Add padding to prevent the button from touching the border */
+  }
+  
+  .Block button {
+      width: 90%;
+      margin: 20px;
+      color: white;
+      background-color: cornflowerblue;
+  }
+  
+  .DataBlockData{
+      flex-grow:1;
+  }
+  
+  .textual-data-row {
+      display: flex;
+  }
+  
+  .textual-data-row p {
+      margin: 0;
+      padding: 0;
+      margin-right: 5px;
+  }
+  
+  .textual-data-row:hover {
+      background-color: lightgray;
+      cursor: pointer;
+  }
+  
+  
+  
+  .DataBlockData div p,
+  .DataBlock div p {
+      margin: 0;
+      align-items: start;
+  }
+  
+  .DataBlock div{
+      margin-left:10px;
+      text-align: start;
+  }
+  
+  /* Carousel css */
+  /* for the radiology page. */
+  
+  .carousel {
+      position: relative;
+      max-width: 300px;
+      overflow: hidden;
+  }
+  
+  .carousel__btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      font-size: 1.5rem;
+      border: none;
+      padding: 1rem;
+      cursor: pointer;
+      z-index: 1;
+      transition: background-color 0.3s;
+  }
+  
+      .carousel__btn:hover {
+          background-color: rgba(0, 0, 0, 0.8);
+      }
+  
+  .carousel__btn--prev {
+      left: 0;
+  }
+  
+  .carousel__btn--next {
+      right: 0;
+  }
+  
+  .carousel__img {
+      width: 300px;
+      height: 300px;
+      object-fit: fill;
+      display: block;
+      transition: transform 0.3s ease-in-out;
+  }
+  
+      .carousel__img:hover {
+          transform: scale(1.05);
+      }
+  
+      /* ---------------------------- */
+  
+  .bottom-page{
+      margin-top:0;
+      display : flex;
+      justify-content: space-between;
+      font-size:22px;
+  }
+  
+  .bottom-page textarea {
+      flex-grow:1;
+      margin-left:20px;
+      height: auto;
+      font-size: 22px;
+  }
+  
+  .top-page {
+      width: 1250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+  
+  .back-button {
+      margin-right:20px;
+      width:15%;
+  }
+  
+  .top-page h1 {
+      text-align: left;
+      flex-grow:1;
+      margin:0;
+      padding:0;
+  }
+  
+  .top-page-nav-info {
+      display: flex;
+      flex-direction: column; /* Stack the children vertically */
+      justify-content: center; /* Center the children vertically */
+      align-items: flex-start; /* Center the children horizontally */
+      gap: 15px; /* Adjust as needed to control the space between the children */
+      width: 100%;
+      height:125px;
+  }
+  
+  .patient-data-block {
+      display: flex;
+      justify-content: space-between;
+  }
+  
+  
+  
+  .card {
+      background-color: #f8f8f8; /* Light gray */
+      border-radius: 10px; /* Rounded corners */
+      padding: 20px; /* Space inside the card */
+      margin: 20px 0; /* Space outside the card */
+      margin-bottom:0;
+      width: 80%; /* Adjust as needed */
+      max-width: 600px; /* Adjust as needed */
+      margin-left: auto; /* Center the card */
+      margin-right: auto; /* Center the card */
+  }
+  
+  .placeholder-card {
+      font-size: 150px;
+      display: flex;
+      justify-content: center; /* Centers content horizontally */
+      align-items: center;
+      padding:0;
+  }
+  
+  .placeholder-card:hover {
+      background-color: #e0e0e0;
+  }
+  
+  .placeholder-card i {
+      height: 200px;
+      display: flex;
+      justify-content: center; /* Centers content horizontally */
+      align-items: center;
+  }
+  
+  .Block:not(:last-child) {
+      margin-right: 20px; /* Adjust as needed */
+  }
+  
+  .patient-card {
+      margin-right: 20px;
+  }
+  
+  .patient-data-row {
+      display: flex; /* Align items in a row */
+      justify-content: space-between; /* Space items evenly */
+      margin-bottom: 10px; /* Space between rows */
+  }
+  
+  .patient-information {
+      width:100%;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+  }
+  
+  .card-buttons {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom:10px;
+  }
+  
+  .card-buttons button {
+      margin-left: 10px;
+  }
+  
+  button:hover {
+      background-color: #e0e0e0; /* Darker gray */
+  }
+  
+  .medication-cards-container {
+      width:100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+  }
+  
+  .medication-card {
+      height:230px;
+      flex: 0 0 calc(33.33% - 15px); /* 33.33% for 3 items per row, 10px for margin */
+      margin: 10px; /* Adjust as needed */
+      box-sizing: border-box; /* Include padding and border in the width */
+  }
+  
+  /*The pattern can be defined using the formula an + b, where a and b are constants, and n is a counter starting from 0.
+  In the case of :nth-child(3n+1), it selects every third element starting from the first one. Here's how it works:
+  ï¿½ For n=0, it selects the 1st element (because 3*0+1 = 1).
+  ï¿½ For n=1, it selects the 4th element (because 3*1+1 = 4).
+  ï¿½ For n=2, it selects the 7th element (because 3*2+1 = 7).
+  ï¿½ And so on...
+  Similarly, :nth-child(3n) selects every third element starting from the third one:
+  ï¿½ For n=0, it doesn't select any element (because 3*0 = 0).
+  ï¿½ For n=1, it selects the 3rd element (because 3*1 = 3).
+  ï¿½ For n=2, it selects the 6th element (because 3*2 = 6).
+  ï¿½ And so on...*/
+  
+  /* This math makes it so it doesnt matter how many medication cards you add they keep getting formatted without margin
+      on the left and right side of the row 
+  */
+  /* Remove left margin from the first card in each row */
+  .medication-card.medication:nth-of-type(3n+1) {
+      margin-left: 0;
+  }
+  
+  .medication-card.medication:nth-of-type(3n) {
+      margin-right: 0;
+  }
+  
+  .patient-card .patient-data-row p,
+  .contactperson-card .patient-data-row p,
+  .medication-card p {
+      line-height: 0.3; /* Adjust as needed */
+  }
+  
+  /*below is css for Kalender.jsx page*/
+  
+  .calendar-datatable {
+      width: 1000px;
+  }
+  
+  .header-button {
+      background-color: rgb(222, 230, 245);
+      color: rgb(10, 10, 10);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+  }
+  
+  .header-button:hover {
+      background-color: lightsteelblue;
+  }
+  
+  /* Center the calendar grid on the screen */
+  .calendar-grid-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: calc(100vh + 400px); /* Full viewport height minus navbar */
+      width: 130%; /* Set the width to 75% of the screen */
+      margin-left: -30%; /* Center the grid within the left 75% of the screen */
+  }
+  
+  .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+  }
+  
+  .greybutton-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      margin-bottom: 5px;
+      font-size: 0.7em;
+  }
+  
+  .header-button {
+      background-color: cornflowerblue;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+  }
+  
+  .header-button:hover {
+      background-color: lightsteelblue;
+  }
+  
+  .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-rows: repeat(6, 200px); /* Adjust row height here */
+      gap: 5px;
+      width: 100%; /* Set width to 100% to match parent container */
+      max-width: 1400px; /* Limit max width */
+  }
+  
+  .grid-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: top;
+      align-items: top;
+      background-color: cornflowerblue;
+      color: white;
+      border-radius: 5px;
+      padding: 20px;
+      font-size: 1.2em;
+  }
+  
+  .days-of-week {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      width: 100%; /* Set width to 100% to match parent container */
+      max-width: 1400px; /* Limit max width */
+      margin-bottom: 10px;
+  }
+  
+  .day {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 1.2em;
+      color: black; /* Set the text color to black */
+  }
+  
+  
+  
+  .rounded-square {
+      position: fixed; /* Use absolute positioning */
+      top: 50%; /* Position it vertically at 50% */
+      right: 7%; /* Position it 5% from the right edge */
+      transform: translate(50%, -50%); /* Adjust to center it properly */
+      max-width: 300px; /* Set the maximum width */
+      width: auto; /* Allow the width to adjust dynamically */
+      height: auto; /* Allow the height to adjust dynamically */
+      max-height: 80%; /* Set the maximum height */
+      background-color: rgb(50, 107, 211);
+      border-radius: 20px;
+      z-index: 1000;
+      overflow: hidden; /* Prevent content overflow */
+  }
+  
+  .month-year-container {
+     display: flex;
+      text-align: center;
+      margin-top: 10px;
+      flex-direction: row;
+  }
+  
+  .month-display {
+      font-weight: bold;
+      color: black;
+      font-size: 1.2em;
+  }
+  
+  .year-display {
+      font-weight: bold;
+      color: black;
+      font-size: 1.2em;
+  }
