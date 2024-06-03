@@ -1,92 +1,41 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
+/* src/App.css */
 .app {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 20px;
-}
-
-.data-display,
-.data-sender,
-.data-grid-filler {
-    width: 80%;
-    padding: 20px;
-    border: 1px solid #ddd;
+    height: 100vh;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
     border-radius: 5px;
-}
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
-table {
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* src/pages/Afsprakenoverzicht.css */
+  .afsprakenoverzicht {
+    margin: 20px;
+  }
+  
+  table {
     width: 100%;
-    border-collapse: collapse; /* This removes the double borders */
-    font-family: 'Roboto', sans-serif;
-}
-
-th, td {
-    border: 1px solid #000;
-    padding: 10px;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
     text-align: left;
-}
-
-th {
-    background-color: cornflowerblue; /* This gives the header cells a blue background */
-}
-
-tr:nth-child(even) {
-    background-color: lightsteelblue; /* This gives every other row a light blue background */
-}
-
-tr:nth-child(odd) {
-    background-color: lightgray; /* This gives the other rows a blue background */
-}
-
-
-h1 {
-    color: #007BFF; /* This changes the color of the h1 elements */
-}
-
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-}
-
-nav {
-    background-color: #007BFF;
-    padding: 10px;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0; /* Ensure the nav bar starts from the left edge */
-}
-
-
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: space-around;
-}
-
-    nav h1, nav a {
-        font-size: 20px; /* Adjust as needed */
-        color: #fff;
-        text-decoration: none;
-    }
-
-.navitems {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-}
-
-.data-display {
-    margin-top: 65px;
-}
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
