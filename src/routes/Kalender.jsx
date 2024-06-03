@@ -1,20 +1,5 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
-<<<<<<< Updated upstream
-import { useNavigate } from 'react-router-dom';
-import TopPage from '../components/TopPage';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
-
-function Kalender() {
-    const navigate = useNavigate();
-    const [showWeekCalendar, setShowWeekCalendar] = useState(false);
-    const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [appointments, setAppointments] = useState([]);
-
-    const handleWeekButtonClick = () => {
-        setShowWeekCalendar(true);
-=======
 import TopPage from '../components/TopPage';
 
 function Kalender() {
@@ -26,18 +11,10 @@ function Kalender() {
     const handleWeekButtonClick = () => {
         setShowWeekCalendar(true);
         setShowNewAppointment(false); // Hide new appointment on week view
->>>>>>> Stashed changes
     };
 
     const handleMonthButtonClick = () => {
         setShowWeekCalendar(false);
-<<<<<<< Updated upstream
-    };
-
-    const handleDayButtonClick = () => {
-        // Handle day button click
-        console.log('Dag button clicked');
-=======
         setShowNewAppointment(false); // Hide new appointment on month view
         // Reset any other state variables if needed
     };
@@ -50,7 +27,6 @@ function Kalender() {
 
     const handleNewAppointmentButtonClick = () => {
         setShowNewAppointment(true);
->>>>>>> Stashed changes
     };
 
     const handleDropdownToggle = () => {
@@ -58,73 +34,6 @@ function Kalender() {
     };
 
     const handleOptionChange = (type) => {
-<<<<<<< Updated upstream
-        // Handle selecting type option
-        console.log('Selected type:', type);
-    };
-
-    const customDayRenderer = ({ date, view }) => {
-        if (view === 'month' && date.getDate() === 3 && date.getMonth() === 5) {
-            return (
-                <button onClick={() => handleAppointmentClick(date)} className="appointment-button">
-                    10:00 Joep Doe
-                </button>
-            );
-        }
-        return null;
-    };
-
-    const DataTable = () => (
-        <>
-            <table className="calendar-datatable">
-                <thead>
-                    <tr>
-                        <th className="image-header"></th>
-                        <th className="spacer"></th>
-                        <th className="th-header-left">
-                            <div className="header-rounded-left header-item">
-                                <button className="header-button" onClick={handleMonthButtonClick}>Maand</button>
-                            </div>
-                        </th>
-                        <th className="th-header-middle">
-                            <div className="header-rounded-middle header-item">
-                                <button className="header-button" onClick={handleWeekButtonClick}>Week</button>
-                            </div>
-                        </th>
-                        <th className="th-header-middle">
-                            <div className="header-rounded-middle header-item">
-                                <button className="header-button" onClick={handleDayButtonClick}>Dag</button>
-                            </div>
-                        </th>
-                        <th className="th-header-middle">
-                        <div className="header-dropdown">
-                                <button className="header-button" onClick={handleDropdownToggle}>Selecteer type</button>
-                                {dropdownOpen && (
-                                    <div className="dropdown-content">
-                                        <button onClick={() => handleOptionChange('Radiologie')} className="header-button">Radiologie</button>
-                                        <button onClick={() => handleOptionChange('Myometrie')} className="header-button">Myometrie</button>
-                                    </div>
-                                )}
-                            </div>
-                        </th>
-                        <th className="th-header-right">
-                            <div className="header-rounded-right header-item">
-                                <button className="header-button">Nieuwe Afspraak</button>
-                            </div>
-                        </th>
-                    </tr>
-                </thead>
-            </table>
-
-            <div className="calendar-container">
-                {showWeekCalendar ? <WeekCalendar /> : <MonthCalendar />}
-            </div>
-        </>
-    );
-
-    const WeekCalendar = () => <Calendar view="week" />;
-    const MonthCalendar = () => <Calendar tileContent={customDayRenderer} />;
-=======
         console.log('Selected type:', type);
     };
 
@@ -246,19 +155,10 @@ function Kalender() {
             </div>
         ));
     };
->>>>>>> Stashed changes
 
     return (
         <>
             <Navbar />
-<<<<<<< Updated upstream
-            <TopPage headerName="Kalender" />
-            <div className="content">
-                <DataTable />
-            </div>
-            {/* Rounded square */}
-            <div className="rounded-square"></div>
-=======
             <div className="calendar-grid-container">
                 <div className="button-container">
                     <button className="header-button" onClick={handleMonthButtonClick}>Maand</button>
@@ -297,7 +197,6 @@ function Kalender() {
                     New Appointment Section
                 </div>
             )}
->>>>>>> Stashed changes
         </>
     );
 }

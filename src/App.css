@@ -646,8 +646,6 @@ Similarly, :nth-child(3n) selects every third element starting from the third on
 }
 
 .header-button {
-<<<<<<< Updated upstream
-=======
     background-color: rgb(222, 230, 245);
     color: rgb(10, 10, 10);
     border: none;
@@ -689,7 +687,6 @@ Similarly, :nth-child(3n) selects every third element starting from the third on
 }
 
 .header-button {
->>>>>>> Stashed changes
     background-color: cornflowerblue;
     color: white;
     border: none;
@@ -703,41 +700,6 @@ Similarly, :nth-child(3n) selects every third element starting from the third on
     background-color: lightsteelblue;
 }
 
-<<<<<<< Updated upstream
-.calendar-container {
-    width: 100%; /* Increase width to make the container twice as large horizontally */
-    margin: 20px auto; /* Center horizontally within its container */
-    display: flex;
-    justify-content: center;
-}
-
-.react-calendar {
-    width: 100%; /* Make the calendar take full width of its container */
-    max-width: 100%; /* Ensure the calendar doesn't exceed the container's width */
-    border: 1px solid #a0a096;
-    border-radius: 10px;
-    padding: 10px;
-}
-
-.react-calendar__navigation button {
-    color: #007BFF;
-}
-
-.react-calendar__tile {
-    height: 100px; /* Increase tile height for larger calendar */
-    font-size: 1.2em; /* Increase font size for better readability */
-}
-
-.react-calendar__tile--now {
-    background: lightblue !important;
-    color: black;
-}
-
-.react-calendar__tile--active {
-    background: cornflowerblue !important;
-    color: white;
-}
-=======
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
@@ -778,7 +740,6 @@ Similarly, :nth-child(3n) selects every third element starting from the third on
 }
 
 
->>>>>>> Stashed changes
 
 .rounded-square {
     position: fixed;
@@ -787,11 +748,7 @@ Similarly, :nth-child(3n) selects every third element starting from the third on
     transform: translateY(-50%);
     width: 400px; /* Adjust width as needed */
     height: 500px; /* Adjust height as needed */
-<<<<<<< Updated upstream
-    background-color: rgb(180, 201, 241);
-=======
     background-color: rgb(50, 107, 211);
->>>>>>> Stashed changes
     border-radius: 20px;
     z-index: 1000; /* Ensure it's above other content */
 }
