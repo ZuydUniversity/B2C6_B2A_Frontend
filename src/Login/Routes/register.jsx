@@ -15,6 +15,10 @@ function Register() {
     const [birthDate, setBirthDate] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [photo, setPhoto] = useState('');
+    const [contact_email, setContactEmail] = useState('');
+    const [contact_phone, setContactPhone] = useState('');
+    const [contact_name, setContactName] = useState('');
+
 
     const [message, setMessage] = useState(''); 
 
@@ -41,6 +45,10 @@ function Register() {
         formData.append('birthDate',birthDate);
         formData.append('phoneNumber', phoneNumber);
         formData.append('photo', photo);
+        formData.append('contact_email', contact_email);
+        formData.append('contact_phone', contact_phone);
+        formData.append('contact_name', contact_name);
+
 
         try {
             const response = await fetch('http://127.0.0.1:5000/register', {
@@ -74,6 +82,9 @@ function Register() {
         setBirthDate('');
         setPhoneNumber('');
         setPhoto('');
+        setContactEmail('');
+        setContactName('');
+        setContactPhone('');
     };
 
 
@@ -120,6 +131,18 @@ function Register() {
                         <div>
                             <label>Telefoonnummer</label>
                             <input type="tel" id="phoneNumber" name="phoneNumber" className='login_input' value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
+                        </div>
+                        <div>
+                            <label>Contactpersoon Naam</label>
+                            <input type="text" id="contactfirstName" name="contactfirstName" className='login_input' value={contact_name} onChange={(e) => setContactName(e.target.value)}  />
+                        </div>
+                        <div>
+                            <label>Contactpersoon E-mailadres</label>
+                            <input type="email" id="contactemail" name="contactemail" className='login_input' value={contact_email} onChange={(e) => setContactEmail(e.target.value)}  />
+                        </div>
+                        <div>
+                            <label>Contactpersoon Telefoonnummer</label>
+                            <input type="tel" id="contactphoneNumber" name="contactphoneNumber" className='login_input' value={contact_phone} onChange={(e) => setContactPhone(e.target.value)}  />
                         </div>
                     </div>
                 );
