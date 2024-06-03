@@ -31,12 +31,16 @@ function Login() {
             setMessage('Wachtwoord is veranderd')
         }
 
+
         if (!response.ok) { 
-            throw new Error('E-mailadres niet gevonden, probeeer het opnieuw');
-        }
+          if(response.status === 500) {
+              throw new Error('Server error, probeer het later opnieuw');
+          }
+          throw new Error('E-mailadres niet gevonden, probeeer het opnieuw');
+      }
     } catch (error) {
       console.error('Email not found:', error);
-      setMessage('E-mailadres niet gevonden, probeeer het opnieuw')
+      setMessage(error.message)
     }
   }
 

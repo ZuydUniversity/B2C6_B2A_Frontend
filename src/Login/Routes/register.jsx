@@ -56,12 +56,11 @@ function Register() {
                 body: formData,
             });
             
-
-            if(response.status === 400) {
+            if (!response.ok) { 
+                if(response.status === 500) {
+                    throw new Error('Server error, probeer het later opnieuw');
+                }
                 throw new Error('E-mailadres is al in gebruik, probeer het opnieuw.');
-            }
-            else if (!response.ok) {
-                throw new Error('Registratie mislukt, ververs de pagina en probeer het opnieuw.');
             }
 
             setMessage('Registratie successvol');
@@ -69,7 +68,7 @@ function Register() {
 
         } catch (error) {
             console.error('Registration error:', error);
-            setMessage('Registratie mislukt, e-mailadres is al in gebruik. Probeer het opnieuw.');
+            setMessage(error.message);
         }
 
     };

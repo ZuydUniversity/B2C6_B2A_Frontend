@@ -20,6 +20,9 @@ const App = () => {
             });
 
             if (!response.ok) { 
+                if(response.status === 500) {
+                    throw new Error('Server error, probeer het later opnieuw');
+                }
                 throw new Error('Inloggen mislukt, probeer het opnieuw');
             }
 
@@ -29,7 +32,7 @@ const App = () => {
 
         } catch (error) {
             console.error('Login error:', error);
-            setLoginError('Inloggen mislukt, probeer het opnieuw')
+            setLoginError(error.message)
         }
     };
 
