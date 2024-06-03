@@ -50,18 +50,18 @@ function Register() {
             
 
             if(response.status === 400) {
-                throw new Error('Email already in use. Try again.');
+                throw new Error('E-mailadres is al in gebruik, probeer het opnieuw.');
             }
             else if (!response.ok) {
-                throw new Error('Registration failed. Please refresh the page and try again.    ');
+                throw new Error('Registratie mislukt, ververs de pagina en probeer het opnieuw.');
             }
 
-            setMessage('Registration successful');
+            setMessage('Registratie successvol');
             navigateToLogin();
 
         } catch (error) {
             console.error('Registration error:', error);
-            setMessage('Registration failed, email aready in use. Try again.');
+            setMessage('Registratie mislukt, e-mailadres is al in gebruik. Probeer het opnieuw.');
         }
 
     };
