@@ -18,9 +18,9 @@ const Navbar = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
                         <Link to="/"><button type="button" className="btn btn-outline-primary"><i className="bi bi-house-fill"></i> Home</button></Link>
-                        <Link to="PatientOverview"><button type="button" className="btn btn-outline-primary"><i className="bi bi-people-fill"></i> Patiëntenoverzicht</button></Link>
+                        <Link to="/PatientOverview"><button type="button" className="btn btn-outline-primary"><i className="bi bi-people-fill"></i> Patiëntenoverzicht</button></Link>
                         <button type="button" className="btn btn-outline-primary"><i className="bi bi-file-check-fill"></i> Resultaten</button>
-                        <Link to="Kalender"><button type="button" className="btn btn-outline-primary"><i className="bi bi-calendar-event-fill"></i> Kalender</button></Link>
+                        <Link to="/Kalender"><button type="button" className="btn btn-outline-primary"><i className="bi bi-calendar-event-fill"></i> Kalender</button></Link>
                     </ul>
                     <ul className="navbar-nav mr-5">
                         <div className="dropdown">
