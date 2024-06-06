@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 nav.navbar {
     background: #D8EBFE;
-    color: #565FA4;
+    color: #565FA4 !important;
     font-family: "Roboto";
     height: 100px;
     width: 100%;
@@ -11,7 +11,8 @@ nav.navbar {
 .navbar-container {
     width: 100%;
     margin: 0 auto;
-    padding: 0 1rem; /* Voeg padding toe voor wat ruimte aan de zijkanten */
+    padding-left: 7%;
+    padding-right: 7%;
 }
 
 .btn {
@@ -20,7 +21,7 @@ nav.navbar {
     background-color: white;
 }
 .custom-icon {
-    color: #565FA4;
+    color: #565FA4 !important;
 }
 
 .navbar-nav .btn {
@@ -37,6 +38,11 @@ nav.navbar {
 
 .dropdown-menu.p-3 {
     min-width: 340px; /* Bepaalt de minimale breedte van de zoekdropdown */
+}
+
+.dropdown-item {
+    font-size: 16px;
+    color: #565FA4 !important;
 }
 
 .form-inline {
