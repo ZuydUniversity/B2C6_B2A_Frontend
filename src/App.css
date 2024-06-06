@@ -791,6 +791,7 @@
     background: var(--secundary-color);
     width: 100%;
     caption-side: top;
+    border-collapse: collapse;
   }
 
   .appointment_table caption,
@@ -813,6 +814,7 @@
 
   .appointment_table tr {
     background-color: var(--secundary-color);
+    font-size: 1rem;
   }
 
   .appointment_table tr:nth-of-type(2n) {

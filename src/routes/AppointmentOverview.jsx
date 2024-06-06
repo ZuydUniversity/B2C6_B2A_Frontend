@@ -1,45 +1,88 @@
-import React from 'react';
+import React, {useEffect, useState } from 'react';
 import '../App.css';
+import Navbar from '../components/Navbar';
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: 'http://localhost:5000'
+});
 
 const AppointmentOverview = () => {
-  const data = [
-    { id: 1, patientName: 'John Smith', doctorName: 'Dr. Alice Jansen', date: new Date('2024-06-10T09:00:00'), description: 'Jaarlijkse medische controle' },
-    { id: 2, patientName: 'Jane Doe', doctorName: 'Dr. Bob de Bruin', date: new Date('2024-06-11T14:30:00'), description: 'Vervolgafspraak voor bloedtestresultaten' },
-    { id: 3, patientName: 'Emily de Vries', doctorName: 'Dr. Karel de Vries', date: new Date('2024-06-12T11:00:00'), description: 'Consultatie voor kniepijn' },
-    { id: 4, patientName: 'Michael de Jong', doctorName: 'Dr. Diana Groen', date: new Date('2024-06-13T16:00:00'), description: 'Routine tandreiniging' },
-    { id: 5, patientName: 'Sarah de Wit', doctorName: 'Dr. Evan Martinez', date: new Date('2024-06-14T10:30:00'), description: 'Oogonderzoek' }
-  ];
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await api.get('/get_appointments');
+        setData(response.data);
+      } catch (error) {
+        console.error('Error fetching the data', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  
+  const handleEdit = (id) => {
+    console.log(`Edit appointment with id: ${id}`);
+    // Implement edit functionality here
+  };
+
+  const handleDownload = (id) => {
+    console.log(`Download appointment with id: ${id}`);
+    // Implement delete functionality here
+  };
+
+  const handleDelete = (id) => {
+    console.log(`Delete appointment with id: ${id}`);
+    // Implement delete functionality here
+  };
 
   return (
-    <div>
-      <table className='appointment_table'>
-        <caption>Afsprakenlijst</caption>
-        <thead>
-          <tr>
-            <th>Patient</th>
-            <th>Dokter</th>
-            <th>Datum & tijd</th>
-            <th>Beschrijving</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((appointment) => (
-            <tr key={appointment.id}>
-              <td>{appointment.patientName}</td>
-              <td>{appointment.doctorName}</td>
-              <td>{appointment.date.toLocaleString('nl-NL', {
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric', 
-                hour: '2-digit', 
-                minute: '2-digit'
-              })}</td>
-              <td>{appointment.description}</td>
+    <>
+      <Navbar />
+      <div>
+        <table className='appointment_table'>
+          <caption>Afsprakenlijst</caption>
+          <thead>
+            <tr>
+              <th>Patient</th>
+              <th>Dokter</th>
+              <th>Datum & tijd</th>
+              <th>Beschrijving</th>
+              <th></th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {data.map((appointment) => (
+              <tr key={appointment.id}>
+                <td>{appointment.patientName}</td>
+                <td>{appointment.doctorName}</td>
+                <td>{appointment.date.toLocaleString('nl-NL', {
+                  year: 'numeric', 
+                  month: 'long', 
+                  day: 'numeric', 
+                  hour: '2-digit', 
+                  minute: '2-digit'
+                })}</td>
+                <td>{appointment.description}</td>
+                <td>
+                  <button onClick={() => handleEdit(appointment.id)}>
+                    <i class="bi bi-pencil-square custom-icon"></i>
+                  </button>
+                  <button onClick={() => handleDownload(appointment.id)}>
+                    <i class="bi bi-download custom-icon"></i>
+                  </button>
+                  <button onClick={() => handleDelete(appointment.id)}>
+                    <i class="bi bi-trash3-fill custom-icon"></i>
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }
 
