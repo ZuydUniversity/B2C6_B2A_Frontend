@@ -64,7 +64,7 @@ function RadiologyPage() {
     return (
         <>
             <Navbar />
-            <TopPage headerName="Patient" patientId={patientId} imageSrc={imageSrc} />
+            <TopPage headerName="Radiologie" patientId={patientId} imageSrc={imageSrc} />
             <div className='content'>
                 <DataTable data={data}/>
             </div>

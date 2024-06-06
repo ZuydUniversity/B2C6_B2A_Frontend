@@ -80,6 +80,8 @@ const PatientSettingsPage = () => {
     const gender = patient ? patient.Gender : '';
     // const diagnosis = patient ? patient.Diagnosis : '';
     const birthdate = patient ? patient.Birthdate : '';
+    const Email = patient ? patient.Email : '';
+    const Phone_number = patient ? patient.Phone_number : '';
 
     //contactpersoon
     const firstNameContact = 'Eric';
@@ -171,7 +173,7 @@ const PatientSettingsPage = () => {
     return (
         <>
             <Navbar />
-            <TopPage headerName="Patient" patientId={patientId} imageSrc={imageSrc} />
+            <TopPage headerName="Patientgegevens" patientId={patientId} imageSrc={imageSrc} />
             <div className="content">
                 <div className="patient-information">
                     <div className="patient-card card">
@@ -207,6 +209,8 @@ const PatientSettingsPage = () => {
                             }
                         </div>
                         <div className="patient-data-row"><p>Geboortedatum</p>{isEditing ? <input type="text" defaultValue={birthdate} /> : <p>{birthdate}</p>}</div>
+                        <div className="patient-data-row"><p>Telefoonnummer</p>{isEditing ? <input type="text" defaultValue={Phone_number} /> : <p>{Phone_number}</p>}</div>
+                        <div className="patient-data-row"><p>Emailadres</p>{isEditing ? <input type="text" defaultValue={Email} /> : <p>{Email}</p>}</div>
                     </div>
 
                     <div className="contactperson-card card">
