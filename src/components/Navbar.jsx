@@ -7,10 +7,7 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
     return (
         <nav className="navbar navbar-expand-lg border-bottom">
-            <div className="navbar-container"> {/* Voeg deze regel toe */}
-                <a className="navbar-brand" href="#">
-                    Logo
-                </a>
+            <div className="navbar-container">
                 <button className="btn btn-outline-primary navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <i className="bi bi-list custom-icon"></i>
                 </button>
@@ -22,7 +19,7 @@ const Navbar = () => {
                         <button type="button" className="btn btn-outline-primary"><i className="bi bi-file-check-fill"></i> Resultaten</button>
                         <Link to="/Kalender"><button type="button" className="btn btn-outline-primary"><i className="bi bi-calendar-event-fill"></i> Kalender</button></Link>
                     </ul>
-                    <ul className="navbar-nav mr-5">
+                    <ul className="navbar-nav ml-auto">
                         <div className="dropdown">
                             <button type="button" className="btn btn-outline-primary" id="dropdownSearchButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="bi bi-search"></i> Zoeken</button>
                             <div className="dropdown-menu p-3" aria-labelledby="dropdownSearchButton">
@@ -43,7 +40,7 @@ const Navbar = () => {
                         </div>
                     </ul>
                 </div>
-            </div> {/* Voeg deze regel toe */}
+            </div>
         </nav>
     );
 }
