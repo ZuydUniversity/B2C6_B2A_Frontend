@@ -9,6 +9,11 @@
         align-items: center;
         height: 100vh;
     }
+
+    .navbar-splitter {
+        margin-top: 15%;
+
+    }
     
     label {
         font-weight: bold;

@@ -3,10 +3,12 @@ import './Navbar.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Link } from 'react-router-dom';
+import LoadScripts from './Navbarimports.jsx';
 
 const Navbar = () => {
     return (
         <nav className="navbar navbar-expand-lg border-bottom">
+            <LoadScripts />
             <div className="navbar-container">
                 <button className="btn btn-outline-primary navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <i className="bi bi-list custom-icon"></i>

@@ -40,8 +40,7 @@ const App = () => {
     return (
         <>
             <Navbar />
-            <h1>Welcome to the Home Page</h1>
-            <div>
+            <div className="navbar-splitter">
                 <h1 className="centered-title"><i className="bi bi-person-circle"></i> Loginpagina</h1>
 
                 <div className="login_style">
