@@ -41,6 +41,12 @@ jobs:
       - name: List directory contents
         run: ls -al
 
+      - name: Upload ESLint results as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: eslint-results
+          path: eslint-results.sarif
+
       - name: Upload analysis results to GitHub
         if: success()
         uses: github/codeql-action/upload-sarif@v2
