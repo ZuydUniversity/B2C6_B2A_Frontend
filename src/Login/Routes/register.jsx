@@ -10,7 +10,6 @@ function Register() {
     const [lastName, setLastName] = useState('');
     const [employeeNumber, setEmployeeNumber] = useState('');
     const [specialization, setSpecialization] = useState('');
-    const [patientNumber, setPatientNumber] = useState('');
     const [gender, setGender] = useState('');
     const [birthDate, setBirthDate] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -40,11 +39,12 @@ function Register() {
         formData.append('accountType', accountType);
         formData.append('employeeNumber', employeeNumber);
         formData.append('specialization', specialization);
-        formData.append('patientNumber', patientNumber);
         formData.append('gender', gender);
         formData.append('birthDate',birthDate);
         formData.append('phoneNumber', phoneNumber);
-        formData.append('photo', photo);
+        if (photo) {
+            formData.append('photo', photo);
+        }
         formData.append('contact_email', contact_email);
         formData.append('contact_phone', contact_phone);
         formData.append('contact_name', contact_name);
@@ -76,7 +76,6 @@ function Register() {
         setAccountType(e.target.value);
         setEmployeeNumber('');
         setSpecialization('');
-        setPatientNumber('');
         setGender('');
         setBirthDate('');
         setPhoneNumber('');
@@ -115,10 +114,6 @@ function Register() {
             case 'Patient':
                 return (
                     <div className="formdiv patient-register-form">
-                        <div>
-                            <label>Patiëntnummer</label>
-                            <input type="number" id="patientNumber" name="patientNumber"className='login_input' value={patientNumber} onChange={(e) => setPatientNumber(e.target.value)} required />
-                        </div>
                         <div>
                             <label>Geslacht</label>
                             <input type="text" id="gender" name="gender" className='login_input' value={gender} onChange={(e) => setGender(e.target.value)} required />
@@ -202,7 +197,7 @@ function Register() {
                         </div>
                         <div>
                             <label>Profielfoto</label>
-                            <input type="file" accept=".jpg,.jpeg,.png" id="photo" name="photo" className='login_input' onChange={(e) => setPhoto(e.target.files[0])} required />
+                            <input type="file" accept=".jpg,.jpeg,.png" id="photo" name="photo" className='login_input' onChange={(e) => setPhoto(e.target.files[0])}  />
                         </div>
                     </div>
                     <div className='register_right'>
