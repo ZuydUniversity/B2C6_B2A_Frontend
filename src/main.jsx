@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './index.css';
+import Register from './Login/Routes/register.jsx';
+import ForgotPassword from './Login/Routes/forgotpassword.jsx';
+import './Login/App.css';
 
 import PatientOverview from './routes/PatientOverview.jsx';
 import ResultOverview from './routes/ResultOverview.jsx';
@@ -27,6 +30,9 @@ const router = createBrowserRouter([
     { path: "/patientsettingspage/:patientId", element: <PatientSettingsPage /> },
     { path: "/patientlist", element: <PatientList /> },
     { path: "/kalender", element: <Kalender /> },
+    { path: "/", element: <App /> },
+    { path: "/register", element: <Register /> },
+    { path: "/forgot-password", element: <ForgotPassword /> },
 ]);
 
 
