@@ -315,33 +315,33 @@ const PatientSettingsPage = () => {
                         <div className="patient-data-row">
                         <p>Diagnose</p>
                         {isEditing ? (
-    <input
-        type="text"
-        value={Array.isArray(diagnosis) ? diagnosis.map(d => d.Diagnosis).join(', ') : ''}
-        onChange={(e) => {
-            const newInputValue = e.target.value;
-            const newDiagnoses = newInputValue.split(',').map(d => d.trim());
-            
-            const currentDiagnoses = diagnosis.map(d => d.Diagnosis);
+                            <input
+                                type="text"
+                                value={Array.isArray(diagnosis) ? diagnosis.map(d => d.Diagnosis).join(', ') : ''}
+                                onChange={(e) => {
+                                    const newInputValue = e.target.value;
+                                    const newDiagnoses = newInputValue.split(',').map(d => d.trim());
+                                    
+                                    const currentDiagnoses = diagnosis.map(d => d.Diagnosis);
 
-            // Find added diagnoses
-            const addedDiagnoses = newDiagnoses.filter(d => !currentDiagnoses.includes(d));
+                                    // Find added diagnoses
+                                    const addedDiagnoses = newDiagnoses.filter(d => !currentDiagnoses.includes(d));
 
-            // Find removed diagnoses
-            const removedDiagnoses = currentDiagnoses.filter(d => !newDiagnoses.includes(d));
+                                    // Find removed diagnoses
+                                    const removedDiagnoses = currentDiagnoses.filter(d => !newDiagnoses.includes(d));
 
-            // Update the diagnosis state to reflect the new input
-            const updatedDiagnosis = newDiagnoses.map(d => ({ Diagnosis: d }));
-            setDiagnosis(updatedDiagnosis);
+                                    // Update the diagnosis state to reflect the new input
+                                    const updatedDiagnosis = newDiagnoses.map(d => ({ Diagnosis: d }));
+                                    setDiagnosis(updatedDiagnosis);
 
-            // Optionally, handle added/removed diagnoses here (e.g., updating the database)
-            // This could involve sending requests to your backend to update the patient's record
-            // based on addedDiagnoses and removedDiagnoses.
-        }}
-    />
-) : (
-    <p>{Array.isArray(diagnosis) ? diagnosis.map(diag => diag.Diagnosis).join(', ') : ''}</p>
-)}
+                                    // Optionally, handle added/removed diagnoses here (e.g., updating the database)
+                                    // This could involve sending requests to your backend to update the patient's record
+                                    // based on addedDiagnoses and removedDiagnoses.
+                                }}
+                            />
+                        ) : (
+                            <p>{Array.isArray(diagnosis) ? diagnosis.map(diag => diag.Diagnosis).join(', ') : ''}</p>
+                        )}
                         </div>
                         <div className="patient-data-row">
                             <p>Geboortedatum</p>
@@ -386,31 +386,34 @@ const PatientSettingsPage = () => {
                     </div>
                 </div>
                 <div className="medication-cards-container">
-                {medications.map((medication, index) => (
-                    <div key={index} className="medication-card medication card">
-                        <div className="card-buttons">
-                            {medication.isEditing ? (
-                                <>
-                                    <button onClick={() => handleSaveMedicationClick(medication.id)}><i className="bi bi-check-circle"></i></button>
-                                    <button onClick={() => handleCancelMedicationClick(medication.id)}><i className="bi bi-x-circle"></i></button>
-                                </>
-                            ) : (
-                                <button onClick={() => handleEditMedicationClick(medication.id)}><i className="bi bi-pencil-square"></i></button>
-                            )}
-                        </div>
-                        <div className="patient-data-row"><p>Medicijn</p>{medication.isEditing ? <input type="text" defaultValue={medication.Name} /> : <p>{medication.Name}</p>}</div>
-                        <div className="patient-data-row"><p>Gebruik</p>{medication.isEditing ? <input type="text" defaultValue={medication.Dose} /> : <p>{medication.Dose}</p>}</div>
-                        <div className="patient-data-row"><p>Frequentie</p>{medication.isEditing ? <input type="text" defaultValue={medication.Frequency} /> : <p>{medication.Frequency}</p>}</div>
-                    </div>
-                ))}
+                {
+                    Array.isArray(medications) && medications.length > 0 ? (
+                        medications.map((medication, index) => (
+                            <div key={index} className="medication-card medication card">
+                                <div className="card-buttons">
+                                    {medication.isEditing ? (
+                                        <>
+                                            <button onClick={() => handleSaveMedicationClick(medication.id)}><i className="bi bi-check-circle"></i></button>
+                                            <button onClick={() => handleCancelMedicationClick(medication.id)}><i className="bi bi-x-circle"></i></button>
+                                        </>
+                                    ) : (
+                                        <button onClick={() => handleEditMedicationClick(medication.id)}><i className="bi bi-pencil-square"></i></button>
+                                    )}
+                                </div>
+                                <div className="patient-data-row"><p>Medicijn</p>{medication.isEditing ? <input type="text" defaultValue={medication.Name} /> : <p>{medication.Name}</p>}</div>
+                                <div className="patient-data-row"><p>Gebruik</p>{medication.isEditing ? <input type="text" defaultValue={medication.Dose} /> : <p>{medication.Dose}</p>}</div>
+                                <div className="patient-data-row"><p>Frequentie</p>{medication.isEditing ? <input type="text" defaultValue={medication.Frequency} /> : <p>{medication.Frequency}</p>}</div>
+                            </div>
+                        ))
+                    ) : null}
                     <div className="medication-card placeholder-card card medication">
                         <i className="bi bi-plus"></i>
                     </div>
                 </div>
                 <div className="diagnosis-cards-container">
-                    {diagnosis.map((diag, index) => (
-                        <div key={index} className="diagnosis-card card">
-                            <div className="card-buttons">
+                {Array.isArray(diagnosis) && diagnosis.length > 0 && diagnosis.map((diag, index) => (
+                    <div key={index} className="diagnosis-card card">
+                        <div className="card-buttons">
                                 {diag.isEditing ? (
                                     <>
                                         <button onClick={() => handleSaveDiagnosisClick(diag.Id)}><i className="bi bi-check-circle"></i></button>
