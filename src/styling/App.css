@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-
-/* Uniformiteit CSS CHECK DE WIKI VOORDAT JE DINGEN ANAPAST! *LINK WIKI* */
+/* Uniformiteit CSS CHECK DE WIKI VOORDAT JE DINGEN AANPAST! *LINK WIKI* */
 
 /* NORMAL/LIGHT MODE */
 :root {
@@ -10,16 +9,24 @@
     --tertiary-color: #1b21d4;
     --background-color: #d8eaff;
     --text-color: black;
-  }
+}
   
-  body {
+body {
+    font-family: 'Roboto', sans-serif;
     background-color: var(--background-color);
     color: var(--text-color);
-  }
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
   
-  /* DARK MODE */
-  /* 
-  @media (prefers-color-scheme: dark) {
+/* DARK MODE */
+/* 
+@media (prefers-color-scheme: dark) {
     :root {
       --primary-color: #fc6039;
       --secondary-color: #000369;
@@ -27,11 +34,11 @@
       --background-color: black;
       --text-color: white;
     }
-  }
+}
   
-  /* COLORBLINDESS MODES */
-  /* Protanopia and Deuteranopia */
-  @media screen and (colorblindness-1: active) {
+/* COLORBLINDNESS MODES */
+/* Protanopia and Deuteranopia */
+@media screen and (colorblindness-1: active) {
     :root {
       --primary-color: #b8b742;
       --secondary-color: #010150;
@@ -39,10 +46,10 @@
       --background-color: #dfdff9;
       --text-color: black;
     }
-  }
+}
 
-  /* Tritanopia */
-  @media screen and (colorblindness-2: active) {
+/* Tritanopia */
+@media screen and (colorblindness-2: active) {
     :root {
       --primary-color: #F4494B;
       --secondary-color: #003C38;
@@ -50,10 +57,10 @@
       --background-color: #d8f5f5;
       --text-color: black;
     }
-  }
+}
 
-  /* Achromatopsia */
-  @media screen and (colorblindness-3: active) {
+/* Achromatopsia */
+@media screen and (colorblindness-3: active) {
     :root {
       --primary-color: #8a8a8a;
       --secondary-color: #0d0d0d;
@@ -61,10 +68,10 @@
       --background-color: #e7e7e7;
       --text-color: black;
     }
-  }
+}
 
-  /* Achromatomaly */
-  @media screen and (colorblindness-3: active) {
+/* Achromatomaly */
+@media screen and (colorblindness-3: active) {
     :root {
       --primary-color: #bd7765;
       --secondary-color: #070837;
@@ -72,10 +79,10 @@
       --background-color: #282b7c;
       --text-color: black;
     }
-  }
+}
 
-  /* HIGH CONTRAST MODE */
-  @media screen and (high-contrast: active) {
+/* HIGH CONTRAST MODE */
+@media screen and (high-contrast: active) {
     :root {
       --primary-color: #ff0000;
       --secondary-color: #0000ff;
@@ -83,132 +90,168 @@
       --background-color: #ffffff;
       --text-color: #000000;
     }
-  }
+}
 
-  .centered-title {
+.centered-title {
     text-align: center;
     color: var(--primary-color);
     text-shadow: 7px 7px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* --------------*/
-  /* NAVBAR css */
-  /* --------------*/
-  
-  nav.navbar {
-      background: white /*var(--background-color)*/;
-      color: var(--text-color);
-      font-family: "arial";
-      height: 100px;
-      width: 100%;
-      position: absolute;
-  }
-  
-  .navbar-container {
-      width: 100%;
-      margin: 0 auto;
-      padding-left: 7%;
-      padding-right: 7%;
-  }
-  
-  .btn {
-      padding-left: 20px;
-      padding-right: 20px;
-      background-color: white;
-  }
-  
-  .btn-outline-primary {
+}
+
+/* --------------*/
+/* NAVBAR css */
+/* --------------*/
+
+nav.navbar {
+    background: white; /*var(--background-color);*/
+    color: var(--text-color);
+    font-family: "arial";
+    height: 100px;
+    width: 100%;
+    position: absolute;
+}
+
+.navbar-container {
+    width: 100%;
+    margin: 0 auto;
+    padding-left: 7%;
+    padding-right: 7%;
+}
+
+.btn {
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: white;
+}
+
+.btn-outline-primary {
     --bs-btn-bg: white;
     --bs-btn-color: var(--primary-color) !important;
     --bs-btn-border-color: var(--primary-color) !important;
     --bs-btn-hover-color: var(--text-color);
     --bs-btn-hover-bg: var(--primary-color) !important;
     --bs-btn-hover-border-color: var(--primary-color) !important;
-    --bs-btn-focus-shadow-rgb: 13, 110, 253; 
+    --bs-btn-focus-shadow-rgb: 13, 110, 253;
     --bs-btn-active-color: var(--text-color);
     --bs-btn-active-bg: var(--primary-color) !important;
     --bs-btn-active-border-color: var(--primary-color) !important;
     --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     --bs-btn-disabled-color: var(--primary-color) !important;
-    --bs-btn-disabled-bg: white; 
+    --bs-btn-disabled-bg: white;
     --bs-btn-disabled-border-color: var(--primary-color) !important;
-    --bs-gradient: white; 
-  }
-  
-  .custom-icon {
-      color: var(--primary-color)!important;
-  }
-  
-  .navbar-nav .btn {
-      margin-right: 30px;
-      box-shadow: 7px 7px 2px 0px rgba(0,0,0,0.1); /* Toegevoegde schaduw */
-  }
-  
-  .dropdown-menu {
-      position: absolute;
-      top: 100%; /* Dit zorgt ervoor dat het menu direct onder de knop verschijnt */
-      left: 0; /* Dit zorgt ervoor dat het menu zich uitlijnt met de linkerkant van de knop */
-      z-index: 1000; /* Zorg ervoor dat de dropdown boven andere elementen verschijnt */
-  }
-  
-  .dropdown-menu.p-3 {
-      min-width: 340px; /* Bepaalt de minimale breedte van de zoekdropdown */
-  }
-  
-  .dropdown-item {
-      font-size: 16px;
-      color: var(--primary-color)!important;
-  }
+    --bs-gradient: white;
+}
 
-  .dropdown-item:hover {
+.custom-icon {
+    color: var(--primary-color)!important;
+}
+
+.navbar-nav .btn {
+    margin-right: 30px;
+    box-shadow: 7px 7px 2px 0px rgba(0,0,0,0.1); /* Toegevoegde schaduw */
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%; /* Dit zorgt ervoor dat het menu direct onder de knop verschijnt */
+    left: 0; /* Dit zorgt ervoor dat het menu zich uitlijnt met de linkerkant van de knop */
+    z-index: 1000; /* Zorg ervoor dat de dropdown boven andere elementen verschijnt */
+}
+
+.dropdown-menu.p-3 {
+    min-width: 340px; /* Bepaalt de minimale breedte van de zoekdropdown */
+}
+
+.dropdown-item {
+    font-size: 16px;
+    color: var(--primary-color)!important;
+}
+
+.dropdown-item:hover {
     background-color: var(--primary-color)!important;
     color: white!important;
-  }
-  
-  .form-inline {
-      width: 100%; /* Zorgt ervoor dat het formulier de volledige breedte van de dropdown inneemt */
-      display: flex;
-      align-items: center; /* Zorgt ervoor dat de items verticaal gecentreerd zijn */
-  }
-  
-  .form-control {
-      flex: 1; /* Zorgt ervoor dat het invoerveld de beschikbare ruimte inneemt */
-      margin-right: 10px; /* Ruimte tussen het invoerveld en de knop */
-  }
+}
 
-  .form-control:focus {
+.form-inline {
+    width: 100%; /* Zorgt ervoor dat het formulier de volledige breedte van de dropdown inneemt */
+    display: flex;
+    align-items: center; /* Zorgt ervoor dat de items verticaal gecentreerd zijn */
+}
+
+.form-control {
+    flex: 1; /* Zorgt ervoor dat het invoerveld de beschikbare ruimte inneemt */
+    margin-right: 10px; /* Ruimte tussen het invoerveld en de knop */
+}
+
+.form-control:focus {
     outline: none !important;
-    border: 2px solid var(--primary-color)!important; 
-  }
+    border: 2px solid var(--primary-color)!important;
+}
 
-  .btn-outline-success {
-      white-space: nowrap; /* Zorgt ervoor dat de knop niet afbreekt */
-  }
+.btn-outline-success {
+    white-space: nowrap; /* Zorgt ervoor dat de knop niet afbreekt */
+}
 
-  
+/* --------------*/
+/* LOGIN, REGISTER, FORGOT PASSWORD css */
+/* --------------*/
 
+.form-label {
+    color: var(--primary-color);
+}
 
-  /* --------------*/
-  /* LOGINPAGE css */
-  /* --------------*/
+.formwidth {
+    width: 500px;
+}
 
-  /* 
-  .login_input
-  .login_input:focus
-  .login_button
-  .login_button:hover 
-  */
+.navbar-splitter {
+    margin-top: 15%;
+}
 
+.bottom-right-text {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    font-size: 15px;
+    white-space: pre-wrap;
+}
 
-  /* --------------*/
-  /* DASHBOARD css */
-  /* --------------*/
+.login_style {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 7px 7px 2px 0px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
 
-  /*
-  .dashboard_input
-  .dashboard_input:focus
-  .dashboard_button
-  .dashboard_button:hover 
-  */
+.login_button {
+    background-color: var(--primary-color);
+    color: white;
+    transition: background-color 0.5s ease;
+    display: block;
+    width: 100%;
+}
 
-  
+.login_button:hover {
+    background-color: #FB3D0E;
+    transform: scale(1.02);
+}
+
+@media (max-width: 768px) {
+    .login_style {
+        padding: 10px;
+    }
+}
+
+/* --------------*/
+/* DASHBOARD css */
+/* --------------*/
+
+/*
+.dashboard_input
+.dashboard_input:focus
+.dashboard_button
+.dashboard_button:hover 
+*/
