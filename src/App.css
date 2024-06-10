@@ -13,6 +13,7 @@
       color: white;
       margin:0;
       padding:0;
+      width:100%;
   }
   
   .content {
@@ -21,6 +22,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      max-height: 76vh;
+      overflow-y: auto; 
   }
   
   .app {
@@ -538,7 +541,6 @@
       margin: 20px 0; /* Space outside the card */
       margin-bottom:0;
       width: 80%; /* Adjust as needed */
-      max-width: 600px; /* Adjust as needed */
       margin-left: auto; /* Center the card */
       margin-right: auto; /* Center the card */
   }
@@ -567,7 +569,13 @@
   }
   
   .patient-card {
-      margin-right: 20px;
+      margin-left: 0px;
+      margin-right:10px;
+  }
+
+  .contactperson-card {
+    margin-left: 10px;
+    margin-right:0px;
   }
   
   .patient-data-row {
@@ -585,10 +593,16 @@
   
   .card-buttons {
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom:10px;
   }
-  
+
+  .card-buttons p {
+    margin:0px;
+    font-weight: bold;
+}
+
   .card-buttons button {
       margin-left: 10px;
   }
@@ -640,6 +654,11 @@
   .medication-card p {
       line-height: 0.3; /* Adjust as needed */
   }
+
+  .contactperson-card{
+    margin-right:0px;
+  }
+
 
   .diagnosis-cards-container {
     width: 100%;
