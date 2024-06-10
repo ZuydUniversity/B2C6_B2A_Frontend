@@ -1,0 +1,51 @@
+name: ESLint
+
+on:
+  push:
+    branches: [ "Eslint-action" ]
+  pull_request:
+    branches: [ "Eslint-action" ]
+  schedule:
+    - cron: '44 19 * * 6'
+
+jobs:
+  eslint:
+    name: Run ESLint scanning
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install ESLint
+        run: |
+          npm install eslint@8.10.0
+          npm install @microsoft/eslint-formatter-sarif@2.1.7
+
+      - name: Run ESLint
+        run: |
+          npx eslint . \
+            --config .eslintrc.cjs \
+            --ext .js,.jsx,.ts,.tsx \
+            --format @microsoft/eslint-formatter-sarif \
+            --output-file eslint-results.sarif
+        continue-on-error: true
+
+      - name: Display ESLint output
+        run: cat eslint-results.sarif || echo "No SARIF report generated"
+
+      - name: List directory contents
+        run: ls -al
+
+      - name: Upload analysis results to GitHub
+        if: success()
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: eslint-results.sarif
+          wait-for-processing: true
+
+
