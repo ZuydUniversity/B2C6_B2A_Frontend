@@ -42,8 +42,9 @@ jobs:
         run: ls -al
 
       - name: Upload analysis results to GitHub
-        if: success()
+        if: always()  # Upload results even if there are linting errors
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: eslint-results.sarif
           wait-for-processing: true
+
