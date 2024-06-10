@@ -137,7 +137,31 @@
   
   .table_2 {
       width: 400px;
+      table-layout: fixed; /* Ensures the table layout is fixed */
+      flex-grow: 1;
   }
+
+    /* Icon styling */
+    .ResultIcon, .EditIcon {
+        cursor: pointer;
+        font-size: 2rem; /* Increase the font size to make the icons bigger */
+    }
+
+    .ResultIcon{
+        margin-left: 70px; /* Adjust as needed for spacing */
+    }
+
+    .ResultIcon:hover {
+        color: lightsteelblue; /* Change the color of the icons on hover */
+    }
+    
+    /* Row container styling */
+    .data-row-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between; /* Ensure spacing between table and icons */
+        margin-bottom: 10px;
+    }
   
   .myometrietable td {
       font-size:18px;
@@ -259,7 +283,9 @@
   
   .header-item,
   .header-rounded-left,
-  .header-rounded-right {
+  .header-rounded-right,
+  .header-rounded-left-result,
+  .header-rounded-right-result{
       padding: 10px 0px 10px 0px;
       background: var(--main-th-color);
       display: flex;
@@ -268,23 +294,46 @@
       width: 200px;
   }
   
-      .header-rounded-left {
+      .header-rounded-left,
+      .header-rounded-left-result {
           border-top-left-radius: 10px;
           border-bottom-left-radius: 10px;
       }
   
-      .header-rounded-right {
+      .header-rounded-right,
+      .header-rounded-right-result {
           border-top-right-radius: 10px;
           border-bottom-right-radius: 10px;
       }
+
+  .header-rounded-left-result,
+  .header-rounded-right-result {
+      width: 175px;
+  }
+
+  .header-empty {
+    width: 45px;
+    background-color: white;
+  }
   
   .th-header-left,
   .th-header-middle,
-  .th-header-right {
+  .th-header-right,
+  .th-header-left-result,
+  .th-header-right-result {
       background-color: var(--main-bg-color);
       padding: 0px;
       width: 200px;
   }
+
+  .th-header-left-result,
+  .th-header-right-result {
+    background-color: var(--main-bg-color);
+    padding: 0px; /* Remove padding */
+    width: 150px;
+    margin: 0; /* Remove margin */
+  }
+
   
   tr:hover {
       background-color: lightgray; /* Change this to the desired hover color */
@@ -296,7 +345,17 @@
       tr:hover .rounded-right {
           background-color: var(--main-hover-color);
       }
-  
+
+  .edit-scores-btn {
+        padding: 5px 10px;
+        font-size: 14px;
+        float: right;
+    }
+    
+    .h2-myometrie {
+        text-align: center;
+        width: 690px;
+    }
   
       /* ---------------------------- */
   

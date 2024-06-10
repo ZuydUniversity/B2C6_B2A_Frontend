@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import '../App.css'; // Import the CSS file
-import Navbar from '../components/Navbar'; // Double period to go back one directory
-import { useNavigate } from 'react-router-dom';
+import '../App.css';
+import Navbar from '../components/Navbar';
+import { useNavigate, useParams } from 'react-router-dom';
 import TopPage from '../components/TopPage';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
-
 
 function ResultOverview() {
   const { patientId } = useParams();
   const imageSrc = '../src/assets/kid_1.png';
-  const patientName = 'John Doe';
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -26,27 +23,40 @@ function ResultOverview() {
     fetchData(patientId);
   }, [patientId]);
 
-  const DataRow = ({ Type, Date }) => {
+  const DataRow = ({ Type, Date, Id }) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
       if (Type === 'Myometrie') {
-        navigate(`/myometriepage/${patientId}`);
+        navigate(`/myometriepage/${patientId}/${Id}`);
       } else if (Type === 'Radiologie') {
-        navigate(`/radiologypage/${patientId}`);
+        navigate(`/radiologypage/${patientId}/${Id}`);
       } else {
         window.alert(`Row clicked: ${Type}`);
       }
     };
 
+    const handlePdfClick = (e) => {
+      e.stopPropagation(); // Prevent triggering the row click event
+      // Handle PDF icon click logic here
+      window.alert('PDF icon clicked');
+    };
+
     // Format the date to display only the date part
-    const formattedDate = new window.Date(Date).toLocaleDateString('en-GB')
+    const formattedDate = new window.Date(Date).toLocaleDateString('en-GB');
 
     return (
-      <tr onClick={handleClick}>
-        <td className="text-cell"><div className="rounded-left">{Type}</div></td>
-        <td className="text-cell"><div className="rounded-right">{formattedDate}</div></td>
-      </tr>
+      <div className="data-row-container">
+        <table className='table_2'>
+          <tbody>
+            <tr onClick={handleClick}>
+              <td className="text-cell"><div className="rounded-left">{Type}</div></td>
+              <td className="text-cell"><div className="rounded-right">{formattedDate}</div></td>
+            </tr>
+          </tbody>
+        </table>
+        <i className="bi bi-filetype-pdf ResultIcon" onClick={handlePdfClick}></i>
+      </div>
     );
   };
 
@@ -55,18 +65,15 @@ function ResultOverview() {
       <table className='table_2'>
         <thead>
           <tr>
-            <th className="th-header-left"><div className="header-rounded-left header-item">Type</div></th>
-            <th className="th-header-right"><div className="header-rounded-right header-item">Date</div></th>
+            <th className="th-header-left-result"><div className="header-rounded-left-result header-item">Type</div></th>
+            <th className="th-header-right-result"><div className="header-rounded-right-result header-item">Date</div></th>
+            <th className="header-empty"></th>
           </tr>
         </thead>
       </table>
 
       <div className="scrollable-table">
-        <table className='table_2'>
-          <tbody>
-            {data.map((row, index) => <DataRow key={index} {...row} />)}
-          </tbody>
-        </table>
+        {data.map((row, index) => <DataRow key={index} {...row} />)}
       </div>
     </>
   );
