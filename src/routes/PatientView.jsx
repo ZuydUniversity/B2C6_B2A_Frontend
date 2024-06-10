@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 import TopPage from '../components/TopPage';
 import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function PatientView() {
     const { patientId } = useParams();
     const imageSrc = '../src/assets/kid_1.png';
     const [diagnosis, setDiagnosis] = useState([]);
     const [patient, setPatient] = useState(null);
+    const [results, setResults] = useState([]);
 
     useEffect(() => {
         const fetchPatient = async (patientId) => {
@@ -52,6 +54,19 @@ function PatientView() {
         }
     }, [patient]);
 
+    useEffect(() => {
+        const fetchData = async (patientId) => {
+          try {
+            const response = await axios.get(`http://localhost:5000/patients/${patientId}/get_results`);
+            setResults(response.data);
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          }
+        };
+    
+        fetchData(patientId);
+      }, [patientId]);
+
     const patientName = patient ? patient.Name : '';
     const phoneNumber = patient ? patient.Phone_number : '';
     const mail = patient ? patient.Email : '';
@@ -65,11 +80,16 @@ function PatientView() {
                     <div className="ResultsBlock Block card">
                         <p>Resultaten</p>
                         <div className="DataBlockData">
-                            {Array.from({ length: 3 }, (_, i) => (
-                                <div className="textual-data-row" key={i + 1}>
-                                    <p>{i + 1}: Result {i + 1}</p>
-                                </div>
-                            ))}
+                        {Array.from({ length: 3 }, (_, i) => (
+                            <div className="textual-data-row" key={i + 1}>
+                                {results[i] !== "" 
+                                    ? (results[i] 
+                                        ? <p>{i + 1}: {results[i].Type}</p> 
+                                        : <p>{i + 1}: </p>)
+                                    : <p>{i + 1}:</p>
+                                }
+                            </div>
+                        ))}
                         </div>
                         <Link to={`/resultoverview/${patientId}`} className="resultoverview-button"><button>Zie alles</button></Link>
                     </div>

@@ -10,6 +10,11 @@ const PatientSettingsPage = () => {
     const [diagnosis, setDiagnosis] = useState([]);
     const [medications, setMedications] = useState([]);
     
+
+    //----------------------------------------------------------------//
+    //-------------API calls to get all the neccessary data-----------//
+    //----------------------------------------------------------------//
+
     useEffect(() => {
         const fetchPatient = async (patientId) => {
             try {
@@ -56,7 +61,11 @@ const PatientSettingsPage = () => {
     };
 
 
-    // const patient = patients[0];
+    
+    //---------------------------------------------------------------------------//
+    //-------Initiating loading Diagnosis and Medication if patient exists-------//
+    //---------------------------------------------------------------------------//
+
     const imageSrc = '../src/assets/kid_1.png';
 
     useEffect(() => {
@@ -71,29 +80,42 @@ const PatientSettingsPage = () => {
         }
     }, [patient]);
 
-
-
+    //Static start values to fill the page
     const patientName = patient ? patient.Name : '';
     const firstName = patient ? patient.Name : '';
     const lastName = patient ? patient.Lastname : '';
     const age = patient ? patient.Age : null;
     const gender = patient ? patient.Gender : '';
-    // const diagnosis = patient ? patient.Diagnosis : '';
     const birthdate = patient ? patient.Birthdate : '';
     const Email = patient ? patient.Email : '';
     const Phone_number = patient ? patient.Phone_number : '';
-
-    //contactpersoon
     const firstNameContact = 'Eric';
     const lastNameContact = 'Doe';
     const emailContact = 'eric_doe@gmail.com';
     const telephoneContact = '0612345678';
 
-    //Logic for editing patient data
+    // All of the editable values
+    const [editedFirstName, setEditedFirstName] = useState('');
+    const [editedLastName, setEditedLastName] = useState('');
+    const [editedGender, setEditedGender] = useState('');
+    const [editedDiagnosis, setEditedDiagnosis] = useState([]);
+    const [editedBirthdate, setEditedBirthdate] = useState('');
+    const [editedPhoneNumber, setEditedPhoneNumber] = useState('');
+    const [editedEmail, setEditedEmail] = useState('');
     const [isEditing, setIsEditing] = useState(false);
+
+    //----------------------------------------------------------------//
+    //-------Logic for handling UI-patient changes upon editing-------//
+    //----------------------------------------------------------------//
 
     const handleEditClick = () => {
         setIsEditing(true);
+        setEditedFirstName(patient.Name);  // Copy current value to local state
+        setEditedLastName(patient.Lastname);
+        setEditedGender(patient.Gender);
+        setEditedBirthdate(patient.Birthdate);
+        setEditedPhoneNumber(patient.Phone_number);
+        setEditedEmail(patient.Email);
     };
 
     const handleSaveClick = () => {
@@ -107,7 +129,43 @@ const PatientSettingsPage = () => {
         setIsEditing(false);
     };
 
-    //Logic for editing contact data
+    //--------------------------------------------------------//
+    //--------All of the handle input field functions---------//
+    //--------------------------------------------------------//
+
+    const handleFirstNameChange = (event) => {
+        setEditedFirstName(event.target.value);  // Update local state when user types
+    };
+
+    const handleLastNameChange = (event) => {
+        setEditedLastName(event.target.value);
+    };
+
+    const handleGenderChange = (event) => {
+        setEditedGender(event.target.value);
+    };
+    
+    const handleDiagnosisChange = (e) => {
+        const newDiagnosis = e.target.value.split(',').map(d => d.trim());
+        setEditedDiagnosis(newDiagnosis); // Assuming you have a state variable named editedDiagnosis
+    };
+
+    const handleBirthdateChange = (event) => {
+        setEditedBirthdate(event.target.value);
+    };
+    
+    const handlePhoneNumberChange = (event) => {
+        setEditedPhoneNumber(event.target.value);
+    };
+    
+    const handleEmailChange = (event) => {
+        setEditedEmail(event.target.value);
+    };
+    
+    //----------------------------------------------------------------------//
+    //-------Logic for handling UI-contactperson changes upon editing-------//
+    //----------------------------------------------------------------------//
+
     const [isEditingContact, setIsEditingContact] = useState(false);
 
     const handleEditContactClick = () => {
@@ -124,7 +182,10 @@ const PatientSettingsPage = () => {
         setIsEditingContact(false);
     };
 
-    //Logic for editing medication data
+    //----------------------------------------------------------------------//
+    //-------Logic for handling UI-medication changes upon editing----------//
+    //----------------------------------------------------------------------//
+
     const handleEditMedicationClick = (id) => {
         setMedications(medications.map(medication => medication.id === id ? { ...medication, isEditing: true } : medication));
     };
@@ -139,14 +200,49 @@ const PatientSettingsPage = () => {
         setMedications(medications.map(medication => medication.id === id ? { ...medication, isEditing: false } : medication));
     };
 
+    //----------------------------------------------------------------------//
+    //----------------Logic for updating changes upon saving----------------//
+    //----------------------------------------------------------------------//
+
+    const updateDiagnosis = (patientId, diagnosisId, diagnosisDetails) => {
+        const apiUrl = `http://localhost:5000/patients/${patientId}/diagnosis/${diagnosisId}`;
+    
+        fetch(apiUrl, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(diagnosisDetails),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to update diagnosis');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Diagnosis updated successfully:', data);
+            // Update UI or state as needed
+        })
+        .catch(error => {
+            console.error('Error updating diagnosis:', error);
+            // Handle error, possibly by showing a message to the user
+        });
+    };
+
     // Function to send edited data to the backend
     const sendDataToBackend = () => {
         const editedData = {
-            // Gather edited data here
+            Name: editedFirstName,
+            Lastname: editedLastName,
+            Gender: editedGender,
+            Birthdate: editedBirthdate,
+            Phone_number: editedPhoneNumber,
+            Email: editedEmail,
         };
 
-        fetch('/update_patient/<int:patient_id>', {
-            method: 'POST',
+        fetch(`http://localhost:5000/update_patient/${patientId}`, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -166,8 +262,9 @@ const PatientSettingsPage = () => {
             console.error('Error sending data to the server:', error);
             // Handle error if needed
         });
-    };
 
+       updateDiagnosis(patientId, diagnosisId, diagnosisDetails);
+    };
 
 
     return (
@@ -187,32 +284,90 @@ const PatientSettingsPage = () => {
                                 <button onClick={handleEditClick}><i className="bi bi-pencil-square"></i></button>
                             )}
                         </div>
-                        <div className="patient-data-row"><p>Naam</p>{isEditing ? <input type="text" defaultValue={lastName} /> : <p>{lastName}</p>}</div>
-                        <div className="patient-data-row"><p>Voornaam</p>{isEditing ? <input type="text" defaultValue={firstName} /> : <p>{firstName}</p>}</div>
                         <div className="patient-data-row">
-                            <p>Leeftijd</p>
+                            <p>Achternaam</p>
                             {isEditing ? (
-                                <input type="text" defaultValue={new Date().getFullYear() - new Date(birthdate).getFullYear()} />
+                                <input type="text" value={editedLastName} onChange={handleLastNameChange} />
                             ) : (
-                                <p>{new Date().getFullYear() - new Date(birthdate).getFullYear()}</p>
+                                <p>{lastName}</p>
                             )}
                         </div>
-                        <div className="patient-data-row"><p>Geslacht</p>{isEditing ? <input type="text" defaultValue={gender} /> : <p>{gender}</p>}</div>
                         <div className="patient-data-row">
-                            <p>Diagnose</p>
-                            {isEditing ? 
-                                diagnosis.map((diag, index) => (
-                                    <input key={index} type="text" defaultValue={diag.Diagnosis} />
-                                )) 
-                                : 
-                                <p>{diagnosis.map(diag => diag.Diagnosis).join(', ')}</p>
-                            }
+                            <p>Voornaam</p>
+                            {isEditing ? (
+                                <input type="text" value={editedFirstName} onChange={handleFirstNameChange} />
+                            ) : (
+                                <p>{firstName}</p>
+                            )}
                         </div>
-                        <div className="patient-data-row"><p>Geboortedatum</p>{isEditing ? <input type="text" defaultValue={birthdate} /> : <p>{birthdate}</p>}</div>
-                        <div className="patient-data-row"><p>Telefoonnummer</p>{isEditing ? <input type="text" defaultValue={Phone_number} /> : <p>{Phone_number}</p>}</div>
-                        <div className="patient-data-row"><p>Emailadres</p>{isEditing ? <input type="text" defaultValue={Email} /> : <p>{Email}</p>}</div>
-                    </div>
+                        <div className="patient-data-row">
+                            <p>Leeftijd</p>
+                            <p>{new Date().getFullYear() - new Date(birthdate).getFullYear()}</p>
+                        </div>
+                        <div className="patient-data-row">
+                            <p>Geslacht</p>
+                            {isEditing ? (
+                                <input type="text" value={editedGender} onChange={handleGenderChange} />
+                            ) : (
+                                <p>{gender}</p>
+                            )}
+                        </div>
+                        <div className="patient-data-row">
+                        <p>Diagnose</p>
+                        {isEditing ? (
+    <input
+        type="text"
+        value={Array.isArray(diagnosis) ? diagnosis.map(d => d.Diagnosis).join(', ') : ''}
+        onChange={(e) => {
+            const newInputValue = e.target.value;
+            const newDiagnoses = newInputValue.split(',').map(d => d.trim());
+            
+            const currentDiagnoses = diagnosis.map(d => d.Diagnosis);
 
+            // Find added diagnoses
+            const addedDiagnoses = newDiagnoses.filter(d => !currentDiagnoses.includes(d));
+
+            // Find removed diagnoses
+            const removedDiagnoses = currentDiagnoses.filter(d => !newDiagnoses.includes(d));
+
+            // Update the diagnosis state to reflect the new input
+            const updatedDiagnosis = newDiagnoses.map(d => ({ Diagnosis: d }));
+            setDiagnosis(updatedDiagnosis);
+
+            // Optionally, handle added/removed diagnoses here (e.g., updating the database)
+            // This could involve sending requests to your backend to update the patient's record
+            // based on addedDiagnoses and removedDiagnoses.
+        }}
+    />
+) : (
+    <p>{Array.isArray(diagnosis) ? diagnosis.map(diag => diag.Diagnosis).join(', ') : ''}</p>
+)}
+                        </div>
+                        <div className="patient-data-row">
+                            <p>Geboortedatum</p>
+                            {isEditing ? (
+                                <input type="text" value={editedBirthdate} onChange={handleBirthdateChange} />
+                            ) : (
+                                <p>{birthdate}</p>
+                            )}
+                        </div>                        
+                        <div className="patient-data-row">
+                            <p>Telefoonnummer</p>
+                            {isEditing ? (
+                                <input type="text" value={editedPhoneNumber} onChange={handlePhoneNumberChange} />
+                            ) : (
+                                <p>{Phone_number}</p>
+                            )}
+                        </div>                        
+                        <div className="patient-data-row">
+                            <p>Emailadres</p>
+                            {isEditing ? (
+                                <input type="text" value={editedEmail} onChange={handleEmailChange} />
+                            ) : (
+                                <p>{Email}</p>
+                            )}
+                        </div>                    
+                    </div>
                     <div className="contactperson-card card">
                         <div className="card-buttons">
                             {isEditingContact ? (
@@ -249,10 +404,29 @@ const PatientSettingsPage = () => {
                     </div>
                 ))}
                     <div className="medication-card placeholder-card card medication">
-                        <i class="bi bi-plus"></i>
+                        <i className="bi bi-plus"></i>
                     </div>
                 </div>
-               
+                <div className="diagnosis-cards-container">
+                    {diagnosis.map((diag, index) => (
+                        <div key={index} className="diagnosis-card card">
+                            <div className="card-buttons">
+                                {diag.isEditing ? (
+                                    <>
+                                        <button onClick={() => handleSaveDiagnosisClick(diag.Id)}><i className="bi bi-check-circle"></i></button>
+                                        <button onClick={() => handleCancelDiagnosisClick(diag.Id)}><i className="bi bi-x-circle"></i></button>
+                                    </>
+                                ) : (
+                                    <button onClick={() => handleEditDiagnosisClick(diag.Id)}><i className="bi bi-pencil-square"></i></button>
+                                )}
+                            </div>
+                            <div className="patient-data-row"><p>Dokter ID</p>{diag.isEditing ? <input type="text" defaultValue={diag.DoctorId} /> : <p>{diag.DoctorId}</p>}</div>
+                            <div className="patient-data-row"><p>Diagnose</p>{diag.isEditing ? <input type="text" defaultValue={diag.Diagnosis} /> : <p>{diag.Diagnosis}</p>}</div>
+                            <div className="patient-data-row"><p>Beschrijving</p>{diag.isEditing ? <input type="text" defaultValue={diag.Description} /> : <p>{diag.Description}</p>}</div>
+                            <div className="patient-data-row"><p>Datum</p>{diag.isEditing ? <input type="text" defaultValue={diag.Date} /> : <p>{diag.Date}</p>}</div>
+                        </div>
+                    ))}
+                </div>
             </div>
         </>
     );

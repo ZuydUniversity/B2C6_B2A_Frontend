@@ -640,6 +640,37 @@
   .medication-card p {
       line-height: 0.3; /* Adjust as needed */
   }
+
+  .diagnosis-cards-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.diagnosis-card {
+    height: 230px;
+    flex: 0 0 calc(33.33% - 15px); /* 33.33% for 3 items per row, 10px for margin */
+    margin: 10px; /* Adjust as needed */
+    box-sizing: border-box; /* Include padding and border in the width */
+}
+
+/* Remove left margin from the first card in each row */
+.diagnosis-card:nth-of-type(3n+1) {
+    margin-left: 0;
+}
+
+/* Remove right margin from the third card in each row */
+.diagnosis-card:nth-of-type(3n) {
+    margin-right: 0;
+}
+
+.patient-card .patient-data-row p,
+.contactperson-card .patient-data-row p,
+.diagnosis-card p {
+    line-height: 0.3; /* Adjust as needed */
+}
+
   
   /*below is css for Kalender.jsx page*/
   
