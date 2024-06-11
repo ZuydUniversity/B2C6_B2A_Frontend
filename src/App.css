@@ -112,8 +112,6 @@
       top: 0;
   }
   
-  
-  
   /* ---------------------------- */
   /* Patientenoverzicht table css */
   /* ---------------------------- */
@@ -419,8 +417,6 @@
       cursor: pointer;
   }
   
-  
-  
   .DataBlockData div p,
   .DataBlock div p {
       margin: 0;
@@ -528,8 +524,6 @@
       display: flex;
       justify-content: space-between;
   }
-  
-  
   
   .card {
       background-color: #f8f8f8; /* Light gray */
