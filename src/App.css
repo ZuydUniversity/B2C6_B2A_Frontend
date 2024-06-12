@@ -655,6 +655,10 @@
       line-height: 0.3; /* Adjust as needed */
   }
 
+  .patient-data-row input{
+    width:60%;
+  }
+
   .contactperson-card{
     margin-right:0px;
   }
