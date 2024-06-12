@@ -8,7 +8,6 @@ function Register() {
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [employeeNumber, setEmployeeNumber] = useState('');
     const [specialization, setSpecialization] = useState('');
     const [gender, setGender] = useState('');
     const [birthDate, setBirthDate] = useState('');
@@ -37,7 +36,6 @@ function Register() {
         formData.append('firstName', firstName);
         formData.append('lastName', lastName);
         formData.append('accountType', accountType);
-        formData.append('employeeNumber', employeeNumber);
         formData.append('specialization', specialization);
         formData.append('gender', gender);
         formData.append('birthDate',birthDate);
@@ -74,7 +72,6 @@ function Register() {
     };
     const changeAccount = (e) => {
         setAccountType(e.target.value);
-        setEmployeeNumber('');
         setSpecialization('');
         setGender('');
         setBirthDate('');
@@ -96,10 +93,6 @@ function Register() {
                 return (
                 <div className="container doctor-register-form">    
                     <div >
-                        <div>
-                            <label>Personeelsnummer</label>
-                            <input type="number" id="employeeNumber" name="employeeNumber" className='login_input' value={employeeNumber} onChange={(e) => setEmployeeNumber(e.target.value)} required />
-                        </div>
                         <div>
                             <label>Specialisatie</label>
                             <input type="text" id="specialization" name="specialization" className='login_input' value={specialization} onChange={(e) => setSpecialization(e.target.value)} required />

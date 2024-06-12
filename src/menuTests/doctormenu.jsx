@@ -22,7 +22,7 @@ function DocMenu() {
                     body: email,
                     credentials: 'include',
                 });
-
+                 
                 if(!response.ok) {
                     navigate('/')
                 }
