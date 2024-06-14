@@ -16,6 +16,8 @@ function Register() {
     const [contact_email, setContactEmail] = useState('');
     const [contact_phone, setContactPhone] = useState('');
     const [contact_name, setContactName] = useState('');
+    const [contact_lastname, setContactLastName] = useState('');
+
 
 
     const [message, setMessage] = useState(''); 
@@ -46,6 +48,7 @@ function Register() {
         formData.append('contact_email', contact_email);
         formData.append('contact_phone', contact_phone);
         formData.append('contact_name', contact_name);
+        formData.append('contact_lastname', contact_lastname);
 
 
         try {
@@ -80,6 +83,7 @@ function Register() {
         setContactEmail('');
         setContactName('');
         setContactPhone('');
+        setContactLastName('');
     };
 
 
@@ -122,6 +126,10 @@ function Register() {
                         <div>
                             <label>Contactpersoon Naam</label>
                             <input type="text" id="contactfirstName" name="contactfirstName" className='login_input' value={contact_name} onChange={(e) => setContactName(e.target.value)}  />
+                        </div>
+                        <div>
+                            <label>Contactpersoon Achternaam</label>
+                            <input type="text" id="contactlastName" name="contactlastName" className='login_input' value={contact_lastname} onChange={(e) => setContactLastName(e.target.value)}  />
                         </div>
                         <div>
                             <label>Contactpersoon E-mailadres</label>
