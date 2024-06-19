@@ -552,13 +552,19 @@
       align-items: center;
       padding:0;
   }
+
+  .placeholder-card p{
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-top:10px;
+  }
   
   .placeholder-card:hover {
       background-color: #e0e0e0;
   }
   
   .placeholder-card i {
-      height: 200px;
+      height: auto;
       display: flex;
       justify-content: center; /* Centers content horizontally */
       align-items: center;
@@ -601,6 +607,8 @@
   .card-buttons p {
     margin:0px;
     font-weight: bold;
+    flex-grow: 1;
+    
 }
 
   .card-buttons button {

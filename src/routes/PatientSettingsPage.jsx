@@ -48,17 +48,29 @@ const PatientSettingsPage = () => {
         try {
             const response = await fetch(`http://localhost:5000/patients/${patientId}/medication`);
             const data = await response.json();
-            setMedications(data);
+            if (data.error) {
+                console.log('Error in response data:', data.error);
+                // Handle the error, e.g., by updating the state to show an appropriate message
+                // This could be setting an error state, or a specific message indicating no medications found
+            } else {
+                setMedications(data);
+            }
         } catch (error) {
             console.error('Error fetching medication:', error);
         }
     };
-
     const getDiagnosis = async (patientId) => {
+        console.log(`Fetching diagnosis for patientId: ${patientId}`);
         try {
             const response = await fetch(`http://localhost:5000/patients/${patientId}/diagnosis`);
             const data = await response.json();
-            setDiagnosis(data); // set the entire data array to the diagnosis state
+            if (data.error) {
+                console.log('Error in response data:', data.error);
+                // Handle the error, e.g., by updating the state to show an appropriate message
+                // This could be setting an error state, or a specific message indicating no diagnoses found
+            } else {
+                setDiagnosis(data); // set the entire data array to the diagnosis state
+            }
         } catch (error) {
             console.error('Error fetching diagnoses:', error);
         }
@@ -212,14 +224,19 @@ const PatientSettingsPage = () => {
         }));
     };
 
-    // Function to handle cancel click
     const handleCancelMedicationClick = (id) => {
-        setMedications(medications.map(medication => {
-            if (medication.Id === id) {
-                return { ...medication, isEditing: false };
-            }
-            return medication;
-        }));
+        if (id < 0) {
+            // If ID is negative, remove the medication from the list
+            setMedications(medications.filter(medication => medication.Id !== id));
+        } else {
+            // If ID is positive, just set isEditing to false
+            setMedications(medications.map(medication => {
+                if (medication.Id === id) {
+                    return { ...medication, isEditing: false };
+                }
+                return medication;
+            }));
+        }
     };
 
     // handleSaveMedicationClick method
@@ -293,20 +310,18 @@ const PatientSettingsPage = () => {
         }));
     };
 
-    // Confirm delete handler
-    const confirmDelete = () => {
-        // Implement deletion logic here
-        // After deletion, reset the state
-        setShowDeleteConfirmation(false);
-        setDeletingMedicationId(null);
-        // Possibly refresh the list of medications or remove the deleted item from state
+    const confirmDelete = async (medicationId) => {
+        deleteMedication(patientId, medicationId);
     };
 
-    // Cancel delete handler
-    const cancelDelete = () => {
-        // Simply reset the state without deleting
-        setShowDeleteConfirmation(false);
-        setDeletingMedicationId(null);
+    const cancelDelete = (medicationId) => {
+        // Assuming you have a state `medications` that holds all medication items
+        setMedications(medications.map(med => {
+            if (med.Id === medicationId) {
+                return { ...med, isDeleting: false }; // Reset isDeleting for the specific medication
+            }
+            return med;
+        }));
     };
 
     //----------------------------------------------------------------------//
@@ -323,14 +338,19 @@ const PatientSettingsPage = () => {
         }));
     };
 
-    // Function to handle cancel click for diagnosis
     const handleCancelDiagnosisClick = (id) => {
-        setDiagnosis(diagnosis.map(diag => {
-            if (diag.Id === id) {
-                return { ...diag, isEditing: false };
-            }
-            return diag;
-        }));
+        if (id < 0) {
+            // If ID is negative, remove the diagnosis from the list
+            setDiagnosis(diagnosis.filter(diag => diag.Id !== id));
+        } else {
+            // If ID is positive, just set isEditing to false
+            setDiagnosis(diagnosis.map(diag => {
+                if (diag.Id === id) {
+                    return { ...diag, isEditing: false };
+                }
+                return diag;
+            }));
+        }
     };
 
     // handleSaveDiagnosisClick method
@@ -348,6 +368,12 @@ const PatientSettingsPage = () => {
             Date: diag.Date,
         };
 
+        if (diag.Id < 0) {
+            addDiagnosis(patientId, editedDiagnosisData, diagnosis.Id);
+        } else {
+            sendDiagnosisDataToBackend(patientId, diagnosis.Id, editedDiagnosisData);
+        }
+    
         sendDiagnosisDataToBackend(patientId, diagnosisId, editedDiagnosisData);
 
         // After sending data to backend, update local state as necessary
@@ -369,10 +395,41 @@ const PatientSettingsPage = () => {
         }));
     };
 
+    const handleDiagDeleteButtonClick = (id) => {
+        setDiagnosis(diagnosis.map(diag => {
+            if (diag.Id === id) {
+                return { ...diag, isDeleting: true };
+            }
+            return diag;
+        }));
+    };
 
+    const confirmDiagDelete = async (diagnosisId) => {
+        deleteDiagnosis(patientId, diagnosisId);
+    };
 
+    const cancelDiagDelete = (diagnosisId) => {
+        setDiagnosis(diagnosis.map(diag => {
+            if (diag.Id === diagnosisId) {
+                return { ...diag, isDeleting: false }; // Reset isDeleting for the specific diagnosis
+            }
+            return diag;
+        }));
+    };
 
-
+    const handleAddNewDiagnosis = () => {
+        const tempId = -1 * (new Date()).getTime(); // Example of a temporary ID
+    
+        const newDiagnosis = {
+            Id: tempId,
+            DoctorId: '',
+            Diagnosis: '',
+            Description: '', 
+            Date: '',
+            isEditing: true, 
+        };
+        setDiagnosis([...diagnosis, newDiagnosis]);
+    };
 
 
     //----------------------------------------------------------------------//
@@ -479,6 +536,25 @@ const PatientSettingsPage = () => {
             });
     };
 
+    const deleteMedication = async (patientId, medicationId) => {
+        try {
+            const url = `http://localhost:5000/patients/${patientId}/medication/${medicationId}`;
+            const response = await fetch(url, { method: 'DELETE' });
+
+            if (!response.ok) {
+                throw new Error('Failed to delete the medication.');
+            }
+
+            // Filter out the deleted medication from the medications state
+            setMedications(currentMedications =>
+                currentMedications.filter(medication => medication.Id !== medicationId)
+            );
+
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     const sendDiagnosisDataToBackend = (patientId, diagnosisId, editedDiagnosisData) => {
         fetch(`http://localhost:5000/patients/${patientId}/diagnosis/${diagnosisId}`, {
             method: 'PUT',
@@ -501,6 +577,51 @@ const PatientSettingsPage = () => {
                 console.error('Error updating diagnosis data:', error);
                 // Optionally, indicate error to the user
             });
+    };
+
+    const addDiagnosis = async (patientId, newDiagnosisData) => {
+        try {
+            const response = await fetch(`http://localhost:5000/patients/${patientId}/diagnosis`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newDiagnosisData),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to add new diagnosis');
+            }
+
+            const data = await response.json();
+            console.log('New diagnosis added:', data);
+            // Update the state or perform any other actions needed after adding the diagnosis
+        } catch (error) {
+            console.error('Error adding new diagnosis:', error);
+        }
+    };
+
+    const deleteDiagnosis = async (patientId, diagnosisId) => {
+        try {
+            const response = await fetch(`http://localhost:5000/patients/${patientId}/diagnosis/${diagnosisId}`, {
+                method: 'DELETE',
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to delete the diagnosis.');
+            }
+
+            // Filter out the deleted diagnosis from the diagnoses state
+            setDiagnosis(currentDiagnoses =>
+                currentDiagnoses.filter(diagnosis => diagnosis.Id !== diagnosisId)
+            );
+
+
+            console.log(`Diagnosis with ID ${diagnosisId} deleted successfully.`);
+            // Update the state or perform any other actions needed after deleting the diagnosis
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
@@ -716,6 +837,7 @@ const PatientSettingsPage = () => {
                             ))
                         ) : null}
                     <div className="medication-card placeholder-card card medication" onClick={handleAddNewMedication}>
+                        <p>Nieuw Medicijn</p>
                         <i className="bi bi-plus"></i>
                     </div>
                 </div>
@@ -733,8 +855,16 @@ const PatientSettingsPage = () => {
                                                     <button onClick={() => handleCancelDiagnosisClick(diag.Id)}><i className="bi bi-x-circle"></i></button>
                                                 </div>
                                             </>
+                                        ) : diag.isDeleting ? (
+                                            <>
+                                                <button onClick={() => confirmDiagDelete(diag.Id)}><i className="bi bi-check-circle"></i></button>
+                                                <button onClick={() => cancelDiagDelete(diag.Id)}><i className="bi bi-x-circle"></i></button>
+                                            </>
                                         ) : (
-                                            <button onClick={() => handleEditDiagnosisClick(diag.Id)}><i className="bi bi-pencil-square"></i></button>
+                                            <>
+                                                <button onClick={() => handleEditDiagnosisClick(diag.Id)}><i className="bi bi-pencil-square"></i></button>
+                                                <button onClick={() => handleDiagDeleteButtonClick(diag.Id)}><i className="bi bi-trash"></i></button>
+                                            </>
                                         )}
                                     </div>
                                     <div className="patient-data-row">
@@ -776,7 +906,8 @@ const PatientSettingsPage = () => {
                                 </div>
                             ))
                         ) : null}
-                    <div className="diagnosis-card placeholder-card card">
+                    <div className="diagnosis-card placeholder-card card diagnosis" onClick={handleAddNewDiagnosis}>
+                        <p>Nieuwe Diagnose</p>
                         <i className="bi bi-plus"></i>
                     </div>
                 </div>
