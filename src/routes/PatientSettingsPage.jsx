@@ -97,10 +97,8 @@ const PatientSettingsPage = () => {
     }, [patient]);
 
     useEffect(() => {
-        setPatientName(patient ? patient.Name : '');
         setFirstName(patient ? patient.Name : '');
         setLastName(patient ? patient.Lastname : '');
-        setAge(patient ? patient.Age : null);
         setGender(patient ? patient.Gender : '');
         setBirthdate(patient ? new Date(patient.Birthdate).toDateString() : '');
         setEmail(patient ? patient.Email : '');
@@ -112,10 +110,8 @@ const PatientSettingsPage = () => {
     }, [patient]);
 
     // Starting values for the patient data
-    const [patientName, setPatientName] = useState(patient ? patient.Name : '');
     const [firstName, setFirstName] = useState(patient ? patient.Name : '');
     const [lastName, setLastName] = useState(patient ? patient.Lastname : '');
-    const [age, setAge] = useState(patient ? patient.Age : null);
     const [gender, setGender] = useState(patient ? patient.Gender : '');
     const [birthdate, setBirthdate] = useState(patient ? new Date(patient.Birthdate).toDateString() : '');
     const [email, setEmail] = useState(patient ? patient.Email : '');
@@ -151,12 +147,12 @@ const PatientSettingsPage = () => {
 
     const handleEditClick = () => {
         setIsEditing(true);
-        setEditedFirstName(patient.Name);  // Copy current value to local state
-        setEditedLastName(patient.Lastname);
-        setEditedGender(patient.Gender);
-        setEditedBirthdate(patient ? new Date(patient.Birthdate).toDateString() : '');
-        setEditedPhoneNumber(patient.Phone_number);
-        setEditedEmail(patient.Email);
+        setEditedFirstName(firstName);  // Copy current value to local state
+        setEditedLastName(lastName);
+        setEditedGender(gender);
+        setEditedBirthdate(birthdate);
+        setEditedPhoneNumber(phone_number);
+        setEditedEmail(email);
 
     };
 
@@ -171,6 +167,7 @@ const PatientSettingsPage = () => {
         setBirthdate(editedBirthdate);
         setPhoneNumber(editedPhoneNumber);
         setEmail(editedEmail);
+        
 
     };
 
@@ -187,10 +184,10 @@ const PatientSettingsPage = () => {
 
     const handleEditContactClick = () => {
         setIsEditingContact(true);
-        setEditedFirstNameContact(patient.Contactperson_name);  // Copy current value to local state
-        setEditedLastNameContact(patient.Contactperson_lastname);
-        setEditedEmailContact(patient.Contactperson_email);
-        setEditedPhoneNumberContact(patient.Contactperson_phone_number);
+        setEditedFirstNameContact(firstNameContact);  // Copy current value to local state
+        setEditedLastNameContact(lastNameContact);
+        setEditedEmailContact(emailContact);
+        setEditedPhoneNumberContact(phoneNumberContact);
 
     };
 
