@@ -59,31 +59,28 @@ const Navbar = () => {
                         <Link to="/"><button type="button" className="btn btn-outline-primary"><i className="bi bi-house-fill"></i> Home</button></Link>
                         <Link to="/PatientOverview"><button type="button" className="btn btn-outline-primary"><i className="bi bi-people-fill"></i> Patiëntenoverzicht</button></Link>
                         <button type="button" className="btn btn-outline-primary"><i className="bi bi-file-check-fill"></i> Resultaten</button>
-                        <Link to="/Kalender"><button type="button" className="btn btn-outline-primary"><i className="bi bi-calendar-event-fill"></i> Kalender</button></Link>
-                    </ul>
-                    <ul className="navbar-nav ms-auto">
-                        <div className="dropdown">
-                            <button type="button" className="btn btn-outline-primary" id="dropdownSearchButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="bi bi-search"></i> Zoeken</button>
-                            <div className="dropdown-menu p-3" aria-labelledby="dropdownSearchButton">
-                                <form className="form-inline d-flex">
-                                    <input className="form-control mr-1" type="search" placeholder="Zoeken..." aria-label="Zoeken" />
-                                    <button className="btn btn-outline-primary mr-0" type="submit"><i className="bi bi-search"></i></button>
-                                </form>
-                            </div>
+                    <Link to="/Kalender"><button type="button" className="btn btn-outline-primary"><i className="bi bi-calendar-event-fill"></i> Kalender</button></Link>
+                </ul>
+                <ul className="navbar-nav ms-auto">
+                    <li className="nav-item">
+                        <form className="form-inline d-flex">
+                            <input className="form-control mr-1" type="search" placeholder="Zoeken..." aria-label="Zoeken" />
+                            <button className="btn btn-outline-primary mr-0" type="submit"><i className="bi bi-search"></i></button>
+                        </form>
+                    </li>
+                    <div className="dropdown">
+                        <button type="button" className="btn btn-outline-primary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="bi bi-person-circle"></i> Profiel</button>
+                        <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a className="dropdown-item" href="#"><i className="bi bi-person-bounding-box"></i> Profielweergave</a>
+                            <a className="dropdown-item" href="#"><i className="bi bi-gear-fill"></i> Profielinstellingen</a>
+                            <div className="dropdown-divider"></div>
+                            <a className="dropdown-item" href="#"><i className="bi bi-box-arrow-left"></i> Uitloggen</a>
                         </div>
-                        <div className="dropdown">
-                            <button type="button" className="btn btn-outline-primary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="bi bi-person-circle"></i> Profiel</button>
-                            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a className="dropdown-item" href="#"><i className="bi bi-person-bounding-box"></i> Profielweergave</a>
-                                <a className="dropdown-item" href="#"><i className="bi bi-gear-fill"></i> Profielinstellingen</a>
-                                <div className="dropdown-divider"></div>
-                                <a className="dropdown-item" href="#"><i className="bi bi-box-arrow-left"></i> Uitloggen</a>
-                            </div>
-                        </div>
-                    </ul>
-                </div>
+                    </div>
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
     );
 }
 
