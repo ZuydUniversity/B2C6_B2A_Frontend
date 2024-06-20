@@ -1,11 +1,31 @@
 // PatientDashboard.jsx
-import React from 'react';
 import Navbar from '../components/Navbar';
 import { useNavigate } from 'react-router-dom';
 import kid_1 from '../assets/kid_1.png';
+import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 
 const PatientDashboard = () => {
     const navigate = useNavigate();
+    const { patientId } = useParams(); // get patientId from the URL
+    const [patientName, setPatientName] = useState('');
+
+    useEffect(() => {
+        const fetchPatientName = async () => {
+            try {
+                const response = await fetch(`http://localhost:5000/get_patient/${patientId}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const patientData = await response.json();
+                setPatientName(patientData.Name + " " + patientData.Lastname); 
+            } catch (error) {
+                console.error(`Failed to fetch patient: ${error}`);
+            }
+        };
+
+        fetchPatientName();
+    }, [patientId]);     
 
     const handleClick = () => {
         navigate('/kalender');
@@ -35,7 +55,7 @@ const PatientDashboard = () => {
         <div>
             <Navbar />
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <h2 style={{ marginRight: '60px', marginTop:'50px', color: 'black' }}>Welkom, Voornaam Achternaam</h2>
+                <h2 style={{ marginRight: '60px', marginTop:'50px', color: 'black' }}>Welkom, {patientName}</h2>
                 <img src={kid_1} alt="Kind foto" style={{ width: '40%', transform: 'scale(0.4)', marginTop: '-170px', marginLeft: '-700px' }} />
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>

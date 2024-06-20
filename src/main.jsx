@@ -35,6 +35,7 @@ const router = createBrowserRouter([
     { path: "/register", element: <Register /> },
     { path: "/forgot-password", element: <ForgotPassword /> },
     { path: "/patientdashboard", element: <PatientDashboard /> },    
+    { path: "/patientdashboard/:patientId", element: <PatientDashboard /> },    
 ]);
 
 
