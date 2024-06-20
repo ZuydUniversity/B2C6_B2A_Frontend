@@ -28,11 +28,6 @@ const AppointmentOverview = () => {
     // Implement edit functionality here
   };
 
-  const handleDownload = (id) => {
-    console.log(`Download appointment with id: ${id}`);
-    // Implement delete functionality here
-  };
-
   const handleDelete = (id) => {
     console.log(`Delete appointment with id: ${id}`);
     // Implement delete functionality here
