@@ -30,16 +30,28 @@ function ResultOverview() {
       if (Type === 'Myometrie') {
         navigate(`/myometriepage/${patientId}/${Id}`);
       } else if (Type === 'Radiologie') {
-        navigate(`/radiologypage/${patientId}/${Id}`);
+        navigate(`/radiologypage/${patientId}/`);
       } else {
         window.alert(`Row clicked: ${Type}`);
       }
     };
 
-    const handlePdfClick = (e) => {
+    const handlePdfClick = async (e) => {
       e.stopPropagation(); // Prevent triggering the row click event
-      // Handle PDF icon click logic here
-      window.alert('PDF icon clicked');
+      try {
+        const response = await axios.get(`http://localhost:5000/download_result_pdf/${patientId}/${Id}`, {
+          responseType: 'blob'
+        });
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `result_${Id}_data.pdf`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } catch (error) {
+        console.error('Error downloading PDF:', error);
+      }
     };
 
     // Format the date to display only the date part
