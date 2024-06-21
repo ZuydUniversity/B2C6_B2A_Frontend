@@ -317,13 +317,6 @@ nav.navbar {
       color: #007BFF; /* This changes the color of the h1 elements */
   }
   
-  html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      padding-top: 137px;
-  }
-  
   nav {
       background-color: #007BFF;
       padding: 10px;
