@@ -107,6 +107,7 @@
 }
 .form_label {
     color: var(--primary-color);
+    font-size: 50px !important;
 }
 
 /* BUTTONS */

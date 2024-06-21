@@ -26,9 +26,9 @@ function PatientOverview() {
     const DataRow = ({ imageSrc, name, birthdate, diagnosis, id }) => (
         <tr onClick={() => navigate(`/patientview/${id}`)}>
             <td><img src={imageSrc} alt="Profile" className="img-fluid rounded" /></td>
-            <td>{name}</td>
-            <td>{birthdate}</td>
-            <td>{diagnosis}</td>
+            <td className="text-left">{name}</td>
+            <td className="text-left">{birthdate}</td>
+            <td className="text-left">{diagnosis}</td>
         </tr>
     );
 

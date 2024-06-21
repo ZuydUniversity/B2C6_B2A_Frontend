@@ -3,7 +3,7 @@
   /* ---------------------------- */
 /* img-fluid for responsive images */
 .img-fluid {
-    max-width: 30%;
+    max-width: 150px;
     height: auto;
 }
 
@@ -23,13 +23,14 @@
 /* table-hover for hover effect on table rows */
 .table-hover tbody tr:hover {
     background-color: rgba(0, 0, 0, 0.075);
+    
 }
 
 /* thead-light for light-colored table header */
 .thead-light th {
-    background-color: #f8f9fa;
-    color: #495057;
-    border-color: #dee2e6;
+    background-color: lightgray;
+    color: black;
+    border-color: white;
 }
 
 /* container for fixed-width centered content */
@@ -45,6 +46,12 @@
 .mt-4 {
     margin-top: 1.5rem;
 }
+
+.text-left {
+    text-align: left;
+    font-size: 25px;
+ }
+
 
 
 /* ---------------------------- */
@@ -103,6 +110,7 @@
   
   th, td {
       border: transparent;
+      border-bottom: gray 1px solid;
   }
   
   th {
@@ -541,3 +549,5 @@
   .medication-card p {
       line-height: 0.3; /* Adjust as needed */
   }
+
+
