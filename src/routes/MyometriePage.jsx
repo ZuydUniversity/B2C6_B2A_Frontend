@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styling/App.css'; // Import the CSS file
+import '../../styling/Patientenoverzicht.css';
 import Navbar from '../components/Navbar';
 import TopPage from '../components/TopPage';
 import { useParams } from 'react-router-dom';
