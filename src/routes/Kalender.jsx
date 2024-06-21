@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../styling/Kalender.css';
 import Navbar from '../components/Navbar';
 import TopPage from '../components/TopPage';
 

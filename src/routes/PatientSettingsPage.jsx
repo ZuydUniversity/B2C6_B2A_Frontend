@@ -1,4 +1,4 @@
-import '../../styling/Patientenoverzicht.css';
+import '../styling/Patientenoverzicht.css';
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import 'bootstrap-icons/font/bootstrap-icons.css';

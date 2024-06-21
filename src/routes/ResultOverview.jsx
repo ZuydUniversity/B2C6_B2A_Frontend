@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../../styling/Patientenoverzicht.css';
+import '../styling/Patientenoverzicht.css';
 import Navbar from '../components/Navbar'; // Double period to go back one directory
 import { useNavigate } from 'react-router-dom';
 import TopPage from '../components/TopPage';

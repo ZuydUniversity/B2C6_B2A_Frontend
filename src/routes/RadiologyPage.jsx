@@ -1,4 +1,4 @@
-import '../../styling/Patientenoverzicht.css';
+import '../styling/Patientenoverzicht.css';
 import Navbar from '../components/Navbar'; //double period to go back one directory
 import React from 'react';
 import Carousel from '../components/Carousel';
