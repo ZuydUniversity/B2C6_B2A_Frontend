@@ -648,29 +648,30 @@
   }
   
   .header-button {
-      background-color: rgb(222, 230, 245);
-      color: rgb(10, 10, 10);
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
+    background-color: cornflowerblue;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.header-button:hover {
+    background-color: lightsteelblue;
+}
+  
+  
+.calendar-grid-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh + 25%);
+    width: 130%;
+    margin-left: -15%;
   }
   
-  .header-button:hover {
-      background-color: lightsteelblue;
-  }
-  
-  
-  .calendar-grid-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: calc(100vh + 400px); 
-      width: 130%; 
-      margin-left: -30%; 
-  }
   
   .button-container {
       display: flex;
