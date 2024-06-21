@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../App.css'; // Import the CSS file
+import '../styling/App.css'; // Import the CSS file
 import Navbar from '../components/Navbar'; // Double period to go back one directory
 import { useNavigate } from 'react-router-dom';
 import TopPage from '../components/TopPage';

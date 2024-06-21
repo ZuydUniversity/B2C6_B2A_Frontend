@@ -128,7 +128,7 @@ nav.navbar {
     --bs-btn-bg: white;
     --bs-btn-color: var(--primary-color) !important;
     --bs-btn-border-color: var(--primary-color) !important;
-    --bs-btn-hover-color: var(--text-color!important);
+    --bs-btn-hover-color: var(--text-color !important);
     --bs-btn-hover-bg: var(--primary-color) !important;
     --bs-btn-hover-border-color: var(--primary-color) !important;
     --bs-btn-focus-shadow-rgb: 13, 110, 253;
@@ -260,13 +260,7 @@ nav.navbar {
     text-align: center;
   }
   
-  html, body {
-      --main-bg-color: white;
-      background-color: var(--main-bg-color);
-      color: white;
-      margin:0;
-      padding:0;
-  }
+  
   
   .content {
       margin: 0;
@@ -296,6 +290,7 @@ nav.navbar {
       width: 100%;
       border-collapse: collapse; /* This removes the double borders */
       font-family: 'Roboto', sans-serif;
+      background-color: var(--background-color)!important;
   }
   
   th, td {
@@ -453,7 +448,7 @@ nav.navbar {
       margin-top:10px;
       padding: 0;
       line-height: 0;
-      background-color: var(--main-bg-color);
+      background-color: var(--background-color);
   }
   
       .grid-image {
@@ -464,7 +459,7 @@ nav.navbar {
       }
   
           .image-header {
-              background-color: var(--main-bg-color);
+              background-color: var(--background-color);
               border: none;
           }
   
@@ -477,7 +472,7 @@ nav.navbar {
   .text-cell {
       padding: 0;
       margin-top:100px !important;
-      background: var(--main-bg-color);
+      background: var(--background-color);
       word-wrap: break-word;
       overflow-wrap: break-word;
       word-break: break-all;
@@ -614,11 +609,12 @@ nav.navbar {
       width: 125px;
       padding: 0;
       line-height: 0;
-      background-color: var(--main-bg-color);
+      background-color: var(--background-color);
   }
   
   .patient-image-results {
       padding-left: 10px;
+      background-color: var(--background-color);
   }
   
   .patient-results {
@@ -628,7 +624,7 @@ nav.navbar {
   .PageBottom {
       display:flex;
       justify-content: space-between;
-      background-color: white;
+      background-color: var(--background-color)!important;
       font-size:22px;
       margin-top:20px;
   }
@@ -753,6 +749,7 @@ nav.navbar {
       display: flex;
       align-items: center;
       justify-content: center;
+      background-color: var(--background-color);
   }
   
   .back-button {
@@ -765,6 +762,7 @@ nav.navbar {
       flex-grow:1;
       margin:0;
       padding:0;
+      background-color: var(--background-color);
   }
   
   .top-page-nav-info {

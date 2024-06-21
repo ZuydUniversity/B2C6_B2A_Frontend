@@ -2,6 +2,7 @@ import Navbar from '../components/Navbar';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TopPage from '../components/TopPage';
+import '../styling/App.css';
 
 
 function PatientOverview() {

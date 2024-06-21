@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import './index.css';
+import './styling/App.css';
 import Register from './Login/Routes/register.jsx';
 import ForgotPassword from './Login/Routes/forgotpassword.jsx';
 
