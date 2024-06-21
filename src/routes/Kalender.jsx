@@ -7,7 +7,7 @@ function Kalender() {
     const [showNewAppointment, setShowNewAppointment] = useState(false);
     const [selectedAppointment, setSelectedAppointment] = useState(null);
     const [currentWeekStartIndex, setCurrentWeekStartIndex] = useState(3);
-    const [currentDayIndex, setCurrentDayIndex] = useState(5);
+    const [currentDayIndex, setCurrentDayIndex] = useState(1);
 
     const handleWeekButtonClick = () => {
         setShowWeekCalendar(true);
