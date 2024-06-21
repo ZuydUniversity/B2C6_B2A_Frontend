@@ -1,3 +1,4 @@
+import './styling/Main.css';
 import './styling/Login.css';
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -42,7 +43,7 @@ const App = () => {
     return (
         <>
             <Navbar />
-            <Container className="d-flex flex-column align-items-center mt-5 formwidth">
+            <Container className="d-flex flex-column align-items-center formwidth">
                 <h1 className="centered-title"><i className="bi bi-person-circle"></i> Inloggen</h1>
                 
                 <div className="login_style p-4 rounded shadow">

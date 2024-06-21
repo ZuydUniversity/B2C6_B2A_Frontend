@@ -11,9 +11,9 @@
     --text-color: black;
 }
   
-body {
+/* body {
     font-family: 'Roboto', sans-serif;
-    background-color: var(--background-color)!important;
+    background-color: var(--background-color);
     color: var(--text-color);
     margin: 0;
     padding: 0;
@@ -22,7 +22,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-}
+} */
   
 /* DARK MODE */
 /* 

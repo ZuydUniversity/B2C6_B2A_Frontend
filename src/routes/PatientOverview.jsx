@@ -1,3 +1,4 @@
+import '../styling/Main.css';
 import '../styling/Patientenoverzicht.css';
 import Navbar from '../components/Navbar';
 import React, { useState, useEffect } from 'react';

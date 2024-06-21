@@ -108,7 +108,7 @@
   
   .text-cell {
       padding: 0;
-      margin-top:100px !important;
+      margin-top:100px ;
       background-color: var(--background-color);
       word-wrap: break-word;
       overflow-wrap: break-word;
@@ -119,7 +119,7 @@
   .middle-text-cell,
   .rounded-right {
       height: 125px;
-      background: var(--secondary-color) !important;
+      background: var(--secondary-color) ;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -261,7 +261,7 @@
   .PageBottom {
       display:flex;
       justify-content: space-between;
-      background-color: var(--background-color)!important;
+      background-color: var(--background-color);
       font-size:22px;
       margin-top:20px;
   }

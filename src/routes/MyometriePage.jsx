@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../styling/Main.css';
 import '../styling/Patientenoverzicht.css';
 import Navbar from '../components/Navbar';
 import TopPage from '../components/TopPage';

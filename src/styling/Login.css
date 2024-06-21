@@ -4,6 +4,8 @@
 
 .formwidth {
     width: 500px;
+    padding-top: 200px;
+
 }
 
 .navbar-splitter {
@@ -45,4 +47,9 @@
     .login_style {
         padding: 10px;
     }
+}
+
+body {
+    height: 100vh;
+    justify-content: center;
 }

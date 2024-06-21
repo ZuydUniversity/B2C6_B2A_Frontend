@@ -1,3 +1,4 @@
+import '../styling/Main.css';
 import React, { useState, useEffect } from 'react';
 import '../styling/Patientenoverzicht.css';
 import Navbar from '../components/Navbar'; // Double period to go back one directory

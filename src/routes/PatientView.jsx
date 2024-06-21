@@ -1,3 +1,4 @@
+import '../styling/Main.css';
 import '../styling/Patientenoverzicht.css';
 import Navbar from '../components/Navbar'; //double period to go back one directory
 import App from '../App';
