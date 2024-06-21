@@ -2,7 +2,7 @@
 
 /* Uniformiteit CSS CHECK DE WIKI VOORDAT JE DINGEN AANPAST! *LINK WIKI* */
 
-/* NORMAL/LIGHT MODE */
+/* NORMAL / LIGHT MODE */
 :root {
     --primary-color: #fc6039;
     --secondary-color: #000369;
@@ -92,12 +92,17 @@ body {
     }
 }
 
+/* HEADERS */
 .centered_title {
     text-align: center;
     color: var(--primary-color);
     text-shadow: 7px 7px 4px rgba(0, 0, 0, 0.1);
 }
+.form_label {
+    color: var(--primary-color);
+}
 
+/* BUTTONS */
 .button {
     background-color: var(--primary-color);
     color: white;
