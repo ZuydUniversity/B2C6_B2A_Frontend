@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../App.css';
+import '../styling/App.css'; // Import the CSS file
 import Navbar from '../components/Navbar';
 import TopPage from '../components/TopPage';
 import { useParams } from 'react-router-dom';

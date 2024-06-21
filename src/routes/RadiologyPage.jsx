@@ -1,4 +1,4 @@
-import '../App.css'; // Import the CSS file
+import '../styling/App.css'; // Import the CSS file
 import Navbar from '../components/Navbar'; //double period to go back one directory
 import React from 'react';
 import Carousel from '../components/Carousel';
