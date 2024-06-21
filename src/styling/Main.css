@@ -9,6 +9,7 @@
     --tertiary-color: #1b21d4;
     --background-color: #d8eaff;
     --text-color: black;
+    --hover-color: #fff;
 }
   
 /* body {
@@ -104,7 +105,7 @@
 
 /* BUTTONS */
 .button {
-    background-color: var(--primary-color);
+    background-color: var(--primary-color) !important;
     color: white;
     transition: background-color 0.5s ease;
     display: block;

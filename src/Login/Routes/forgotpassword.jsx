@@ -52,8 +52,8 @@ function ForgotPassword() {
     return (
       <>
         <Navbar />
-        <Container className="mt-5 formwidth">
-            <h1 className="centered-title"><i className="bi bi-question-circle-fill"></i> Wachtwoord resetten</h1>
+        <Container className="d-flex flex-column align-items-center formwidth container">
+            <h1 className="centered_title"><i className="bi bi-question-circle-fill"></i> Wachtwoord resetten</h1>
             <div className="login_style p-4 rounded shadow">
                 <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="formEmail" className="mb-3">

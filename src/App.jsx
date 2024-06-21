@@ -44,7 +44,7 @@ const App = () => {
         <>
             <Navbar />
             <Container className="d-flex flex-column align-items-center formwidth">
-                <h1 className="centered-title"><i className="bi bi-person-circle"></i> Inloggen</h1>
+                <h1 className="centered_title"><i className="bi bi-person-circle"></i> Inloggen</h1>
                 
                 <div className="login_style p-4 rounded shadow">
                     <Form onSubmit={handleSubmit}>

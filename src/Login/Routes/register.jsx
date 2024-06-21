@@ -150,8 +150,8 @@ function Register() {
     return (
         <>
         <Navbar />
-        <Container className="mt-5">
-            <h1 className="centered-title"><i className="bi bi-person-plus-fill"></i> Account aanmaken</h1>
+        <Container className="d-flex flex-column align-items-center formwidth container">
+            <h1 className="centered_title"><i className="bi bi-person-plus-fill"></i> Account aanmaken</h1>
             <div className="login_style p-4 rounded shadow" style={{ maxHeight: '70vh', overflowY: 'auto' }}>
                 <Form onSubmit={register}>
                     <Form.Group controlId="formAccountType" className="mb-3">
