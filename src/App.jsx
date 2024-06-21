@@ -87,7 +87,7 @@ const App = () => {
                 {loginError && <Alert variant="danger" className="mt-3">{loginError}</Alert>}
 
                 <div className="bottom-right-text position-fixed" style={{ right: '10px', bottom: '10px' }}>
-                    {`Mogelijk gemaakt door \n \t \t      Klas B2A`}
+                    {`Mogelijk gemaakt door \n \t \t       Klas B2A`}
                 </div>
             </Container>
         </>
