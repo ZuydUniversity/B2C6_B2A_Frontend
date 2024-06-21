@@ -3,7 +3,7 @@
 /* --------------*/
 
 nav.navbar {
-    background: white; /*var(--background-color);*/
+    background: #576CA8; /*var(--background-color);*/
     color: var(--hover-color);
     font-family: "arial";
     height: 100px;

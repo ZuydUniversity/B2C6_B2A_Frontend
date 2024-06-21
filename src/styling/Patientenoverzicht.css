@@ -1,5 +1,54 @@
 /* ---------------------------- */
-  /* Patientenoverzicht table css */
+  /* Patientenoverzicht dashboard (new) */
+  /* ---------------------------- */
+/* img-fluid for responsive images */
+.img-fluid {
+    max-width: 30%;
+    height: auto;
+}
+
+/* rounded for rounded images */
+.rounded {
+    border-radius: 0.25rem;
+}
+
+/* table-responsive for responsive tables */
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* table-hover for hover effect on table rows */
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+}
+
+/* thead-light for light-colored table header */
+.thead-light th {
+    background-color: #f8f9fa;
+    color: #495057;
+    border-color: #dee2e6;
+}
+
+/* container for fixed-width centered content */
+.container {
+    width: 70%;
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* mt-4 for top margin */
+.mt-4 {
+    margin-top: 1.5rem;
+}
+
+
+/* ---------------------------- */
+  /* Patientenoverzicht table css (old) */
   /* ---------------------------- */
   
   table,
@@ -7,13 +56,11 @@
   .myometrietable {
       border-collapse: separate;
       border-spacing: 0 10px;
-      font-size: 22px;
       font-family: Arial;
       /* Easily adjustable colors for the whole component, bg=background, th= tableheader, td= tabledata */
       --main-th-color: cornflowerblue;
       --main-td-color: lightsteelblue;
       --main-hover-color: powderblue;
-      width: 70% auto;
       border-spacing: 0 2px;
       margin-top:0;
       color:white;
@@ -36,23 +83,6 @@
   
   .myometrie-textarea{
       width:100%;
-  }
-  
-  .patientoverview-scrollable-table {
-      overflow-y: auto;
-      width: 100%;
-      max-height: 650px;
-      max-width: 730px;
-      margin-bottom: 100px;
-      background-color: var(--background-color);
-  }
-  
-  .scrollable-table {
-      overflow-y: auto;
-      width: 100%;
-      max-height: 650px;
-      max-width:400px;
-      margin-bottom:25px;
   }
   
   .radiology-scrollable-table {
@@ -123,7 +153,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 200px;
+      width: 100%;
       margin-top:10px;
   }
   .rounded-left {
@@ -172,7 +202,6 @@
   }
   
   tr:hover {
-      background-color: lightgray; /* Change this to the desired hover color */
       cursor: pointer;
   }
   
@@ -184,22 +213,6 @@
   
   
       /* ---------------------------- */
-  
-  .Navbar {
-      top:0;
-      left:0;
-      position:absolute;
-      display: flex;
-      justify-content: flex-start;
-      background-color: cornflowerblue;
-      padding:20px 0px 20px 20px;
-      color:white;
-      margin: 0;
-      z-index: 100;
-      width: 100%;
-      box-sizing: border-box;
-  
-  }
   
   .link {
       margin-right:20px;

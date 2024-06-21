@@ -22,7 +22,7 @@ const TopPage = ({ headerName, imageSrc, patientId }) => {
     }, [patientId]);
 
     return (
-        <div className="top-page">
+        <div className="top-page formwidth">
             <div className="top-page-nav-info">
                 <BackButton />
                 <h1>{headerName}</h1>

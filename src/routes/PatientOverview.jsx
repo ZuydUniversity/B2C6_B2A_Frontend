@@ -1,11 +1,8 @@
-import '../styling/Main.css';
-import '../styling/Patientenoverzicht.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from '../components/Navbar';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TopPage from '../components/TopPage';
-
-
 
 function PatientOverview() {
     const [patients, setPatients] = useState([]);
@@ -24,44 +21,33 @@ function PatientOverview() {
         getPatients();
     }, []);
 
-
     const navigate = useNavigate();
 
-    const DataRow = ({ imageSrc, name, birthdate, diagnosis, id}) => (
+    const DataRow = ({ imageSrc, name, birthdate, diagnosis, id }) => (
         <tr onClick={() => navigate(`/patientview/${id}`)}>
-            <td className="image-cell"><img src={imageSrc} alt="Profile" className="grid-image" /></td>
-            <td className="spacer"></td>
-            <td className="text-cell"><div className="rounded-left">{name}</div></td>
-            <td className="text-cell"><div className="middle-text-cell">{birthdate}</div></td>
-            <td className="text-cell"><div className="rounded-right">{diagnosis}</div></td>
+            <td><img src={imageSrc} alt="Profile" className="img-fluid rounded" /></td>
+            <td>{name}</td>
+            <td>{birthdate}</td>
+            <td>{diagnosis}</td>
         </tr>
     );
 
-
-
     const DataTable = ({ data }) => (
-        <>
-            <table className="patientoverview-datatable">
-                <thead>
+        <div className="table-responsive">
+            <table className="table table-hover">
+                <thead className="thead-light">
                     <tr>
-                        <th className="image-header"></th>
-                        <th className="spacer"></th>
-                        <th className="th-header-left"><div className="header-rounded-left header-item">Name</div></th>
-                        <th className="th-header-middle"><div className="header-rounded-middle header-item">Birthdate</div></th>
-                        <th className="th-header-right"><div className="header-rounded-right header-item">Diagnosis</div></th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Birthdate</th>
+                        <th scope="col">Diagnosis</th>
                     </tr>
                 </thead>
+                <tbody>
+                    {data.map((row, index) => <DataRow key={index} {...row} />)}
+                </tbody>
             </table>
-
-
-            <div className="patientoverview-scrollable-table">
-                <table>
-                    <tbody>
-                        {data.map((row, index) => <DataRow key={index} {...row} />)}
-                    </tbody>
-                </table>
-            </div>
-        </>
+        </div>
     );
 
     // const data = [
@@ -79,28 +65,23 @@ function PatientOverview() {
     //     { imageSrc: 'src/assets/kid_3.png', name: 'Sabine Edo', birthdate: '08/05/2016', diagnosis: 'Flu' }
     // ];
 
-    let data = [
-        // Existing data...
-    ];
-    
+    let data = [];
     patients.forEach(patient => {
         data.push({
-            // imageSrc: patient.imageSrc,
             imageSrc: 'src/assets/kid_1.png',
             name: patient.Name,
             birthdate: patient.Birthdate,
-            // diagnosis: patient.Diagnosis
             diagnosis: "jdm",
             id: patient.Id
         });
     });
 
-        
     return (
         <>
-            <Navbar />
-            <TopPage headerName="Patientenoverzicht" />
-            <div className="content">
+            <Navbar/>
+            <TopPage/>
+            <h1 className="centered_title"><i className="bi bi-people-fill"></i> Patiëntenoverzicht</h1>
+            <div className="container mt-4">
                 <DataTable data={data} />
             </div>
         </>
