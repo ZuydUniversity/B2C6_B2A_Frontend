@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 import '../styling/Main.css';
 import '../styling/Patientenoverzicht.css';
+import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import TopPage from '../components/TopPage';
 import { useParams } from 'react-router-dom';
@@ -8,7 +8,6 @@ import { useParams } from 'react-router-dom';
 function MyometriePage() {
     const { patientId } = useParams();
     const imageSrc = '../src/assets/kid_1.png';
-    const patientName = 'John Doe';
 
     const [cmasScores] = useState({
         headElevation: { left: { score: 1, average: 1 }, right: { score: 2, average: 2 }, joint: 'Nek' },
@@ -40,52 +39,58 @@ function MyometriePage() {
     return (
         <>
             <Navbar />
-            <TopPage headerName="Patient" patientId={patientId} imageSrc={imageSrc} />
-            <div className="content">
-                <h2>CMAS Scores</h2>
-                <div>
-                    <table className="myometrietable">
-                        <thead>
-                            <tr>
-                                <th>Item</th>
-                                <th>Gewricht</th>
-                                <th>Links/Rechts (score)</th>
-                                <th>Score</th>
-                                <th>Gemiddelde Score</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {Object.entries(cmasScores).map(([item, scores]) => (
-                                <tr key={item}>
-                                    <td>{item}</td>
-                                    <td>{scores.joint}</td>
-                                    <td style={{ margin: '5px' }}>
-                                        <div>Links: {scores.left.score}</div>
-                                        <div>Rechts: {scores.right.score}</div>
-                                    </td>
-                                    <td>{scores.left.score + scores.right.score}</td>
-                                    <td>{(scores.left.average + scores.right.average) / 2}</td>
+            <div className="container">
+                <TopPage headerName="Patiënt" patientId={patientId} imageSrc={imageSrc} />
+                <div className="mt-4">
+                    <h2>CMAS Scores</h2>
+                    <div className="table-responsive">
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Gewricht</th>
+                                    <th>Links/Rechts (score)</th>
+                                    <th>Score</th>
+                                    <th>Gemiddelde Score</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {Object.entries(cmasScores).map(([item, scores]) => (
+                                    <tr key={item}>
+                                        <td>{item}</td>
+                                        <td>{scores.joint}</td>
+                                        <td>
+                                            <div>Links: {scores.left.score}</div>
+                                            <div>Rechts: {scores.right.score}</div>
+                                        </td>
+                                        <td>{scores.left.score + scores.right.score}</td>
+                                        <td>{(scores.left.average + scores.right.average) / 2}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className="row mt-4">
+                        <div className="col-md-6">
+                            <h2>Totaalscore</h2>
+                            <p>{totalItemScore}</p>
+                        </div>
+                        <div className="col-md-6">
+                            <h2>Voeg een notitie toe</h2>
+                            <form onSubmit={(e) => e.preventDefault()}>
+                                <div className="mb-3">
+                                    <textarea
+                                        className="form-control h-100"
+                                        value={note}
+                                        onChange={handleNoteChange}
+                                        placeholder="Voeg een notitie toe"
+                                        rows="4"
+                                    />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <h2 className='patient-results'>Totaalscore</h2>
-                <p className='patient-results'>{totalItemScore}</p>
-            </div>
-            <div>
-                <h2 className='patient-results'>Voeg een notitie toe</h2>
-                <form onSubmit={(e) => e.preventDefault()}>
-                    <textarea className='myometrie-textarea'
-                        value={note}
-                        onChange={handleNoteChange}
-                        placeholder="Voeg een notitie toe"
-                        rows="4" /* Set the desired number of rows */
-                        cols="50" /* Set the desired number of columns */
-                    />
-                </form>
             </div>
         </>
     );

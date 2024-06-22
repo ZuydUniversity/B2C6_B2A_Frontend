@@ -48,7 +48,7 @@ const App = () => {
                 
                 <div className="login_style p-4 rounded shadow">
                     <Form onSubmit={handleSubmit}>
-                        <Form.Group controlId="formEmail" className="mb-3 text-left">
+                        <Form.Group controlId="formEmail" className="mb-3">
                             <Form.Label className='form-label'><i className="bi bi-envelope-at-fill"></i> E-mailadres</Form.Label>
                             <Form.Control 
                                 type="email" 

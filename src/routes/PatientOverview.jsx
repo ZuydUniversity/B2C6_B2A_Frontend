@@ -1,8 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../styling/Main.css';
+import '../styling/Patientenoverzicht.css';
 import Navbar from '../components/Navbar';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import TopPage from '../components/TopPage';
 
 function PatientOverview() {
     const [patients, setPatients] = useState([]);
@@ -35,11 +36,11 @@ function PatientOverview() {
     const DataTable = ({ data }) => (
         <div className="table-responsive">
             <table className="table table-hover">
-                <thead className="thead-light">
+                <thead className="thead">
                     <tr>
-                        <th scope="col">Image</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Birthdate</th>
+                        <th scope="col"></th>
+                        <th scope="col">Naam</th>
+                        <th scope="col">Geboortedatum</th>
                         <th scope="col">Diagnosis</th>
                     </tr>
                 </thead>
@@ -79,9 +80,9 @@ function PatientOverview() {
     return (
         <>
             <Navbar/>
-            <TopPage/>
+            <div className="container formwidth">
+            
             <h1 className="centered_title"><i className="bi bi-people-fill"></i> Patiëntenoverzicht</h1>
-            <div className="container mt-4">
                 <DataTable data={data} />
             </div>
         </>

@@ -14,43 +14,54 @@ function PatientView() {
     const mail = 'John_doe@gmail.com';
     const diagnosis = 'JDM';
 
-
     return (
         <>
             <Navbar />
-            <div className="PatientView">
-                <TopPage headerName="Patient" patientId={patientId} imageSrc={imageSrc} />
-                <div className='PageBottom'>
-                    <div className="ResultsBlock Block card">
-                        <p>Resultaten</p>
-                        <div className="DataBlockData">
-                            {Array.from({ length: 3 }, (_, i) => (
-                                <div className="textual-data-row" key={i + 1}>
-                                    <p>{i + 1}: Result {i + 1}</p>
+            <div className="container">
+                <TopPage headerName="Patiënt" patientId={patientId} imageSrc={imageSrc} patientName={patientName} />
+                <div className="row mt-4">
+                    <div className="col-md-4 mb-4">
+                        <div className="card h-100">
+                            <div className="card-body">
+                                <h5 className="card-title">Resultaten</h5>
+                                <div className="mb-3">
+                                    {Array.from({ length: 3 }, (_, i) => (
+                                        <div className="mb-2" key={i + 1}>
+                                            <p>{i + 1}: Resultaat {i + 1}</p>
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
+                                <Link to={`/resultoverview/${patientId}`} className="btn btn-outline-primary">Alle resultaten</Link>
+                            </div>
                         </div>
-                        <Link to={`/resultoverview/${patientId}`} className="resultoverview-button"><button>Zie alles</button></Link>
                     </div>
-                    <div className="EssayBlock Block card">
-                        <p>Verslagen</p>
-                        <div className="DataBlockData">
-                            {Array.from({ length: 3 }, (_, i) => (
-                                <div className="textual-data-row" key={i + 1}>
-                                    <p>{i + 1}: Verslag {i + 1}</p>
+                    <div className="col-md-4 mb-4">
+                        <div className="card h-100">
+                            <div className="card-body">
+                                <h5 className="card-title">Verslagen</h5>
+                                <div className="mb-3">
+                                    {Array.from({ length: 3 }, (_, i) => (
+                                        <div className="mb-2" key={i + 1}>
+                                            <p>{i + 1}: Verslag {i + 1}</p>
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
+                                <Link to={`/essaypage/${patientId}`} className="btn btn-outline-primary">Alle verslagen</Link>
+                            </div>
                         </div>
-                        <Link to={`/essaypage/${patientId}`}><button>Zie alles</button></Link>
                     </div>
-                    <div className="DataBlock Block card">
-                        <p>Gegevens</p>
-                        <div className="DataBlockData">
-                            <p>Nummer: {phoneNumber}</p>
-                            <p>Mail: {mail}</p>
-                            <p>Diagnose: {diagnosis}</p>
+                    <div className="col-md-4 mb-4">
+                        <div className="card h-100">
+                            <div className="card-body">
+                                <h5 className="card-title">Gegevens</h5>
+                                <div className="mb-3">
+                                    <p>Nummer: {phoneNumber}</p>
+                                    <p>Mail: {mail}</p>
+                                    <p>Diagnose: {diagnosis}</p>
+                                </div>
+                                <Link to={`/patientsettingspage/${patientId}`} className="btn btn-outline-primary">Alle gegevens</Link>
+                            </div>
                         </div>
-                        <Link to={`/patientsettingspage/${patientId}`}><button>Zie alles</button></Link>
                     </div>
                 </div>
             </div>

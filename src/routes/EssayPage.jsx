@@ -11,7 +11,7 @@ const EssayPage = () => {
     return (
         <>
             <Navbar />
-            <TopPage headerName="Patient" patientId={patientId} imageSrc={imageSrc} />
+            <TopPage headerName="Patiënt" patientId={patientId} imageSrc={imageSrc} />
         </>
     );
 };

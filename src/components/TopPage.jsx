@@ -1,9 +1,9 @@
-import React from 'react';
-import BackButton from './BackButton'; // Make sure to import the BackButton component
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import BackButton from './BackButton';
 
 const TopPage = ({ headerName, imageSrc, patientId }) => {
     const [patientName, setPatientName] = useState('');
+
     useEffect(() => {
         const fetchPatientName = async (patientId) => {
             try {
@@ -22,14 +22,21 @@ const TopPage = ({ headerName, imageSrc, patientId }) => {
     }, [patientId]);
 
     return (
-        <div className="top-page formwidth">
-            <div className="top-page-nav-info">
+        <div className="container formwidth">
+            <div className="d-flex justify-content-between align-items-center mb-4">
                 <BackButton />
                 <h1>{headerName}</h1>
-            </div>
-            <div className="patient-data-block">
-                <h3 className="patient-results">{patientName}</h3>
-                <img className="patient-image-results" src={imageSrc} alt="patient" />
+                <div className="d-flex align-items-center">
+                    <img 
+                        src={imageSrc} 
+                        alt="Patient" 
+                        className="img-thumbnail me-3" 
+                        style={{ width: '100px', height: '100px' }} 
+                    />
+                    <div>
+                        <h3>{patientName}</h3>
+                    </div>
+                </div>
             </div>
         </div>
     );

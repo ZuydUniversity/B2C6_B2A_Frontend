@@ -11,7 +11,7 @@ const BackButton = () => {
     };
 
     return (
-        <button onClick={handleClick} className="back_button_outline_primary back_button btn w-15">
+        <button onClick={handleClick} className="btn btn-outline-primary">
             <i className="bi bi-arrow-left"></i> Back
         </button>
     );

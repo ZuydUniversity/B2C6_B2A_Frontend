@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../styling/Navbar.css';
+import '../styling/Main.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Link } from 'react-router-dom';
@@ -56,10 +57,10 @@ const Navbar = () => {
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto">
-                        <Link to="/"><button type="button" className="btn btn-outline-primary"><i className="bi bi-house-fill"></i> Home</button></Link>
-                        <Link to="/PatientOverview"><button type="button" className="btn btn-outline-primary"><i className="bi bi-people-fill"></i> Patiëntenoverzicht</button></Link>
-                        <button type="button" className="btn btn-outline-primary"><i className="bi bi-file-check-fill"></i> Resultaten</button>
-                    <Link to="/Kalender"><button type="button" className="btn btn-outline-primary"><i className="bi bi-calendar-event-fill"></i> Kalender</button></Link>
+                        <Link to="/" type="button" className="btn btn-outline-primary"><i className="bi bi-house-fill"></i> Home</Link>
+                        <Link to="/PatientOverview" type="button" className="btn btn-outline-primary"><i className="bi bi-people-fill"></i> Patiëntenoverzicht</Link>
+                        <Link to="/" type="button" className="btn btn-outline-primary"><i className="bi bi-file-check-fill"></i> Resultaten</Link>
+                        <Link to="/Kalender" type="button" className="btn btn-outline-primary"><i className="bi bi-calendar-event-fill"></i> Kalender</Link>
                 </ul>
                 <ul className="navbar-nav ms-auto">
                     <li className="nav-item">
@@ -69,12 +70,12 @@ const Navbar = () => {
                         </form>
                     </li>
                     <div className="dropdown">
-                        <button type="button" className="btn btn-outline-primary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="bi bi-person-circle"></i> Profiel</button>
+                        <Link to="/" type="button" className="btn btn-outline-primary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="bi bi-person-circle"></i> Profiel</Link>
                         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a className="dropdown-item" href="#"><i className="bi bi-person-bounding-box"></i> Profielweergave</a>
-                            <a className="dropdown-item" href="#"><i className="bi bi-gear-fill"></i> Profielinstellingen</a>
+                            <Link to="/" className="dropdown-item" href="#"><i className="bi bi-person-bounding-box"></i> Profielweergave</Link>
+                            <Link to="/" className="dropdown-item" href="#"><i className="bi bi-gear-fill"></i> Profielinstellingen</Link>
                             <div className="dropdown-divider"></div>
-                            <a className="dropdown-item" href="#"><i className="bi bi-box-arrow-left"></i> Uitloggen</a>
+                            <Link to="/" className="dropdown-item" href="#"><i className="bi bi-box-arrow-left"></i> Uitloggen</Link>
                         </div>
                     </div>
                 </ul>

@@ -72,7 +72,7 @@ function ForgotPassword() {
                         <i className="bi bi-check2-square"></i> Opslaan
                     </Button>
                 </Form> <br />
-                <Button variant="link" onClick={navigateToLogin} className="login_button w-100">Terug</Button>
+                <Button variant="primary" onClick={navigateToLogin} className="login_button w-100">Terug</Button>
                 {message && <Alert variant="danger" className="mt-3">{message}</Alert>}
             </div>
         </Container>

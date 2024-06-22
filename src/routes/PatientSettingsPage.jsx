@@ -51,14 +51,12 @@ const PatientSettingsPage = () => {
         try {
             const response = await fetch(`http://localhost:5000/patients/${patientId}/diagnosis`);
             const data = await response.json();
-            setDiagnosis(data); // set the entire data array to the diagnosis state
+            setDiagnosis(data);
         } catch (error) {
             console.error('Error fetching diagnoses:', error);
         }
     };
 
-
-    // const patient = patients[0];
     const imageSrc = '../src/assets/kid_1.png';
 
     useEffect(() => {
@@ -73,73 +71,58 @@ const PatientSettingsPage = () => {
         }
     }, [patient]);
 
-
-
     const patientName = patient ? patient.Name : '';
     const firstName = patient ? patient.Name : '';
     const lastName = patient ? patient.Lastname : '';
-    const age = patient ? patient.Age : null;
+    const age = patient ? new Date().getFullYear() - new Date(patient.Birthdate).getFullYear() : null;
     const gender = patient ? patient.Gender : '';
-    // const diagnosis = patient ? patient.Diagnosis : '';
     const birthdate = patient ? patient.Birthdate : '';
 
-    //contactpersoon
     const firstNameContact = 'Eric';
     const lastNameContact = 'Doe';
     const emailContact = 'eric_doe@gmail.com';
     const telephoneContact = '0612345678';
 
-    //Logic for editing patient data
     const [isEditing, setIsEditing] = useState(false);
+    const [isEditingContact, setIsEditingContact] = useState(false);
 
     const handleEditClick = () => {
         setIsEditing(true);
     };
 
     const handleSaveClick = () => {
-        // Save changes here
         setIsEditing(false);
         sendDataToBackend();
     };
 
     const handleCancelClick = () => {
-        // Revert changes here
         setIsEditing(false);
     };
-
-    //Logic for editing contact data
-    const [isEditingContact, setIsEditingContact] = useState(false);
 
     const handleEditContactClick = () => {
         setIsEditingContact(true);
     };
 
     const handleSaveContactClick = () => {
-        // Save changes here
         setIsEditingContact(false);
     };
 
     const handleCancelContactClick = () => {
-        // Revert changes here
         setIsEditingContact(false);
     };
 
-    //Logic for editing medication data
     const handleEditMedicationClick = (id) => {
         setMedications(medications.map(medication => medication.id === id ? { ...medication, isEditing: true } : medication));
     };
 
     const handleSaveMedicationClick = (id) => {
-        // Save changes here
         setMedications(medications.map(medication => medication.id === id ? { ...medication, isEditing: false } : medication));
     };
 
     const handleCancelMedicationClick = (id) => {
-        // Revert changes here
         setMedications(medications.map(medication => medication.id === id ? { ...medication, isEditing: false } : medication));
     };
 
-    // Function to send edited data to the backend
     const sendDataToBackend = () => {
         const editedData = {
             // Gather edited data here
@@ -160,97 +143,132 @@ const PatientSettingsPage = () => {
         })
         .then(data => {
             console.log('Data successfully sent to the server:', data);
-            // Handle response from backend if needed
         })
         .catch(error => {
             console.error('Error sending data to the server:', error);
-            // Handle error if needed
         });
     };
-
-
 
     return (
         <>
             <Navbar />
-            <TopPage headerName="Patient" patientId={patientId} imageSrc={imageSrc} />
-            <div className="content">
-                <div className="patient-information">
-                    <div className="patient-card card">
-                        <div className="card-buttons">
-                            {isEditing ? (
-                                <>
-                                    <button onClick={handleSaveClick}><i className="bi bi-check-circle"></i></button>
-                                    <button onClick={handleCancelClick}><i className="bi bi-x-circle"></i></button>
-                                </>
-                            ) : (
-                                <button onClick={handleEditClick}><i className="bi bi-pencil-square"></i></button>
-                            )}
+            <TopPage headerName="Patiënt" patientId={patientId} imageSrc={imageSrc} />
+            <div className="container mt-4">
+                <div className="row">
+                    <div className="col-lg-6 mb-4">
+                        <div className="card">
+                            <div className="card-header d-flex justify-content-between align-items-center">
+                                <span>Patiënt informatie</span>
+                                {isEditing ? (
+                                    <>
+                                        <button className="btn btn-outline-primary" onClick={handleSaveClick}><i className="bi bi-check-circle"></i></button>
+                                        <button className="btn btn-outline-primary" onClick={handleCancelClick}><i className="bi bi-x-circle"></i></button>
+                                    </>
+                                ) : (
+                                    <button className="btn btn-outline-primary" onClick={handleEditClick}><i className="bi bi-pencil-square"></i></button>
+                                )}
+                            </div>
+                            <div className="card-body">
+                                <div className="mb-3">
+                                    <label className="form-label">Naam</label>
+                                    {isEditing ? <input type="text" className="form-control" defaultValue={lastName} /> : <p className="form-control-plaintext">{lastName}</p>}
+                                </div>
+                                <div className="mb-3">
+                                    <label className="form-label">Voornaam</label>
+                                    {isEditing ? <input type="text" className="form-control" defaultValue={firstName} /> : <p className="form-control-plaintext">{firstName}</p>}
+                                </div>
+                                <div className="mb-3">
+                                    <label className="form-label">Leeftijd</label>
+                                    {isEditing ? <input type="text" className="form-control" defaultValue={age} /> : <p className="form-control-plaintext">{age}</p>}
+                                </div>
+                                <div className="mb-3">
+                                    <label className="form-label">Geslacht</label>
+                                    {isEditing ? <input type="text" className="form-control" defaultValue={gender} /> : <p className="form-control-plaintext">{gender}</p>}
+                                </div>
+                                <div className="mb-3">
+                                    <label className="form-label">Diagnose</label>
+                                    {isEditing ? (
+                                        diagnosis.map((diag, index) => (
+                                            <input key={index} type="text" className="form-control mb-2" defaultValue={diag.Diagnosis} />
+                                        ))
+                                    ) : (
+                                        <p className="form-control-plaintext">{diagnosis.map(diag => diag.Diagnosis).join(', ')}</p>
+                                    )}
+                                </div>
+                                <div className="mb-3">
+                                    <label className="form-label">Geboortedatum</label>
+                                    {isEditing ? <input type="text" className="form-control" defaultValue={birthdate} /> : <p className="form-control-plaintext">{birthdate}</p>}
+                                </div>
+                            </div>
                         </div>
-                        <div className="patient-data-row"><p>Naam</p>{isEditing ? <input type="text" defaultValue={lastName} /> : <p>{lastName}</p>}</div>
-                        <div className="patient-data-row"><p>Voornaam</p>{isEditing ? <input type="text" defaultValue={firstName} /> : <p>{firstName}</p>}</div>
-                        <div className="patient-data-row">
-                            <p>Leeftijd</p>
-                            {isEditing ? (
-                                <input type="text" defaultValue={new Date().getFullYear() - new Date(birthdate).getFullYear()} />
-                            ) : (
-                                <p>{new Date().getFullYear() - new Date(birthdate).getFullYear()}</p>
-                            )}
-                        </div>
-                        <div className="patient-data-row"><p>Geslacht</p>{isEditing ? <input type="text" defaultValue={gender} /> : <p>{gender}</p>}</div>
-                        <div className="patient-data-row">
-                            <p>Diagnose</p>
-                            {isEditing ? 
-                                diagnosis.map((diag, index) => (
-                                    <input key={index} type="text" defaultValue={diag.Diagnosis} />
-                                )) 
-                                : 
-                                <p>{diagnosis.map(diag => diag.Diagnosis).join(', ')}</p>
-                            }
-                        </div>
-                        <div className="patient-data-row"><p>Geboortedatum</p>{isEditing ? <input type="text" defaultValue={birthdate} /> : <p>{birthdate}</p>}</div>
                     </div>
-
-                    <div className="contactperson-card card">
-                        <div className="card-buttons">
-                            {isEditingContact ? (
-                                <>
-                                    <button onClick={handleSaveContactClick}><i className="bi bi-check-circle"></i></button>
-                                    <button onClick={handleCancelContactClick}><i className="bi bi-x-circle"></i></button>
-                                </>
-                            ) : (
-                                <button onClick={handleEditContactClick}><i className="bi bi-pencil-square"></i></button>
-                            )}
+                    <div className="col-lg-6 mb-4">
+                        <div className="card">
+                            <div className="card-header d-flex justify-content-between align-items-center">
+                                <span>Contact informatie</span>
+                                {isEditingContact ? (
+                                    <>
+                                        <button className="btn btn-outline-primary" onClick={handleSaveContactClick}><i className="bi bi-check-circle"></i></button>
+                                        <button className="btn btn-outline-primary" onClick={handleCancelContactClick}><i className="bi bi-x-circle"></i></button>
+                                    </>
+                                ) : (
+                                    <button className="btn btn-outline-primary" onClick={handleEditContactClick}><i className="bi bi-pencil-square"></i></button>
+                                )}
+                            </div>
+                            <div className="card-body">
+                                <div className="mb-3">
+                                    <label className="form-label">Naam</label>
+                                    {isEditingContact ? <input type="text" className="form-control" defaultValue={lastNameContact} /> : <p className="form-control-plaintext">{lastNameContact}</p>}
+                                </div>
+                                <div className="mb-3">
+                                    <label className="form-label">Voornaam</label>
+                                    {isEditingContact ? <input type="text" className="form-control" defaultValue={firstNameContact} /> : <p className="form-control-plaintext">{firstNameContact}</p>}
+                                </div>
+                                <div className="mb-3">
+                                    <label className="form-label">Telefoonnummer</label>
+                                    {isEditingContact ? <input type="text" className="form-control" defaultValue={telephoneContact} /> : <p className="form-control-plaintext">{telephoneContact}</p>}
+                                </div>
+                                <div className="mb-3">
+                                    <label className="form-label">Emailadres</label>
+                                    {isEditingContact ? <input type="text" className="form-control" defaultValue={emailContact} /> : <p className="form-control-plaintext">{emailContact}</p>}
+                                </div>
+                            </div>
                         </div>
-                        <div className="patient-data-row"><p>Naam</p>{isEditingContact ? <input type="text" defaultValue={lastNameContact} /> : <p>{lastNameContact}</p>}</div>
-                        <div className="patient-data-row"><p>Voornaam</p>{isEditingContact ? <input type="text" defaultValue={firstNameContact} /> : <p>{firstNameContact}</p>}</div>
-                        <div className="patient-data-row"><p>Telefoonnummer</p>{isEditingContact ? <input type="text" defaultValue={emailContact} /> : <p>{emailContact}</p>}</div>
-                        <div className="patient-data-row"><p>Emailadres</p>{isEditingContact ? <input type="text" defaultValue={telephoneContact} /> : <p>{telephoneContact}</p>}</div>
                     </div>
                 </div>
-                <div className="medication-cards-container">
-                {medications.map((medication, index) => (
-                    <div key={index} className="medication-card medication card">
-                        <div className="card-buttons">
-                            {medication.isEditing ? (
-                                <>
-                                    <button onClick={() => handleSaveMedicationClick(medication.id)}><i className="bi bi-check-circle"></i></button>
-                                    <button onClick={() => handleCancelMedicationClick(medication.id)}><i className="bi bi-x-circle"></i></button>
-                                </>
-                            ) : (
-                                <button onClick={() => handleEditMedicationClick(medication.id)}><i className="bi bi-pencil-square"></i></button>
-                            )}
+                <div className="row">
+                    {medications.map((medication, index) => (
+                        <div key={index} className="col-lg-6 mb-4">
+                            <div className="card">
+                                <div className="card-header d-flex justify-content-between align-items-center">
+                                    <span>Behandeling</span>
+                                    {medication.isEditing ? (
+                                        <>
+                                            <button className="btn btn-outline-primary" onClick={() => handleSaveMedicationClick(medication.id)}><i className="bi bi-check-circle"></i></button>
+                                            <button className="btn btn-outline-primary" onClick={() => handleCancelMedicationClick(medication.id)}><i className="bi bi-x-circle"></i></button>
+                                        </>
+                                    ) : (
+                                        <button className="btn btn-outline-primary" onClick={() => handleEditMedicationClick(medication.id)}><i className="bi bi-pencil-square"></i></button>
+                                    )}
+                                </div>
+                                <div className="card-body">
+                                    <div className="mb-3">
+                                        <label className="form-label">Medicijn</label>
+                                        {medication.isEditing ? <input type="text" className="form-control" defaultValue={medication.Name} /> : <p className="form-control-plaintext">{medication.Name}</p>}
+                                    </div>
+                                    <div className="mb-3">
+                                        <label className="form-label">Gebruik</label>
+                                        {medication.isEditing ? <input type="text" className="form-control" defaultValue={medication.Dose} /> : <p className="form-control-plaintext">{medication.Dose}</p>}
+                                    </div>
+                                    <div className="mb-3">
+                                        <label className="form-label">Frequentie</label>
+                                        {medication.isEditing ? <input type="text" className="form-control" defaultValue={medication.Frequency} /> : <p className="form-control-plaintext">{medication.Frequency}</p>}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div className="patient-data-row"><p>Medicijn</p>{medication.isEditing ? <input type="text" defaultValue={medication.Name} /> : <p>{medication.Name}</p>}</div>
-                        <div className="patient-data-row"><p>Gebruik</p>{medication.isEditing ? <input type="text" defaultValue={medication.Dose} /> : <p>{medication.Dose}</p>}</div>
-                        <div className="patient-data-row"><p>Frequentie</p>{medication.isEditing ? <input type="text" defaultValue={medication.Frequency} /> : <p>{medication.Frequency}</p>}</div>
-                    </div>
-                ))}
-                    <div className="medication-card placeholder-card card medication">
-                        <i class="bi bi-plus"></i>
-                    </div>
+                    ))}
                 </div>
-               
             </div>
         </>
     );

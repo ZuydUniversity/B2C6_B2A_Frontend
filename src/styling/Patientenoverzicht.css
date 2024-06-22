@@ -157,7 +157,7 @@
   .middle-text-cell,
   .rounded-right {
       height: 125px;
-      background: var(--secondary-color) ;
+      background: var(--background-color) ;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -441,7 +441,6 @@
   
   
   .card {
-      background-color: #f8f8f8; /* Light gray */
       border-radius: 10px; /* Rounded corners */
       padding: 20px; /* Space inside the card */
       margin: 20px 0; /* Space outside the card */
@@ -450,6 +449,11 @@
       max-width: 600px; /* Adjust as needed */
       margin-left: auto; /* Center the card */
       margin-right: auto; /* Center the card */
+      background-color: var(--background-color);
+  }
+
+  .card-header {
+      background-color: #fff;
   }
   
   .placeholder-card {

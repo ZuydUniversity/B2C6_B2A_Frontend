@@ -190,7 +190,7 @@ function Register() {
                     </Button>
                     {message && <Alert variant="danger" className="mt-3">{message}</Alert>}
                 </Form> <br />
-                <Button variant="link" onClick={navigateToLogin} className="login_button w-100">Terug</Button>
+                <Button variant="primary" onClick={navigateToLogin} className="login_button w-100">Terug</Button>
             </div>
         </Container>
         </>
