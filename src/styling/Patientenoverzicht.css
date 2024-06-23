@@ -450,6 +450,7 @@
       margin-left: auto; /* Center the card */
       margin-right: auto; /* Center the card */
       background-color: var(--background-color);
+      box-shadow: 7px 7px 2px 0px rgba(0,0,0,0.1);
   }
 
   .card-header {
