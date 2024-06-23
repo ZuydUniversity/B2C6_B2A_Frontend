@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import './Login/App.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Navbar from './components/Navbar';
+import Cookies from 'js-cookie';
 
 const App = () => {
+
+    useEffect(() => {
+        Cookies.remove('user_id');
+        Cookies.remove('role');
+    }, []);
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loginError, setLoginError] = useState(null);
@@ -37,17 +44,20 @@ const App = () => {
 
             if (response.ok) { // code : 200-299
                 setLoginError('Inloggen successvol');   
+                Cookies.set('user_id', data.user_id, { expires: 1/24 });
+                Cookies.set('role', data.role, { expires: 1/24 });
+        
                 if(data.role == 1){ 
-                    navigate('/docmenu', { state: {email, role : data.role }});               
+                    navigate('/docmenu');               
                 }
                 else if(data.role == 2){ 
-                    navigate('/patmenu', { state: {email, role : data.role }});
+                    navigate('/patmenu');
                 }
                 else if(data.role == 3){ 
-                    navigate('/adminmenu', { state: {email, role : data.role }});               
+                    navigate('/adminmenu');               
                 }
                 else if(data.role == 4){ 
-                    navigate('/resmenu', { state: {email, role : data.role }});
+                    navigate('/resmenu');
                 }
                 else{
                     setLoginError("Gebruiker heeft geen rol, neem contact op met admin")
