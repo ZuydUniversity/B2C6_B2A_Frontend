@@ -10,7 +10,6 @@ import './Login/App.css';
 import PatientOverview from './routes/PatientOverview.jsx';
 import ResultOverview from './routes/ResultOverview.jsx';
 import PatientView from './routes/PatientView.jsx';
-import PatientView from './routes/PatientView.jsx';
 import MyometriePage from './routes/MyometriePage.jsx';
 import EssayPage from './routes/EssayPage.jsx';
 import RadiologyPage from './routes/RadiologyPage.jsx';

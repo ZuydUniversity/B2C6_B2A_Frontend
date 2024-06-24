@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import '../App.css';
 import Navbar from '../components/Navbar';
-import React, { useState } from 'react';
-import '../App.css';
-import Navbar from '../components/Navbar';
 
 function MyometriePage() {
     const imageSrc = '../src/assets/kid_1.png';
