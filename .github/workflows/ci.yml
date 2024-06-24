@@ -55,5 +55,5 @@ jobs:
           
           # Install dependencies and start the application
           npm install
-          npm start
+          npm run dev
         EOF
