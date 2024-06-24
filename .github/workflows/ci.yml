@@ -34,19 +34,22 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up SSH
+    - name: Set up SSH key
       run: |
-        echo "$SSH_PRIVATE_KEY" > private_key.ppk
-        chmod 600 private_key.ppk
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.AZURE_VM_SSH_KEY_FRONTEND_PPK }}
+        echo "${{ secrets.AZURE_VM_SSH_KEY_FRONTEND }}" > private_key
+        chmod 600 private_key
+
+    - name: Test SSH connection
+      run: |
+        ssh -o StrictHostKeyChecking=no ${{ secrets.AZURE_USER_ID }}@${{ secrets.AZURE_VM_IP_FRONTEND }} "echo SSH connection successful"
 
     - name: Copy files via SCP
       run: |
-        scp -o StrictHostKeyChecking=no -i private_key.ppk -r ./dist/* ${{ secrets.AZURE_USER_ID }}@${{ secrets.AZURE_VM_IP_FRONTEND }}:/usr/src/app
+        scp -o StrictHostKeyChecking=no -r ./dist/* ${{ secrets.AZURE_USER_ID }}@${{ secrets.AZURE_VM_IP_FRONTEND }}:/usr/src/app
 
     - name: SSH and restart service
       run: |
-        ssh -o StrictHostKeyChecking=no -i private_key.ppk ${{ secrets.AZURE_USER_ID }}@${{ secrets.AZURE_VM_IP_FRONTEND }} << 'EOF'
+        ssh -o StrictHostKeyChecking=no ${{ secrets.AZURE_USER_ID }}@${{ secrets.AZURE_VM_IP_FRONTEND }} << 'EOF'
           pm2 restart all
         EOF
+
