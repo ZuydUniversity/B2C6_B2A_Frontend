@@ -5,7 +5,6 @@ on:
     branches:
       - add-ci-pipeline
 
-
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
@@ -25,26 +24,31 @@ jobs:
     - name: Run tests
       run: npm test
 
-
     - name: Build project
       run: npm run build
 
   deploy:
-    needs:  build-and-test
+    needs: build-and-test
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+
     - name: Set up SSH
       uses: webfactory/ssh-agent@v0.5.3
       with:
         ssh-private-key: ${{ secrets.AZURE_VM_SSH_KEY_FRONTEND }}
+
+    - name: Test SSH connection
+      run: |
+        ssh -o StrictHostKeyChecking=no ${{ secrets.AZURE_USER_ID }}@${{ secrets.AZURE_VM_IP_FRONTEND }} "echo SSH connection successful"
+
     - name: Copy files via SCP
       run: |
         scp -o StrictHostKeyChecking=no -r ./dist/* ${{ secrets.AZURE_USER_ID }}@${{ secrets.AZURE_VM_IP_FRONTEND }}:/usr/src/app
+
     - name: SSH and restart service
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.AZURE_USER_ID }}@${{ secrets.AZURE_VM_IP_FRONTEND }} << 'EOF'
           pm2 restart all
         EOF
-
