@@ -32,7 +32,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v2 
+
 
     - name: Set up SSH key
       run: |
@@ -42,11 +43,6 @@ jobs:
     - name: Test SSH connection
       run: |
         ssh -o StrictHostKeyChecking=accept-new -i ./private_key ${{ secrets.AZURE_USER_ID }}@${{ secrets.AZURE_VM_IP_FRONTEND }} "echo SSH connection successful"
-
-    - name: Copy files via SCP
-      run: |
-        ls -la private_key
-        scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i private_key -r ./dist/* ${{ secrets.AZURE_USER_ID }}@${{ secrets.AZURE_VM_IP_FRONTEND }}:/usr/src/app
 
     - name: SSH and restart service
       run: |
