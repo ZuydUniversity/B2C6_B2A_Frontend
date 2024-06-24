@@ -13,6 +13,7 @@
       color: white;
       margin:0;
       padding:0;
+      width:100%;
   }
   
   .content {
@@ -21,6 +22,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      max-height: 76vh;
+      overflow-y: auto; 
   }
   
   .app {
@@ -538,7 +541,6 @@
       margin: 20px 0; /* Space outside the card */
       margin-bottom:0;
       width: 80%; /* Adjust as needed */
-      max-width: 600px; /* Adjust as needed */
       margin-left: auto; /* Center the card */
       margin-right: auto; /* Center the card */
   }
@@ -550,13 +552,19 @@
       align-items: center;
       padding:0;
   }
+
+  .placeholder-card p{
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-top:10px;
+  }
   
   .placeholder-card:hover {
       background-color: #e0e0e0;
   }
   
   .placeholder-card i {
-      height: 200px;
+      height: auto;
       display: flex;
       justify-content: center; /* Centers content horizontally */
       align-items: center;
@@ -567,7 +575,13 @@
   }
   
   .patient-card {
-      margin-right: 20px;
+      margin-left: 0px;
+      margin-right:10px;
+  }
+
+  .contactperson-card {
+    margin-left: 10px;
+    margin-right:0px;
   }
   
   .patient-data-row {
@@ -585,10 +599,18 @@
   
   .card-buttons {
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom:10px;
   }
-  
+
+  .card-buttons p {
+    margin:0px;
+    font-weight: bold;
+    flex-grow: 1;
+    
+}
+
   .card-buttons button {
       margin-left: 10px;
   }
@@ -640,6 +662,46 @@
   .medication-card p {
       line-height: 0.3; /* Adjust as needed */
   }
+
+  .patient-data-row input{
+    width:60%;
+  }
+
+  .contactperson-card{
+    margin-right:0px;
+  }
+
+
+  .diagnosis-cards-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.diagnosis-card {
+    height: 230px;
+    flex: 0 0 calc(33.33% - 15px); /* 33.33% for 3 items per row, 10px for margin */
+    margin: 10px; /* Adjust as needed */
+    box-sizing: border-box; /* Include padding and border in the width */
+}
+
+/* Remove left margin from the first card in each row */
+.diagnosis-card:nth-of-type(3n+1) {
+    margin-left: 0;
+}
+
+/* Remove right margin from the third card in each row */
+.diagnosis-card:nth-of-type(3n) {
+    margin-right: 0;
+}
+
+.patient-card .patient-data-row p,
+.contactperson-card .patient-data-row p,
+.diagnosis-card p {
+    line-height: 0.3; /* Adjust as needed */
+}
+
   
   /*below is css for Kalender.jsx page*/
   
