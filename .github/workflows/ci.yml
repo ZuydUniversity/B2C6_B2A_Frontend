@@ -44,9 +44,11 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=accept-new -i ./private_key ${{ secrets.AZURE_USER_ID }}@${{ secrets.AZURE_VM_IP_FRONTEND }} "echo SSH connection successful"
 
-    - name: SSH and restart service
+  
+    - name: Run application on VM
       run: |
         ssh -o StrictHostKeyChecking=accept-new -i ./private_key ${{ secrets.AZURE_USER_ID }}@${{ secrets.AZURE_VM_IP_FRONTEND }} << 'EOF'
-          pm2 restart all
+          cd /usr/src/app
+          npm install
+          npm start
         EOF
-
