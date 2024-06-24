@@ -170,7 +170,7 @@ function Register() {
             <div className='register_style'>
                 <div className='register_form'>
                     <div className='register_left'>
-                        <div style={{marginBottom: '20px'}}>
+                        <div style={{marginBottom: '2r0px'}}>
                         <label>Accounttype</label>
                         <select value={accountType} onChange={changeAccount} required>
                             <option value="" disabled>Selecteer een accounttype</option>
