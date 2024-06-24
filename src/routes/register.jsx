@@ -1,10 +1,7 @@
+
 import '../styling/Main.css';
 import '../styling/Login.css';
 import React, { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import Navbar from '../components/Navbar';
-import { Container, Form, Button, Alert } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 function Register() {
@@ -13,26 +10,29 @@ function Register() {
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [employeeNumber, setEmployeeNumber] = useState('');
     const [specialization, setSpecialization] = useState('');
-    const [patientNumber, setPatientNumber] = useState('');
     const [gender, setGender] = useState('');
     const [birthDate, setBirthDate] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [photo, setPhoto] = useState('');
-    const [contactEmail, setContactEmail] = useState('');
-    const [contactPhone, setContactPhone] = useState('');
-    const [contactName, setContactName] = useState('');
-    const [message, setMessage] = useState('');
+    const [contact_email, setContactEmail] = useState('');
+    const [contact_phone, setContactPhone] = useState('');
+    const [contact_name, setContactName] = useState('');
+    const [contact_lastname, setContactLastName] = useState('');
+
+
+
+    const [message, setMessage] = useState(''); 
 
     const navigate = useNavigate();
 
     const navigateToLogin = () => {
-        navigate('/'); 
+      navigate('/'); 
     };
 
     const register = async (e) => {
         e.preventDefault(); 
+
 
         const formData = new FormData();
         formData.append('email', email);
@@ -40,16 +40,18 @@ function Register() {
         formData.append('firstName', firstName);
         formData.append('lastName', lastName);
         formData.append('accountType', accountType);
-        formData.append('employeeNumber', employeeNumber);
         formData.append('specialization', specialization);
-        formData.append('patientNumber', patientNumber);
         formData.append('gender', gender);
-        formData.append('birthDate', birthDate);
+        formData.append('birthDate',birthDate);
         formData.append('phoneNumber', phoneNumber);
-        formData.append('photo', photo);
-        formData.append('contact_email', contactEmail);
-        formData.append('contact_phone', contactPhone);
-        formData.append('contact_name', contactName);
+        if (photo) {
+            formData.append('photo', photo);
+        }
+        formData.append('contact_email', contact_email);
+        formData.append('contact_phone', contact_phone);
+        formData.append('contact_name', contact_name);
+        formData.append('contact_lastname', contact_lastname);
+
 
         try {
             const response = await fetch('http://127.0.0.1:5000/register', {
@@ -71,13 +73,11 @@ function Register() {
             console.error('Registration error:', error);
             setMessage(error.message);
         }
-    };
 
+    };
     const changeAccount = (e) => {
         setAccountType(e.target.value);
-        setEmployeeNumber('');
         setSpecialization('');
-        setPatientNumber('');
         setGender('');
         setBirthDate('');
         setPhoneNumber('');
@@ -85,117 +85,137 @@ function Register() {
         setContactEmail('');
         setContactName('');
         setContactPhone('');
+        setContactLastName('');
     };
+
+
+   
+
+
 
     const renderForm = () => {
         switch (accountType) {
             case 'Doctor':
                 return (
-                    <>
-                        <Form.Group controlId="formEmployeeNumber" className="mb-3">
-                            <Form.Label>Personeelsnummer</Form.Label>
-                            <Form.Control type="number" value={employeeNumber} onChange={(e) => setEmployeeNumber(e.target.value)} required />
-                        </Form.Group>
-                        <Form.Group controlId="formSpecialization" className="mb-3">
-                            <Form.Label>Specialisatie</Form.Label>
-                            <Form.Control type="text" value={specialization} onChange={(e) => setSpecialization(e.target.value)} required />
-                        </Form.Group>
-                        <Form.Group controlId="formPhoneNumber" className="mb-3">
-                            <Form.Label>Telefoonnummer</Form.Label>
-                            <Form.Control type="tel" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
-                        </Form.Group>
-                    </>
+                <div className="container doctor-register-form">    
+                    <div >
+                        <div>
+                            <label>Specialisatie</label>
+                            <input type="text" id="specialization" name="specialization" className='login_input' value={specialization} onChange={(e) => setSpecialization(e.target.value)} required />
+                        </div>
+                        <div>
+                            <label>Telefoonnummer</label>
+                            <input type="tel" id="phoneNumber" name="phoneNumber" className='login_input' value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
+                        </div>
+                    </div>
+                </div>    
                 );
             case 'Patient':
                 return (
-                    <>
-                        <Form.Group controlId="formPatientNumber" className="mb-3">
-                            <Form.Label>Patiëntnummer</Form.Label>
-                            <Form.Control type="number" value={patientNumber} onChange={(e) => setPatientNumber(e.target.value)} required />
-                        </Form.Group>
-                        <Form.Group controlId="formGender" className="mb-3">
-                            <Form.Label>Geslacht</Form.Label>
-                            <Form.Control type="text" value={gender} onChange={(e) => setGender(e.target.value)} required />
-                        </Form.Group>
-                        <Form.Group controlId="formBirthDate" className="mb-3">
-                            <Form.Label>Geboortedatum</Form.Label>
-                            <Form.Control type="date" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} required />
-                        </Form.Group>
-                        <Form.Group controlId="formPhoneNumber" className="mb-3">
-                            <Form.Label>Telefoonnummer</Form.Label>
-                            <Form.Control type="tel" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
-                        </Form.Group>
-                        <Form.Group controlId="formContactName" className="mb-3">
-                            <Form.Label>Contactpersoon Naam</Form.Label>
-                            <Form.Control type="text" value={contactName} onChange={(e) => setContactName(e.target.value)} />
-                        </Form.Group>
-                        <Form.Group controlId="formContactEmail" className="mb-3">
-                            <Form.Label>Contactpersoon E-mailadres</Form.Label>
-                            <Form.Control type="email" value={contactEmail} onChange={(e) => setContactEmail(e.target.value)} />
-                        </Form.Group>
-                        <Form.Group controlId="formContactPhone" className="mb-3">
-                            <Form.Label>Contactpersoon Telefoonnummer</Form.Label>
-                            <Form.Control type="tel" value={contactPhone} onChange={(e) => setContactPhone(e.target.value)} />
-                        </Form.Group>
-                    </>
+                    <div className="formdiv patient-register-form">
+                        <div>
+                            <label>Geslacht</label>
+                            <input type="text" id="gender" name="gender" className='login_input' value={gender} onChange={(e) => setGender(e.target.value)} required />
+                        </div>
+                        <div>
+                            <label>Geboortedatum</label>
+                            <input type="date" id="birthday" name="birthday" className='login_input' value={birthDate} onChange={(e) => setBirthDate(e.target.value)} required />
+                        </div>
+                        <div>
+                            <label>Telefoonnummer</label>
+                            <input type="tel" id="phoneNumber" name="phoneNumber" className='login_input' value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
+                        </div>
+                        <div>
+                            <label>Contactpersoon Naam</label>
+                            <input type="text" id="contactfirstName" name="contactfirstName" className='login_input' value={contact_name} onChange={(e) => setContactName(e.target.value)}  />
+                        </div>
+                        <div>
+                            <label>Contactpersoon Achternaam</label>
+                            <input type="text" id="contactlastName" name="contactlastName" className='login_input' value={contact_lastname} onChange={(e) => setContactLastName(e.target.value)}  />
+                        </div>
+                        <div>
+                            <label>Contactpersoon E-mailadres</label>
+                            <input type="email" id="contactemail" name="contactemail" className='login_input' value={contact_email} onChange={(e) => setContactEmail(e.target.value)}  />
+                        </div>
+                        <div>
+                            <label>Contactpersoon Telefoonnummer</label>
+                            <input type="tel" id="contactphoneNumber" name="contactphoneNumber" className='login_input' value={contact_phone} onChange={(e) => setContactPhone(e.target.value)}  />
+                        </div>
+                    </div>
                 );
             case 'Admin':
-                return null; // No additional fields for Admin
+                return (
+                    <div>
+                        <div>
+                            
+                        </div>
+                    </div>
+                );
             case 'Researcher':
-                return null; // No additional fields for Researcher
+                return (
+                    <div>
+                        <div>
+                            
+                        </div>
+                    </div>
+                );
             default:
                 return null;
         }
     };
 
     return (
-        <>
-        <Navbar />
-        <Container className="d-flex flex-column align-items-center formwidth container">
-            <h1 className="centered_title"><i className="bi bi-person-plus-fill"></i> Account aanmaken</h1>
-            <div className="login_style p-4 rounded shadow" style={{ maxHeight: '70vh', overflowY: 'auto' }}>
-                <Form onSubmit={register}>
-                    <Form.Group controlId="formAccountType" className="mb-3">
-                        <Form.Label>Accounttype</Form.Label>
-                        <Form.Control as="select" value={accountType} onChange={changeAccount} required>
+    <div> 
+        <h1 className="centered-title"><i className="bi bi-person-plus-fill"></i> Account aanmaken</h1>
+        <div className='formdiv'>
+          <form onSubmit={register}>
+            <div className='register_style'>
+                <div className='register_form'>
+                    <div className='register_left'>
+                        <div style={{marginBottom: '2r0px'}}>
+                        <label>Accounttype</label>
+                        <select value={accountType} onChange={changeAccount} required>
                             <option value="" disabled>Selecteer een accounttype</option>
                             <option value="Doctor">Dokter</option>
                             <option value="Patient">Patiënt</option>
                             <option value="Admin">Beheerder</option>
                             <option value="Researcher">Onderzoeker</option>
-                        </Form.Control>
-                    </Form.Group>
-                    <Form.Group controlId="formFirstName" className="mb-3">
-                        <Form.Label>Voornaam</Form.Label>
-                        <Form.Control type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
-                    </Form.Group>
-                    <Form.Group controlId="formLastName" className="mb-3">
-                        <Form.Label>Achternaam</Form.Label>
-                        <Form.Control type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} required />
-                    </Form.Group>
-                    <Form.Group controlId="formEmail" className="mb-3">
-                        <Form.Label>E-mailadres</Form.Label>
-                        <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                    </Form.Group>
-                    <Form.Group controlId="formPassword" className="mb-3">
-                        <Form.Label>Wachtwoord</Form.Label>
-                        <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                    </Form.Group>
-                    <Form.Group controlId="formPhoto" className="mb-3">
-                        <Form.Label>Profielfoto</Form.Label>
-                        <Form.Control type="file" accept=".jpg,.jpeg,.png" onChange={(e) => setPhoto(e.target.files[0])} required />
-                    </Form.Group>
-                    {accountType && renderForm()}
-                    <Button variant="primary" type="submit" className="login_button w-100">
-                        <i className="bi bi-person-plus-fill"></i> Registreren
-                    </Button>
-                    {message && <Alert variant="danger" className="mt-3">{message}</Alert>}
-                </Form> <br />
-                <Button variant="primary" onClick={navigateToLogin} className="login_button w-100">Terug</Button>
+                        </select>
+                        </div>
+                        <div>
+                            <label>Voornaam</label>
+                            <input type="text" id="firstName" name="firstName" className='login_input' value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
+                        </div>
+                        <div>
+                            <label>Achternaam</label>
+                            <input type="text" id="lastName" name="lastName" className='login_input' value={lastName} onChange={(e) => setLastName(e.target.value)} required />
+                        </div>
+                        <div>
+                            <label>E-mailadres</label>
+                            <input type="email" id="email" name="email" className='login_input' value={email} onChange={(e) => setEmail(e.target.value)} required />
+                        </div>
+                        <div>
+                            <label>Wachtwoord</label>
+                            <input type="password" id="password" name="password" className='login_input' value={password} onChange={(e) => setPassword(e.target.value)} required />
+                        </div>
+                        <div>
+                            <label>Profielfoto</label>
+                            <input type="file" accept=".jpg,.jpeg,.png" id="photo" name="photo" className='login_input' onChange={(e) => setPhoto(e.target.files[0])}  />
+                        </div>
+                    </div>
+                    <div className='register_right'>
+                        {accountType && renderForm()}
+                    </div>
+                </div>
+                <button type="submit" className='login_button'><i className="bi bi-person-plus-fill"></i> Registreren</button>
             </div>
-        </Container>
-        </>
-    );
+          </form>
+          
+          {message && <p>{message}</p>}
+        </div>
+        
+    </div>    
+      );
 }
 
 export default Register;
