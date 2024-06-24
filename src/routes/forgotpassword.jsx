@@ -1,4 +1,5 @@
-import '../../styling/Login.css';
+import '../styling/Main.css';
+import '../styling/Login.css';
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
