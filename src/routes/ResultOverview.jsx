@@ -9,6 +9,7 @@ function ResultOverview() {
   const { patientId } = useParams();
   const imageSrc = '../src/assets/kid_1.png';
   const [data, setData] = useState([]);
+  const [sortConfig, setSortConfig] = useState({ key: '', direction: '' });
 
   useEffect(() => {
     const fetchData = async (patientId) => {
@@ -22,6 +23,30 @@ function ResultOverview() {
 
     fetchData(patientId);
   }, [patientId]);
+
+  const sortedData = React.useMemo(() => {
+    let sortableData = [...data];
+    if (sortConfig.key) {
+      sortableData.sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? -1 : 1;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+    return sortableData;
+  }, [data, sortConfig]);
+
+  const requestSort = (key) => {
+    let direction = 'ascending';
+    if (sortConfig.key === key && sortConfig.direction === 'ascending') {
+      direction = 'descending';
+    }
+    setSortConfig({ key, direction });
+  };
 
   const DataRow = ({ Type, Date, Id }) => {
     const navigate = useNavigate();
@@ -54,7 +79,6 @@ function ResultOverview() {
       }
     };
 
-    // Format the date to display only the date part
     const formattedDate = new window.Date(Date).toLocaleDateString('en-GB');
 
     return (
@@ -77,8 +101,12 @@ function ResultOverview() {
       <table className='table_2'>
         <thead>
           <tr>
-            <th className="th-header-left-result"><div className="header-rounded-left-result header-item">Type</div></th>
-            <th className="th-header-right-result"><div className="header-rounded-right-result header-item">Date</div></th>
+            <th className="th-header-left-result" onClick={() => requestSort('Type')}>
+              <div className="header-rounded-left-result header-item">Type</div>
+            </th>
+            <th className="th-header-right-result" onClick={() => requestSort('Date')}>
+              <div className="header-rounded-right-result header-item">Date</div>
+            </th>
             <th className="header-empty"></th>
           </tr>
         </thead>
@@ -95,7 +123,7 @@ function ResultOverview() {
       <Navbar />
       <TopPage headerName="Resultaten" patientId={patientId} imageSrc={imageSrc} />
       <div className="content">
-        <DataTable data={data} />
+        <DataTable data={sortedData} />
       </div>
     </>
   );
