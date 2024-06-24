@@ -8,9 +8,7 @@ function Register() {
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [employeeNumber, setEmployeeNumber] = useState('');
     const [specialization, setSpecialization] = useState('');
-    const [patientNumber, setPatientNumber] = useState('');
     const [gender, setGender] = useState('');
     const [birthDate, setBirthDate] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -18,6 +16,8 @@ function Register() {
     const [contact_email, setContactEmail] = useState('');
     const [contact_phone, setContactPhone] = useState('');
     const [contact_name, setContactName] = useState('');
+    const [contact_lastname, setContactLastName] = useState('');
+
 
 
     const [message, setMessage] = useState(''); 
@@ -38,16 +38,17 @@ function Register() {
         formData.append('firstName', firstName);
         formData.append('lastName', lastName);
         formData.append('accountType', accountType);
-        formData.append('employeeNumber', employeeNumber);
         formData.append('specialization', specialization);
-        formData.append('patientNumber', patientNumber);
         formData.append('gender', gender);
         formData.append('birthDate',birthDate);
         formData.append('phoneNumber', phoneNumber);
-        formData.append('photo', photo);
+        if (photo) {
+            formData.append('photo', photo);
+        }
         formData.append('contact_email', contact_email);
         formData.append('contact_phone', contact_phone);
         formData.append('contact_name', contact_name);
+        formData.append('contact_lastname', contact_lastname);
 
 
         try {
@@ -74,9 +75,7 @@ function Register() {
     };
     const changeAccount = (e) => {
         setAccountType(e.target.value);
-        setEmployeeNumber('');
         setSpecialization('');
-        setPatientNumber('');
         setGender('');
         setBirthDate('');
         setPhoneNumber('');
@@ -84,6 +83,7 @@ function Register() {
         setContactEmail('');
         setContactName('');
         setContactPhone('');
+        setContactLastName('');
     };
 
 
@@ -97,10 +97,6 @@ function Register() {
                 return (
                 <div className="container doctor-register-form">    
                     <div >
-                        <div>
-                            <label>Personeelsnummer</label>
-                            <input type="number" id="employeeNumber" name="employeeNumber" className='login_input' value={employeeNumber} onChange={(e) => setEmployeeNumber(e.target.value)} required />
-                        </div>
                         <div>
                             <label>Specialisatie</label>
                             <input type="text" id="specialization" name="specialization" className='login_input' value={specialization} onChange={(e) => setSpecialization(e.target.value)} required />
@@ -116,10 +112,6 @@ function Register() {
                 return (
                     <div className="formdiv patient-register-form">
                         <div>
-                            <label>Patiëntnummer</label>
-                            <input type="number" id="patientNumber" name="patientNumber"className='login_input' value={patientNumber} onChange={(e) => setPatientNumber(e.target.value)} required />
-                        </div>
-                        <div>
                             <label>Geslacht</label>
                             <input type="text" id="gender" name="gender" className='login_input' value={gender} onChange={(e) => setGender(e.target.value)} required />
                         </div>
@@ -134,6 +126,10 @@ function Register() {
                         <div>
                             <label>Contactpersoon Naam</label>
                             <input type="text" id="contactfirstName" name="contactfirstName" className='login_input' value={contact_name} onChange={(e) => setContactName(e.target.value)}  />
+                        </div>
+                        <div>
+                            <label>Contactpersoon Achternaam</label>
+                            <input type="text" id="contactlastName" name="contactlastName" className='login_input' value={contact_lastname} onChange={(e) => setContactLastName(e.target.value)}  />
                         </div>
                         <div>
                             <label>Contactpersoon E-mailadres</label>
@@ -174,7 +170,7 @@ function Register() {
             <div className='register_style'>
                 <div className='register_form'>
                     <div className='register_left'>
-                        <div style={{marginBottom: '20px'}}>
+                        <div style={{marginBottom: '2r0px'}}>
                         <label>Accounttype</label>
                         <select value={accountType} onChange={changeAccount} required>
                             <option value="" disabled>Selecteer een accounttype</option>
@@ -202,7 +198,7 @@ function Register() {
                         </div>
                         <div>
                             <label>Profielfoto</label>
-                            <input type="file" accept=".jpg,.jpeg,.png" id="photo" name="photo" className='login_input' onChange={(e) => setPhoto(e.target.files[0])} required />
+                            <input type="file" accept=".jpg,.jpeg,.png" id="photo" name="photo" className='login_input' onChange={(e) => setPhoto(e.target.files[0])}  />
                         </div>
                     </div>
                     <div className='register_right'>
