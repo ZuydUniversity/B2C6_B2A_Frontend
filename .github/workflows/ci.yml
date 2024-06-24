@@ -43,7 +43,7 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=accept-new -i ./private_key ${{ secrets.AZURE_USER_ID }}@${{ secrets.AZURE_VM_IP_FRONTEND }} "echo SSH connection successful"
 
-      - name: Run application on VM
+    - name: Run application on VM
       run: |
         ssh -o StrictHostKeyChecking=accept-new -i ./private_key ${{ secrets.AZURE_USER_ID }}@${{ secrets.AZURE_VM_IP_FRONTEND }} << 'EOF'
           # Ensure the app directory exists
