@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import '../App.css';
 import Navbar from '../components/Navbar';
 import { useNavigate, useParams } from 'react-router-dom';
 import TopPage from '../components/TopPage';
@@ -82,47 +81,38 @@ function ResultOverview() {
     const formattedDate = new window.Date(Date).toLocaleDateString('en-GB');
 
     return (
-      <div className="data-row-container">
-        <table className='table_2'>
-          <tbody>
-            <tr onClick={handleClick}>
-              <td className="text-cell"><div className="rounded-left">{Type}</div></td>
-              <td className="text-cell"><div className="rounded-right">{formattedDate}</div></td>
-            </tr>
-          </tbody>
-        </table>
-        <i className="bi bi-filetype-pdf ResultIcon" onClick={handlePdfClick}></i>
-      </div>
+      <tr onClick={handleClick} style={{ cursor: 'pointer' }}>
+        <td>{Type}</td>
+        <td>{formattedDate}</td>
+        <td>
+          <i className="bi bi-filetype-pdf" onClick={handlePdfClick}></i>
+        </td>
+      </tr>
     );
   };
 
   const DataTable = ({ data }) => (
-    <>
-      <table className='table_2'>
+    <div className="table-responsive">
+      <table className="table table-hover">
         <thead>
           <tr>
-            <th className="th-header-left-result" onClick={() => requestSort('Type')}>
-              <div className="header-rounded-left-result header-item">Type</div>
-            </th>
-            <th className="th-header-right-result" onClick={() => requestSort('Date')}>
-              <div className="header-rounded-right-result header-item">Date</div>
-            </th>
-            <th className="header-empty"></th>
+            <th onClick={() => requestSort('Type')}>Type</th>
+            <th onClick={() => requestSort('Date')}>Date</th>
+            <th>Download</th>
           </tr>
         </thead>
+        <tbody>
+          {data.map((row, index) => <DataRow key={index} {...row} />)}
+        </tbody>
       </table>
-
-      <div className="scrollable-table">
-        {data.map((row, index) => <DataRow key={index} {...row} />)}
-      </div>
-    </>
+    </div>
   );
 
   return (
     <>
       <Navbar />
-      <TopPage headerName="Resultaten" patientId={patientId} imageSrc={imageSrc} />
-      <div className="content">
+      <TopPage headerName="Patient" patientId={patientId} imageSrc={imageSrc} />
+      <div className="container mt-4">
         <DataTable data={sortedData} />
       </div>
     </>
