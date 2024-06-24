@@ -30,7 +30,7 @@ const router = createBrowserRouter([
     { path: "/patientoverview", element: <PatientOverview /> },
     { path: "/patientview/:patientId", element: <PatientView /> },
     { path: "/resultoverview/:patientId", element: <ResultOverview /> },
-    { path: "/myometriepage/:patientId", element: <MyometriePage /> },
+    { path: "/myometriepage/:patientId/:resultId", element: <MyometriePage /> },
     { path: "/essaypage/:patientId", element: <EssayPage /> },
     { path: "/radiologypage/:patientId", element: <RadiologyPage /> },
     { path: "/patientsettingspage/:patientId", element: <PatientSettingsPage /> },

@@ -17,8 +17,10 @@ const TopPage = ({ headerName, imageSrc, patientId }) => {
                 console.error(`Failed to fetch patient: ${error}`);
             }
         };
-
-        fetchPatientName(patientId);
+    
+        if (patientId) { // Check if patientId is provided before making the API call because for example patientoverview doesnt use a patientId but still made a call.
+            fetchPatientName(patientId);
+        }
     }, [patientId]);
 
     return (
