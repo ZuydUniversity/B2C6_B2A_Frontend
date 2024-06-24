@@ -661,15 +661,15 @@
       background-color: lightsteelblue;
   }
   
-  /* Center the calendar grid on the screen */
+  
   .calendar-grid-container {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: calc(100vh + 400px); /* Full viewport height minus navbar */
-      width: 130%; /* Set the width to 75% of the screen */
-      margin-left: -30%; /* Center the grid within the left 75% of the screen */
+      height: calc(100vh + 400px); 
+      width: 130%; 
+      margin-left: -30%; 
   }
   
   .button-container {
@@ -705,10 +705,10 @@
   .calendar-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      grid-template-rows: repeat(6, 200px); /* Adjust row height here */
+      grid-template-rows: repeat(6, 200px); 
       gap: 5px;
-      width: 100%; /* Set width to 100% to match parent container */
-      max-width: 1400px; /* Limit max width */
+      width: 100%; 
+      max-width: 1400px; 
   }
   
   .grid-item {
@@ -727,8 +727,8 @@
       display: grid;
       grid-template-columns: repeat(7, 1fr);
       gap: 10px;
-      width: 100%; /* Set width to 100% to match parent container */
-      max-width: 1400px; /* Limit max width */
+      width: 100%; 
+      max-width: 1400px; 
       margin-bottom: 10px;
   }
   
@@ -738,24 +738,24 @@
       align-items: center;
       font-weight: bold;
       font-size: 1.2em;
-      color: black; /* Set the text color to black */
+      color: black; 
   }
   
   
   
   .rounded-square {
-      position: fixed; /* Use absolute positioning */
-      top: 50%; /* Position it vertically at 50% */
-      right: 7%; /* Position it 5% from the right edge */
-      transform: translate(50%, -50%); /* Adjust to center it properly */
-      max-width: 300px; /* Set the maximum width */
-      width: auto; /* Allow the width to adjust dynamically */
-      height: auto; /* Allow the height to adjust dynamically */
-      max-height: 80%; /* Set the maximum height */
+      position: fixed; 
+      top: 50%; 
+      right: 7%; 
+      transform: translate(50%, -50%); 
+      max-width: 300px; 
+      width: auto; 
+      height: auto; 
+      max-height: 80%; 
       background-color: rgb(50, 107, 211);
       border-radius: 20px;
       z-index: 1000;
-      overflow: hidden; /* Prevent content overflow */
+      overflow: hidden; 
   }
   
   .month-year-container {
@@ -776,3 +776,12 @@
       color: black;
       font-size: 1.2em;
   }
+
+  .week-view-item {
+    height: 1000px; 
+  }  
+
+  .day-view-item {
+    height: 1000px; 
+    width: 800px;
+  }  
