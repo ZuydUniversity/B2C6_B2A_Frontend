@@ -48,7 +48,7 @@ jobs:
         ssh -o StrictHostKeyChecking=accept-new -i ./private_key ${{ secrets.AZURE_USER_ID }}@${{ secrets.AZURE_VM_IP_FRONTEND }} << 'EOF'
           # Ensure the app directory exists
           # mkdir -p /usr/src/app
-          cd /myfrontend/B2C6_B2A_Frontend
+          cd home/myfrontend/B2C6_B2A_Frontend
           
           # Clone the repository
           git clone https://github.com/ZuydUniversity/B2C6_B2A_Frontend.git .
