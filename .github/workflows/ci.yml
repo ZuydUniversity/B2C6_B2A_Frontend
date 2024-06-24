@@ -29,7 +29,7 @@ jobs:
       run: npm run build
 
   deploy:
-    needs: build project
+    needs: Build project
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
