@@ -33,7 +33,7 @@ const router = createBrowserRouter([
     { path: "/resultoverview/:patientId", element: <ResultOverview /> },
     { path: "/myometriepage/:patientId/:resultId", element: <MyometriePage /> },
     { path: "/essaypage/:patientId", element: <EssayPage /> },
-    { path: "/radiologypage/:patientId", element: <RadiologyPage /> },
+    { path: "/radiologypage/:patientId`/:resultId", element: <RadiologyPage /> },
     { path: "/patientsettingspage/:patientId", element: <PatientSettingsPage /> },
     { path: "/patientlist", element: <PatientList /> },
     { path: "/kalender", element: <Kalender /> },
