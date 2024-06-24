@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 import './Login/App.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Navbar from './components/Navbar';
+import Cookies from 'js-cookie';
 
 const App = () => {
+
+    useEffect(() => {
+        Cookies.remove('user_id');
+        Cookies.remove('role');
+    }, []);
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loginError, setLoginError] = useState(null);
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -17,7 +27,9 @@ const App = () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ email, password })
+                body: JSON.stringify({ email, password }),
+                credentials: 'include'
+
             });
 
             if (!response.ok) { 
@@ -26,9 +38,30 @@ const App = () => {
                 }
                 throw new Error('Inloggen mislukt, probeer het opnieuw');
             }
+            
+            const data = await response.json();
+            
 
             if (response.ok) { // code : 200-299
-                setLoginError('Inloggen successvol')
+                setLoginError('Inloggen successvol');   
+                Cookies.set('user_id', data.user_id, { expires: 1/24 });
+                Cookies.set('role', data.role, { expires: 1/24 });
+        
+                if(data.role == 1){ 
+                    navigate('/docmenu');               
+                }
+                else if(data.role == 2){ 
+                    navigate('/patmenu');
+                }
+                else if(data.role == 3){ 
+                    navigate('/adminmenu');               
+                }
+                else if(data.role == 4){ 
+                    navigate('/resmenu');
+                }
+                else{
+                    setLoginError("Gebruiker heeft geen rol, neem contact op met admin")
+                }
             }
 
         } catch (error) {

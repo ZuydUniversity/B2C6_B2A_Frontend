@@ -13,6 +13,7 @@
       color: white;
       margin:0;
       padding:0;
+      width:100%;
   }
   
   .content {
@@ -21,6 +22,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      max-height: 76vh;
+      overflow-y: auto; 
   }
   
   .app {
@@ -137,7 +140,31 @@
   
   .table_2 {
       width: 400px;
+      table-layout: fixed; /* Ensures the table layout is fixed */
+      flex-grow: 1;
   }
+
+    /* Icon styling */
+    .ResultIcon, .EditIcon {
+        cursor: pointer;
+        font-size: 2rem; /* Increase the font size to make the icons bigger */
+    }
+
+    .ResultIcon{
+        margin-left: 70px; /* Adjust as needed for spacing */
+    }
+
+    .ResultIcon:hover {
+        color: lightsteelblue; /* Change the color of the icons on hover */
+    }
+    
+    /* Row container styling */
+    .data-row-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between; /* Ensure spacing between table and icons */
+        margin-bottom: 10px;
+    }
   
   .myometrietable td {
       font-size:18px;
@@ -259,7 +286,9 @@
   
   .header-item,
   .header-rounded-left,
-  .header-rounded-right {
+  .header-rounded-right,
+  .header-rounded-left-result,
+  .header-rounded-right-result{
       padding: 10px 0px 10px 0px;
       background: var(--main-th-color);
       display: flex;
@@ -268,23 +297,46 @@
       width: 200px;
   }
   
-      .header-rounded-left {
+      .header-rounded-left,
+      .header-rounded-left-result {
           border-top-left-radius: 10px;
           border-bottom-left-radius: 10px;
       }
   
-      .header-rounded-right {
+      .header-rounded-right,
+      .header-rounded-right-result {
           border-top-right-radius: 10px;
           border-bottom-right-radius: 10px;
       }
+
+  .header-rounded-left-result,
+  .header-rounded-right-result {
+      width: 175px;
+  }
+
+  .header-empty {
+    width: 45px;
+    background-color: white;
+  }
   
   .th-header-left,
   .th-header-middle,
-  .th-header-right {
+  .th-header-right,
+  .th-header-left-result,
+  .th-header-right-result {
       background-color: var(--main-bg-color);
       padding: 0px;
       width: 200px;
   }
+
+  .th-header-left-result,
+  .th-header-right-result {
+    background-color: var(--main-bg-color);
+    padding: 0px; /* Remove padding */
+    width: 150px;
+    margin: 0; /* Remove margin */
+  }
+
   
   tr:hover {
       background-color: lightgray; /* Change this to the desired hover color */
@@ -296,7 +348,17 @@
       tr:hover .rounded-right {
           background-color: var(--main-hover-color);
       }
-  
+
+  .edit-scores-btn {
+        padding: 5px 10px;
+        font-size: 14px;
+        float: right;
+    }
+    
+    .h2-myometrie {
+        text-align: center;
+        width: 690px;
+    }
   
       /* ---------------------------- */
   
@@ -538,7 +600,6 @@
       margin: 20px 0; /* Space outside the card */
       margin-bottom:0;
       width: 80%; /* Adjust as needed */
-      max-width: 600px; /* Adjust as needed */
       margin-left: auto; /* Center the card */
       margin-right: auto; /* Center the card */
   }
@@ -550,13 +611,19 @@
       align-items: center;
       padding:0;
   }
+
+  .placeholder-card p{
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-top:10px;
+  }
   
   .placeholder-card:hover {
       background-color: #e0e0e0;
   }
   
   .placeholder-card i {
-      height: 200px;
+      height: auto;
       display: flex;
       justify-content: center; /* Centers content horizontally */
       align-items: center;
@@ -567,7 +634,13 @@
   }
   
   .patient-card {
-      margin-right: 20px;
+      margin-left: 0px;
+      margin-right:10px;
+  }
+
+  .contactperson-card {
+    margin-left: 10px;
+    margin-right:0px;
   }
   
   .patient-data-row {
@@ -585,10 +658,18 @@
   
   .card-buttons {
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom:10px;
   }
-  
+
+  .card-buttons p {
+    margin:0px;
+    font-weight: bold;
+    flex-grow: 1;
+    
+}
+
   .card-buttons button {
       margin-left: 10px;
   }
@@ -640,6 +721,46 @@
   .medication-card p {
       line-height: 0.3; /* Adjust as needed */
   }
+
+  .patient-data-row input{
+    width:60%;
+  }
+
+  .contactperson-card{
+    margin-right:0px;
+  }
+
+
+  .diagnosis-cards-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.diagnosis-card {
+    height: 230px;
+    flex: 0 0 calc(33.33% - 15px); /* 33.33% for 3 items per row, 10px for margin */
+    margin: 10px; /* Adjust as needed */
+    box-sizing: border-box; /* Include padding and border in the width */
+}
+
+/* Remove left margin from the first card in each row */
+.diagnosis-card:nth-of-type(3n+1) {
+    margin-left: 0;
+}
+
+/* Remove right margin from the third card in each row */
+.diagnosis-card:nth-of-type(3n) {
+    margin-right: 0;
+}
+
+.patient-card .patient-data-row p,
+.contactperson-card .patient-data-row p,
+.diagnosis-card p {
+    line-height: 0.3; /* Adjust as needed */
+}
+
   
   /*below is css for Kalender.jsx page*/
   
@@ -661,15 +782,15 @@
       background-color: lightsteelblue;
   }
   
-  /* Center the calendar grid on the screen */
+  
   .calendar-grid-container {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: calc(100vh + 400px); /* Full viewport height minus navbar */
-      width: 130%; /* Set the width to 75% of the screen */
-      margin-left: -30%; /* Center the grid within the left 75% of the screen */
+      height: calc(100vh + 400px); 
+      width: 130%; 
+      margin-left: -30%; 
   }
   
   .button-container {
@@ -705,10 +826,10 @@
   .calendar-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      grid-template-rows: repeat(6, 200px); /* Adjust row height here */
+      grid-template-rows: repeat(6, 200px); 
       gap: 5px;
-      width: 100%; /* Set width to 100% to match parent container */
-      max-width: 1400px; /* Limit max width */
+      width: 100%; 
+      max-width: 1400px; 
   }
   
   .grid-item {
@@ -727,8 +848,8 @@
       display: grid;
       grid-template-columns: repeat(7, 1fr);
       gap: 10px;
-      width: 100%; /* Set width to 100% to match parent container */
-      max-width: 1400px; /* Limit max width */
+      width: 100%; 
+      max-width: 1400px; 
       margin-bottom: 10px;
   }
   
@@ -738,24 +859,24 @@
       align-items: center;
       font-weight: bold;
       font-size: 1.2em;
-      color: black; /* Set the text color to black */
+      color: black; 
   }
   
   
   
   .rounded-square {
-      position: fixed; /* Use absolute positioning */
-      top: 50%; /* Position it vertically at 50% */
-      right: 7%; /* Position it 5% from the right edge */
-      transform: translate(50%, -50%); /* Adjust to center it properly */
-      max-width: 300px; /* Set the maximum width */
-      width: auto; /* Allow the width to adjust dynamically */
-      height: auto; /* Allow the height to adjust dynamically */
-      max-height: 80%; /* Set the maximum height */
+      position: fixed; 
+      top: 50%; 
+      right: 7%; 
+      transform: translate(50%, -50%); 
+      max-width: 300px; 
+      width: auto; 
+      height: auto; 
+      max-height: 80%; 
       background-color: rgb(50, 107, 211);
       border-radius: 20px;
       z-index: 1000;
-      overflow: hidden; /* Prevent content overflow */
+      overflow: hidden; 
   }
   
   .month-year-container {
@@ -776,3 +897,13 @@
       color: black;
       font-size: 1.2em;
   }
+
+  .week-view-item {
+    height: 1000px; 
+  }  
+
+  .day-view-item {
+    height: 1000px; 
+    width: 800px;
+  }  
+

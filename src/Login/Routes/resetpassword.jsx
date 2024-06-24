@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
-function ForgotPassword() {
-  const [email, setEmail] = useState('');
+function ResetPassword() {
+  const [new_password, setPassword] = useState('');
   const [message, setMessage] = useState(null);
+  const { token } = useParams();
+  const navigate = useNavigate();
 
+  const navigateToLogin = () => {
+    navigate('/'); 
+  };
 
 
 
@@ -13,16 +19,17 @@ function ForgotPassword() {
 
 
     try {
-        const response = await fetch('http://127.0.0.1:5000/send_password_reset_email', {
+        const response = await fetch(`http://127.0.0.1:5000/reset_password/${token}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
                      },
-            body: JSON.stringify({ email})
+            body: JSON.stringify({ password : new_password})
         });
 
         if (response.ok) { // code : 200-299
-            setMessage('Volg de instructies in de e-mail om je wachtwoord te resetten')
+            setMessage('Wachtwoord gereset')
+            navigateToLogin();
         }
 
 
@@ -44,10 +51,10 @@ function ForgotPassword() {
     <div className="login_style">
       <form onSubmit={handleSubmit} className="forget_form">
         <div>
-          <label>E-mailadres</label>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="login_input" />
+          <label>Nieuwe wachtwoord</label>
+          <input type="password" value={new_password} onChange={(e) => setPassword(e.target.value)} required className="login_input" />
         </div>
-        <button type="submit" className="login_button"><i class="bi bi-check2-square"></i> Verzend E-mail</button>
+        <button type="submit" className="login_button"><i class="bi bi-check2-square"></i> Opslaan</button>
       </form>
       {message && <p>{message}</p>} 
     </div>
@@ -56,4 +63,4 @@ function ForgotPassword() {
 
 }
 
-export default ForgotPassword;
+export default ResetPassword;
