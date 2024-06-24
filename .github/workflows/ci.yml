@@ -37,7 +37,7 @@ jobs:
     - name: Set up SSH key
       run: |
         echo "${{ secrets.AZURE_VM_SSH_KEY_FRONTEND }}" > private_key
-        chmod 600 private_key
+        
 
     - name: Copy files via SCP
       run: |
