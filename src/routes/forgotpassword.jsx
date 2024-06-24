@@ -1,84 +1,62 @@
 import '../styling/Main.css';
 import '../styling/Login.css';
 import React, { useState } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap-icons/font/bootstrap-icons.css';
-import Navbar from '../components/Navbar';
-import { Container, Form, Button, Alert } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+
 
 function ForgotPassword() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [password2, setPassword2] = useState('');
-    const [message, setMessage] = useState(null);
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState(null);
 
-    const navigate = useNavigate();
 
-    const navigateToLogin = () => {
-        navigate('/'); 
-    };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
 
-        if (password !== password2) {
-            setMessage('Wachtwoorden komen niet overeen, probeer het opnieuw');
-            return;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+
+
+    try {
+        const response = await fetch('http://127.0.0.1:5000/send_password_reset_email', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+                     },
+            body: JSON.stringify({ email})
+        });
+
+        if (response.ok) { // code : 200-299
+            setMessage('Volg de instructies in de e-mail om je wachtwoord te resetten')
         }
 
-        try {
-            const response = await fetch('http://127.0.0.1:5000/forgotpassword', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email, password })
-            });
 
-            if (response.ok) { 
-                setMessage('Wachtwoord is veranderd');
-            } else {
-                if(response.status === 500) {
-                    throw new Error('Server error, probeer het later opnieuw');
-                }
-                throw new Error('E-mailadres niet gevonden, probeeer het opnieuw');
-            }
-        } catch (error) {
-            console.error('Email not found:', error);
-            setMessage(error.message);
-        }
-    };
+        if (!response.ok) { 
+          if(response.status === 500) {
+              throw new Error('Server error, probeer het later opnieuw');
+          }
+          throw new Error('E-mailadres niet gevonden, probeeer het opnieuw');
+      }
+    } catch (error) {
+      console.error('Email not found:', error);
+      setMessage(error.message)
+    }
+  }
 
-    return (
-      <>
-        <Navbar />
-        <Container className="d-flex flex-column align-items-center formwidth container">
-            <h1 className="centered_title"><i className="bi bi-question-circle-fill"></i> Wachtwoord resetten</h1>
-            <div className="login_style p-4 rounded shadow">
-                <Form onSubmit={handleSubmit}>
-                    <Form.Group controlId="formEmail" className="mb-3">
-                        <Form.Label>E-mailadres</Form.Label>
-                        <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                    </Form.Group>
-                    <Form.Group controlId="formPassword" className="mb-3">
-                        <Form.Label>Nieuw wachtwoord</Form.Label>
-                        <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                    </Form.Group>
-                    <Form.Group controlId="formPassword2" className="mb-3">
-                        <Form.Label>Herhaal nieuw wachtwoord</Form.Label>
-                        <Form.Control type="password" value={password2} onChange={(e) => setPassword2(e.target.value)} required />
-                    </Form.Group>
-                    <Button variant="primary" type="submit" className="login_button w-100 btn btn-primary">
-                        <i className="bi bi-check2-square"></i> Opslaan
-                    </Button>
-                </Form> <br />
-                <Button variant="primary" onClick={navigateToLogin} className="login_button w-100">Terug</Button>
-                {message && <Alert variant="danger" className="mt-3">{message}</Alert>}
-            </div>
-        </Container>
-      </>
-    );
+  return (
+    <>
+    <h1 className="centered-title"><i className="bi bi-question-circle-fill"></i> Wachtwoord resetten</h1>
+    <div className="login_style">
+      <form onSubmit={handleSubmit} className="forget_form">
+        <div>
+          <label>E-mailadres</label>
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="login_input" />
+        </div>
+        <button type="submit" className="login_button"><i class="bi bi-check2-square"></i> Verzend E-mail</button>
+      </form>
+      {message && <p>{message}</p>} 
+    </div>
+    </>  
+  );
+
 }
 
 export default ForgotPassword;
