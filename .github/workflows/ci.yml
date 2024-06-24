@@ -39,10 +39,6 @@ jobs:
         echo "${{ secrets.AZURE_VM_SSH_KEY_FRONTEND }}" > private_key
         chmod 600 private_key
 
-    - name: Test SSH connection
-      run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.AZURE_USER_ID }}@${{ secrets.AZURE_VM_IP_FRONTEND }} "echo SSH connection successful"
-
     - name: Copy files via SCP
       run: |
         scp -o StrictHostKeyChecking=no -r ./dist/* ${{ secrets.AZURE_USER_ID }}@${{ secrets.AZURE_VM_IP_FRONTEND }}:/usr/src/app
