@@ -195,7 +195,7 @@ function Kalender() {
                 <div className="row">
                     <div className="col">
                         <div className="month-year-container">
-                            {renderMonth()} 
+                            {renderMonth()}
                             {renderYear()}
                         </div>
                     </div>

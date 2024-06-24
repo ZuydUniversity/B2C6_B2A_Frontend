@@ -153,7 +153,7 @@ const PatientSettingsPage = () => {
         <>
             <Navbar />
             <TopPage headerName="Patiënt" patientId={patientId} imageSrc={imageSrc} />
-            <div className="container mt-4">
+            <div className="container">
                 <div className="row">
                     <div className="col-lg-6 mb-4">
                         <div className="card">

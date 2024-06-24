@@ -59,7 +59,6 @@ const Navbar = () => {
                     <ul className="navbar-nav me-auto">
                         <Link to="/" type="button" className="btn btn-outline-primary"><i className="bi bi-house-fill"></i> Home</Link>
                         <Link to="/PatientOverview" type="button" className="btn btn-outline-primary"><i className="bi bi-people-fill"></i> Patiëntenoverzicht</Link>
-                        <Link to="/" type="button" className="btn btn-outline-primary"><i className="bi bi-file-check-fill"></i> Resultaten</Link>
                         <Link to="/Kalender" type="button" className="btn btn-outline-primary"><i className="bi bi-calendar-event-fill"></i> Kalender</Link>
                 </ul>
                 <ul className="navbar-nav ms-auto">

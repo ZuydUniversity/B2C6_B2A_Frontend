@@ -25,16 +25,10 @@ const TopPage = ({ headerName, imageSrc, patientId }) => {
         <div className="container formwidth">
             <div className="d-flex justify-content-between align-items-center mb-4">
                 <BackButton />
-                <h1>{headerName}</h1>
-                <div className="d-flex align-items-center">
-                    <img 
-                        src={imageSrc} 
-                        alt="Patient" 
-                        className="img-thumbnail me-3" 
-                        style={{ width: '100px', height: '100px' }} 
-                    />
                     <div>
-                        <h3>{patientName}</h3>
+                    <div className="d-flex align-items-center mt-4">
+                            <h3 className="me-3">{patientName}</h3>
+                            <img src={imageSrc} alt="Patient" className="img-thumbnail" style={{ width: '100px', height: '100px' }} />
                     </div>
                 </div>
             </div>

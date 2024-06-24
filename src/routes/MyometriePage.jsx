@@ -39,8 +39,8 @@ function MyometriePage() {
     return (
         <>
             <Navbar />
+            <TopPage headerName="Patiënt" patientId={patientId} imageSrc={imageSrc} />
             <div className="container">
-                <TopPage headerName="Patiënt" patientId={patientId} imageSrc={imageSrc} />
                 <div className="mt-4">
                     <h2>CMAS Scores</h2>
                     <div className="table-responsive">

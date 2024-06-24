@@ -17,13 +17,14 @@ function PatientView() {
     return (
         <>
             <Navbar />
+            <TopPage headerName="Patiënt" patientId={patientId} imageSrc={imageSrc} patientName={patientName} />
             <div className="container">
-                <TopPage headerName="Patiënt" patientId={patientId} imageSrc={imageSrc} patientName={patientName} />
                 <div className="row mt-4">
-                    <div className="col-md-4 mb-4">
-                        <div className="card h-100">
+                    <div className="col-md-4 mb-4 p-0">
+                        <div className="card h-100 m-3">
                             <div className="card-body">
-                                <h5 className="card-title">Resultaten</h5>
+                                <h5 className="card-title text-center">Resultaten</h5>
+                                <hr class="hr" />
                                 <div className="mb-3">
                                     {Array.from({ length: 3 }, (_, i) => (
                                         <div className="mb-2" key={i + 1}>
@@ -31,14 +32,15 @@ function PatientView() {
                                         </div>
                                     ))}
                                 </div>
-                                <Link to={`/resultoverview/${patientId}`} className="btn btn-outline-primary">Alle resultaten</Link>
+                                <Link to={`/resultoverview/${patientId}`} className="btn btn-outline-primary d-flex justify-content-center">Alle resultaten</Link>
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-4 mb-4">
-                        <div className="card h-100">
+                    <div className="col-md-4 mb-4 p-0">
+                        <div className="card h-100 m-3">
                             <div className="card-body">
-                                <h5 className="card-title">Verslagen</h5>
+                                <h5 className="card-title text-center">Verslagen</h5>
+                                <hr class="hr" />
                                 <div className="mb-3">
                                     {Array.from({ length: 3 }, (_, i) => (
                                         <div className="mb-2" key={i + 1}>
@@ -46,20 +48,21 @@ function PatientView() {
                                         </div>
                                     ))}
                                 </div>
-                                <Link to={`/essaypage/${patientId}`} className="btn btn-outline-primary">Alle verslagen</Link>
+                                <Link to={`/essaypage/${patientId}`} className="btn btn-outline-primary d-flex justify-content-center">Alle verslagen</Link>
                             </div>
                         </div>
                     </div>
-                    <div className="col-md-4 mb-4">
-                        <div className="card h-100">
+                    <div className="col-md-4 mb-4 p-0">
+                        <div className="card h-100 m-3">
                             <div className="card-body">
-                                <h5 className="card-title">Gegevens</h5>
+                                <h5 className="card-title text-center">Gegevens</h5>
+                                <hr class="hr" />
                                 <div className="mb-3">
                                     <p>Nummer: {phoneNumber}</p>
                                     <p>Mail: {mail}</p>
                                     <p>Diagnose: {diagnosis}</p>
                                 </div>
-                                <Link to={`/patientsettingspage/${patientId}`} className="btn btn-outline-primary">Alle gegevens</Link>
+                                <Link to={`/patientsettingspage/${patientId}`} className="btn btn-outline-primary d-flex justify-content-center">Alle gegevens</Link>
                             </div>
                         </div>
                     </div>

@@ -442,7 +442,8 @@
   
   .card {
       border-radius: 10px; /* Rounded corners */
-      padding: 20px; /* Space inside the card */
+      padding: 20px;
+      padding-bottom: 0px; /* Space inside the card */
       margin: 20px 0; /* Space outside the card */
       margin-bottom:0;
       width: 80%; /* Adjust as needed */
