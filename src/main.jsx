@@ -16,6 +16,7 @@ import RadiologyPage from './routes/RadiologyPage.jsx';
 import PatientSettingsPage from './routes/PatientSettingsPage.jsx';
 import PatientList from './components/PatientList.jsx';
 import Kalender from './routes/Kalender.jsx';
+import PatientDashboard from './routes/PatientDashboard.jsx';
 
 import DocMenuTest from './menuTests/doctormenu.jsx'
 import PatMenuTest from './menuTests/patientmenu.jsx'
@@ -39,13 +40,13 @@ const router = createBrowserRouter([
     { path: "/", element: <App /> },
     { path: "/register", element: <Register /> },
     { path: "/forgot-password", element: <ForgotPassword /> },
+    { path: "/patientdashboard", element: <PatientDashboard /> },    
+    { path: "/patientdashboard/:patientId", element: <PatientDashboard /> },    
     { path: "/docmenu", element: <DocMenuTest /> },
     { path: "/patmenu", element: <PatMenuTest /> },
     { path: "/resmenu", element: <ResMenuTest /> },
     { path: "/adminmenu", element: <AdminMenu />},
     { path: "/reset-password/:token", element: <ResetPassword /> }
-    
-
 ]);
 
 
