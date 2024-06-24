@@ -59,6 +59,14 @@ function Kalender() {
         setShowNewAppointment(true);
     };
 
+    const handleDaySwitch = (dayIndex) => {
+        setCurrentDayIndex(dayIndex);
+        setShowDayCalendar(true);
+        setShowWeekCalendar(false);
+        setShowNewAppointment(false);
+    };
+    
+
     const renderGridItems = () => {
         const startingDayIndex = 5;
         const items = [];
@@ -66,7 +74,7 @@ function Kalender() {
 
         const appointments = {
             //week 22
-            1: ["10:00u John Doe My", "14:00u Jane Smith Ra", "17:00u test Ra" ],
+            1: ["10:00u John Doe My", "14:00u Jane Smith Ra"],
             2: [],
             //week 23
             3: ["11:00u Carol White My", "15:00u Dave Black Ra"],
@@ -108,6 +116,7 @@ function Kalender() {
                 items.push(
                     <div key={day} className="grid-item week-view-item">
                         <div className="day-number">{day}</div>
+                        <button className="small-button" onClick={() => handleDaySwitch(day)}>v</button>
                         <div className="greybutton-container">
                             {appointments[day] && appointments[day].map((appointment, idx) => (
                                 <button key={idx} className="grey-button" onClick={() => handleAppointmentClick(day, appointment)}>{appointment}</button>
@@ -120,6 +129,7 @@ function Kalender() {
             items.push(
                 <div key={currentDayIndex} className="grid-item day-view-item">
                     <div className="day-number">{currentDayIndex}</div>
+                    <button className="small-button" onClick={() => handleDaySwitch(currentDayIndex)}>v</button>
                     <div className="greybutton-container">
                         {appointments[currentDayIndex] && appointments[currentDayIndex].map((appointment, idx) => (
                             <button key={idx} className="grey-button" onClick={() => handleAppointmentClick(currentDayIndex, appointment)}>{appointment}</button>
@@ -133,10 +143,11 @@ function Kalender() {
                     const index = row * 7 + col;
                     if (index >= startingDayIndex && dayNumber <= 30) {
                         const isNotSunday = (index + 1) % 7 !== 0;
-
+    
                         items.push(
                             <div key={index} className="grid-item">
                                 <div className="day-number">{dayNumber}</div>
+                                <button className="small-button" onClick={() => handleDaySwitch(currentDayIndex)}>v</button>
                                 {isNotSunday && (
                                     <div className="greybutton-container">
                                         {appointments[dayNumber] && appointments[dayNumber].map((appointment, idx) => (
@@ -153,7 +164,7 @@ function Kalender() {
                 }
             }
         }
-
+    
         return items;
     };
 
