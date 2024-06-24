@@ -337,6 +337,15 @@
     margin: 0; /* Remove margin */
   }
 
+  .th-header-left-result:hover,
+  .th-header-right-result:hover {
+    cursor: pointer;
+    background-color: #e0e0e0; /* Lighter background color for hover */
+    color: lightsteelblue; /* Change text color on hover */
+    font-weight: bold; /* Make the text bold on hover */
+    transition: background-color 0.3s, color 0.3s, font-weight 0.3s, border-bottom 0.3s; /* Smooth transition effect */
+  }
+
   
   tr:hover {
       background-color: lightgray; /* Change this to the desired hover color */
