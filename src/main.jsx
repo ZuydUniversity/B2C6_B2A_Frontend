@@ -6,7 +6,6 @@ import './index.css';
 import Register from './Login/Routes/register.jsx';
 import ForgotPassword from './Login/Routes/forgotpassword.jsx';
 import './Login/App.css';
-
 import PatientOverview from './routes/PatientOverview.jsx';
 import ResultOverview from './routes/ResultOverview.jsx';
 import PatientView from './routes/PatientView.jsx';
@@ -17,6 +16,8 @@ import PatientSettingsPage from './routes/PatientSettingsPage.jsx';
 import PatientList from './components/PatientList.jsx';
 import Kalender from './routes/Kalender.jsx';
 import AppointmentOverview from './routes/AppointmentOverview.jsx';
+import AppointmentView from './routes/AppointmentView.jsx';
+import AppointmentCreate from './routes/AppointmentCreate.jsx';
 
 
 
@@ -35,6 +36,8 @@ const router = createBrowserRouter([
     { path: "/register", element: <Register /> },
     { path: "/forgot-password", element: <ForgotPassword /> },
     { path: "/appointmentoverview", element: <AppointmentOverview /> },
+    { path: "/appointmentview/:appointmentId", element: <AppointmentView />},
+    { path: "/appointment/create", element: <AppointmentCreate />}
 ]);
 
 
