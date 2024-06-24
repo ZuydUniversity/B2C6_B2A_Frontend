@@ -50,15 +50,9 @@ function ResultOverview() {
   ];
 
 
-  const data = [
-    { type: 'Myometrie', date: '19/03/2024' },
-    { type: 'Radiologie', date: '01/07/2022' },
-    { type: 'Myometrie', date: '27/11/2020' },
-    { type: 'Myometrie', date: '09/10/2019' },
-  ];
+ 
 
   return (
-    <>
     <>
       <Navbar />
       <h1>Resultatenoverzicht</h1>
