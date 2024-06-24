@@ -25,16 +25,16 @@
 }
 
 .login_button {
-    background-color: var(--primary-color) !important;
+    background-color: white !important;
     border-color: var(--primary-color) !important;
-    color: white;
+    color: var(--primary-color) !important;
     transition: background-color 0.5s ease;
     display: block;
     width: 100%;
 }
 
 .login_button:hover {
-    transform: scale(1.02);
+    background-color: var(--primary-color) !important;
     color: white !important;
 }
 
