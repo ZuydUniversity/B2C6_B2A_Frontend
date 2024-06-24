@@ -27,7 +27,7 @@ const TopPage = ({ headerName, imageSrc, patientId }) => {
                 <BackButton />
                     <div>
                     <div className="d-flex align-items-center mt-4">
-                            <h3 className="me-3">{patientName}</h3>
+                            <h3 className="me-3 ms-3">{patientName}</h3>
                             <img src={imageSrc} alt="Patient" className="img-thumbnail" style={{ width: '100px', height: '100px' }} />
                     </div>
                 </div>
