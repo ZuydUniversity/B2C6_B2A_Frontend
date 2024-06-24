@@ -75,7 +75,31 @@
   
   .table_2 {
       width: 400px;
+      table-layout: fixed; /* Ensures the table layout is fixed */
+      flex-grow: 1;
   }
+
+    /* Icon styling */
+    .ResultIcon, .EditIcon {
+        cursor: pointer;
+        font-size: 2rem; /* Increase the font size to make the icons bigger */
+    }
+
+    .ResultIcon{
+        margin-left: 70px; /* Adjust as needed for spacing */
+    }
+
+    .ResultIcon:hover {
+        color: lightsteelblue; /* Change the color of the icons on hover */
+    }
+    
+    /* Row container styling */
+    .data-row-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between; /* Ensure spacing between table and icons */
+        margin-bottom: 10px;
+    }
   
   .myometrietable td {
       font-size:18px;
@@ -182,7 +206,9 @@
   
   .header-item,
   .header-rounded-left,
-  .header-rounded-right {
+  .header-rounded-right,
+  .header-rounded-left-result,
+  .header-rounded-right-result{
       padding: 10px 0px 10px 0px;
       background: var(--main-th-color);
       display: flex;
@@ -191,23 +217,55 @@
       width: 200px;
   }
   
-      .header-rounded-left {
+      .header-rounded-left,
+      .header-rounded-left-result {
           border-top-left-radius: 10px;
           border-bottom-left-radius: 10px;
       }
   
-      .header-rounded-right {
+      .header-rounded-right,
+      .header-rounded-right-result {
           border-top-right-radius: 10px;
           border-bottom-right-radius: 10px;
       }
+
+  .header-rounded-left-result,
+  .header-rounded-right-result {
+      width: 175px;
+  }
+
+  .header-empty {
+    width: 45px;
+    background-color: white;
+  }
   
   .th-header-left,
   .th-header-middle,
-  .th-header-right {
+  .th-header-right,
+  .th-header-left-result,
+  .th-header-right-result {
       background-color: var(--main-bg-color);
       padding: 0px;
       width: 200px;
   }
+
+  .th-header-left-result,
+  .th-header-right-result {
+    background-color: var(--main-bg-color);
+    padding: 0px; /* Remove padding */
+    width: 150px;
+    margin: 0; /* Remove margin */
+  }
+
+  .th-header-left-result:hover,
+  .th-header-right-result:hover {
+    cursor: pointer;
+    background-color: #e0e0e0; /* Lighter background color for hover */
+    color: lightsteelblue; /* Change text color on hover */
+    font-weight: bold; /* Make the text bold on hover */
+    transition: background-color 0.3s, color 0.3s, font-weight 0.3s, border-bottom 0.3s; /* Smooth transition effect */
+  }
+
   
   tr:hover {
       cursor: pointer;
@@ -218,7 +276,17 @@
       tr:hover .rounded-right {
           background-color: var(--main-hover-color);
       }
-  
+
+  .edit-scores-btn {
+        padding: 5px 10px;
+        font-size: 14px;
+        float: right;
+    }
+    
+    .h2-myometrie {
+        text-align: center;
+        width: 690px;
+    }
   
       /* ---------------------------- */
   
@@ -445,7 +513,6 @@
       margin: 20px 0; /* Space outside the card */
       margin-bottom:0;
       width: 80%; /* Adjust as needed */
-      max-width: 600px; /* Adjust as needed */
       margin-left: auto; /* Center the card */
       margin-right: auto; /* Center the card */
       background-color: var(--background-color);
@@ -463,13 +530,19 @@
       align-items: center;
       padding:0;
   }
+
+  .placeholder-card p{
+    font-size: 20px;
+    margin-bottom: 10px;
+    margin-top:10px;
+  }
   
   .placeholder-card:hover {
       background-color: #e0e0e0;
   }
   
   .placeholder-card i {
-      height: 200px;
+      height: auto;
       display: flex;
       justify-content: center; /* Centers content horizontally */
       align-items: center;
@@ -480,7 +553,13 @@
   }
   
   .patient-card {
-      margin-right: 20px;
+      margin-left: 0px;
+      margin-right:10px;
+  }
+
+  .contactperson-card {
+    margin-left: 10px;
+    margin-right:0px;
   }
   
   .patient-data-row {
@@ -498,10 +577,18 @@
   
   .card-buttons {
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom:10px;
   }
-  
+
+  .card-buttons p {
+    margin:0px;
+    font-weight: bold;
+    flex-grow: 1;
+    
+}
+
   .card-buttons button {
       margin-left: 10px;
   }

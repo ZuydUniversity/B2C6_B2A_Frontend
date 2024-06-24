@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import { useNavigate } from 'react-router-dom';
 import TopPage from '../components/TopPage';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 function ResultOverview() {
   const { patientId } = useParams();
   const imageSrc = '../src/assets/kid_1.png';
   const [data, setData] = useState([]);
+  const [sortConfig, setSortConfig] = useState({ key: '', direction: '' });
 
   useEffect(() => {
     const fetchData = async (patientId) => {
@@ -23,27 +23,75 @@ function ResultOverview() {
     fetchData(patientId);
   }, [patientId]);
 
-  const DataRow = ({ Type, Date }) => {
+  const sortedData = React.useMemo(() => {
+    let sortableData = [...data];
+    if (sortConfig.key) {
+      sortableData.sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? -1 : 1;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+    return sortableData;
+  }, [data, sortConfig]);
+
+  const requestSort = (key) => {
+    let direction = 'ascending';
+    if (sortConfig.key === key && sortConfig.direction === 'ascending') {
+      direction = 'descending';
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const DataRow = ({ Type, Date, Id }) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
       if (Type === 'Myometrie') {
-        navigate(`/myometriepage/${patientId}`);
+        navigate(`/myometriepage/${patientId}/${Id}`);
       } else if (Type === 'Radiologie') {
-        navigate(`/radiologypage/${patientId}`);
+        navigate(`/radiologypage/${patientId}/`);
       } else {
         window.alert(`Row clicked: ${Type}`);
       }
     };
 
-    // Format the date to display only the date part
+    const handlePdfClick = async (e) => {
+      e.stopPropagation(); // Prevent triggering the row click event
+      try {
+        const response = await axios.get(`http://localhost:5000/download_result_pdf/${patientId}/${Id}`, {
+          responseType: 'blob'
+        });
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `result_${Id}_data.pdf`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } catch (error) {
+        console.error('Error downloading PDF:', error);
+      }
+    };
+
     const formattedDate = new window.Date(Date).toLocaleDateString('en-GB');
 
     return (
-      <tr onClick={handleClick} style={{ cursor: 'pointer' }}>
-        <td>{Type}</td>
-        <td>{formattedDate}</td>
-      </tr>
+      <div className="data-row-container">
+        <table className='table_2'>
+          <tbody>
+            <tr onClick={handleClick} style={{ cursor: 'pointer' }}>
+              <td>{Type}</td>
+              <td>{formattedDate}</td>
+            </tr>
+          </tbody>
+        </table>
+        <i className="bi bi-filetype-pdf ResultIcon" onClick={handlePdfClick}></i>
+      </div>
     );
   };
 
@@ -52,8 +100,8 @@ function ResultOverview() {
       <table className="table table-hover">
         <thead>
           <tr>
-            <th>Type</th>
-            <th>Date</th>
+            <th onClick={() => requestSort('Type')}>Type</th>
+            <th onClick={() => requestSort('Date')}>Date</th>
           </tr>
         </thead>
         <tbody>
@@ -66,11 +114,9 @@ function ResultOverview() {
   return (
     <>
       <Navbar />
-      <TopPage headerName="Patiënt" patientId={patientId} imageSrc={imageSrc} />
-      <div className="container">
-        <div className="mt-4">
-          <DataTable data={data} />
-        </div>
+      <TopPage headerName="Patient" patientId={patientId} imageSrc={imageSrc} />
+      <div className="content">
+        <DataTable data={sortedData} />
       </div>
     </>
   );
