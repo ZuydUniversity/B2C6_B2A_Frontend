@@ -821,6 +821,18 @@
     background: var(--secundary-half-color);
   }
 
+  .appointment_table td:last-child,
+  .appointment_table th:last-child{
+    text-align: right;
+  }
+
+  .appointment_table button {
+    background-color: white;
+    color: black;
+    margin-right: 0.3em;
+  }
+
+  /* Smaller screensizes */
   @media (max-width: 650px) {
     .appointment_table th {
         display: none;
@@ -839,19 +851,11 @@
     }
 
     .appointment_table td:nth-of-type(1)::before {
-        content: "Patiënt: ";
+        content: "Description: ";
     }
 
     .appointment_table td:nth-of-type(2)::before {
-        content: "Dokter: ";
-    }
-
-    .appointment_table td:nth-of-type(3)::before {
-        content: "Datum & tijd: ";
-    }
-
-    .appointment_table td:nth-of-type(4)::before {
-        content: "Beschrijving: ";
+        content: "Datum & Tijd: ";
     }
 
     .appointment_table td:first-child {
@@ -860,5 +864,6 @@
 
     .appointment_table td:last-child {
         padding-top: 1rem;
+        text-align: left;
     }
   }
