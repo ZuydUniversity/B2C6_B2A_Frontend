@@ -45,10 +45,17 @@ jobs:
         ssh -o StrictHostKeyChecking=accept-new -i ./private_key ${{ secrets.AZURE_USER_ID }}@${{ secrets.AZURE_VM_IP_FRONTEND }} "echo SSH connection successful"
 
   
-    - name: Run application on VM
+      - name: Run application on VM
       run: |
         ssh -o StrictHostKeyChecking=accept-new -i ./private_key ${{ secrets.AZURE_USER_ID }}@${{ secrets.AZURE_VM_IP_FRONTEND }} << 'EOF'
+          # Ensure the app directory exists
+          mkdir -p /usr/src/app
           cd /usr/src/app
+          
+          # Clone the repository
+          git clone https://github.com/ZuydUniversity/B2C6_B2A_Frontend.git .
+          
+          # Install dependencies and start the application
           npm install
           npm start
         EOF
