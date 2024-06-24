@@ -38,10 +38,10 @@ function PatientOverview() {
             <table className="table table-hover">
                 <thead className="thead">
                     <tr>
-                        <th scope="col"></th>
-                        <th scope="col">Naam</th>
-                        <th scope="col">Geboortedatum</th>
-                        <th scope="col">Diagnosis</th>
+                        <th scope="col" className="h5 bold"></th>
+                        <th scope="col" className="h5 bold">Naam</th>
+                        <th scope="col" className="h5 bold">Geboortedatum</th>
+                        <th scope="col" className="h5 bold">Diagnosis</th>
                     </tr>
                 </thead>
                 <tbody>

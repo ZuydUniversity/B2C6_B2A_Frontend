@@ -201,6 +201,10 @@
     color: white !important;
 }
 
+.bold {
+    font-weight: bold !important;
+}
+
 /*FORM WIDTH*/
 .formwidth {
     width: 500px;

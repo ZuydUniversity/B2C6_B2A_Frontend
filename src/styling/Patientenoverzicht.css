@@ -3,7 +3,7 @@
   /* ---------------------------- */
 /* img-fluid for responsive images */
 .img-fluid {
-    max-width: 150px;
+    max-width: 100px;
     height: auto;
 }
 
@@ -49,7 +49,7 @@
 
 .text-left {
     text-align: left;
-    font-size: 25px;
+    font-size: 20px;
  }
 
 
@@ -437,8 +437,6 @@
       display: flex;
       justify-content: space-between;
   }
-  
-  
   
   .card {
       border-radius: 10px; /* Rounded corners */
