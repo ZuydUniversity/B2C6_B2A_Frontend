@@ -46,7 +46,7 @@ const App = () => {
             <Container className="d-flex flex-column align-items-center formwidth">
                 <h1 className="centered_title"><i className="bi bi-person-circle"></i> Inloggen</h1>
                 
-                <div className="login_style p-4 rounded shadow">
+                <div className="card card-width p-4">
                     <Form onSubmit={handleSubmit}>
                         <Form.Group controlId="formEmail" className="mb-3">
                             <Form.Label className='form-label'><i className="bi bi-envelope-at-fill"></i> E-mailadres</Form.Label>
@@ -72,7 +72,7 @@ const App = () => {
                     </Form>
                 </div>
 
-                <div className="login_style p-4 rounded shadow mt-3">
+                <div className="card card-width p-4">
                     <Form action="/register" method="GET">
                         <Button variant="secondary" type="submit" className='login_button w-100 mb-2'>
                             <i className="bi bi-person-plus-fill"></i> Account aanmaken

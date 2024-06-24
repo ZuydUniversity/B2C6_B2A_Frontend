@@ -81,17 +81,13 @@ function ResultOverview() {
     const formattedDate = new window.Date(Date).toLocaleDateString('en-GB');
 
     return (
-      <div className="data-row-container">
-        <table className='table_2'>
-          <tbody>
-            <tr onClick={handleClick} style={{ cursor: 'pointer' }}>
-              <td>{Type}</td>
-              <td>{formattedDate}</td>
-            </tr>
-          </tbody>
-        </table>
-        <i className="bi bi-filetype-pdf ResultIcon" onClick={handlePdfClick}></i>
-      </div>
+      <tr onClick={handleClick} style={{ cursor: 'pointer' }}>
+        <td>{Type}</td>
+        <td>{formattedDate}</td>
+        <td>
+          <i className="bi bi-filetype-pdf" onClick={handlePdfClick}></i>
+        </td>
+      </tr>
     );
   };
 
@@ -102,6 +98,7 @@ function ResultOverview() {
           <tr>
             <th onClick={() => requestSort('Type')}>Type</th>
             <th onClick={() => requestSort('Date')}>Date</th>
+            <th>Download</th>
           </tr>
         </thead>
         <tbody>
@@ -115,7 +112,7 @@ function ResultOverview() {
     <>
       <Navbar />
       <TopPage headerName="Patient" patientId={patientId} imageSrc={imageSrc} />
-      <div className="content">
+      <div className="container mt-4">
         <DataTable data={sortedData} />
       </div>
     </>

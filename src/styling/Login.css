@@ -49,3 +49,7 @@ body {
     justify-content: center;
     background-color: var(--background-color) !important;
 }
+
+.card-width {
+    width: 80% !important; 
+}

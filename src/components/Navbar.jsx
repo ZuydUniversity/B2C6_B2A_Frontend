@@ -64,7 +64,7 @@ const Navbar = () => {
                 <ul className="navbar-nav ms-auto">
                     <li className="nav-item">
                         <form className="form-inline d-flex">
-                            <input className="form-control mr-1" type="search" placeholder="Zoeken..." aria-label="Zoeken" />
+                            <input className="form-control input-border-navbar mr-1" type="search" placeholder="Zoeken..." aria-label="Zoeken" />
                             <button className="btn btn-outline-primary mr-0" type="submit"><i className="bi bi-search"></i></button>
                         </form>
                     </li>

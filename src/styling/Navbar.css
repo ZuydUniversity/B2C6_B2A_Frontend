@@ -79,12 +79,11 @@ nav.navbar {
     align-items: center; /* Zorgt ervoor dat de items verticaal gecentreerd zijn */
 }
 
-.form-control {
+.input-border-navbar {
     flex: 1; /* Zorgt ervoor dat het invoerveld de beschikbare ruimte inneemt */
-    margin-right: 10px; /* Ruimte tussen het invoerveld en de knop */
 }
 
-.form-control:focus {
+.input-border-navbar:focus {
     outline: none ;
     border: 2px solid var(--primary-color);
 }

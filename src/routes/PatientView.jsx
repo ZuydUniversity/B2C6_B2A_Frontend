@@ -80,7 +80,7 @@ function PatientView() {
             <div className="container">
                 <div className="row mt-4">
                     <div className="col-md-4 mb-4 p-0">
-                        <div className="card h-100 m-3">
+                        <div className="card patient-view-card h-100 m-3">
                             <div className="card-body">
                                 <h5 className="card-title text-center">Resultaten</h5>
                                 <hr class="hr" />
@@ -101,7 +101,7 @@ function PatientView() {
                         </div>
                     </div>
                     <div className="col-md-4 mb-4 p-0">
-                        <div className="card h-100 m-3">
+                        <div className="card patient-view-card h-100 m-3">
                             <div className="card-body">
                                 <h5 className="card-title text-center">Verslagen</h5>
                                 <hr class="hr" />
@@ -117,7 +117,7 @@ function PatientView() {
                         </div>
                     </div>
                     <div className="col-md-4 mb-4 p-0">
-                        <div className="card h-100 m-3">
+                        <div className="card patient-view-card h-100 m-3">
                             <div className="card-body">
                                 <h5 className="card-title text-center">Gegevens</h5>
                                 <hr class="hr" />

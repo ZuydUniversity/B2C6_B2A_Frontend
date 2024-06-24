@@ -507,17 +507,21 @@
   }
   
   .card {
-      border-radius: 10px; /* Rounded corners */
-      padding: 20px;
-      padding-bottom: 0px; /* Space inside the card */
-      margin: 20px 0; /* Space outside the card */
-      margin-bottom:0;
-      width: 80%; /* Adjust as needed */
-      margin-left: auto; /* Center the card */
-      margin-right: auto; /* Center the card */
-      background-color: var(--background-color);
-      box-shadow: 7px 7px 2px 0px rgba(0,0,0,0.1);
-  }
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px;
+    padding-bottom: 0px; /* Space inside the card */
+    margin: 20px 0; /* Space outside the card */
+    margin-bottom:0;
+    width: 100%; /* Adjust as needed */
+    margin-left: auto; /* Center the card */
+    margin-right: auto; /* Center the card */
+    background-color: var(--background-color);
+    box-shadow: 7px 7px 2px 0px rgba(0,0,0,0.1);
+}
+
+    .patient-view-card {
+        width: 90% !important; 
+    }
 
   .card-header {
       background-color: #fff;
@@ -641,4 +645,10 @@
       line-height: 0.3; /* Adjust as needed */
   }
 
+  .uniform-input {
+    width: 50% !important;
+  }
 
+  .add-button {
+    height: 183.6px !important;
+  }

@@ -621,294 +621,277 @@ const PatientSettingsPage = () => {
 
     return (
         <>
-            <Navbar />
-            <TopPage headerName="Patientgegevens" patientId={patientId} imageSrc={imageSrc} />
-            <div className="content">
-                <div className="patient-information">
-                    <div className="patient-card card">
-                        <div className="card-buttons">
-                            <p>Patientgegevens</p>
-                            {isEditing ? (
-                                <>
-                                    <div>
-                                        <button onClick={handleSaveClick}><i className="bi bi-check-circle"></i></button>
-                                        <button onClick={handleCancelClick}><i className="bi bi-x-circle"></i></button>
-                                    </div>
-                                </>
+          <Navbar />
+          <TopPage headerName="Patientgegevens" patientId={patientId} imageSrc={imageSrc} />
+          <div className="container">
+            <div className="row">
+              <div className="col-md-6">
+                <div className="card mb-3">
+                  <div className="card-header d-flex justify-content-between align-items-center">
+                    <p className="mb-0">Patientgegevens</p>
+                    {isEditing ? (
+                      <div>
+                        <button className="btn btn-outline-success btn-sm me-1" onClick={handleSaveClick}>
+                          <i className="bi bi-check-circle"></i>
+                        </button>
+                        <button className="btn btn-outline-danger btn-sm" onClick={handleCancelClick}>
+                          <i className="bi bi-x-circle"></i>
+                        </button>
+                      </div>
+                    ) : (
+                      <button className="btn btn-outline-primary btn-sm" onClick={handleEditClick}>
+                        <i className="bi bi-pencil-square"></i>
+                      </button>
+                    )}
+                  </div>
+                  <div className="card-body">
+                    {[
+                      { label: "Achternaam", value: lastName, editValue: editedLastName, onChange: setEditedLastName },
+                      { label: "Voornaam", value: firstName, editValue: editedFirstName, onChange: setEditedFirstName },
+                      { label: "Leeftijd", value: new Date().getFullYear() - new Date(birthdate).getFullYear() },
+                      { label: "Geslacht", value: gender, editValue: editedGender, onChange: setEditedGender },
+                      { label: "Diagnose(s)", value: Array.isArray(diagnosis) ? diagnosis.map(d => d.Diagnosis).join(', ') : '' },
+                      { label: "Geboortedatum", value: birthdate ? new Date(birthdate).toDateString() : '', editValue: editedBirthdate, onChange: setEditedBirthdate, isDate: true },
+                      { label: "Telefoonnummer", value: phone_number, editValue: editedPhoneNumber, onChange: setEditedPhoneNumber },
+                      { label: "Emailadres", value: email, editValue: editedEmail, onChange: setEditedEmail }
+                    ].map((field, index) => (
+                      <div key={index} className="mb-3 d-flex justify-content-between align-items-center">
+                        <p className="mb-0">{field.label}</p>
+                        {isEditing && field.editValue !== undefined ? (
+                          field.isDate ? (
+                            <input
+                              type="date"
+                              className="form-control uniform-input"
+                              value={field.editValue ? new Date(field.editValue).toISOString().split('T')[0] : ''}
+                              onChange={(e) => field.onChange(e.target.value)}
+                            />
+                          ) : (
+                            <input
+                              type="text"
+                              className="form-control uniform-input"
+                              value={field.editValue}
+                              onChange={(e) => field.onChange(e.target.value)}
+                            />
+                          )
+                        ) : (
+                          <p className="mb-0">{field.value}</p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="card mb-3">
+                  <div className="card-header d-flex justify-content-between align-items-center">
+                    <p className="mb-0">Contactpersoon</p>
+                    {isEditingContact ? (
+                      <div>
+                        <button className="btn btn-outline-success btn-sm me-1" onClick={handleSaveContactClick}>
+                          <i className="bi bi-check-circle"></i>
+                        </button>
+                        <button className="btn btn-outline-danger btn-sm" onClick={handleCancelContactClick}>
+                          <i className="bi bi-x-circle"></i>
+                        </button>
+                      </div>
+                    ) : (
+                      <button className="btn btn-outline-primary btn-sm" onClick={handleEditContactClick}>
+                        <i className="bi bi-pencil-square"></i>
+                      </button>
+                    )}
+                  </div>
+                  <div className="card-body">
+                    {[
+                      { label: "Naam", value: lastNameContact, editValue: editedLastNameContact, onChange: setEditedLastNameContact },
+                      { label: "Voornaam", value: firstNameContact, editValue: editedFirstNameContact, onChange: setEditedFirstNameContact },
+                      { label: "Email", value: emailContact, editValue: editedEmailContact, onChange: setEditedEmailContact },
+                      { label: "Telefoonnummer", value: phoneNumberContact, editValue: editedPhoneNumberContact, onChange: setEditedPhoneNumberContact }
+                    ].map((field, index) => (
+                      <div key={index} className="mb-3 d-flex justify-content-between align-items-center">
+                        <p className="mb-0">{field.label}</p>
+                        {isEditingContact && field.editValue !== undefined ? (
+                          <input
+                            type="text"
+                            className="form-control uniform-input"
+                            value={field.editValue}
+                            onChange={(e) => field.onChange(e.target.value)}
+                          />
+                        ) : (
+                          <p className="mb-0">{field.value}</p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+                <div className="col-md-6">
+                    <div className="card mb-3">
+                        <p className="mb-3 text-center">Nieuwe medicijn</p>
+                        <button className="add-button btn btn-outline-primary mb-3"  onClick={handleAddNewMedication}>
+                            <i className="bi bi-plus h1"></i>
+                        </button>
+                    </div>
+                </div>
+                {Array.isArray(medications) && medications.length > 0 && (
+                  medications.map((medication, index) => (
+                    <div className="col-md-6">
+                        <div key={index} className="card mb-3">
+                        <div className="card-header d-flex justify-content-between align-items-center">
+                            <p className="mb-0">Medicatie</p>
+                            <div>
+                            {medication.isEditing ? (
+                                <div>
+                                <button className="btn btn-outline-success btn-sm me-1" onClick={() => handleSaveMedicationClick(medication.Id)}>
+                                    <i className="bi bi-check-circle"></i>
+                                </button>
+                                <button className="btn btn-outline-danger btn-sm" onClick={() => handleCancelMedicationClick(medication.Id)}>
+                                    <i className="bi bi-x-circle"></i>
+                                </button>
+                                </div>
+                            ) : medication.isDeleting ? (
+                                <div>
+                                <button className="btn btn-outline-success btn-sm me-1" onClick={() => confirmDelete(medication.Id)}>
+                                    <i className="bi bi-check-circle"></i>
+                                </button>
+                                <button className="btn btn-outline-danger btn-sm" onClick={() => cancelDelete(medication.Id)}>
+                                    <i className="bi bi-x-circle"></i>
+                                </button>
+                                </div>
                             ) : (
-                                <button onClick={handleEditClick}><i className="bi bi-pencil-square"></i></button>
+                                <div>
+                                <button className="btn btn-outline-primary btn-sm me-1" onClick={() => handleEditMedicationClick(medication.Id)}>
+                                    <i className="bi bi-pencil-square"></i>
+                                </button>
+                                <button className="btn btn-outline-danger btn-sm" onClick={() => handleDeleteButtonClick(medication.Id)}>
+                                    <i className="bi bi-trash"></i>
+                                </button>
+                                </div>
                             )}
+                            </div>
                         </div>
-                        <div className="patient-data-row">
-                            <p>Achternaam</p>
-                            {isEditing ? (
-                                <input type="text" value={editedLastName} onChange={(e) => setEditedLastName(e.target.value)} />
-                            ) : (
-                                <p>{lastName}</p>
-                            )}
-                        </div>
-                        <div className="patient-data-row">
-                            <p>Voornaam</p>
-                            {isEditing ? (
-                                <input type="text" value={editedFirstName} onChange={(e) => setEditedFirstName(e.target.value)} />
-                            ) : (
-                                <p>{firstName}</p>
-                            )}
-                        </div>
-                        <div className="patient-data-row">
-                            <p>Leeftijd</p>
-                            <p>{new Date().getFullYear() - new Date(birthdate).getFullYear()}</p>
-                        </div>
-                        <div className="patient-data-row">
-                            <p>Geslacht</p>
-                            {isEditing ? (
-                                <input type="text" value={editedGender} onChange={(e) => setEditedGender(e.target.value)} />
-                            ) : (
-                                <p>{gender}</p>
-                            )}
-                        </div>
-                        <div className="patient-data-row">
-                            <p>Diagnose(s)</p>
-                            <p>{Array.isArray(diagnosis) ? diagnosis.map(d => d.Diagnosis).join(', ') : ''}</p>
-                        </div>
-                        <div className="patient-data-row">
-                            <p>Geboortedatum</p>
-                            {isEditing ? (
-                                <input
+                        <div className="card-body">
+                            {[
+                            { label: "Medicijn", value: medication.Name, editValue: medication.Name, onChange: (e) => handleInputChange(medication.Id, 'Name', e.target.value) },
+                            { label: "Gebruik", value: medication.Dose, editValue: medication.Dose, onChange: (e) => handleInputChange(medication.Id, 'Dose', e.target.value) },
+                            { label: "Frequentie", value: medication.Frequency, editValue: medication.Frequency, onChange: (e) => handleInputChange(medication.Id, 'Frequency', e.target.value) },
+                            { label: "Startdatum", value: medication.Start_date ? new Date(medication.Start_date).toDateString() : '', editValue: medication.Start_date, onChange: (e) => handleInputChange(medication.Id, 'Start_date', e.target.value), isDate: true }
+                            ].map((field, index) => (
+                            <div key={index} className="mb-3 d-flex justify-content-between align-items-center">
+                                <p className="mb-0">{field.label}</p>
+                                {medication.isEditing ? (
+                                field.isDate ? (
+                                    <input
                                     type="date"
-                                    value={editedBirthdate ? new Date(editedBirthdate).toISOString().split('T')[0] : ''}
-                                    onChange={(e) => setEditedBirthdate(e.target.value)}
-                                />
-                            ) : (
-                                <p>{birthdate ? new Date(birthdate).toDateString() : ''}</p>
-                            )}
+                                    className="form-control uniform-input"
+                                    value={field.editValue ? new Date(field.editValue).toISOString().split('T')[0] : ''}
+                                    onChange={field.onChange}
+                                    />
+                                ) : (
+                                    <input
+                                    type="text"
+                                    className="form-control uniform-input"
+                                    value={field.editValue}
+                                    onChange={field.onChange}
+                                    />
+                                )
+                                ) : (
+                                <p className="mb-0">{field.value}</p>
+                                )}
+                            </div>
+                            ))}
                         </div>
-                        <div className="patient-data-row">
-                            <p>Telefoonnummer</p>
-                            {isEditing ? (
-                                <input type="text" value={editedPhoneNumber} onChange={(e) => setEditedPhoneNumber(e.target.value)} />
-                            ) : (
-                                <p>{phone_number}</p>
-                            )}
-                        </div>
-                        <div className="patient-data-row">
-                            <p>Emailadres</p>
-                            {isEditing ? (
-                                <input type="text" value={editedEmail} onChange={(e) => setEditedEmail(e.target.value)} />
-                            ) : (
-                                <p>{email}</p>
-                            )}
                         </div>
                     </div>
-                    <div className="contactperson-card card">
-                        <div className="card-buttons">
-                            <p>Contactpersoon</p>
-                            {isEditingContact ? (
-                                <>
-                                    <div>
-                                        <button onClick={handleSaveContactClick}><i className="bi bi-check-circle"></i></button>
-                                        <button onClick={handleCancelContactClick}><i className="bi bi-x-circle"></i></button>
-                                    </div>
-                                </>
-                            ) : (
-                                <button onClick={handleEditContactClick}><i className="bi bi-pencil-square"></i></button>
-                            )}
-                        </div>
-                        <div className="patient-data-row">
-                            <p>Naam</p>
-                            {isEditingContact ? (
-                                <input
-                                    type="text"
-                                    value={editedLastNameContact}
-                                    onChange={(e) => setEditedLastNameContact(e.target.value)}
-                                />
-                            ) : (
-                                <p>{lastNameContact}</p>
-                            )}
-                        </div>
-                        <div className="patient-data-row">
-                            <p>Voornaam</p>
-                            {isEditingContact ? (
-                                <input
-                                    type="text"
-                                    value={editedFirstNameContact}
-                                    onChange={(e) => setEditedFirstNameContact(e.target.value)}
-                                />
-                            ) : (
-                                <p>{firstNameContact}</p>
-                            )}
-                        </div>
-                        <div className="patient-data-row">
-                            <p>Email</p>
-                            {isEditingContact ? (
-                                <input
-                                    type="text"
-                                    value={editedEmailContact}
-                                    onChange={(e) => setEditedEmailContact(e.target.value)}
-                                />
-                            ) : (
-                                <p>{emailContact}</p>
-                            )}
-                        </div>
-                        <div className="patient-data-row">
-                            <p>Telefoonnummer</p>
-                            {isEditingContact ? (
-                                <input
-                                    type="text"
-                                    value={editedPhoneNumberContact}
-                                    onChange={(e) => setEditedPhoneNumberContact(e.target.value)}
-                                />
-                            ) : (
-                                <p>{phoneNumberContact}</p>
-                            )}
-                        </div>
+                  ))
+                )}
+            </div>
+            <div className="row">
+                <div className="col-md-6">
+                    <div className="card mb-3">
+                        <p className="mb-3 text-center">Nieuwe diagnosis</p>
+                        <button className="add-button btn btn-outline-primary mb-3" onClick={handleAddNewDiagnosis}>
+                            <i className="bi bi-plus h1"></i>
+                        </button>
                     </div>
                 </div>
-                <div className="medication-cards-container">
-                    {
-                        Array.isArray(medications) && medications.length > 0 ? (
-                            medications.map((medication, index) => (
-                                <div key={index} className="medication-card medication card">
-                                    <div className="card-buttons">
-                                        <p>Medicatie</p>
-                                        <div key={medication.Id}>
-                                            {medication.isEditing ? (
-                                                <>
-                                                    <div>
-                                                        <button onClick={() => handleSaveMedicationClick(medication.Id)}><i className="bi bi-check-circle"></i></button>
-                                                        <button onClick={() => handleCancelMedicationClick(medication.Id)}><i className="bi bi-x-circle"></i></button>
-                                                    </div>
-                                                </>
-                                            ) : medication.isDeleting ? (
-                                                <>
-                                                    <button onClick={() => confirmDelete(medication.Id)}><i className="bi bi-check-circle"></i></button>
-                                                    <button onClick={() => cancelDelete(medication.Id)}><i className="bi bi-x-circle"></i></button>
-                                                </>
-                                            ) : (
-                                                <>
-                                                    <button onClick={() => handleEditMedicationClick(medication.Id)}><i className="bi bi-pencil-square"></i></button>
-                                                    <button onClick={() => handleDeleteButtonClick(medication.Id)}><i className="bi bi-trash"></i></button>
-                                                </>
-                                            )}
-                                        </div>
-                                    </div>
-                                    <div className="patient-data-row">
-                                        <p>Medicijn</p>
-                                        {medication.isEditing ? (
-                                            <input type="text" value={medication.Name} onChange={(e) => handleInputChange(medication.Id, 'Name', e.target.value)} />
-                                        ) : (
-                                            <p>{medication.Name}</p>
-                                        )}
-                                    </div>
-                                    <div className="patient-data-row">
-                                        <p>Gebruik</p>
-                                        {medication.isEditing ? (
-                                            <input type="text" value={medication.Dose} onChange={(e) => handleInputChange(medication.Id, 'Dose', e.target.value)} />
-                                        ) : (
-                                            <p>{medication.Dose}</p>
-                                        )}
-                                    </div>
-                                    <div className="patient-data-row">
-                                        <p>Frequentie</p>
-                                        {medication.isEditing ? (
-                                            <input type="text" value={medication.Frequency} onChange={(e) => handleInputChange(medication.Id, 'Frequency', e.target.value)} />
-                                        ) : (
-                                            <p>{medication.Frequency}</p>
-                                        )}
-                                    </div>
-                                    <div className="patient-data-row">
-                                        <p>Startdatum</p>
-                                        {medication.isEditing ? (
-                                            <input
-                                                type="date"
-                                                value={medication.Start_date ? new Date(medication.Start_date).toISOString().split('T')[0] : ''}
-                                                onChange={(e) => handleInputChange(medication.Id, 'Start_date', e.target.value)}
-                                            />
-                                        ) : (
-                                            <p>{medication.Start_date ? new Date(medication.Start_date).toDateString() : ''}</p>
-                                        )}
-                                    </div>
-                                </div>
-                            ))
-                        ) : null}
-                    <div className="medication-card placeholder-card card medication" onClick={handleAddNewMedication}>
-                        <p>Nieuw Medicijn</p>
-                        <i className="bi bi-plus"></i>
+                {Array.isArray(diagnosis) && diagnosis.length > 0 && (
+                  diagnosis.map((diag, index) => (
+                <div className="col-md-6">
+                    <div key={index} className="card mb-3">
+                      <div className="card-header d-flex justify-content-between align-items-center">
+                        <p className="mb-0">Diagnose</p>
+                        <div>
+                          {diag.isEditing ? (
+                            <div>
+                              <button className="btn btn-outline-success btn-sm me-1" onClick={() => handleSaveDiagnosisClick(diag.Id)}>
+                                <i className="bi bi-check-circle"></i>
+                              </button>
+                              <button className="btn btn-outline-danger btn-sm" onClick={() => handleCancelDiagnosisClick(diag.Id)}>
+                                <i className="bi bi-x-circle"></i>
+                              </button>
+                            </div>
+                          ) : diag.isDeleting ? (
+                            <div>
+                              <button className="btn btn-outline-success btn-sm me-1" onClick={() => confirmDiagDelete(diag.Id)}>
+                                <i className="bi bi-check-circle"></i>
+                              </button>
+                              <button className="btn btn-outline-danger btn-sm" onClick={() => cancelDiagDelete(diag.Id)}>
+                                <i className="bi bi-x-circle"></i>
+                              </button>
+                            </div>
+                          ) : (
+                            <div>
+                              <button className="btn btn-outline-primary btn-sm me-1" onClick={() => handleEditDiagnosisClick(diag.Id)}>
+                                <i className="bi bi-pencil-square"></i>
+                              </button>
+                              <button className="btn btn-outline-danger btn-sm" onClick={() => handleDiagDeleteButtonClick(diag.Id)}>
+                                <i className="bi bi-trash"></i>
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <div className="card-body">
+                        {[
+                          { label: "Dokter ID", value: diag.DoctorId, editValue: diag.DoctorId, onChange: (e) => handleInputChangeForDiagnosis(diag.Id, 'DoctorId', e.target.value) },
+                          { label: "Diagnose", value: diag.Diagnosis, editValue: diag.Diagnosis, onChange: (e) => handleInputChangeForDiagnosis(diag.Id, 'Diagnosis', e.target.value) },
+                          { label: "Beschrijving", value: diag.Description, editValue: diag.Description, onChange: (e) => handleInputChangeForDiagnosis(diag.Id, 'Description', e.target.value) },
+                          { label: "Datum", value: diag.Date ? new Date(diag.Date).toDateString() : '', editValue: diag.Date, onChange: (e) => handleInputChangeForDiagnosis(diag.Id, 'Date', e.target.value), isDate: true }
+                        ].map((field, index) => (
+                          <div key={index} className="mb-3 d-flex justify-content-between align-items-center">
+                            <p className="mb-0">{field.label}</p>
+                            {diag.isEditing ? (
+                              field.isDate ? (
+                                <input
+                                  type="date"
+                                  className="form-control uniform-input"
+                                  value={field.editValue ? new Date(field.editValue).toISOString().split('T')[0] : ''}
+                                  onChange={field.onChange}
+                                />
+                              ) : (
+                                <input
+                                  type="text"
+                                  className="form-control uniform-input"
+                                  value={field.editValue}
+                                  onChange={field.onChange}
+                                />
+                              )
+                            ) : (
+                              <p className="mb-0">{field.value}</p>
+                            )}
+                          </div>
+                        ))}
+                      </div>
                     </div>
                 </div>
-                <div className="diagnosis-cards-container">
-                    {
-                        Array.isArray(diagnosis) && diagnosis.length > 0 ? (
-                            diagnosis.map((diag, index) => (
-                                <div key={index} className="diagnosis-card card">
-                                    <div className="card-buttons">
-                                        <p>Diagnose</p>
-                                        {diag.isEditing ? (
-                                            <>
-                                                <div>
-                                                    <button onClick={() => handleSaveDiagnosisClick(diag.Id)}><i className="bi bi-check-circle"></i></button>
-                                                    <button onClick={() => handleCancelDiagnosisClick(diag.Id)}><i className="bi bi-x-circle"></i></button>
-                                                </div>
-                                            </>
-                                        ) : diag.isDeleting ? (
-                                            <>
-                                                <button onClick={() => confirmDiagDelete(diag.Id)}><i className="bi bi-check-circle"></i></button>
-                                                <button onClick={() => cancelDiagDelete(diag.Id)}><i className="bi bi-x-circle"></i></button>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <button onClick={() => handleEditDiagnosisClick(diag.Id)}><i className="bi bi-pencil-square"></i></button>
-                                                <button onClick={() => handleDiagDeleteButtonClick(diag.Id)}><i className="bi bi-trash"></i></button>
-                                            </>
-                                        )}
-                                    </div>
-                                    <div className="patient-data-row">
-                                        <p>Dokter ID</p>
-                                        {diag.isEditing ? (
-                                            <input type="text" value={diag.DoctorId} onChange={(e) => handleInputChangeForDiagnosis(diag.Id, 'DoctorId', e.target.value)} />
-                                        ) : (
-                                            <p>{diag.DoctorId}</p>
-                                        )}
-                                    </div>
-                                    <div className="patient-data-row">
-                                        <p>Diagnose</p>
-                                        {diag.isEditing ? (
-                                            <input type="text" value={diag.Diagnosis} onChange={(e) => handleInputChangeForDiagnosis(diag.Id, 'Diagnosis', e.target.value)} />
-                                        ) : (
-                                            <p>{diag.Diagnosis}</p>
-                                        )}
-                                    </div>
-                                    <div className="patient-data-row">
-                                        <p>Beschrijving</p>
-                                        {diag.isEditing ? (
-                                            <input type="text" value={diag.Description} onChange={(e) => handleInputChangeForDiagnosis(diag.Id, 'Description', e.target.value)} />
-                                        ) : (
-                                            <p>{diag.Description}</p>
-                                        )}
-                                    </div>
-                                    <div className="patient-data-row">
-                                        <p>Datum</p>
-                                        {diag.isEditing ? (
-                                            <input
-                                                type="date"
-                                                value={diag.Date ? new Date(diag.Date).toISOString().split('T')[0] : ''}
-                                                onChange={(e) => handleInputChangeForDiagnosis(diag.Id, 'Date', e.target.value)}
-                                            />
-                                        ) : (
-                                            <p>{diag.Date ? new Date(diag.Date).toDateString() : ''}</p>
-                                        )}
-                                    </div>
-                                </div>
-                            ))
-                        ) : null}
-                    <div className="diagnosis-card placeholder-card card diagnosis" onClick={handleAddNewDiagnosis}>
-                        <p>Nieuwe Diagnose</p>
-                        <i className="bi bi-plus"></i>
-                    </div>
-                </div>
+                  ))
+                )}
+              </div>
             </div>
         </>
-    );
-};
-
-export default PatientSettingsPage;
+      );
+    };
+    
+    export default PatientSettingsPage;

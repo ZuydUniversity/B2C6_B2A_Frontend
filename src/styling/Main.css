@@ -103,7 +103,6 @@
 .centered_title {
     text-align: center;
     color: var(--primary-color);
-    text-shadow: 7px 7px 4px rgba(0, 0, 0, 0.1);
 }
 .form_label {
     color: var(--primary-color);

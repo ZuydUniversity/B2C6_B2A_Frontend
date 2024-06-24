@@ -127,18 +127,18 @@ function MyometriePage() {
     return (
         <>
             <Navbar />
-            <TopPage headerName="Myometrie" patientId={patientId} imageSrc={imageSrc} />
-            <div className="content">
-                <h2 className="h2-myometrie" style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <TopPage headerName="Patient" patientId={patientId} imageSrc={imageSrc} />
+            <div className="container mt-4">
+                <h2 className="d-flex justify-content-between">
                     CMAS Scores
                     {isEditing ? (
-                        <button className="edit-scores-btn" onClick={handleSaveScores}>Save Scores</button>
+                        <button className="btn btn-outline-primary" onClick={handleSaveScores}>Scores opslaan</button>
                     ) : (
-                        <button className="edit-scores-btn" onClick={handleEditScores}>Edit Scores</button>
+                        <button className="btn btn-outline-primary" onClick={handleEditScores}>Scores aanpassen</button>
                     )}
                 </h2>
-                <div>
-                    <table className="myometrietable">
+                <div className="table-responsive">
+                    <table className="table table-hover">
                         <thead>
                             <tr>
                                 <th>Item</th>
@@ -158,6 +158,7 @@ function MyometriePage() {
                                                 type="number" 
                                                 value={exercise.Left} 
                                                 onChange={(e) => handleScoreChange(index, 'Left', e.target.value)} 
+                                                className="form-control d-inline w-auto"
                                             />
                                         </div>
                                         <div>
@@ -165,6 +166,7 @@ function MyometriePage() {
                                                 type="number" 
                                                 value={exercise.Right} 
                                                 onChange={(e) => handleScoreChange(index, 'Right', e.target.value)} 
+                                                className="form-control d-inline w-auto"
                                             />
                                         </div>
                                     </td>
@@ -185,23 +187,28 @@ function MyometriePage() {
                     </table>
                 </div>
             </div>
-            <div>
-                <h2 className='patient-results'>Totaalscore</h2>
-                <p className='patient-results'>{totalItemScore}</p>
-            </div>
-            <div>
-                <h2 className='patient-results'>Voeg een notitie toe</h2>
-                <form onSubmit={(e) => e.preventDefault()}>
-                    <textarea className='myometrie-textarea'
-                        value={note}
-                        onChange={handleNoteChange}
-                        placeholder="Voeg een notitie toe" 
-                        rows="4"
-                        cols="50"
-                    />
-                    <button type="button" onClick={handleNoteSave}>Opslaan</button>
-                </form>
-                {message && <p>{message}</p>}
+            <div className="container mt-4 pb-5">
+                <div className="row">
+                    <div className="col-md-6">
+                        <h2>Totaalscore</h2>
+                        <p>{totalItemScore}</p>
+                    </div>
+                    <div className="col-md-6">
+                        <h2>Voeg een notitie toe</h2>
+                        <form onSubmit={(e) => e.preventDefault()}>
+                            <div className="mb-3">
+                                <textarea className="form-control"
+                                    value={note}
+                                    onChange={handleNoteChange}
+                                    placeholder="Voeg een notitie toe" 
+                                    rows="4"
+                                />
+                            </div>
+                            <button type="button" className="btn btn-outline-primary" onClick={handleNoteSave}>Notities opslaan</button>
+                        </form>
+                        {message && <p>{message}</p>}
+                    </div>
+                </div>
             </div>
         </>
     );

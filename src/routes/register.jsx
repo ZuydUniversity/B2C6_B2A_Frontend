@@ -1,8 +1,8 @@
-
 import '../styling/Main.css';
 import '../styling/Login.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Container, Form, Button, Alert } from 'react-bootstrap';
 
 function Register() {
     const [accountType, setAccountType] = useState('');
@@ -19,20 +19,16 @@ function Register() {
     const [contact_phone, setContactPhone] = useState('');
     const [contact_name, setContactName] = useState('');
     const [contact_lastname, setContactLastName] = useState('');
-
-
-
-    const [message, setMessage] = useState(''); 
+    const [message, setMessage] = useState('');
 
     const navigate = useNavigate();
 
     const navigateToLogin = () => {
-      navigate('/'); 
+        navigate('/');
     };
 
     const register = async (e) => {
-        e.preventDefault(); 
-
+        e.preventDefault();
 
         const formData = new FormData();
         formData.append('email', email);
@@ -42,7 +38,7 @@ function Register() {
         formData.append('accountType', accountType);
         formData.append('specialization', specialization);
         formData.append('gender', gender);
-        formData.append('birthDate',birthDate);
+        formData.append('birthDate', birthDate);
         formData.append('phoneNumber', phoneNumber);
         if (photo) {
             formData.append('photo', photo);
@@ -52,29 +48,28 @@ function Register() {
         formData.append('contact_name', contact_name);
         formData.append('contact_lastname', contact_lastname);
 
-
         try {
             const response = await fetch('http://127.0.0.1:5000/register', {
                 method: 'POST',
                 body: formData,
             });
-            
-            if (!response.ok) { 
-                if(response.status === 500) {
+
+            if (!response.ok) {
+                if (response.status === 500) {
                     throw new Error('Server error, probeer het later opnieuw');
                 }
                 throw new Error('E-mailadres is al in gebruik, probeer het opnieuw.');
             }
 
-            setMessage('Registratie successvol');
+            setMessage('Registratie succesvol');
             navigateToLogin();
 
         } catch (error) {
-            console.error('Registration error:', error);
+            console.error('Registratie fout:', error);
             setMessage(error.message);
         }
-
     };
+
     const changeAccount = (e) => {
         setAccountType(e.target.value);
         setSpecialization('');
@@ -88,134 +83,114 @@ function Register() {
         setContactLastName('');
     };
 
+    const renderDoctorFields = () => {
+        return (
+            <>
+                <div className="col-md-6 mb-3">
+                    <label htmlFor="specialization" className="form-label">Specialisatie</label>
+                    <input type="text" id="specialization" name="specialization" className="form-control" value={specialization} onChange={(e) => setSpecialization(e.target.value)} required />
+                </div>
+                <div className="col-md-6 mb-3">
+                    <label htmlFor="phoneNumber" className="form-label">Telefoonnummer</label>
+                    <input type="tel" id="phoneNumber" name="phoneNumber" className="form-control" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
+                </div>
+            </>
+        );
+    };
 
-   
-
-
-
-    const renderForm = () => {
-        switch (accountType) {
-            case 'Doctor':
-                return (
-                <div className="container doctor-register-form">    
-                    <div >
-                        <div>
-                            <label>Specialisatie</label>
-                            <input type="text" id="specialization" name="specialization" className='login_input' value={specialization} onChange={(e) => setSpecialization(e.target.value)} required />
-                        </div>
-                        <div>
-                            <label>Telefoonnummer</label>
-                            <input type="tel" id="phoneNumber" name="phoneNumber" className='login_input' value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
-                        </div>
-                    </div>
-                </div>    
-                );
-            case 'Patient':
-                return (
-                    <div className="formdiv patient-register-form">
-                        <div>
-                            <label>Geslacht</label>
-                            <input type="text" id="gender" name="gender" className='login_input' value={gender} onChange={(e) => setGender(e.target.value)} required />
-                        </div>
-                        <div>
-                            <label>Geboortedatum</label>
-                            <input type="date" id="birthday" name="birthday" className='login_input' value={birthDate} onChange={(e) => setBirthDate(e.target.value)} required />
-                        </div>
-                        <div>
-                            <label>Telefoonnummer</label>
-                            <input type="tel" id="phoneNumber" name="phoneNumber" className='login_input' value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required />
-                        </div>
-                        <div>
-                            <label>Contactpersoon Naam</label>
-                            <input type="text" id="contactfirstName" name="contactfirstName" className='login_input' value={contact_name} onChange={(e) => setContactName(e.target.value)}  />
-                        </div>
-                        <div>
-                            <label>Contactpersoon Achternaam</label>
-                            <input type="text" id="contactlastName" name="contactlastName" className='login_input' value={contact_lastname} onChange={(e) => setContactLastName(e.target.value)}  />
-                        </div>
-                        <div>
-                            <label>Contactpersoon E-mailadres</label>
-                            <input type="email" id="contactemail" name="contactemail" className='login_input' value={contact_email} onChange={(e) => setContactEmail(e.target.value)}  />
-                        </div>
-                        <div>
-                            <label>Contactpersoon Telefoonnummer</label>
-                            <input type="tel" id="contactphoneNumber" name="contactphoneNumber" className='login_input' value={contact_phone} onChange={(e) => setContactPhone(e.target.value)}  />
-                        </div>
-                    </div>
-                );
-            case 'Admin':
-                return (
-                    <div>
-                        <div>
-                            
-                        </div>
-                    </div>
-                );
-            case 'Researcher':
-                return (
-                    <div>
-                        <div>
-                            
-                        </div>
-                    </div>
-                );
-            default:
-                return null;
-        }
+    const renderPatientFields = () => {
+        return (
+            <>
+                <div className="col-md-6 mb-3">
+                    <label htmlFor="gender" className="form-label">Geslacht</label>
+                    <input type="text" id="gender" name="gender" className="form-control" value={gender} onChange={(e) => setGender(e.target.value)} required />
+                </div>
+                <div className="col-md-6 mb-3">
+                    <label htmlFor="birthDate" className="form-label">Geboortedatum</label>
+                    <input type="date" id="birthDate" name="birthDate" className="form-control" value={birthDate} onChange={(e) => setBirthDate(e.target.value)} required />
+                </div>
+                <div className="col-md-6 mb-3">
+                    <label htmlFor="contact_name" className="form-label">Contactpersoon Naam</label>
+                    <input type="text" id="contact_name" name="contact_name" className="form-control" value={contact_name} onChange={(e) => setContactName(e.target.value)} />
+                </div>
+                <div className="col-md-6 mb-3">
+                    <label htmlFor="contact_lastname" className="form-label">Contactpersoon Achternaam</label>
+                    <input type="text" id="contact_lastname" name="contact_lastname" className="form-control" value={contact_lastname} onChange={(e) => setContactLastName(e.target.value)} />
+                </div>
+                <div className="col-md-6 mb-3">
+                    <label htmlFor="contact_email" className="form-label">Contactpersoon E-mailadres</label>
+                    <input type="email" id="contact_email" name="contact_email" className="form-control" value={contact_email} onChange={(e) => setContactEmail(e.target.value)} />
+                </div>
+                <div className="col-md-6 mb-3">
+                    <label htmlFor="contact_phone" className="form-label">Contactpersoon Telefoonnummer</label>
+                    <input type="tel" id="contact_phone" name="contact_phone" className="form-control" value={contact_phone} onChange={(e) => setContactPhone(e.target.value)} />
+                </div>
+            </>
+        );
     };
 
     return (
-    <div> 
-        <h1 className="centered-title"><i className="bi bi-person-plus-fill"></i> Account aanmaken</h1>
-        <div className='formdiv'>
-          <form onSubmit={register}>
-            <div className='register_style'>
-                <div className='register_form'>
-                    <div className='register_left'>
-                        <div style={{marginBottom: '2r0px'}}>
-                        <label>Accounttype</label>
-                        <select value={accountType} onChange={changeAccount} required>
-                            <option value="" disabled>Selecteer een accounttype</option>
-                            <option value="Doctor">Dokter</option>
-                            <option value="Patient">Patiënt</option>
-                            <option value="Admin">Beheerder</option>
-                            <option value="Researcher">Onderzoeker</option>
-                        </select>
-                        </div>
-                        <div>
-                            <label>Voornaam</label>
-                            <input type="text" id="firstName" name="firstName" className='login_input' value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
-                        </div>
-                        <div>
-                            <label>Achternaam</label>
-                            <input type="text" id="lastName" name="lastName" className='login_input' value={lastName} onChange={(e) => setLastName(e.target.value)} required />
-                        </div>
-                        <div>
-                            <label>E-mailadres</label>
-                            <input type="email" id="email" name="email" className='login_input' value={email} onChange={(e) => setEmail(e.target.value)} required />
-                        </div>
-                        <div>
-                            <label>Wachtwoord</label>
-                            <input type="password" id="password" name="password" className='login_input' value={password} onChange={(e) => setPassword(e.target.value)} required />
-                        </div>
-                        <div>
-                            <label>Profielfoto</label>
-                            <input type="file" accept=".jpg,.jpeg,.png" id="photo" name="photo" className='login_input' onChange={(e) => setPhoto(e.target.files[0])}  />
+        <div className="container mt-5 pb-5">
+            <h1 className="centered_title mb-4"><i className="bi bi-person-plus-fill"></i> Account aanmaken</h1>
+            <div className="card card-width p-4">
+                <form onSubmit={register}>
+                    <div className="row mb-3">
+                        <div className="col-md-6">
+                            <label htmlFor="accountType" className="form-label">Accounttype</label>
+                            <select className="form-select" id="accountType" value={accountType} onChange={changeAccount} required>
+                                <option value="" disabled>Selecteer een accounttype</option>
+                                <option value="Doctor">Dokter</option>
+                                <option value="Patient">Patiënt</option>
+                                <option value="Admin">Beheerder</option>
+                                <option value="Researcher">Onderzoeker</option>
+                            </select>
                         </div>
                     </div>
-                    <div className='register_right'>
-                        {accountType && renderForm()}
+                    <div className="row mb-3">
+                        <div className="col-md-6 mb-3">
+                            <label htmlFor="firstName" className="form-label">Voornaam</label>
+                            <input type="text" id="firstName" name="firstName" className="form-control" value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
+                        </div>
+                        <div className="col-md-6 mb-3">
+                            <label htmlFor="lastName" className="form-label">Achternaam</label>
+                            <input type="text" id="lastName" name="lastName" className="form-control" value={lastName} onChange={(e) => setLastName(e.target.value)} required />
+                        </div>
+                        <div className="col-md-6 mb-3">
+                            <label htmlFor="email" className="form-label">E-mailadres</label>
+                            <input type="email" id="email" name="email" className="form-control" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                        </div>
+                        <div className="col-md-6 mb-3">
+                            <label htmlFor="password" className="form-label">Wachtwoord</label>
+                            <input type="password" id="password" name="password" className="form-control" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                        </div>
+                        <div className="col-md-6 mb-3">
+                            <label htmlFor="photo" className="form-label">Profielfoto</label>
+                            <input type="file" accept=".jpg,.jpeg,.png" id="photo" name="photo" className="form-control" onChange={(e) => setPhoto(e.target.files[0])} />
+                        </div>
                     </div>
+                    <div className="row mb-3">
+                        {accountType === 'Doctor' && renderDoctorFields()}
+                        {accountType === 'Patient' && renderPatientFields()}
+                    </div>
+                </form>
+
+                </div>            
+                    <div className="card card-width p-4">
+                    <Form action="/register" method="GET">
+                        <Button variant="secondary" type="submit" className='login_button w-100 mb-2'>
+                            <i className="bi bi-person-plus-fill"></i> Registreren
+                        </Button>
+                    </Form>
+                    <Form method="GET" onClick={() => window.history.back()}>
+                        <Button variant="secondary" type="button" className='login_button w-100'>
+                            <i className="bi bi-arrow-left"></i> Terug
+                        </Button>
+                    </Form>
+                    {message && <p className="mt-3 text-center">{message}</p>}
                 </div>
-                <button type="submit" className='login_button'><i className="bi bi-person-plus-fill"></i> Registreren</button>
-            </div>
-          </form>
-          
-          {message && <p>{message}</p>}
+
         </div>
-        
-    </div>    
-      );
+    );
 }
 
 export default Register;
