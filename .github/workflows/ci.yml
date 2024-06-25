@@ -59,7 +59,7 @@ jobs:
           sudo npm run build
           npx serve -s dist -l 80
           
-          Continue on error:true
+          
         EOF
 
         
