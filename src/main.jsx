@@ -16,6 +16,7 @@ import RadiologyPage from './routes/RadiologyPage.jsx';
 import PatientSettingsPage from './routes/PatientSettingsPage.jsx';
 import PatientList from './components/PatientList.jsx';
 import Kalender from './routes/Kalender.jsx';
+import ProfilePage from './routes/ProfilePage.jsx';
 
 
 
@@ -33,6 +34,7 @@ const router = createBrowserRouter([
     { path: "/", element: <App /> },
     { path: "/register", element: <Register /> },
     { path: "/forgot-password", element: <ForgotPassword /> },
+    { path: "/ProfilePage", element: <ProfilePage/>}
 ]);
 
 
