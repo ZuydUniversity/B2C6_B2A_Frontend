@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - add-ci-pipeline
+      - CI-deployment
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build project
+        run: npm run build
+
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up SSH key
+        run: |
+          echo "${{ secrets.AZURE_VM_SSH_KEY_FRONTEND }}" > private_key
+          chmod 600 private_key
+
+      - name: Test SSH connection
+        run: |
+          ssh -o StrictHostKeyChecking=accept-new -i ./private_key ${{ secrets.AZURE_USER_ID }}@${{ secrets.AZURE_VM_IP_FRONTEND }} "echo SSH connection successful"
+
+      - name: Run application on VM
+        run: |
+          ssh -o StrictHostKeyChecking=accept-new -i ./private_key ${{ secrets.AZURE_USER_ID }}@${{ secrets.AZURE_VM_IP_FRONTEND }} << 'EOF'
+            # Ensure the app directory exists and is cleaned
+            rm -rf /home/azureuserb2a/myfrontend/B2C6_B2A_Frontend/*
+            rm -rf /home/azureuserb2a/myfrontend/B2C6_B2A_Frontend/.[!.]*
+
+            # Navigate to the app directory
+            cd /home/azureuserb2a/myfrontend/B2C6_B2A_Frontend
+
+            # Clone the repository
+            git clone https://github.com/ZuydUniversity/B2C6_B2A_Frontend.git .
+
+            # Install dependencies
+            npm install
+
+            # Start the application
+            sudo npm run dev
+          EOF
