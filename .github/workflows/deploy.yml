@@ -3,7 +3,6 @@ name: CI
 on:
   push:
     branches:
-      - add-ci-pipeline
       - CI-deployment
 
 jobs:
@@ -47,11 +46,11 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=accept-new -i ./private_key ${{ secrets.AZURE_USER_ID }}@${{ secrets.AZURE_VM_IP_FRONTEND }} << 'EOF'
             # Ensure the app directory exists and is cleaned
-            rm -rf /home/azureuserb2a/myfrontend/B2C6_B2A_Frontend/*
-            rm -rf /home/azureuserb2a/myfrontend/B2C6_B2A_Frontend/.[!.]*
+            rm -rf /home/azureuserb2a/myfrontend2/B2C6_B2A_Frontend/*
+            rm -rf /home/azureuserb2a/myfrontend2/B2C6_B2A_Frontend/.[!.]*
 
             # Navigate to the app directory
-            cd /home/azureuserb2a/myfrontend/B2C6_B2A_Frontend
+            cd /home/azureuserb2a/myfrontend2/B2C6_B2A_Frontend
 
             # Clone the repository
             git clone https://github.com/ZuydUniversity/B2C6_B2A_Frontend.git .
