@@ -1,47 +1,48 @@
 name: CI
+
 on:
   push:
     branches:
-      -     Test-Pipeline
+      - Test-Pipeline
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
-    - name: Install dependencies
-      run: npm install
-    - name: Run tests
-      run: npm test
-    - name: Build project
-      run: npm run build
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build project
+        run: npm run build
+
   deploy:
     needs: build-and-test
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    - name: Set up SSH key
-      run: |
-        echo "${{ secrets.AZURE_VM_SSH_KEY_FRONTEND }}" > private_key
-        chmod 600 private_key
-    - name: Test SSH connection
-      run: |
-        ssh -o StrictHostKeyChecking=accept-new -i ./private_key ${{ secrets.AZURE_USER_ID }}@${{ secrets.AZURE_VM_IP_FRONTEND }} "echo SSH connection successful"
-    - name: Run application on VM
-      run: |
-        ssh -o StrictHostKeyChecking=accept-new -i ./private_key ${{ secrets.AZURE_USER_ID }}@${{ secrets.AZURE_VM_IP_FRONTEND }} << 'EOF'
-          # Ensure the app directory exists
-          # mkdir -p /usr/src/app
-          rm -f /home/azureuserb2a/myfrontend2/B2C6_B2A_Frontend{*,.*}
-          cd /home/azureuserb2a/myfrontend2/B2C6_B2A_Frontend
-          # Clone the repository
-          git clone https://github.com/ZuydUniversity/B2C6_B2A_Frontend.git .
-          # Install dependencies and start the application
-          npm install
-          sudo npm run dev
-        EOF
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up SSH key
+        run: |
+          echo "${{ secrets.ANSIBLE_SSH_CONVERTED }}" > private_key
+          chmod 600 private_key
+      - name: Test SSH connection
+        run: |
+          ssh -o StrictHostKeyChecking=accept-new -i ./private_key ${{ secrets.AZURE_USER_ID }}@${{ secrets.Ansible_Controller_IP }} "echo SSH connection successful"
+      - name: Run application on VM
+        run: |
+          ssh -o StrictHostKeyChecking=accept-new -i ./private_key ${{ secrets.AZURE_USER_ID }}@${{ secrets.Ansible_Controller_IP }} << 'EOF'
+          
+            #ansible-playbook -i ~/ansibleproject/ansible/inventory.ini ~/ansibleproject/ansible/frontend/stop_frontend_vm.yml
+          EOF
