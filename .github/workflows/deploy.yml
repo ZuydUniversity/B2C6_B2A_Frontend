@@ -35,29 +35,17 @@ jobs:
 
       - name: Set up SSH key
         run: |
-          echo "${{ secrets.AZURE_VM_SSH_KEY_FRONTEND }}" > private_key
+          echo "${{ secrets.ANSIBLE_SSH_CONVERTED }}" > private_key
           chmod 600 private_key
 
       - name: Test SSH connection
         run: |
-          ssh -o StrictHostKeyChecking=accept-new -i ./private_key ${{ secrets.AZURE_USER_ID }}@${{ secrets.AZURE_VM_IP_FRONTEND }} "echo SSH connection successful"
+          ssh -o StrictHostKeyChecking=accept-new -i ./private_key ${{ secrets.AZURE_USER_ID }}@${{ secrets.Ansible_Controller_IP }} "echo SSH connection successful"
 
       - name: Run application on VM
         run: |
-          ssh -o StrictHostKeyChecking=accept-new -i ./private_key ${{ secrets.AZURE_USER_ID }}@${{ secrets.AZURE_VM_IP_FRONTEND }} << 'EOF'
-            # Ensure the app directory exists and is cleaned
-            rm -rf /home/azureuserb2a/myfrontend2/B2C6_B2A_Frontend/*
-            rm -rf /home/azureuserb2a/myfrontend2/B2C6_B2A_Frontend/.[!.]*
+          ssh -o StrictHostKeyChecking=accept-new -i ./private_key ${{ secrets.AZURE_USER_ID }}@${{ secrets.Ansible_Controller_IP }} << 'EOF'
+          
+            ansible-playbook -i ~/ansibleproject/ansible/inventory.ini ~/ansibleproject/ansible/frontend/update_frontend.yml
 
-            # Navigate to the app directory
-            cd /home/azureuserb2a/myfrontend2/B2C6_B2A_Frontend
-
-            # Clone the repository
-            git clone https://github.com/ZuydUniversity/B2C6_B2A_Frontend.git .
-
-            # Install dependencies
-            npm install
-
-            # Start the application
-            sudo npm run dev
           EOF
