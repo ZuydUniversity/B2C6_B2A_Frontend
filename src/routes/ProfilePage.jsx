@@ -83,7 +83,7 @@ const Settings = ({ userId }) => {
     <div className={`content accessibility-mode-${accessibilityMode}`}>
       <Navbar />
       <div className="container formwidth">
-      <h1 className="centered_title"><i className="bi bi-person-bounding-box"></i> Profielweergave</h1>
+      <h1 className="centered_title"><i className="bi bi-person-fill-gear"></i> Profielinstellingen</h1>
         <div className="row">
           <div className="col-lg-6">
             <div className="card mb-4">
