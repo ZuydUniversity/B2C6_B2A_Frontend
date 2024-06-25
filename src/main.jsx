@@ -19,12 +19,14 @@ import PatMenuTest from './menuTests/patientmenu.jsx'
 import ResMenuTest from './menuTests/researchermenu.jsx'
 import AdminMenu from './menuTests/adminmenu.jsx';
 import ResetPassword from './routes/resetpassword.jsx';
+import DoctorDashboard from './routes/Home.jsx';
 
 
 
 const router = createBrowserRouter([
     { path: "/", element: <App/> },
     { path: "/patientoverview", element: <PatientOverview /> },
+    { path: "/doctordashboard", element: <DoctorDashboard/> },
     { path: "/patientview/:patientId", element: <PatientView /> },
     { path: "/resultoverview/:patientId", element: <ResultOverview /> },
     { path: "/myometriepage/:patientId/:resultId", element: <MyometriePage /> },
