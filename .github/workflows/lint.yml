@@ -5,10 +5,12 @@ on:
     branches:
       - main
       - 'feature/*'
+      - Soufjantje-patch-3
   pull_request:
     branches:
       - main
       - 'feature/*'
+      - Soufjantje-patch-3
 
 jobs:
   lint:
@@ -28,3 +30,4 @@ jobs:
 
     - name: Run ESLint
       run: npm run lint
+
