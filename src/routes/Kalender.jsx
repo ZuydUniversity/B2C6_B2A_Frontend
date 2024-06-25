@@ -229,26 +229,17 @@ function Kalender() {
                             <button className="btn btn-outline-primary" onClick={handleMonthButtonClick}>Maand</button>
                             <button className="btn btn-outline-primary" onClick={handleWeekButtonClick}>Week</button>
                             <button className="btn btn-outline-primary" onClick={handleDayButtonClick}>Dag</button>
-                            <div className="dropdown">
-                                <button className="btn btn-outline-primary dropdown-toggle" onClick={handleDropdownToggle}>
-                                    Nieuwe Afspraak
-                                </button>
-                                <ul className={`dropdown-menu ${dropdownOpen ? 'show' : ''}`}>
-                                    <li><button className="dropdown-item" onClick={() => handleOptionChange('option1')}>Optie 1</button></li>
-                                    <li><button className="dropdown-item" onClick={() => handleOptionChange('option2')}>Optie 2</button></li>
-                                    <li><button className="dropdown-item" onClick={() => handleOptionChange('option3')}>Optie 3</button></li>
-                                </ul>
                             </div>
-                            <button className="btn btn-outline-primary" onClick={handleDayButtonClick}>Vorige</button>
-                            <button className="btn btn-outline-primary" onClick={handleDayButtonClick}>Volgende</button>
+                            <button className="btn btn-outline-primary" onClick={handleMonthButtonClick}>Vorige Maand</button>
+                            <button className="btn btn-outline-primary" onClick={handleMonthButtonClick}>Volgende Maand</button>
+                            <button className="btn btn-outline-primary" onClick={handleVorigeWeekButtonClick}>Vorige Week</button>
+                            <button className="btn btn-outline-primary" onClick={handleVolgendeWeekButtonClick}>Volgende Week</button>
+                            <button className="btn btn-outline-primary" onClick={handleVorigeDagButtonClick}>Vorige Dag</button>
+                            <button className="btn btn-outline-primary" onClick={handleVolgendeDagButtonClick}>Volgende Dag</button>
+
                         </div>
                     </div>
-                    <button className="header-button" onClick={handleMonthButtonClick}>Vorige Maand</button>
-                    <button className="header-button" onClick={handleMonthButtonClick}>Volgende Maand</button>
-                    <button className="header-button" onClick={handleVorigeWeekButtonClick}>Vorige Week</button>
-                    <button className="header-button" onClick={handleVolgendeWeekButtonClick}>Volgende Week</button>
-                    <button className="header-button" onClick={handleVorigeDagButtonClick}>Vorige Dag</button>
-                    <button className="header-button" onClick={handleVolgendeDagButtonClick}>Volgende Dag</button>
+
                 </div>
                 <div className="row">
                     <div className="col">
@@ -266,7 +257,6 @@ function Kalender() {
                 <div className="row calendar-grid">
                     {renderGridItems()}
                 </div>
-            </div>
             {selectedAppointment && (
                 <div className="container mt-4">
                     <div className="row">
