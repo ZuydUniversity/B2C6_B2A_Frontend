@@ -229,14 +229,13 @@ function Kalender() {
                             <button className="btn btn-outline-primary" onClick={handleMonthButtonClick}>Maand</button>
                             <button className="btn btn-outline-primary" onClick={handleWeekButtonClick}>Week</button>
                             <button className="btn btn-outline-primary" onClick={handleDayButtonClick}>Dag</button>
-                            </div>
                             <button className="btn btn-outline-primary" onClick={handleMonthButtonClick}>Vorige Maand</button>
                             <button className="btn btn-outline-primary" onClick={handleMonthButtonClick}>Volgende Maand</button>
                             <button className="btn btn-outline-primary" onClick={handleVorigeWeekButtonClick}>Vorige Week</button>
                             <button className="btn btn-outline-primary" onClick={handleVolgendeWeekButtonClick}>Volgende Week</button>
                             <button className="btn btn-outline-primary" onClick={handleVorigeDagButtonClick}>Vorige Dag</button>
                             <button className="btn btn-outline-primary" onClick={handleVolgendeDagButtonClick}>Volgende Dag</button>
-
+                            </div>
                         </div>
                     </div>
 
