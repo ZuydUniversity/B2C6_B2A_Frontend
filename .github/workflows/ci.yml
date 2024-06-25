@@ -56,5 +56,5 @@ jobs:
           
           # Install dependencies and start the application
           npm install
-          sudo npm run dev
+          sudo npm run build
         EOF
