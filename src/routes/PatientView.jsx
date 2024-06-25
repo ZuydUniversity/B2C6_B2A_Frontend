@@ -1,8 +1,12 @@
+import '../styling/Main.css';
+import '../styling/Patientenoverzicht.css';
+import Navbar from '../components/Navbar';
+import App from '../App';
+import TopPage from '../components/TopPage';
+
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import Navbar from '../components/Navbar';
-import TopPage from '../components/TopPage';
 
 function PatientView() {
     const { patientId } = useParams();
@@ -91,19 +95,45 @@ function PatientView() {
                                     <p>{index + 1}: {result.Type}</p>
                                 </div>
                             ))}
-                        </div>
-                        <Link to={`/resultoverview/${patientId}`} className="resultoverview-button"><button>Zie alles</button></Link>
-                    </div>
-                    <div className="EssayBlock Block card">
-                        <p>Verslagen</p>
-                        <div className="DataBlockData">
-                            {Array.from({ length: 3 }, (_, i) => (
-                                <div className="textual-data-row" key={i + 1}>
-                                    <p>{i + 1}: Verslag {i + 1}</p>
+            <TopPage headerName="Patiënt" patientId={patientId} imageSrc={imageSrc} patientName={patientName} />
+            <div className="container">
+                <div className="row mt-4">
+                    <div className="col-md-4 mb-4 p-0">
+                        <div className="card patient-view-card h-100 m-3">
+                            <div className="card-body">
+                                <h5 className="card-title text-center">Resultaten</h5>
+                                <hr class="hr" />
+                                <div className="mb-3">
+                                    {Array.from({ length: 3 }, (_, i) => (
+                                        <div className="mb-2" key={i + 1}>
+                                            {results[i] !== "" 
+                                                ? (results[i] 
+                                                    ? <p>{i + 1}: {results[i].Type}</p> 
+                                                    : <p>{i + 1}: </p>)
+                                                : <p>{i + 1}:</p>
+                                }
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
+                                <Link to={`/resultoverview/${patientId}`} className="btn btn-outline-primary d-flex justify-content-center">Alle resultaten</Link>
+                            </div>
                         </div>
-                        <Link to={`/essaypage/${patientId}`}><button>Zie alles</button></Link>
+                    </div>
+                    <div className="col-md-4 mb-4 p-0">
+                        <div className="card patient-view-card h-100 m-3">
+                            <div className="card-body">
+                                <h5 className="card-title text-center">Verslagen</h5>
+                                <hr class="hr" />
+                                <div className="mb-3">
+                                    {Array.from({ length: 3 }, (_, i) => (
+                                        <div className="mb-2" key={i + 1}>
+                                            <p>{i + 1}: Verslag {i + 1}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                                <Link to={`/essaypage/${patientId}`} className="btn btn-outline-primary d-flex justify-content-center">Alle verslagen</Link>
+                            </div>
+                        </div>
                     </div>
                     <div className="DataBlock Block card">
                         <p>Gegevens</p>
@@ -117,8 +147,25 @@ function PatientView() {
                                     diagnosis.Diagnosis
                                 }
                             </p>
+                    <div className="col-md-4 mb-4 p-0">
+                        <div className="card patient-view-card h-100 m-3">
+                            <div className="card-body">
+                                <h5 className="card-title text-center">Gegevens</h5>
+                                <hr class="hr" />
+                                <div className="mb-3">
+                                    <p>Nummer: {phoneNumber}</p>
+                                    <p>Mail: {mail}</p>
+                                    <p>Diagnose:{ ' ' }
+                                        {Array.isArray(diagnosis) ? 
+                                            diagnosis.map(diag => diag.Diagnosis).join(', ') 
+                                            : 
+                                            diagnosis.Diagnosis
+                                        }
+                                </p>
+                                </div>
+                                <Link to={`/patientsettingspage/${patientId}`} className="btn btn-outline-primary d-flex justify-content-center">Alle gegevens</Link>
+                            </div>
                         </div>
-                        <Link to={`/patientsettingspage/${patientId}`}><button>Zie alles</button></Link>
                     </div>
                 </div>
             </div>

@@ -1,42 +1,51 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
-
-
-
+import React, {  useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function DocMenu() {
+
+    const location = useLocation();
     const navigate = useNavigate();
-    const [user_id, setUser_id] = useState(null);
-    const [role, setRole] = useState(null);
+    const message = "";
+    const { email, role } = location.state || {};
 
     useEffect(() => {
-        const allCookies = Cookies.get();
-        if (Object.keys(allCookies).length === 0) {
-            console.log("No cookies found");
+        
+        if (!email || role != 1) {
             navigate('/');
-        } else {
-            setUser_id(Cookies.get('user_id'));
-            setRole(Cookies.get('role'));
-        }
-    }, []);
-
-    useEffect(() => {
-        if (user_id === null || role === null) {
             return;
         }
-        if (user_id == null || role !== "1") { 
-            console.log('Redirecting due to invalid userid or role');
-            navigate('/');
-        }
-    }, [user_id, role]); 
 
-    return (
-        <>
-            <h1>DocMenu</h1>
-            <h1> userid : {user_id} </h1>
-        </>
-    );
+        const checkSession = async () => {
+            try {
+                const response = await fetch('http://127.0.0.1:5000/checksession', {
+                    method: 'POST',
+                    body: email,
+                    credentials: 'include',
+                });
+                 
+                if(!response.ok) {
+                    navigate('/')
+                }
+            }
+            catch (error) {
+                console.error('Error:', error);
+                navigate('/')
+
+            }
+        };
+
+        checkSession();
+    }, []);
+    
+    
+
+  return (
+    <>
+        <h1>DocMenu</h1>
+        <h1>{email} session valid</h1>
+    </>  
+  );
+
 }
 
 export default DocMenu;
