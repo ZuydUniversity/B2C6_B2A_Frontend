@@ -88,7 +88,21 @@ function Register() {
             <>
                 <div className="col-md-6 mb-3">
                     <label htmlFor="specialization" className="form-label">Specialisatie</label>
-                    <input type="text" id="specialization" name="specialization" className="form-control" value={specialization} onChange={(e) => setSpecialization(e.target.value)} required />
+                    <select id="specialization" name="specialization" className="form-control" value={specialization} onChange={(e) => setSpecialization(e.target.value)} required>
+                        <option value="">Selecteer een specialisatie...</option>
+                        <option value="Algemene Geneeskunde">Algemene Geneeskunde</option>
+                        <option value="Cardiologie">Cardiologie</option>
+                        <option value="Chirurgie">Chirurgie</option>
+                        <option value="Dermatologie">Dermatologie</option>
+                        <option value="Fysiotherapeut">Fysiotherapeut</option>
+                        <option value="Gynaecologie">Gynaecologie</option>
+                        <option value="Neurologie">Neurologie</option>
+                        <option value="Oogheelkunde">Oogheelkunde</option>
+                        <option value="Orthopedie">Orthopedie</option>
+                        <option value="Pediatrie">Pediatrie</option>
+                        <option value="Psychiatrie">Psychiatrie</option>
+                        <option value="Radiologie">Radiologie</option>
+                    </select>
                 </div>
                 <div className="col-md-6 mb-3">
                     <label htmlFor="phoneNumber" className="form-label">Telefoonnummer</label>
@@ -103,7 +117,12 @@ function Register() {
             <>
                 <div className="col-md-6 mb-3">
                     <label htmlFor="gender" className="form-label">Geslacht</label>
-                    <input type="text" id="gender" name="gender" className="form-control" value={gender} onChange={(e) => setGender(e.target.value)} required />
+                    <select id="gender" name="gender" className="form-control" value={gender} onChange={(e) => setGender(e.target.value)} required>
+                        <option value="">Selecteer...</option>
+                        <option value="Man">Man</option>
+                        <option value="Vrouw">Vrouw</option>
+                        <option value="Anders">Anders</option>
+                    </select>
                 </div>
                 <div className="col-md-6 mb-3">
                     <label htmlFor="birthDate" className="form-label">Geboortedatum</label>
