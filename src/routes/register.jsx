@@ -191,25 +191,18 @@ function Register() {
                         {accountType === 'Doctor' && renderDoctorFields()}
                         {accountType === 'Patient' && renderPatientFields()}
                     </div>
-                </form>
-
-                </div>            
-                    <div className="card card-width p-4">
-                    <Form action="/register" method="GET">
-                        <Button variant="secondary" type="submit" className='login_button w-100 mb-2'>
+                    <Button variant="secondary" type='submit' className='login_button w-100 mb-2'>
                             <i className="bi bi-person-plus-fill"></i> Registreren
-                        </Button>
-                    </Form>
-                    <Form method="GET" onClick={() => window.history.back()}>
-                        <Button variant="secondary" type="button" className='login_button w-100'>
+                    </Button>
+                </form>
+                </div>
+                    <div className="card card-width p-4">
+                        <Button variant="secondary" type="button" className='login_button w-100' onClick={() => window.history.back()}>
                             <i className="bi bi-arrow-left"></i> Terug
                         </Button>
-                    </Form>
                     {message && <p className="mt-3 text-center">{message}</p>}
                 </div>
-
         </div>
     );
 }
-
 export default Register;
