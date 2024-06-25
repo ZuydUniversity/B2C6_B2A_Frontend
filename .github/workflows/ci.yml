@@ -48,7 +48,7 @@ jobs:
         ssh -o StrictHostKeyChecking=accept-new -i ./private_key ${{ secrets.AZURE_USER_ID }}@${{ secrets.AZURE_VM_IP_FRONTEND }} << 'EOF'
           # Ensure the app directory exists
           # mkdir -p /usr/src/app
-          rm -f /home/azureuserb2a/myfrontend2/B2C6_B2A_Frontend/{*,.*}
+          sudo rm -f /home/azureuserb2a/myfrontend2/B2C6_B2A_Frontend/{*,.*}
           cd /home/azureuserb2a/myfrontend2/B2C6_B2A_Frontend
           
           # Clone the repository
@@ -57,4 +57,9 @@ jobs:
           # Install dependencies and start the application
           npm install
           sudo npm run build
+          npm install -g serve
+          serve -s dist &
+          Continue on error:true
         EOF
+
+        
