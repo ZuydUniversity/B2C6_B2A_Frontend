@@ -34,14 +34,14 @@ function Kalender() {
         setShowWeekCalendar(false);
         setShowDayCalendar(true);
         setShowNewAppointment(false);
-        setCurrentDayIndex(prevIndex => (prevIndex > 1 ? prevIndex - 1 : 1)); // Ensure day index doesn't go below 1
+        setCurrentDayIndex(prevIndex => (prevIndex > 1 ? prevIndex - 1 : 1)); 
     };
 
     const handleVolgendeDagButtonClick = () => {
         setShowWeekCalendar(false);
         setShowDayCalendar(true);
         setShowNewAppointment(false);
-        setCurrentDayIndex(prevIndex => (prevIndex < 30 ? prevIndex + 1 : 30)); // Ensure day index doesn't go above 30
+        setCurrentDayIndex(prevIndex => (prevIndex < 30 ? prevIndex + 1 : 30)); 
     };
     
     const handleVolgendeWeekButtonClick = () => {
@@ -71,7 +71,7 @@ function Kalender() {
     
 
     const renderGridItems = () => {
-        const startingDayIndex = 5; // Assuming Saturday is the 6th day of the week (0-indexed)
+        const startingDayIndex = 5; 
         const items = [];
         let dayNumber = 1;
 
@@ -141,30 +141,24 @@ function Kalender() {
                 </div>
             );
         } else {
-            // Render all rows for the entire month of June
             for (let row = 0; row < 6; row++) {
                 for (let col = 0; col < 7; col++) {
                     const index = row * 7 + col;
-                    if (index >= startingDayIndex && dayNumber <= 30) {
-                        // Check if the current day is not Sunday
-                        const isNotSunday = (index + 1) % 7 !== 0;
-    
+                    if (index >= startingDayIndex && dayNumber <= 30) {    
+                        
                         items.push(
                             <div key={index} className="grid-item">
                                 <div className="day-number">{dayNumber}</div>
                                 <button className="small-button" onClick={() => handleDaySwitch(currentDayIndex)}>v</button>
-                                {isNotSunday && (
                                     <div className="greybutton-container">
                                         {appointments[dayNumber] && appointments[dayNumber].map((appointment, idx) => (
                                             <button key={idx} className="grey-button" onClick={() => handleAppointmentClick(dayNumber, appointment)}>{appointment}</button>
                                         ))}
                                     </div>
-                                )}
                             </div>
                         );
                         dayNumber++;
                     } else {
-                        // Otherwise, display an empty grid item
                         items.push(<div key={index} className="empty-grid-item"></div>);
                     }
                 }
@@ -178,7 +172,7 @@ function Kalender() {
         const [time, patient] = appointment.split('u ');
         const startTime = time.trim();
         const endTime = calculateEndTime(startTime);
-        const cleanedPatient = patient.trim().replace(/ My$| Ra$/, ''); // Remove ' My' or ' Ra'
+        const cleanedPatient = patient.trim().replace(/ My$| Ra$/, '');
         setSelectedAppointment({
             day,
             startTime,
@@ -193,7 +187,7 @@ function Kalender() {
         const [hours, minutes] = startTime.split(':').map(Number);
         const startDate = new Date();
         startDate.setHours(hours, minutes);
-        const endDate = new Date(startDate.getTime() + 2 * 60 * 60 * 1000); // Add 2 hours
+        const endDate = new Date(startDate.getTime() + 2 * 60 * 60 * 1000); 
         const endHours = endDate.getHours().toString().padStart(2, '0');
         const endMinutes = endDate.getMinutes().toString().padStart(2, '0');
         return `${endHours}:${endMinutes}`;
