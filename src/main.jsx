@@ -19,6 +19,7 @@ import PatMenuTest from './menuTests/patientmenu.jsx'
 import ResMenuTest from './menuTests/researchermenu.jsx'
 import AdminMenu from './menuTests/adminmenu.jsx';
 import ResetPassword from './routes/resetpassword.jsx';
+import ProfilePage from './routes/ProfilePage.jsx';
 
 
 
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
     { path: "/resultoverview/:patientId", element: <ResultOverview /> },
     { path: "/myometriepage/:patientId/:resultId", element: <MyometriePage /> },
     { path: "/essaypage/:patientId", element: <EssayPage /> },
-    { path: "/radiologypage/:patientId", element: <RadiologyPage /> },
+    { path: "/radiologypage/:patientId`/:resultId", element: <RadiologyPage /> },
     { path: "/patientsettingspage/:patientId", element: <PatientSettingsPage /> },
     { path: "/patientlist", element: <PatientList /> },
     { path: "/kalender", element: <Kalender /> },
@@ -42,7 +43,8 @@ const router = createBrowserRouter([
     { path: "/patmenu", element: <PatMenuTest /> },
     { path: "/resmenu", element: <ResMenuTest /> },
     { path: "/adminmenu", element: <AdminMenu />},
-    { path: "/reset-password/:token", element: <ResetPassword /> }
+    { path: "/reset-password/:token", element: <ResetPassword /> },
+    { path: "/ProfilePage", element: <ProfilePage/>}
 ]);
 
 
