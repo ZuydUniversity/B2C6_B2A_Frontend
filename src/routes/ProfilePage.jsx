@@ -142,11 +142,11 @@ const Settings = ({ userId }) => {
             </div>
           ) : (
             <div>
-              <p>First Name: {profileInfo.name}</p>
-              <p>Last Name: {profileInfo.lastname}</p>
-              <p>Gender: {profileInfo.gender}</p>
+              <p>Voornaam: {profileInfo.name}</p>
+              <p>Achternaam: {profileInfo.lastname}</p>
+              <p>Geslacht: {profileInfo.gender}</p>
               <p>Email: {profileInfo.email}</p>
-              <p>Phone: {profileInfo.phone}</p>
+              <p>Telefoonnummer: {profileInfo.phone}</p>
               <button onClick={handleEditProfile}>Verander Profiel Informatie</button>
             </div>
           )}
