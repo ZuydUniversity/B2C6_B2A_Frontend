@@ -1,6 +1,6 @@
 import React, {useEffect, useState } from 'react';
-import '../App.css';
 import Navbar from '../components/Navbar';
+import "../styling/Appointment.css";
 import axios from 'axios';
 
 const api = axios.create({

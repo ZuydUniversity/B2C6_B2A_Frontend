@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import '../styling/Main.css';
+import '../styling/Kalender.css';
 import Navbar from '../components/Navbar';
-import TopPage from '../components/TopPage';
 
 function Kalender() {
     const [showWeekCalendar, setShowWeekCalendar] = useState(false);
@@ -169,41 +170,64 @@ function Kalender() {
     return (
         <>
             <Navbar />
-            <div className="calendar-grid-container">
-                <div className="button-container">
-                    <button className="header-button" onClick={handleMonthButtonClick}>Maand</button>
-                    <button className="header-button" onClick={handleWeekButtonClick}>Week</button>
-                    <button className="header-button" onClick={handleDayButtonClick}>Dag</button>
-                    <div className="header-dropdown">
-                        <button className="header-button" onClick={handleNewAppointmentButtonClick}>Nieuwe Afspraak</button>
+            <div className="container formwidth">
+                <div className="row">
+                    <div className="col">
+                        <div className="btn-group mb-3">
+                            <button className="btn btn-outline-primary" onClick={handleMonthButtonClick}>Maand</button>
+                            <button className="btn btn-outline-primary" onClick={handleWeekButtonClick}>Week</button>
+                            <button className="btn btn-outline-primary" onClick={handleDayButtonClick}>Dag</button>
+                            <div className="dropdown">
+                                <button className="btn btn-outline-primary dropdown-toggle" onClick={handleDropdownToggle}>
+                                    Nieuwe Afspraak
+                                </button>
+                                <ul className={`dropdown-menu ${dropdownOpen ? 'show' : ''}`}>
+                                    <li><button className="dropdown-item" onClick={() => handleOptionChange('option1')}>Optie 1</button></li>
+                                    <li><button className="dropdown-item" onClick={() => handleOptionChange('option2')}>Optie 2</button></li>
+                                    <li><button className="dropdown-item" onClick={() => handleOptionChange('option3')}>Optie 3</button></li>
+                                </ul>
+                            </div>
+                            <button className="btn btn-outline-primary" onClick={handleDayButtonClick}>Vorige</button>
+                            <button className="btn btn-outline-primary" onClick={handleDayButtonClick}>Volgende</button>
+                        </div>
                     </div>
-                    <button className="header-button" onClick={handleDayButtonClick}>Vorige</button>
-                    <button className="header-button" onClick={handleDayButtonClick}>Volgende</button>
                 </div>
-                <div className="month-year-container">
-                    {renderMonth()}
-                    {renderYear()}
+                <div className="row">
+                    <div className="col">
+                        <div className="month-year-container">
+                            {renderMonth()}
+                            {renderYear()}
+                        </div>
+                    </div>
                 </div>
-                <div className="days-of-week">
-                    {renderDaysOfWeek()}
+                <div className="row">
+                    <div className="col days-of-week">
+                        {renderDaysOfWeek()}
+                    </div>
                 </div>
-                <div className="calendar-grid">
+                <div className="row calendar-grid">
                     {renderGridItems()}
                 </div>
             </div>
-            <div className="rounded-square">
-                {selectedAppointment && (
-                    <div className="appointment-details">
-                        <p><strong>Afspraak details</strong></p>
-                        <p><strong>Datum:</strong> 3 juni 2024</p>
-                        <p><strong>Begintijd:</strong> {selectedAppointment.startTime}</p>
-                        <p><strong>Eindtijd:</strong> {selectedAppointment.endTime}</p>
-                        <p><strong>Patiënt:</strong> {selectedAppointment.patient}</p>
-                        <p><strong>Medewerker:</strong> {selectedAppointment.staff}</p>
-                        <p><strong>Type:</strong> {selectedAppointment.type}</p>
+            {selectedAppointment && (
+                <div className="container mt-4">
+                    <div className="row">
+                        <div className="col">
+                            <div className="rounded-square">
+                                <div className="appointment-details">
+                                    <p><strong>Afspraak details</strong></p>
+                                    <p><strong>Datum:</strong> 3 juni 2024</p>
+                                    <p><strong>Begintijd:</strong> {selectedAppointment.startTime}</p>
+                                    <p><strong>Eindtijd:</strong> {selectedAppointment.endTime}</p>
+                                    <p><strong>Patiënt:</strong> {selectedAppointment.patient}</p>
+                                    <p><strong>Medewerker:</strong> {selectedAppointment.staff}</p>
+                                    <p><strong>Type:</strong> {selectedAppointment.type}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                )}
-            </div>
+                </div>
+            )}
         </>
     );
 }

@@ -11,7 +11,9 @@ const EssayPage = () => {
     return (
         <>
             <Navbar />
-            <TopPage headerName="Patient" patientId={patientId} imageSrc={imageSrc} />
+            <TopPage headerName="Verslagen" patientId={patientId} imageSrc={imageSrc} />
+            <div className="container">
+            </div>
         </>
     );
 };

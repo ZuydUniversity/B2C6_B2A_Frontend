@@ -1,6 +1,5 @@
 import React, {useEffect, useState } from 'react';
 import Select from 'react-select';
-import '../App.css';
 import Navbar from '../components/Navbar';
 import axios from 'axios';
 
