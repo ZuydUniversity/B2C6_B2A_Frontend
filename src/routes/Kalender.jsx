@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import '../styling/Main.css';
+import '../styling/Kalender.css';
 import Navbar from '../components/Navbar';
 
 function Kalender() {
@@ -22,6 +24,7 @@ function Kalender() {
     };
 
     const handleDayButtonClick = () => {
+        console.log('Dag button clicked');
         setShowWeekCalendar(false);
         setShowDayCalendar(true);
         setShowNewAppointment(false);
@@ -68,7 +71,7 @@ function Kalender() {
     
 
     const renderGridItems = () => {
-        const startingDayIndex = 5;
+        const startingDayIndex = 5; // Assuming Saturday is the 6th day of the week (0-indexed)
         const items = [];
         let dayNumber = 1;
 
@@ -114,7 +117,7 @@ function Kalender() {
             const weekDays = Array.from({ length: 7 }, (_, i) => currentWeekStartIndex + i);
             for (let day of weekDays) {
                 items.push(
-                    <div key={day} className="grid-item week-view-item">
+                    <div key={day} className="grid-item">
                         <div className="day-number">{day}</div>
                         <button className="small-button" onClick={() => handleDaySwitch(day)}>v</button>
                         <div className="greybutton-container">
@@ -138,10 +141,12 @@ function Kalender() {
                 </div>
             );
         } else {
+            // Render all rows for the entire month of June
             for (let row = 0; row < 6; row++) {
                 for (let col = 0; col < 7; col++) {
                     const index = row * 7 + col;
                     if (index >= startingDayIndex && dayNumber <= 30) {
+                        // Check if the current day is not Sunday
                         const isNotSunday = (index + 1) % 7 !== 0;
     
                         items.push(
@@ -159,6 +164,7 @@ function Kalender() {
                         );
                         dayNumber++;
                     } else {
+                        // Otherwise, display an empty grid item
                         items.push(<div key={index} className="empty-grid-item"></div>);
                     }
                 }
@@ -172,7 +178,7 @@ function Kalender() {
         const [time, patient] = appointment.split('u ');
         const startTime = time.trim();
         const endTime = calculateEndTime(startTime);
-        const cleanedPatient = patient.trim().replace(/ My$| Ra$/, '');
+        const cleanedPatient = patient.trim().replace(/ My$| Ra$/, ''); // Remove ' My' or ' Ra'
         setSelectedAppointment({
             day,
             startTime,
@@ -187,7 +193,7 @@ function Kalender() {
         const [hours, minutes] = startTime.split(':').map(Number);
         const startDate = new Date();
         startDate.setHours(hours, minutes);
-        const endDate = new Date(startDate.getTime() + 2 * 60 * 60 * 1000);
+        const endDate = new Date(startDate.getTime() + 2 * 60 * 60 * 1000); // Add 2 hours
         const endHours = endDate.getHours().toString().padStart(2, '0');
         const endMinutes = endDate.getMinutes().toString().padStart(2, '0');
         return `${endHours}:${endMinutes}`;
@@ -216,13 +222,26 @@ function Kalender() {
     return (
         <>
             <Navbar />
-            <div className="calendar-grid-container">
-                <div className="button-container">
-                    <button className="header-button" onClick={handleMonthButtonClick}>Maand</button>
-                    <button className="header-button" onClick={handleWeekButtonClick}>Week</button>
-                    <button className="header-button" onClick={handleDayButtonClick}>Dag</button>
-                    <div className="header-dropdown">
-                        <button className="header-button" onClick={handleNewAppointmentButtonClick}>Nieuwe Afspraak</button>
+            <div className="container formwidth">
+                <div className="row">
+                    <div className="col">
+                        <div className="btn-group mb-3">
+                            <button className="btn btn-outline-primary" onClick={handleMonthButtonClick}>Maand</button>
+                            <button className="btn btn-outline-primary" onClick={handleWeekButtonClick}>Week</button>
+                            <button className="btn btn-outline-primary" onClick={handleDayButtonClick}>Dag</button>
+                            <div className="dropdown">
+                                <button className="btn btn-outline-primary dropdown-toggle" onClick={handleDropdownToggle}>
+                                    Nieuwe Afspraak
+                                </button>
+                                <ul className={`dropdown-menu ${dropdownOpen ? 'show' : ''}`}>
+                                    <li><button className="dropdown-item" onClick={() => handleOptionChange('option1')}>Optie 1</button></li>
+                                    <li><button className="dropdown-item" onClick={() => handleOptionChange('option2')}>Optie 2</button></li>
+                                    <li><button className="dropdown-item" onClick={() => handleOptionChange('option3')}>Optie 3</button></li>
+                                </ul>
+                            </div>
+                            <button className="btn btn-outline-primary" onClick={handleDayButtonClick}>Vorige</button>
+                            <button className="btn btn-outline-primary" onClick={handleDayButtonClick}>Volgende</button>
+                        </div>
                     </div>
                     <button className="header-button" onClick={handleMonthButtonClick}>Vorige Maand</button>
                     <button className="header-button" onClick={handleMonthButtonClick}>Volgende Maand</button>
@@ -231,30 +250,42 @@ function Kalender() {
                     <button className="header-button" onClick={handleVorigeDagButtonClick}>Vorige Dag</button>
                     <button className="header-button" onClick={handleVolgendeDagButtonClick}>Volgende Dag</button>
                 </div>
-                <div className="month-year-container">
-                    {renderMonth()}
-                    {renderYear()}
+                <div className="row">
+                    <div className="col">
+                        <div className="month-year-container">
+                            {renderMonth()}
+                            {renderYear()}
+                        </div>
+                    </div>
                 </div>
-                <div className="days-of-week">
-                    {renderDaysOfWeek()}
+                <div className="row">
+                    <div className="col days-of-week">
+                        {renderDaysOfWeek()}
+                    </div>
                 </div>
-                <div className="calendar-grid">
+                <div className="row calendar-grid">
                     {renderGridItems()}
                 </div>
             </div>
-            <div className="rounded-square">
-                {selectedAppointment && (
-                    <div className="appointment-details">
-                        <p><strong>Afspraak details</strong></p>
-                        <p><strong>Datum:</strong> 3 juni 2024</p>
-                        <p><strong>Begintijd:</strong> {selectedAppointment.startTime}</p>
-                        <p><strong>Eindtijd:</strong> {selectedAppointment.endTime}</p>
-                        <p><strong>Patiënt:</strong> {selectedAppointment.patient}</p>
-                        <p><strong>Medewerker:</strong> {selectedAppointment.staff}</p>
-                        <p><strong>Type:</strong> {selectedAppointment.type}</p>
+            {selectedAppointment && (
+                <div className="container mt-4">
+                    <div className="row">
+                        <div className="col">
+                            <div className="rounded-square">
+                                <div className="appointment-details">
+                                    <p><strong>Afspraak details</strong></p>
+                                    <p><strong>Datum:</strong> 3 juni 2024</p>
+                                    <p><strong>Begintijd:</strong> {selectedAppointment.startTime}</p>
+                                    <p><strong>Eindtijd:</strong> {selectedAppointment.endTime}</p>
+                                    <p><strong>Patiënt:</strong> {selectedAppointment.patient}</p>
+                                    <p><strong>Medewerker:</strong> {selectedAppointment.staff}</p>
+                                    <p><strong>Type:</strong> {selectedAppointment.type}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                )}
-            </div>
+                </div>
+            )}
         </>
     );
 }

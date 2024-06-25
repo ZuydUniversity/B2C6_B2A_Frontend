@@ -1,0 +1,147 @@
+/*----------------------------------*/
+  /*below is css for Kalender.jsx page*/
+  /*----------------------------------*/
+
+
+  .calendar-datatable {
+    width: 1000px;
+}
+
+.header-button {
+    background-color: rgb(222, 230, 245);
+    color: rgb(10, 10, 10);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.header-button:hover {
+    background-color: lightsteelblue;
+}
+
+
+.calendar-grid-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh + 400px); 
+    width: 130%; 
+    margin-left: -30%; 
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.greybutton-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 5px;
+    font-size: 0.7em;
+}
+
+.header-button {
+    background-color: cornflowerblue;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.header-button:hover {
+    background-color: lightsteelblue;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 200px); 
+    gap: 5px;
+    width: 100%; 
+    max-width: 1400px; 
+}
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: top;
+    background-color: cornflowerblue;
+    color: white;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 1.2em;
+}
+
+.days-of-week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    width: 100%; 
+    max-width: 1400px; 
+    margin-bottom: 10px;
+}
+
+.day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: black; 
+}
+
+
+
+.rounded-square {
+    position: fixed; 
+    top: 50%; 
+    right: 7%; 
+    transform: translate(50%, -50%); 
+    max-width: 300px; 
+    width: auto; 
+    height: auto; 
+    max-height: 80%; 
+    background-color: rgb(50, 107, 211);
+    border-radius: 20px;
+    z-index: 1000;
+    overflow: hidden; 
+}
+
+.month-year-container {
+   display: flex;
+    text-align: center;
+    margin-top: 10px;
+    flex-direction: row;
+}
+
+.month-display {
+    font-weight: bold;
+    color: black;
+    font-size: 1.2em;
+}
+
+.year-display {
+    font-weight: bold;
+    color: black;
+    font-size: 1.2em;
+}
+
+.week-view-item {
+  height: 1000px; 
+}  
+
+.day-view-item {
+  height: 1000px; 
+  width: 800px;
+}  
