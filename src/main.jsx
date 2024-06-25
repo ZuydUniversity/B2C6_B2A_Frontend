@@ -43,7 +43,7 @@ const router = createBrowserRouter([
     { path: "/patmenu", element: <PatMenuTest /> },
     { path: "/resmenu", element: <ResMenuTest /> },
     { path: "/adminmenu", element: <AdminMenu />},
-    { path: "/reset-password/:token", element: <ResetPassword /> }
+    { path: "/reset-password/:token", element: <ResetPassword /> },
     { path: "/ProfilePage", element: <ProfilePage/>}
 ]);
 
