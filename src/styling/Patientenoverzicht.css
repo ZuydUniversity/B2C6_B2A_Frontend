@@ -1,124 +1,61 @@
-/* test */
-
-#root {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0;
-    text-align: center;
-  }
-  
-  html, body {
-      --main-bg-color: white;
-      background-color: var(--main-bg-color);
-      color: white;
-      margin:0;
-      padding:0;
-      width:100%;
-  }
-  
-  .content {
-      margin: 0;
-      color: black;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      max-height: 76vh;
-      overflow-y: auto; 
-  }
-  
-  .app {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-  }
-  
-  .data-display,
-  .data-sender,
-  .data-grid-filler {
-      width: 80%;
-      padding: 20px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-  }
-  
-  table {
-      width: 100%;
-      border-collapse: collapse; /* This removes the double borders */
-      font-family: 'Roboto', sans-serif;
-  }
-  
-  th, td {
-      border: 1px solid #000;
-      padding: 0px 0px 10px 0px;
-      text-align: left;
-  }
-  
-  th {
-      background-color: cornflowerblue; /* This gives the header cells a blue background */
-  }
-  
-  tr:nth-child(even) {
-      background-color: lightsteelblue; /* This gives every other row a light blue background */
-  }
-  
-  tr:nth-child(odd) {
-      background-color: lightgray; /* This gives the other rows a blue background */
-  }
-  
-  
-  h1 {
-      color: #007BFF; /* This changes the color of the h1 elements */
-  }
-  
-  html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-  }
-  
-  nav {
-      background-color: #007BFF;
-      padding: 10px;
-      width: 100%;
-      position: fixed;
-      top: 0;
-      left: 0; /* Ensure the nav bar starts from the left edge */
-  }
-  
-  
-  nav ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: space-around;
-  }
-  
-      nav h1, nav a {
-          font-size: 20px; /* Adjust as needed */
-          color: #fff;
-          text-decoration: none;
-      }
-  
-  .navitems {
-      display: flex;
-      gap: 20px;
-      align-items: center;
-  }
-  
-  .data-display {
-      margin-top: 65px;
-  }
-  
-  h1 {
-      top: 0;
-  }
-  
-  
-  
+/* ---------------------------- */
+  /* Patientenoverzicht dashboard (new) */
   /* ---------------------------- */
-  /* Patientenoverzicht table css */
+/* img-fluid for responsive images */
+.img-fluid {
+    max-width: 100px;
+    height: auto;
+}
+
+/* rounded for rounded images */
+.rounded {
+    border-radius: 0.25rem;
+}
+
+/* table-responsive for responsive tables */
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* table-hover for hover effect on table rows */
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+    
+}
+
+/* thead-light for light-colored table header */
+.thead-light th {
+    background-color: lightgray;
+    color: black;
+    border-color: white;
+}
+
+/* container for fixed-width centered content */
+.container {
+    width: 70%;
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* mt-4 for top margin */
+.mt-4 {
+    margin-top: 1.5rem;
+}
+
+.text-left {
+    text-align: left;
+    font-size: 20px;
+ }
+
+
+
+/* ---------------------------- */
+  /* Patientenoverzicht table css (old) */
   /* ---------------------------- */
   
   table,
@@ -126,13 +63,11 @@
   .myometrietable {
       border-collapse: separate;
       border-spacing: 0 10px;
-      font-size: 22px;
       font-family: Arial;
       /* Easily adjustable colors for the whole component, bg=background, th= tableheader, td= tabledata */
       --main-th-color: cornflowerblue;
       --main-td-color: lightsteelblue;
       --main-hover-color: powderblue;
-      width: 70% auto;
       border-spacing: 0 2px;
       margin-top:0;
       color:white;
@@ -181,22 +116,6 @@
       width:100%;
   }
   
-  .patientoverview-scrollable-table {
-      overflow-y: auto;
-      width: 100%;
-      max-height: 650px;
-      max-width: 730px;
-      margin-bottom: 100px;
-  }
-  
-  .scrollable-table {
-      overflow-y: auto;
-      width: 100%;
-      max-height: 650px;
-      max-width:400px;
-      margin-bottom:25px;
-  }
-  
   .radiology-scrollable-table {
       overflow-y: auto;
       width: 100%;
@@ -215,6 +134,7 @@
   
   th, td {
       border: transparent;
+      border-bottom: gray 1px solid;
   }
   
   th {
@@ -227,7 +147,7 @@
       margin-top:10px;
       padding: 0;
       line-height: 0;
-      background-color: var(--main-bg-color);
+      background-color: var(--background-color);
   }
   
       .grid-image {
@@ -238,7 +158,7 @@
       }
   
           .image-header {
-              background-color: var(--main-bg-color);
+              background-color: var(--background-color);
               border: none;
           }
   
@@ -250,8 +170,8 @@
   
   .text-cell {
       padding: 0;
-      margin-top:100px !important;
-      background: var(--main-bg-color);
+      margin-top:100px ;
+      background-color: var(--background-color);
       word-wrap: break-word;
       overflow-wrap: break-word;
       word-break: break-all;
@@ -261,11 +181,11 @@
   .middle-text-cell,
   .rounded-right {
       height: 125px;
-      background: var(--main-td-color);
+      background: var(--background-color) ;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 200px;
+      width: 100%;
       margin-top:10px;
   }
   .rounded-left {
@@ -337,9 +257,17 @@
     margin: 0; /* Remove margin */
   }
 
+  .th-header-left-result:hover,
+  .th-header-right-result:hover {
+    cursor: pointer;
+    background-color: #e0e0e0; /* Lighter background color for hover */
+    color: lightsteelblue; /* Change text color on hover */
+    font-weight: bold; /* Make the text bold on hover */
+    transition: background-color 0.3s, color 0.3s, font-weight 0.3s, border-bottom 0.3s; /* Smooth transition effect */
+  }
+
   
   tr:hover {
-      background-color: lightgray; /* Change this to the desired hover color */
       cursor: pointer;
   }
   
@@ -361,22 +289,6 @@
     }
   
       /* ---------------------------- */
-  
-  .Navbar {
-      top:0;
-      left:0;
-      position:absolute;
-      display: flex;
-      justify-content: flex-start;
-      background-color: cornflowerblue;
-      padding:20px 0px 20px 20px;
-      color:white;
-      margin: 0;
-      z-index: 100;
-      width: 100%;
-      box-sizing: border-box;
-  
-  }
   
   .link {
       margin-right:20px;
@@ -423,11 +335,12 @@
       width: 125px;
       padding: 0;
       line-height: 0;
-      background-color: var(--main-bg-color);
+      background-color: var(--background-color);
   }
   
   .patient-image-results {
       padding-left: 10px;
+      background-color: var(--background-color);
   }
   
   .patient-results {
@@ -437,7 +350,7 @@
   .PageBottom {
       display:flex;
       justify-content: space-between;
-      background-color: white;
+      background-color: var(--background-color);
       font-size:22px;
       margin-top:20px;
   }
@@ -562,6 +475,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      background-color: var(--background-color);
   }
   
   .back-button {
@@ -574,6 +488,7 @@
       flex-grow:1;
       margin:0;
       padding:0;
+      background-color: var(--background-color);
   }
   
   .top-page-nav-info {
@@ -591,17 +506,25 @@
       justify-content: space-between;
   }
   
-  
-  
   .card {
-      background-color: #f8f8f8; /* Light gray */
-      border-radius: 10px; /* Rounded corners */
-      padding: 20px; /* Space inside the card */
-      margin: 20px 0; /* Space outside the card */
-      margin-bottom:0;
-      width: 80%; /* Adjust as needed */
-      margin-left: auto; /* Center the card */
-      margin-right: auto; /* Center the card */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px;
+    padding-bottom: 0px; /* Space inside the card */
+    margin: 20px 0; /* Space outside the card */
+    margin-bottom:0;
+    width: 100%; /* Adjust as needed */
+    margin-left: auto; /* Center the card */
+    margin-right: auto; /* Center the card */
+    background-color: var(--background-color);
+    box-shadow: 7px 7px 2px 0px rgba(0,0,0,0.1);
+}
+
+    .patient-view-card {
+        width: 90% !important; 
+    }
+
+  .card-header {
+      background-color: #fff;
   }
   
   .placeholder-card {
@@ -722,188 +645,10 @@
       line-height: 0.3; /* Adjust as needed */
   }
 
-  .patient-data-row input{
-    width:60%;
+  .uniform-input {
+    width: 50% !important;
   }
 
-  .contactperson-card{
-    margin-right:0px;
+  .add-button {
+    height: 183.6px !important;
   }
-
-
-  .diagnosis-cards-container {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-}
-
-.diagnosis-card {
-    height: 230px;
-    flex: 0 0 calc(33.33% - 15px); /* 33.33% for 3 items per row, 10px for margin */
-    margin: 10px; /* Adjust as needed */
-    box-sizing: border-box; /* Include padding and border in the width */
-}
-
-/* Remove left margin from the first card in each row */
-.diagnosis-card:nth-of-type(3n+1) {
-    margin-left: 0;
-}
-
-/* Remove right margin from the third card in each row */
-.diagnosis-card:nth-of-type(3n) {
-    margin-right: 0;
-}
-
-.patient-card .patient-data-row p,
-.contactperson-card .patient-data-row p,
-.diagnosis-card p {
-    line-height: 0.3; /* Adjust as needed */
-}
-
-  
-  /*below is css for Kalender.jsx page*/
-  
-  .calendar-datatable {
-      width: 1000px;
-  }
-  
-  .header-button {
-      background-color: rgb(222, 230, 245);
-      color: rgb(10, 10, 10);
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-  }
-  
-  .header-button:hover {
-      background-color: lightsteelblue;
-  }
-  
-  
-  .calendar-grid-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: calc(100vh + 400px); 
-      width: 130%; 
-      margin-left: -30%; 
-  }
-  
-  .button-container {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 20px;
-  }
-  
-  .greybutton-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      margin-bottom: 5px;
-      font-size: 0.7em;
-  }
-  
-  .header-button {
-      background-color: cornflowerblue;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-  }
-  
-  .header-button:hover {
-      background-color: lightsteelblue;
-  }
-  
-  .calendar-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      grid-template-rows: repeat(6, 200px); 
-      gap: 5px;
-      width: 100%; 
-      max-width: 1400px; 
-  }
-  
-  .grid-item {
-      display: flex;
-      flex-direction: column;
-      justify-content: top;
-      align-items: top;
-      background-color: cornflowerblue;
-      color: white;
-      border-radius: 5px;
-      padding: 20px;
-      font-size: 1.2em;
-  }
-  
-  .days-of-week {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 10px;
-      width: 100%; 
-      max-width: 1400px; 
-      margin-bottom: 10px;
-  }
-  
-  .day {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-weight: bold;
-      font-size: 1.2em;
-      color: black; 
-  }
-  
-  
-  
-  .rounded-square {
-      position: fixed; 
-      top: 50%; 
-      right: 7%; 
-      transform: translate(50%, -50%); 
-      max-width: 300px; 
-      width: auto; 
-      height: auto; 
-      max-height: 80%; 
-      background-color: rgb(50, 107, 211);
-      border-radius: 20px;
-      z-index: 1000;
-      overflow: hidden; 
-  }
-  
-  .month-year-container {
-     display: flex;
-      text-align: center;
-      margin-top: 10px;
-      flex-direction: row;
-  }
-  
-  .month-display {
-      font-weight: bold;
-      color: black;
-      font-size: 1.2em;
-  }
-  
-  .year-display {
-      font-weight: bold;
-      color: black;
-      font-size: 1.2em;
-  }
-
-  .week-view-item {
-    height: 1000px; 
-  }  
-
-  .day-view-item {
-    height: 1000px; 
-    width: 800px;
-  }  
-

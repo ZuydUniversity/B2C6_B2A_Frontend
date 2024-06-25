@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import '../App.css';
 import Navbar from '../components/Navbar';
 import { useNavigate, useParams } from 'react-router-dom';
 import TopPage from '../components/TopPage';
@@ -9,6 +8,7 @@ function ResultOverview() {
   const { patientId } = useParams();
   const imageSrc = '../src/assets/kid_1.png';
   const [data, setData] = useState([]);
+  const [sortConfig, setSortConfig] = useState({ key: '', direction: '' });
 
   useEffect(() => {
     const fetchData = async (patientId) => {
@@ -23,6 +23,30 @@ function ResultOverview() {
     fetchData(patientId);
   }, [patientId]);
 
+  const sortedData = React.useMemo(() => {
+    let sortableData = [...data];
+    if (sortConfig.key) {
+      sortableData.sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? -1 : 1;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+    return sortableData;
+  }, [data, sortConfig]);
+
+  const requestSort = (key) => {
+    let direction = 'ascending';
+    if (sortConfig.key === key && sortConfig.direction === 'ascending') {
+      direction = 'descending';
+    }
+    setSortConfig({ key, direction });
+  };
+
   const DataRow = ({ Type, Date, Id }) => {
     const navigate = useNavigate();
 
@@ -30,7 +54,7 @@ function ResultOverview() {
       if (Type === 'Myometrie') {
         navigate(`/myometriepage/${patientId}/${Id}`);
       } else if (Type === 'Radiologie') {
-        navigate(`/radiologypage/${patientId}/`);
+        navigate(`/radiologypage/${patientId}/${Id}`);
       } else {
         window.alert(`Row clicked: ${Type}`);
       }
@@ -54,48 +78,42 @@ function ResultOverview() {
       }
     };
 
-    // Format the date to display only the date part
     const formattedDate = new window.Date(Date).toLocaleDateString('en-GB');
 
     return (
-      <div className="data-row-container">
-        <table className='table_2'>
-          <tbody>
-            <tr onClick={handleClick}>
-              <td className="text-cell"><div className="rounded-left">{Type}</div></td>
-              <td className="text-cell"><div className="rounded-right">{formattedDate}</div></td>
-            </tr>
-          </tbody>
-        </table>
-        <i className="bi bi-filetype-pdf ResultIcon" onClick={handlePdfClick}></i>
-      </div>
+      <tr onClick={handleClick} style={{ cursor: 'pointer' }}>
+        <td>{Type}</td>
+        <td>{formattedDate}</td>
+        <td>
+          <i className="bi bi-filetype-pdf" onClick={handlePdfClick}></i>
+        </td>
+      </tr>
     );
   };
 
   const DataTable = ({ data }) => (
-    <>
-      <table className='table_2'>
+    <div className="table-responsive">
+      <table className="table table-hover">
         <thead>
           <tr>
-            <th className="th-header-left-result"><div className="header-rounded-left-result header-item">Type</div></th>
-            <th className="th-header-right-result"><div className="header-rounded-right-result header-item">Date</div></th>
-            <th className="header-empty"></th>
+            <th onClick={() => requestSort('Type')}>Type</th>
+            <th onClick={() => requestSort('Date')}>Date</th>
+            <th>Download</th>
           </tr>
         </thead>
+        <tbody>
+          {data.map((row, index) => <DataRow key={index} {...row} />)}
+        </tbody>
       </table>
-
-      <div className="scrollable-table">
-        {data.map((row, index) => <DataRow key={index} {...row} />)}
-      </div>
-    </>
+    </div>
   );
 
   return (
     <>
       <Navbar />
-      <TopPage headerName="Resultaten" patientId={patientId} imageSrc={imageSrc} />
-      <div className="content">
-        <DataTable data={data} />
+      <TopPage headerName="Patient" patientId={patientId} imageSrc={imageSrc} />
+      <div className="container mt-4">
+        <DataTable data={sortedData} />
       </div>
     </>
   );
