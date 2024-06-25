@@ -72,7 +72,7 @@ const Navbar = () => {
                         <button type="button" className="btn btn-outline-primary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="bi bi-person-circle"></i> Profiel</button>
                         <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <Link to="/" className="dropdown-item" href="#"><i className="bi bi-person-bounding-box"></i> Profielweergave</Link>
-                            <Link to="/" className="dropdown-item" href="#"><i className="bi bi-gear-fill"></i> Profielinstellingen</Link>
+                            <Link to="/ProfilePage" className="dropdown-item" href="#"><i className="bi bi-gear-fill"></i> Profielinstellingen</Link>
                             <div className="dropdown-divider"></div>
                             <Link to="/" className="dropdown-item" href="#"><i className="bi bi-box-arrow-left"></i> Uitloggen</Link>
                         </div>
