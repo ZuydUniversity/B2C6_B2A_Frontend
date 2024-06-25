@@ -55,9 +55,9 @@ jobs:
           git clone https://github.com/ZuydUniversity/B2C6_B2A_Frontend.git .
           
           # Install dependencies and start the application
-          npm install
+          sudo npm install
           sudo npm run build
-          npx serve -s dist -l 80
+          sudo npx serve -s dist -l 80
           
           
         EOF
