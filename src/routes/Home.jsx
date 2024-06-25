@@ -1,12 +1,29 @@
-import React from 'react';
+import '../styling/Main.css';
+import '../styling/Home.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Navbar from '../components/Navbar';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Home = () => {
+const Dashboard = () => {
     return (
         <div>
-            <h1>Welcome to the Home Page</h1>
-            <p>This is the content of the home page.</p>
+            <Navbar />
+            <div className="container mt-4">
+                <h1>Welkom bij het ArtsenDashboard</h1>
+                <div className="row">
+                    <div className="col-md-6">
+                    </div>
+                    <div className="col-md-6">
+                    </div>
+                </div>
+                <div className="row mt-4">
+                    <div className="col-12">
+                    </div>
+                </div>
+            </div>
         </div>
     );
-};
+}
 
-export default Home;
+export default Dashboard;

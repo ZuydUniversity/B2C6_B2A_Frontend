@@ -57,7 +57,7 @@ const Navbar = () => {
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto">
-                        <Link to="/" type="button" className="btn btn-outline-primary"><i className="bi bi-house-fill"></i> Home</Link>
+                        <Link to="/Home" type="button" className="btn btn-outline-primary"><i className="bi bi-house-fill"></i> Home</Link>
                         <Link to="/PatientOverview" type="button" className="btn btn-outline-primary"><i className="bi bi-people-fill"></i> Patiëntenoverzicht</Link>
                         <Link to="/Kalender" type="button" className="btn btn-outline-primary"><i className="bi bi-calendar-event-fill"></i> Kalender</Link>
                 </ul>
