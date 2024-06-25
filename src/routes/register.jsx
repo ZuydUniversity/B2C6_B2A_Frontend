@@ -118,7 +118,7 @@ function Register() {
                 <div className="col-md-6 mb-3">
                     <label htmlFor="gender" className="form-label">Geslacht</label>
                     <select id="gender" name="gender" className="form-control" value={gender} onChange={(e) => setGender(e.target.value)} required>
-                        <option value="">Selecteer...</option>
+                        <option value="">Selecteer geslacht...</option>
                         <option value="Man">Man</option>
                         <option value="Vrouw">Vrouw</option>
                         <option value="Anders">Anders</option>
