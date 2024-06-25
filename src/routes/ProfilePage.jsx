@@ -81,14 +81,14 @@ const Settings = ({ userId }) => {
 
   return (
     <div className={`content accessibility-mode-${accessibilityMode}`}>
-      <Navbar />
-      <div className="settings-container">
+      <Navbar/>
+      <div className="container">
         <div className="setting-option">
-          <h3>Profile Information</h3>
+          <h3>Profiel Informatie</h3>
           {isEditingProfile ? (
             <div>
               <div>
-                <label htmlFor="name">First Name:</label>
+                <label htmlFor="name">Voornaam:</label>
                 <input
                   type="text"
                   id="name"
@@ -98,7 +98,7 @@ const Settings = ({ userId }) => {
                 />
               </div>
               <div>
-                <label htmlFor="lastname">Last Name:</label>
+                <label htmlFor="lastname">Achternaam:</label>
                 <input
                   type="text"
                   id="lastname"
@@ -108,7 +108,7 @@ const Settings = ({ userId }) => {
                 />
               </div>
               <div>
-                <label htmlFor="gender">Gender:</label>
+                <label htmlFor="gender">Geslacht:</label>
                 <input
                   type="text"
                   id="gender"
@@ -128,7 +128,7 @@ const Settings = ({ userId }) => {
                 />
               </div>
               <div>
-                <label htmlFor="phone">Phone:</label>
+                <label htmlFor="phone">Telefoonnummer:</label>
                 <input
                   type="tel"
                   id="phone"
@@ -138,7 +138,7 @@ const Settings = ({ userId }) => {
                 />
               </div>
               <button onClick={handleCancelEdit}>Cancel</button>
-              <button onClick={handleSaveProfile}>Confirm</button>
+              <button onClick={handleSaveProfile}>Accepteer</button>
             </div>
           ) : (
             <div>
@@ -147,12 +147,12 @@ const Settings = ({ userId }) => {
               <p>Gender: {profileInfo.gender}</p>
               <p>Email: {profileInfo.email}</p>
               <p>Phone: {profileInfo.phone}</p>
-              <button onClick={handleEditProfile}>Edit Profile Information</button>
+              <button onClick={handleEditProfile}>Verander Profiel Informatie</button>
             </div>
           )}
         </div>
         <div className="settings-options">
-          <h3>Accessibility Options</h3>
+          <h3>Toegankelijkheids Opties</h3>
           <div>
             <input 
               type="radio" 
@@ -162,7 +162,7 @@ const Settings = ({ userId }) => {
               checked={accessibilityMode === 1} 
               onChange={() => setAccessibilityMode(1)} 
             />
-            <label htmlFor="normal">Normal Mode</label>
+            <label htmlFor="normal">Standaard Modus</label>
           </div>
           <div>
             <input 
@@ -173,7 +173,7 @@ const Settings = ({ userId }) => {
               checked={accessibilityMode === 2} 
               onChange={() => setAccessibilityMode(2)} 
             />
-            <label htmlFor="dark">Dark Mode</label>
+            <label htmlFor="dark">Donkere Modus</label>
           </div>
           {/* Add additional accessibility options here with respective values */}
           <div>
@@ -185,7 +185,7 @@ const Settings = ({ userId }) => {
               checked={accessibilityMode === 3}
               onChange={() => setAccessibilityMode(3)}
             />
-            <label htmlFor="protanopia_deuteranopia">Protanopia and Deuteranopia</label>
+            <label htmlFor="protanopia_deuteranopia">Protanopie en Deuteranopie</label>
           </div>
           <div>
             <input
@@ -196,7 +196,7 @@ const Settings = ({ userId }) => {
               checked={accessibilityMode === 4}
               onChange={() => setAccessibilityMode(4)}
             />
-            <label htmlFor="tritanopia">Tritanopia</label>
+            <label htmlFor="tritanopia">Tritanopie</label>
           </div>
           <div>
             <input
@@ -207,7 +207,7 @@ const Settings = ({ userId }) => {
               checked={accessibilityMode === 5}
               onChange={() => setAccessibilityMode(5)}
             />
-            <label htmlFor="achromatopsia">Achromatopsia</label>
+            <label htmlFor="achromatopsia">Achromatopsie</label>
           </div>
           <div>
             <input
@@ -229,7 +229,7 @@ const Settings = ({ userId }) => {
               checked={accessibilityMode === 7}
               onChange={() => setAccessibilityMode(7)}
             />
-            <label htmlFor="high_contrast">High Contrast Mode</label>
+            <label htmlFor="high_contrast">Hoge Contrast Modus</label>
           </div>
         </div>
         <div className="settings-option">
@@ -239,7 +239,7 @@ const Settings = ({ userId }) => {
             checked={emailNotifications}
             onChange={() => setEmailNotifications(!emailNotifications)}
           />
-          <label htmlFor="emailNotifications">Email Notifications</label>
+          <label htmlFor="emailNotifications">Email Notificaties</label>
         </div>
       </div>
     </div>
