@@ -20,7 +20,7 @@ import ResMenuTest from './menuTests/researchermenu.jsx'
 import AdminMenu from './menuTests/adminmenu.jsx';
 import ResetPassword from './routes/resetpassword.jsx';
 import ProfilePage from './routes/ProfilePage.jsx';
-
+import PatientSettingsViewPage from './routes/PatientSettingsViewPage.jsx';	
 
 
 const router = createBrowserRouter([
@@ -44,7 +44,8 @@ const router = createBrowserRouter([
     { path: "/resmenu", element: <ResMenuTest /> },
     { path: "/adminmenu", element: <AdminMenu />},
     { path: "/reset-password/:token", element: <ResetPassword /> },
-    { path: "/ProfilePage", element: <ProfilePage/>}
+    { path: "/ProfilePage", element: <ProfilePage/>},
+    { path: "/PatientSettingsViewPage/:patientId", element: <PatientSettingsViewPage/>}
 ]);
 
 
