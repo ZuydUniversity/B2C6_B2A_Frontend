@@ -20,7 +20,7 @@ import ResMenuTest from './menuTests/researchermenu.jsx'
 import AdminMenu from './menuTests/adminmenu.jsx';
 import ResetPassword from './routes/resetpassword.jsx';
 import ProfilePage from './routes/ProfilePage.jsx';
-
+import DoctorDashboard from './routes/DoctorDashboard.jsx';
 
 
 const router = createBrowserRouter([
@@ -38,7 +38,9 @@ const router = createBrowserRouter([
     { path: "/register", element: <Register /> },
     { path: "/forgot-password", element: <ForgotPassword /> },
     { path: "/patientdashboard", element: <PatientDashboard /> },    
-    { path: "/patientdashboard/:patientId", element: <PatientDashboard /> },    
+    { path: "/patientdashboard/:patientId", element: <PatientDashboard /> },
+    { path: "/doctordashboard", element: <DoctorDashboard /> },
+    { path: "/doctordashboard/:patientId", element: <DoctorDashboard /> },
     { path: "/docmenu", element: <DocMenuTest /> },
     { path: "/patmenu", element: <PatMenuTest /> },
     { path: "/resmenu", element: <ResMenuTest /> },
