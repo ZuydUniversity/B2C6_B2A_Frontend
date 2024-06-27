@@ -121,9 +121,11 @@
 
 .month-year-container {
     display: flex;
-    text-align: center;
+    flex-direction: column;
+    justify-content: center; /* Align horizontally centered */
+    align-items: center; /* Align vertically centered */
     margin-top: 10px;
-    flex-direction: row;
+    width: 75%; /* Occupy full width */
 }
 
 .month-display {
