@@ -5,27 +5,6 @@ on:
     branches:
       - CI-deployment
 
-jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run tests
-        run: npm test
-
-      - name: Build project
-        run: npm run build
-
   deploy:
     needs: build-and-test
     runs-on: ubuntu-latest
@@ -37,15 +16,12 @@ jobs:
         run: |
           echo "${{ secrets.ANSIBLE_SSH_CONVERTED }}" > private_key
           chmod 600 private_key
-
       - name: Test SSH connection
         run: |
           ssh -o StrictHostKeyChecking=accept-new -i ./private_key ${{ secrets.AZURE_USER_ID }}@${{ secrets.Ansible_Controller_IP }} "echo SSH connection successful"
-
       - name: Run application on VM
         run: |
           ssh -o StrictHostKeyChecking=accept-new -i ./private_key ${{ secrets.AZURE_USER_ID }}@${{ secrets.Ansible_Controller_IP }} << 'EOF'
-          
-            ansible-playbook -i ~/ansibleproject/ansible/inventory.ini ~/ansibleproject/ansible/frontend/start_frontend_vm.yml
-
+            #stop de frontend
+            ansible-playbook -i ~/ansibleproject/ansible/inventory.ini ~/ansibleproject/ansible/frontend/stop_frontend_vm.yml
           EOF
