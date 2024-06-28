@@ -1,19 +1,20 @@
-// PatientDashboard.jsx
+// DoctorDashboard.jsx
 import Navbar from '../components/Navbar';
 import { useNavigate } from 'react-router-dom';
 import kid_1 from '../assets/kid_1.png';
 import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 
-const PatientDashboard = () => {
+//Doctordashboard hergebruikt voor het grootste deel het patientdashboard, het enige verschil is de manier waarop notities opgehaald worden (via doctorid en met patientnaam erbij)
+const DoctorDashboard = () => {
     const [patientName, setPatientName] = useState('');
-    const [patientNotes, setPatientNotes] = useState([]); 
+    const [doctorNotes, setDoctorNotes] = useState([]); 
     const [patientAppointments, setPatientAppointments] = useState([]); 
     const navigate = useNavigate();
     const { patientId } = useParams();
 
     useEffect(() => {
-        const fetchPatientName = async () => { // Functie om de naam van de gebruiker op te halen
+        const fetchPatientName = async () => { // Functie om de naam van de gebruiker op te halen (werkt ook voor dokter)
             try {
                 const response = await fetch(`http://localhost:5000/getuserfirstnamelastname/${patientId}`);
                 if (!response.ok) {
@@ -27,23 +28,23 @@ const PatientDashboard = () => {
                 }
             } catch (error) {
                 console.error(`Failed to fetch patient: ${error}`);
-            }
+            } 
         };
 
-        const fetchPatientNotes = async () => { // Functie om alle notities gelinkt aan de patient op te halen. Geen limiet
+        const fetchDoctorNotes = async () => { // Functie om alle notities gelinkt aan de dokter op te halen, met patientnaam erbij. Geen limiet.
             try {
-                const response = await fetch(`http://localhost:5000/patients/${patientId}/notes`);
+                const response = await fetch(`http://localhost:5000/patients/${patientId}/doctornotes`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const notesData = await response.json();
-                setPatientNotes(notesData);
+                setDoctorNotes(notesData);
             } catch (error) {
-                console.error(`Failed to fetch patient notes: ${error}`);
+                console.error(`Failed to fetch doctor notes: ${error}`);
             }
         };
 
-        const fetchPatientAppointments = async () => { // Functie om patients komende afspraken op te halen. Limiet van 5
+        const fetchPatientAppointments = async () => { // Functie om patients komende afspraken op te halen (werkt ook voor dokter). Limiet van 5
             try {
                 const response = await fetch(`http://localhost:5000/patients/${patientId}/upcomingappointments`);
                 if (!response.ok) {
@@ -58,7 +59,7 @@ const PatientDashboard = () => {
 
         fetchPatientAppointments();
         fetchPatientName();
-        fetchPatientNotes(); 
+        fetchDoctorNotes(); 
     }, [patientId]);
 
     const handleClick = () => {
@@ -104,20 +105,24 @@ const PatientDashboard = () => {
                     </table>
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    {/* Weergeven patient notities in tabel */}
-                    {patientNotes.length > 0 ? (
+                    {/* Weergeven dokter notities in tabel */}
+                    {doctorNotes.length > 0 ? (
                         <table>
                             <thead>
                                 <tr>
                                     <th style={{ color: 'black' }}>Datum</th>
                                     <th style={{ color: 'black' }}>Notitie</th>
+                                    <th style={{ color: 'black' }}>Patiëntnaam</th>
+                                    <th style={{ color: 'black' }}>Patiëntachternaam</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {patientNotes.map((note, index) => (
+                                {doctorNotes.map((note, index) => (
                                     <tr key={index}>
                                         <td style={{ color: 'black' }}>{note.Date}</td>
                                         <td style={{ color: 'black' }}>{note.Type}</td>
+                                        <td style={{ color: 'black' }}>{note.Name}</td>
+                                        <td style={{ color: 'black' }}>{note.Lastname}</td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -131,4 +136,4 @@ const PatientDashboard = () => {
     );
 };
 
-export default PatientDashboard;
+export default DoctorDashboard;
