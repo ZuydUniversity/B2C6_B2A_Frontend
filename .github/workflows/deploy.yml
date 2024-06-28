@@ -5,6 +5,7 @@ on:
     branches:
       - CI-deployment
 
+jobs:     
   deploy:
     needs: build-and-test
     runs-on: ubuntu-latest
