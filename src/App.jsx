@@ -1,16 +1,24 @@
 import './styling/Main.css';
 import './styling/Login.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Navbar from './components/Navbar';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 const App = () => {
+    
+    useEffect(() => {
+        Cookies.remove('user_id')
+        Cookies.remove('role')
+    }, []);
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loginError, setLoginError] = useState(null);
-
+    const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -20,7 +28,8 @@ const App = () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ email, password })
+                body: JSON.stringify({ email, password }),
+                credentials: 'include'
             });
 
             if (!response.ok) {
@@ -32,6 +41,25 @@ const App = () => {
 
             if (response.ok) { // code : 200-299
                 setLoginError('Inloggen successvol');
+                const data = await response.json();
+                Cookies.set( 'user_id', data.user_id, {expires: 1/24});
+                Cookies.set( 'role', data.role, {expires: 1/24});
+
+                if(data.role == 1){
+                    navigate('/docmenu');
+                }
+                else if(data.role == 2){
+                    navigate('/patmenu');
+                }
+                else if(data.role == 3){
+                    navigate('/adminmenu');
+                }
+                else if(data.role == 4){
+                    navigate('/resmenu');
+                }
+                else{
+                    setLoginError("Gebruiker heeft geen rol, neem contact op met admin")
+                }
             }
 
         } catch (error) {
