@@ -67,7 +67,7 @@
     gap: 5px;
     width: 100%;
     max-width: 1400px;
-    padding-left: 60px;
+    padding-left: 30px;
 }
 
 .grid-item {
@@ -122,10 +122,10 @@
 .month-year-container {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Align horizontally centered */
-    align-items: center; /* Align vertically centered */
+    justify-content: center; 
+    align-items: center; 
     margin-top: 10px;
-    width: 75%; /* Occupy full width */
+    width: 75%; 
 }
 
 .month-display {

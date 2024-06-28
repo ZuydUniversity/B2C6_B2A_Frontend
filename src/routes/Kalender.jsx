@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import '../styling/Main.css';
 import '../styling/Kalender.css';
 import Navbar from '../components/Navbar';
+
 
 function Kalender() {
     const [showWeekCalendar, setShowWeekCalendar] = useState(false);
@@ -10,6 +12,27 @@ function Kalender() {
     const [selectedAppointment, setSelectedAppointment] = useState(null);
     const [currentWeekStartIndex, setCurrentWeekStartIndex] = useState(3);
     const [currentDayIndex, setCurrentDayIndex] = useState(5);
+    const [appointments, setAppointments] = useState([]);
+
+    useEffect(() => {
+        const fetchAppointments = async () => {
+            try {
+                const response = await axios.get('http://127.0.0.1:5000/user/10/appointment/get', {
+                    params: {
+                        start_date: "2024-06-01",
+                        end_date: "2024-06-30"
+                    }
+                });
+    
+                setAppointments(response.data.appointments);
+            } catch (error) {
+                console.error('Error fetching appointments:', error);
+            }
+        };
+    
+        fetchAppointments();
+    }, []);
+
 
     const handleWeekButtonClick = () => {
         setShowWeekCalendar(true);
@@ -48,15 +71,27 @@ function Kalender() {
         setShowWeekCalendar(true);
         setShowDayCalendar(false);
         setShowNewAppointment(false);
-        setCurrentWeekStartIndex(currentWeekStartIndex + 7);
+    
+        if (currentWeekStartIndex + 7 <= 30) {
+            setCurrentWeekStartIndex(currentWeekStartIndex + 7);
+        } else {
+            setCurrentWeekStartIndex(30 - 6);
+        }
     };
-
+    
     const handleVorigeWeekButtonClick = () => {
         setShowWeekCalendar(true);
         setShowDayCalendar(false);
         setShowNewAppointment(false);
-        setCurrentWeekStartIndex(currentWeekStartIndex - 7);
+    
+        if (currentWeekStartIndex - 7 >= 3) {  
+            setCurrentWeekStartIndex(currentWeekStartIndex - 7);
+        } else {
+            setCurrentWeekStartIndex(-4);  
+        }
     };
+    
+
 
     const handleNewAppointmentButtonClick = () => {
         setShowNewAppointment(true);
@@ -71,117 +106,108 @@ function Kalender() {
     
 
     const renderGridItems = () => {
-        const startingDayIndex = 5; 
-        const items = [];
-        let dayNumber = 1;
+    const startingDayIndex = 5;
+    const items = [];
+    let dayNumber = 1;
 
-        const appointments = {
-            //week 22
-            1: ["10:00u John Doe My", "14:00u Jane Smith Ra"],
-            2: [],
-            //week 23
-            3: ["11:00u Carol White My", "15:00u Dave Black Ra"],
-            4: ["08:00u Eve Green My", "16:00u Frank Blue Ra"],
-            5: ["12:00u Grace Pink My", "17:00u Hank Yellow Ra"],
-            6: ["07:00u Ida Red My", "18:00u Jack Orange Ra"],
-            7: ["10:30u Kate Violet My", "14:30u Leo Indigo Ra"],
-            8: ["09:30u Mike Gray My", "13:30u Nina Teal Ra"],
-            9: [],
-            //week 24
-            10: ["08:30u Quinn Brown My", "16:30u Rob Black Ra"],
-            11: ["12:30u Sam Green My", "17:30u Tom Blue Ra"],
-            12: ["07:30u Uma Red My", "18:30u Vic Orange Ra"],
-            13: ["10:45u Walt Violet My", "14:45u Xena Indigo Ra"],
-            14: ["09:45u Yan Gray My", "13:45u Zoe Teal Ra"],
-            15: ["11:45u Amy Gold My", "15:45u Ben Silver Ra"],
-            16: [],
-            //week 25
-            17: ["12:45u Ed Green My", "17:45u Fay Blue Ra"],
-            18: ["07:45u Gus Red My", "18:45u Hal Orange Ra"],
-            19: ["10:15u Ian Violet My", "14:15u Jen Indigo Ra"],
-            20: ["09:15u Kim Gray My", "13:15u Lou Teal Ra"],
-            21: ["11:15u Max Gold My", "15:15u Ned Silver Ra"],
-            22: ["08:15u Oli Brown My", "16:15u Pat Black Ra"],
-            23: [],
-            //week 26
-            24: ["07:15u Tim Red My", "18:15u Uma Orange Ra"],
-            25: ["10:55u Val Violet My", "14:55u Wes Indigo Ra"],
-            26: ["09:55u Xim Gray My", "13:55u Yul Teal Ra"],
-            27: ["11:55u Zed Gold My", "15:55u Amy Silver Ra"],
-            28: ["08:55u Ben Brown My", "16:55u Carl Black Ra"],
-            29: ["12:55u Dan Green My", "17:55u Ed Blue Ra"],
-            30: []
-        };
-
-        if (showWeekCalendar) {
-            const weekDays = Array.from({ length: 7 }, (_, i) => currentWeekStartIndex + i);
-            for (let day of weekDays) {
-                items.push(
-                    <div key={day} className="grid-item">
-                        <div className="day-number">{day}</div>
-                        <button className="small-button" onClick={() => handleDaySwitch(day)}>v</button>
-                        <div className="greybutton-container">
-                            {appointments[day] && appointments[day].map((appointment, idx) => (
-                                <button key={idx} className="grey-button" onClick={() => handleAppointmentClick(day, appointment)}>{appointment}</button>
-                            ))}
-                        </div>
-                    </div>
-                );
-            }
-        } else if (showDayCalendar) {
+    if (showWeekCalendar) {
+        const weekDays = Array.from({ length: 7 }, (_, i) => currentWeekStartIndex + i);
+        for (let day of weekDays) {
             items.push(
-                <div key={currentDayIndex} className="grid-item day-view-item">
-                    <div className="day-number">{currentDayIndex}</div>
-                    <button className="small-button" onClick={() => handleDaySwitch(currentDayIndex)}>v</button>
+                <div key={day} className="grid-item week-view-item">
+                    <div className="day-number">{day}</div>
+                    <button className="small-button" onClick={() => handleDaySwitch(day)}>v</button>
                     <div className="greybutton-container">
-                        {appointments[currentDayIndex] && appointments[currentDayIndex].map((appointment, idx) => (
-                            <button key={idx} className="grey-button" onClick={() => handleAppointmentClick(currentDayIndex, appointment)}>{appointment}</button>
+                        {appointments && appointments[day.toString()] && appointments[day.toString()].map((appointment, idx) => (
+                            <div key={idx} className="appointment-item">
+                                <button className="grey-button" onClick={() => handleAppointmentClick(day.toString(), appointment)}>
+                                    {appointment.Description}
+                                </button>
+                                <div className="appointment-details-in-grid">
+                                    <p>User ID: {appointment.participants['10'].id}</p>
+                                    <p>Date: {appointment.Date}</p>
+                                </div>
+                            </div>
                         ))}
                     </div>
                 </div>
             );
-        } else {
-            for (let row = 0; row < 6; row++) {
-                for (let col = 0; col < 7; col++) {
-                    const index = row * 7 + col;
-                    if (index >= startingDayIndex && dayNumber <= 30) {    
-                        
-                        items.push(
-                            <div key={index} className="grid-item">
-                                <div className="day-number">{dayNumber}</div>
-                                <button className="small-button" onClick={() => handleDaySwitch(currentDayIndex)}>v</button>
-                                    <div className="greybutton-container">
-                                        {appointments[dayNumber] && appointments[dayNumber].map((appointment, idx) => (
-                                            <button key={idx} className="grey-button" onClick={() => handleAppointmentClick(dayNumber, appointment)}>{appointment}</button>
-                                        ))}
-                                    </div>
+        }
+    } else if (showDayCalendar) {
+        items.push(
+            <div key={currentDayIndex} className="grid-item day-view-item">
+                <div className="day-number">{currentDayIndex}</div>
+                <button className="small-button" onClick={() => handleDaySwitch(currentDayIndex)}>v</button>
+                <div className="greybutton-container">
+                    {appointments && appointments[currentDayIndex.toString()] && appointments[currentDayIndex.toString()].map((appointment, idx) => (
+                        <div key={idx} className="appointment-item">
+                            <button className="grey-button" onClick={() => handleAppointmentClick(currentDayIndex.toString(), appointment)}>
+                                {appointment.Description}
+                            </button>
+                            <div className="appointment-details-in-grid">
+                                <p>User ID: {appointment.participants['10'].id}</p>
+                                <p>Date: {appointment.Date}</p>
                             </div>
-                        );
-                        dayNumber++;
-                    } else {
-                        items.push(<div key={index} className="empty-grid-item"></div>);
-                    }
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+    } else {
+        for (let row = 0; row < 6; row++) {
+            for (let col = 0; col < 7; col++) {
+                const index = row * 7 + col;
+                if (index >= startingDayIndex && dayNumber <= 30) {
+                    items.push(
+                        <div key={index} className="grid-item">
+                            <div className="day-number">{dayNumber}</div>
+                            <button className="small-button" onClick={() => handleDaySwitch(dayNumber)}>v</button>
+                            <div className="greybutton-container">
+                                {appointments && appointments[dayNumber.toString()] && appointments[dayNumber.toString()].map((appointment, idx) => (
+                                    <div key={idx} className="appointment-item">
+                                        <button className="grey-button" onClick={() => handleAppointmentClick(dayNumber.toString(), appointment)}>
+                                            {appointment.Description}
+                                        </button>
+                                        <div className="appointment-details-in-grid">
+                                            <p>User ID: {appointment.participants['10'].id}</p>
+                                            <p>Date: {appointment.Date}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    );
+                    dayNumber++;
+                } else {
+                    items.push(<div key={index} className="empty-grid-item"></div>);
                 }
             }
         }
-    
-        return items;
-    };
+    }
+
+    return items;
+};
+
 
     const handleAppointmentClick = (day, appointment) => {
-        const [time, patient] = appointment.split('u ');
-        const startTime = time.trim();
+        const startTime = appointment.Date.split(' ')[1];
         const endTime = calculateEndTime(startTime);
-        const cleanedPatient = patient.trim().replace(/ My$| Ra$/, '');
+        const cleanedPatient = `${appointment.participants[10].name} ${appointment.participants[10].lastname}`;
+        const userId = appointment.participants[10].id; 
+    
         setSelectedAppointment({
             day,
             startTime,
             endTime,
             patient: cleanedPatient,
-            staff: 'Dr. Koenen',
-            type: patient.endsWith('My') ? 'Myometrie' : patient.endsWith('Ra') ? 'Radiologie' : ''
+            staff: userId,
+            type: appointment.Description,
+            userId,  
+            date: appointment.Date,  
         });
     };
+    
+
 
     const calculateEndTime = (startTime) => {
         const [hours, minutes] = startTime.split(':').map(Number);
@@ -229,6 +255,7 @@ function Kalender() {
                             <button className="btn btn-outline-primary" onClick={handleVolgendeWeekButtonClick}>Volgende Week</button>
                             <button className="btn btn-outline-primary" onClick={handleVorigeDagButtonClick}>Vorige Dag</button>
                             <button className="btn btn-outline-primary" onClick={handleVolgendeDagButtonClick}>Volgende Dag</button>
+                            <button className="btn btn-outline-primary" onClick={handleNewAppointmentButtonClick}>Nieuwe Afspraak</button>
                             </div>
                         </div>
                     </div>
@@ -257,7 +284,7 @@ function Kalender() {
                             <div className="rounded-square">
                                 <div className="appointment-details">
                                     <p><strong>Afspraak details</strong></p>
-                                    <p><strong>Datum:</strong> 3 juni 2024</p>
+                                    <p><strong>Datum:</strong> {selectedAppointment.day} juni 2024</p>
                                     <p><strong>Begintijd:</strong> {selectedAppointment.startTime}</p>
                                     <p><strong>Eindtijd:</strong> {selectedAppointment.endTime}</p>
                                     <p><strong>Patiënt:</strong> {selectedAppointment.patient}</p>
