@@ -60,7 +60,7 @@ function ResetPassword() {
                         <Form.Label>Bevestig nieuw wachtwoord</Form.Label>
                         <Form.Control type="password" value={confirm_password} onChange={(e) => setConfirmPassword(e.target.value)} required />
                     </Form.Group>
-                    <Button type="submit" class="login_button w-100 mb-2 btn btn-primary"><i className="bi bi-check2-square"></i> Opslaan</Button>
+                    <button type="submit" class="login_button w-100 mb-3 btn"><i className="bi bi-check2-square"></i> Opslaan</button>
                 </Form>
             </div>
             {message && (
