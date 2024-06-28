@@ -14,9 +14,9 @@ import PatientSettingsPage from './routes/PatientSettingsPage.jsx';
 import PatientList from './components/PatientList.jsx';
 import Kalender from './routes/Kalender.jsx';
 import PatientDashboard from './routes/PatientDashboard.jsx';
-import DocMenuTest from './menuTests/doctormenu.jsx'
-import PatMenuTest from './menuTests/patientmenu.jsx'
-import ResMenuTest from './menuTests/researchermenu.jsx'
+import DocMenuTest from './menuTests/doctormenu.jsx';
+import PatMenuTest from './menuTests/patientmenu.jsx';
+import ResMenuTest from './menuTests/researchermenu.jsx';
 import AdminMenu from './menuTests/adminmenu.jsx';
 import ResetPassword from './routes/resetpassword.jsx';
 import ProfilePage from './routes/ProfilePage.jsx';

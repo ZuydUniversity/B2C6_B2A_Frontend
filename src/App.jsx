@@ -6,6 +6,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import Navbar from './components/Navbar';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
 import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 const App = () => {
     
@@ -17,7 +18,7 @@ const App = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loginError, setLoginError] = useState(null);
-
+    const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -40,6 +41,7 @@ const App = () => {
 
             if (response.ok) { // code : 200-299
                 setLoginError('Inloggen successvol');
+                const data = await response.json();
                 Cookies.set( 'user_id', data.user_id, {expires: 1/24});
                 Cookies.set( 'role', data.role, {expires: 1/24});
 
