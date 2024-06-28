@@ -40,7 +40,7 @@ function ForgotPassword() {
                 <Form onSubmit={handleSubmit} className="forget_form">
                     <Form.Group className="mb-3">
                         <Form.Label>E-mailadres</Form.Label>
-                        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                        <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                     </Form.Group>
                     <Button type="submit" className="login_button w-100 mb-2"><i className="bi bi-check2-square"></i> Verzend E-mail</Button>
                     <Button variant="secondary" type="button" className='login_button w-100' onClick={() => window.history.back()}>
