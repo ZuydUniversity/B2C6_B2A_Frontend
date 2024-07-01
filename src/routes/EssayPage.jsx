@@ -1,7 +1,7 @@
+import '../styling/Main.css';
 import Navbar from '../components/Navbar'; // Double period to go back one directory
 import TopPage from '../components/TopPage';
 import { useParams } from 'react-router-dom';
-import App from '../App';
 import React, { useState, useEffect } from 'react';
 
 const EssayPage = () => {
@@ -14,14 +14,19 @@ const EssayPage = () => {
             try {
                 const response = await fetch(`http://localhost:5000/user/${patientId}/appointment`);
                 const data = await response.json();
-                setAppointments(data);
+                if (Array.isArray(data)) {
+                    setAppointments(data);
+                } else {
+                    console.error('Error: API did not return an array');
+                    setAppointments([]);
+                }
             } catch (error) {
                 console.error('Error fetching patients:', error);
             }
         };
 
         getAppointments();
-    }, []);
+    }, [patientId]);
 
     const DataRow = ({ date, appointment, note }) => (
         <tr>
@@ -30,8 +35,6 @@ const EssayPage = () => {
             <td className="text-cell"><div className="rounded-right">{note}</div></td>
         </tr>
     );
-
-
 
     const DataTable = ({ data }) => (
         <>
@@ -45,7 +48,6 @@ const EssayPage = () => {
                 </thead>
             </table>
 
-
             <div className="patientoverview-scrollable-table">
                 <table>
                     <tbody>
@@ -56,11 +58,11 @@ const EssayPage = () => {
         </>
     );
 
-    const data = Appointments.map(appointment => ({
+    const data = Array.isArray(Appointments) ? Appointments.map(appointment => ({
         date: new Date(appointment.Date).toLocaleDateString('en-CA'), // Converts to 'YYYY-MM-DD' format
         appointment: appointment.Description,
         note: appointment.Note
-    }));
+    })) : [];
 
     return (
         <>

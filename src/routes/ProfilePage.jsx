@@ -241,8 +241,13 @@ const Settings = ({ userId }) => {
           />
           <label htmlFor="emailNotifications">Email Notificaties</label>
         </div>
+        <div>
+          <button onClick={handleSaveProfile}>Opties opslaan</button>
+        </div>
       </div>
+      
     </div>
+    
   );
 };
 

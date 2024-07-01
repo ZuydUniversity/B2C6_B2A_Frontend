@@ -12,7 +12,7 @@ const BackButton = () => {
 
     return (
         <button onClick={handleClick} className="btn btn-outline-primary">
-            <i className="bi bi-arrow-left"></i> Back
+            <i className="bi bi-arrow-left"></i> Terug
         </button>
     );
 };
