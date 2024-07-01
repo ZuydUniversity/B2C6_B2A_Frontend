@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
 
 function Register() {
-    const [accountType, setAccountType] = useState('');
+    const [accountType, setAccountType]= useState('Patient');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
@@ -88,7 +88,21 @@ function Register() {
             <>
                 <div className="col-md-6 mb-3">
                     <label htmlFor="specialization" className="form-label">Specialisatie</label>
-                    <input type="text" id="specialization" name="specialization" className="form-control" value={specialization} onChange={(e) => setSpecialization(e.target.value)} required />
+                    <select id="specialization" name="specialization" className="form-control" value={specialization} onChange={(e) => setSpecialization(e.target.value)} required>
+                        <option value="">Selecteer een specialisatie...</option>
+                        <option value="Algemene Geneeskunde">Algemene Geneeskunde</option>
+                        <option value="Cardiologie">Cardiologie</option>
+                        <option value="Chirurgie">Chirurgie</option>
+                        <option value="Dermatologie">Dermatologie</option>
+                        <option value="Fysiotherapeut">Fysiotherapeut</option>
+                        <option value="Gynaecologie">Gynaecologie</option>
+                        <option value="Neurologie">Neurologie</option>
+                        <option value="Oogheelkunde">Oogheelkunde</option>
+                        <option value="Orthopedie">Orthopedie</option>
+                        <option value="Pediatrie">Pediatrie</option>
+                        <option value="Psychiatrie">Psychiatrie</option>
+                        <option value="Radiologie">Radiologie</option>
+                    </select>
                 </div>
                 <div className="col-md-6 mb-3">
                     <label htmlFor="phoneNumber" className="form-label">Telefoonnummer</label>
@@ -103,7 +117,12 @@ function Register() {
             <>
                 <div className="col-md-6 mb-3">
                     <label htmlFor="gender" className="form-label">Geslacht</label>
-                    <input type="text" id="gender" name="gender" className="form-control" value={gender} onChange={(e) => setGender(e.target.value)} required />
+                    <select id="gender" name="gender" className="form-control" value={gender} onChange={(e) => setGender(e.target.value)} required>
+                        <option value="">Selecteer geslacht...</option>
+                        <option value="Man">Man</option>
+                        <option value="Vrouw">Vrouw</option>
+                        <option value="Anders">Anders</option>
+                    </select>
                 </div>
                 <div className="col-md-6 mb-3">
                     <label htmlFor="birthDate" className="form-label">Geboortedatum</label>
@@ -136,17 +155,8 @@ function Register() {
                 <form onSubmit={register}>
                     <div className="row mb-3">
                         <div className="col-md-6">
-                            <label htmlFor="accountType" className="form-label">Accounttype</label>
-                            <select className="form-select" id="accountType" value={accountType} onChange={changeAccount} required>
-                                <option value="" disabled>Selecteer een accounttype</option>
-                                <option value="Doctor">Dokter</option>
-                                <option value="Patient">Patiënt</option>
-                                <option value="Admin">Beheerder</option>
-                                <option value="Researcher">Onderzoeker</option>
-                            </select>
                         </div>
-                    </div>
-                    <div className="row mb-3">
+                    </div>                   <div className="row mb-3">
                         <div className="col-md-6 mb-3">
                             <label htmlFor="firstName" className="form-label">Voornaam</label>
                             <input type="text" id="firstName" name="firstName" className="form-control" value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
@@ -172,25 +182,18 @@ function Register() {
                         {accountType === 'Doctor' && renderDoctorFields()}
                         {accountType === 'Patient' && renderPatientFields()}
                     </div>
-                </form>
-
-                </div>            
-                    <div className="card card-width p-4">
-                    <Form action="/register" method="GET">
-                        <Button variant="secondary" type="submit" className='login_button w-100 mb-2'>
+                    <Button variant="secondary" type='submit' className='login_button w-100 mb-2'>
                             <i className="bi bi-person-plus-fill"></i> Registreren
-                        </Button>
-                    </Form>
-                    <Form method="GET" onClick={() => window.history.back()}>
-                        <Button variant="secondary" type="button" className='login_button w-100'>
+                    </Button>
+                </form>
+                </div>
+                    <div className="card card-width p-4">
+                        <Button variant="secondary" type="button" className='login_button w-100' onClick={() => window.history.back()}>
                             <i className="bi bi-arrow-left"></i> Terug
                         </Button>
-                    </Form>
                     {message && <p className="mt-3 text-center">{message}</p>}
                 </div>
-
         </div>
     );
 }
-
 export default Register;

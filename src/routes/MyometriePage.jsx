@@ -8,8 +8,7 @@ import { useParams } from 'react-router-dom';
 
 function MyometriePage() {
     const { patientId, resultId } = useParams();
-    const imageSrc = '../src/assets/kid_1.png';
-
+    const imageSrc = '/src/assets/kid_1.png';
     const [cmasScores, setCmasScores] = useState([]);
     const [note, setNote] = useState('');
     const [message, setMessage] = useState('');

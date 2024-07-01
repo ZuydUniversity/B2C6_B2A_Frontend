@@ -54,7 +54,7 @@ function ResultOverview() {
       if (Type === 'Myometrie') {
         navigate(`/myometriepage/${patientId}/${Id}`);
       } else if (Type === 'Radiologie') {
-        navigate(`/radiologypage/${patientId}/`);
+        navigate(`/radiologypage/${patientId}/${Id}`);
       } else {
         window.alert(`Row clicked: ${Type}`);
       }
