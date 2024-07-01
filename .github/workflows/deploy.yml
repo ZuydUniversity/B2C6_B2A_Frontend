@@ -43,3 +43,6 @@ jobs:
             #stop de frontend
             ansible-playbook -i ~/ansibleproject/ansible/inventory.ini ~/ansibleproject/ansible/frontend/start_frontend_vm.yml
           EOF
+          
+      - name: Cleanup
+        run: rm -f private_key
