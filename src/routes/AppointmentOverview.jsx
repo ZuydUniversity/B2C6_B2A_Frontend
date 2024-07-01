@@ -53,45 +53,46 @@ const AppointmentOverview = () => {
 
   return (
     <>
-    <Navbar />
-    <div className="container">
-      <table className='appointment_table'>
-        <caption>Afsprakenlijst</caption>
-        <thead>
-          <tr>
-            <th>Beschrijving</th>
-            <th>Datum & tijd</th>
-            <th>Acties</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Object.keys(data).map((id) => (
-            <tr key={id} onClick={() => handleView(id)}>
-              <td>{data[id].Description}</td>
-              <td>{new Date(data[id].Date).toLocaleString('nl-NL', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-              })}</td>
-              <td>
-                <button className="btn btn-outline-primary btn-sm" onClick={() => handleEdit(id)}>
-                  <i className="bi bi-pencil-square custom-icon"></i>
-                </button>
-                <button className="btn btn-outline-primary btn-sm" onClick={() => handleDelete(id)}>
-                  <i className="bi bi-trash3-fill custom-icon"></i>
-                </button>
-              </td>
+      <Navbar />
+      <div className="container">
+        <table className='appointment_table'>
+          <caption>Afsprakenlijst</caption>
+          <thead>
+            <tr>
+              <th>Beschrijving</th>
+              <th>Datum & tijd</th>
+              <th>Acties</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <button className="btn btn-outline-primary" onClick={handleCreate}>Nieuwe afspraak</button>
-    </div>
-  </>
-);
+          </thead>
+          <tbody>
+            {Object.keys(data).map((id) => (
+              <tr key={id}>
+                <td onClick={() => handleView(id)}>{data[id].Description}</td>
+                <td onClick={() => handleView(id)}>{new Date(data[id].Date).toLocaleString('nl-NL', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit'
+                })}</td>
+                <td>
+                  <button className="btn btn-outline-primary btn-sm" onClick={() => handleEdit(id)}>
+                    <i className="bi bi-pencil-square custom-icon"></i>
+                  </button>
+                  <button className="btn btn-outline-primary btn-sm" onClick={() => handleDelete(id)}>
+                    <i className="bi bi-trash3-fill custom-icon"></i>
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <button className="btn btn-outline-primary" onClick={handleCreate}>Nieuwe afspraak</button>
+      </div>
+    </>
+  );
 }
+
 
 
 export default AppointmentOverview;
