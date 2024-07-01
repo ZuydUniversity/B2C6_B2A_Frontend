@@ -41,7 +41,7 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=accept-new -i ./private_key ${{ secrets.AZURE_USER_ID }}@${{ secrets.Ansible_Controller_IP }} << 'EOF'
             #update
-            ansible-playbook -i ~/ansibleproject/ansible/inventory.ini ~/ansibleproject/ansible/frontend/update_frontend.yml
+            ansible-playbook -i ~/ansibleproject/ansible/inventory.ini ~/ansibleproject/ansible/frontend/stop_frontend_vm.yml
           EOF
           
       - name: Cleanup
