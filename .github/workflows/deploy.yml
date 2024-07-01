@@ -40,8 +40,8 @@ jobs:
       - name: Run application on VM
         run: |
           ssh -o StrictHostKeyChecking=accept-new -i ./private_key ${{ secrets.AZURE_USER_ID }}@${{ secrets.Ansible_Controller_IP }} << 'EOF'
-            #stop de frontend
-            ansible-playbook -i ~/ansibleproject/ansible/inventory.ini ~/ansibleproject/ansible/frontend/start_frontend_vm.yml
+            #update
+            ansible-playbook -i ~/ansibleproject/ansible/inventory.ini ~/ansibleproject/ansible/frontend/update_frontend.yml
           EOF
           
       - name: Cleanup
