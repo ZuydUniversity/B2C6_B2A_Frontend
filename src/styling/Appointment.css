@@ -4,11 +4,6 @@
   /* ------------------------------ */
   
   .appointment_table {
-    --primary-color: #000369;
-    --secundary-color: #D8EAFF;
-    --secundary-half-color: #E9F2FF;
-    --tertiary-color: #1B21D4;
-
     color:black;
     background: var(--secundary-color);
     width: 100%;
@@ -52,40 +47,4 @@
     background-color: white;
     color: black;
     margin-right: 0.3em;
-  }
-
-  /* Smaller screensizes */
-  @media (max-width: 650px) {
-    .appointment_table th {
-        display: none;
-    }
-
-    .appointment_table td {
-        display: grid;
-        gap: 0.5rem;
-        grid-template-columns: 15ch auto;
-        padding: 0.5rem 1rem;
-    }
-
-    .appointment_table td::before {
-        font-weight: 700;
-        text-transform: capitalize;
-    }
-
-    .appointment_table td:nth-of-type(1)::before {
-        content: "Description: ";
-    }
-
-    .appointment_table td:nth-of-type(2)::before {
-        content: "Datum & Tijd: ";
-    }
-
-    .appointment_table td:first-child {
-        padding-top: 1rem;
-    }
-
-    .appointment_table td:last-child {
-        padding-top: 1rem;
-        text-align: left;
-    }
   }

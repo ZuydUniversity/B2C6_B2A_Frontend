@@ -1,5 +1,7 @@
 import React, {useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import "../styling/Main.css"
 import "../styling/Appointment.css";
 import axios from 'axios';
 
@@ -8,6 +10,7 @@ const api = axios.create({
 });
 
 const AppointmentOverview = () => {
+ const navigate = useNavigate();
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -23,18 +26,20 @@ const AppointmentOverview = () => {
     }
   }
 
+  const handleView = (id) => {
+    navigate(`/appointmentview/view/${id}`);
+  };
+
   const handleCreate = () => {
-    console.log('Create new appointment');
+    navigate('/appointment/create');
   };
 
   const handleEdit = (id) => {
-    console.log(`Edit appointment with id: ${id}`);
-    // Implement edit functionality here
+    navigate(`/appointmentview/edit/${id}`);
   };
 
   const handleDelete = (id) => {
     const deleteAppointment = async () => {
-      console.log(`Delete appointment with id: ${id}`)
       try {
         await api.delete(`/appointment/${id}/delete`);
         fetchData();
@@ -48,45 +53,45 @@ const AppointmentOverview = () => {
 
   return (
     <>
-      <Navbar />
-      <div>
-        <table className='appointment_table'>
-          <caption>Afsprakenlijst</caption>
-          <thead>
-            <tr>
-              <th>Beschrijving</th>
-              <th>Datum & tijd</th>
-              <th>
-                <button onClick={() => handleCreate()}>Nieuwe afspraak</button>
-              </th>
+    <Navbar />
+    <div className="container">
+      <table className='appointment_table'>
+        <caption>Afsprakenlijst</caption>
+        <thead>
+          <tr>
+            <th>Beschrijving</th>
+            <th>Datum & tijd</th>
+            <th>Acties</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Object.keys(data).map((id) => (
+            <tr key={id} onClick={() => handleView(id)}>
+              <td>{data[id].Description}</td>
+              <td>{new Date(data[id].Date).toLocaleString('nl-NL', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+              })}</td>
+              <td>
+                <button className="btn btn-outline-primary btn-sm" onClick={() => handleEdit(id)}>
+                  <i className="bi bi-pencil-square custom-icon"></i>
+                </button>
+                <button className="btn btn-outline-primary btn-sm" onClick={() => handleDelete(id)}>
+                  <i className="bi bi-trash3-fill custom-icon"></i>
+                </button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {Object.entries(data).map(([id, appointment]) => (
-              <tr key={id}>
-                <td>{appointment.Description}</td>
-                <td>{new Date(appointment.Date).toLocaleString('nl-NL', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                  hour: '2-digit',
-                  minute: '2-digit'
-                })}</td>
-                <td>
-                  <button onClick={() => handleEdit(id)}>
-                    <i className="bi bi-pencil-square custom-icon"></i>
-                  </button>
-                  <button onClick={() => handleDelete(id)}>
-                    <i className="bi bi-trash3-fill custom-icon"></i>
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </>
-  );
+          ))}
+        </tbody>
+      </table>
+      <button className="btn btn-outline-primary" onClick={handleCreate}>Nieuwe afspraak</button>
+    </div>
+  </>
+);
 }
+
 
 export default AppointmentOverview;

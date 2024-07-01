@@ -21,7 +21,6 @@ import AdminMenu from './menuTests/adminmenu.jsx';
 import ResetPassword from './routes/resetpassword.jsx';
 import AppointmentOverview from './routes/AppointmentOverview.jsx';
 import AppointmentView from './routes/AppointmentView.jsx';
-import AppointmentCreate from './routes/AppointmentCreate.jsx';
 
 
 
@@ -47,8 +46,7 @@ const router = createBrowserRouter([
     { path: "/adminmenu", element: <AdminMenu />},
     { path: "/reset-password/:token", element: <ResetPassword /> },
     { path: "/appointmentoverview", element: <AppointmentOverview /> },
-    { path: "/appointmentview/:appointmentId", element: <AppointmentView />},
-    { path: "/appointment/create", element: <AppointmentCreate />}
+    { path: "/appointmentview/:action/:id", element: <AppointmentView />},
 ]);
 
 
