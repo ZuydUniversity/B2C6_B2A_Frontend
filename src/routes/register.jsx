@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Alert } from 'react-bootstrap';
 
 function Register() {
-    const [accountType, setAccountType] = useState('');
+    const [accountType, setAccountType]= useState('Patient');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
@@ -155,17 +155,8 @@ function Register() {
                 <form onSubmit={register}>
                     <div className="row mb-3">
                         <div className="col-md-6">
-                            <label htmlFor="accountType" className="form-label">Accounttype</label>
-                            <select className="form-select" id="accountType" value={accountType} onChange={changeAccount} required>
-                                <option value="" disabled>Selecteer een accounttype</option>
-                                <option value="Doctor">Dokter</option>
-                                <option value="Patient">Patiënt</option>
-                                <option value="Admin">Beheerder</option>
-                                <option value="Researcher">Onderzoeker</option>
-                            </select>
                         </div>
-                    </div>
-                    <div className="row mb-3">
+                    </div>                   <div className="row mb-3">
                         <div className="col-md-6 mb-3">
                             <label htmlFor="firstName" className="form-label">Voornaam</label>
                             <input type="text" id="firstName" name="firstName" className="form-control" value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
