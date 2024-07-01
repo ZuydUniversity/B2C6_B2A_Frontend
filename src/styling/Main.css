@@ -209,3 +209,21 @@
     width: 500px;
     padding-top: 110px;
 }
+
+.password-input-group {
+    display: flex;
+    align-items: center;
+}
+
+.show-password-btn {
+    margin-left: 8px;
+    cursor: pointer;
+    background-color: white !important;
+    border-color: var(--primary-color) !important;
+    color: var(--primary-color) !important;
+}
+
+.show-password-btn:hover {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+}

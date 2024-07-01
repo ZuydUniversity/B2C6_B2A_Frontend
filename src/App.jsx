@@ -9,16 +9,17 @@ import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 
 const App = () => {
-    
     useEffect(() => {
-        Cookies.remove('user_id')
-        Cookies.remove('role')
+        Cookies.remove('user_id');
+        Cookies.remove('role');
     }, []);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false); // State to manage password visibility
     const [loginError, setLoginError] = useState(null);
     const navigate = useNavigate();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -39,33 +40,32 @@ const App = () => {
                 throw new Error('Inloggen mislukt, probeer het opnieuw');
             }
 
-            if (response.ok) { // code : 200-299
-                setLoginError('Inloggen successvol');
+            if (response.ok) {
+                setLoginError('Inloggen succesvol');
                 const data = await response.json();
-                Cookies.set( 'user_id', data.user_id, {expires: 1/24});
-                Cookies.set( 'role', data.role, {expires: 1/24});
+                Cookies.set('user_id', data.user_id, { expires: 1 / 24 });
+                Cookies.set('role', data.role, { expires: 1 / 24 });
 
-                if(data.role == 1){
+                if (data.role == 1) {
                     navigate('/docmenu');
-                }
-                else if(data.role == 2){
+                } else if (data.role == 2) {
                     navigate('/patmenu');
-                }
-                else if(data.role == 3){
+                } else if (data.role == 3) {
                     navigate('/adminmenu');
-                }
-                else if(data.role == 4){
+                } else if (data.role == 4) {
                     navigate('/resmenu');
-                }
-                else{
-                    setLoginError("Gebruiker heeft geen rol, neem contact op met admin")
+                } else {
+                    setLoginError("Gebruiker heeft geen rol, neem contact op met admin");
                 }
             }
-
         } catch (error) {
             console.error('Login error:', error);
             setLoginError(error.message);
         }
+    };
+
+    const toggleShowPassword = () => {
+        setShowPassword(!showPassword);
     };
 
     return (
@@ -77,7 +77,7 @@ const App = () => {
                 <div className="card card-width p-4">
                     <Form onSubmit={handleSubmit}>
                         <Form.Group controlId="formEmail" className="mb-3">
-                            <Form.Label className='form-label'><i className="bi bi-envelope-at-fill"></i> E-mailadres</Form.Label>
+                            <Form.Label className='form-label'>E-mailadres</Form.Label>
                             <Form.Control 
                                 type="email" 
                                 value={email} 
@@ -86,13 +86,22 @@ const App = () => {
                             />
                         </Form.Group>
                         <Form.Group controlId="formPassword" className="mb-3">
-                            <Form.Label><i className="bi bi-key-fill"></i> Wachtwoord</Form.Label>
-                            <Form.Control 
-                                type="password" 
-                                value={password} 
-                                onChange={(e) => setPassword(e.target.value)} 
-                                required 
-                            />
+                            <Form.Label>Wachtwoord</Form.Label>
+                            <div className="password-input-group">
+                                <Form.Control 
+                                    type={showPassword ? "text" : "password"} 
+                                    value={password} 
+                                    onChange={(e) => setPassword(e.target.value)} 
+                                    required 
+                                />
+                                <Button 
+                                    variant="outline-secondary" 
+                                    onClick={toggleShowPassword} 
+                                    className="show-password-btn"
+                                >
+                                    {showPassword ? <i className="bi bi-eye-slash"></i> : <i className="bi bi-eye"></i>}
+                                </Button>
+                            </div>
                         </Form.Group>
                         <Button variant="primary" type="submit" className='login_button w-100'>
                             <i className="bi bi-box-arrow-right"></i> Inloggen
