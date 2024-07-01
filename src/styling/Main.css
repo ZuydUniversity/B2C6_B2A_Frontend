@@ -26,7 +26,7 @@
 } */
   
 /* DARK MODE */
-/* 
+/*
 @media (prefers-color-scheme: dark) {
     :root {
       --primary-color: #fc6039;
@@ -39,58 +39,48 @@
   
 /* COLORBLINDNESS MODES */
 /* Protanopia and Deuteranopia */
-@media screen and (colorblindness-1: active) {
-    :root {
+.color-blindness-1 {
       --primary-color: #b8b742;
       --secondary-color: #010150;
       --tertiary-color: #1d1da8;
       --background-color: #dfdff9;
       --text-color: black;
-    }
 }
 
 /* Tritanopia */
-@media screen and (colorblindness-2: active) {
-    :root {
+.color-blindness-4 {
       --primary-color: #F4494B;
       --secondary-color: #003C38;
       --tertiary-color: #1b867e;
       --background-color: #d8f5f5;
       --text-color: black;
-    }
 }
 
 /* Achromatopsia */
-@media screen and (colorblindness-3: active) {
-    :root {
+.color-blindness-3 {
       --primary-color: #8a8a8a;
       --secondary-color: #0d0d0d;
       --tertiary-color: #333333;
       --background-color: #e7e7e7;
       --text-color: black;
-    }
 }
 
 /* Achromatomaly */
-@media screen and (colorblindness-3: active) {
-    :root {
+.color-blindness-4 {
       --primary-color: #bd7765;
       --secondary-color: #070837;
       --tertiary-color: #282b7c;
       --background-color: #282b7c;
       --text-color: black;
-    }
 }
 
 /* HIGH CONTRAST MODE */
-@media screen and (high-contrast: active) {
-    :root {
+.high-contrast {
       --primary-color: #ff0000;
       --secondary-color: #0000ff;
       --tertiary-color: #00ff00;
       --background-color: #ffffff;
-      --text-color: #000000;
-    }
+      --text-color: #000000;  
 }
 
 /* Bootstrap overrides */
