@@ -28,8 +28,6 @@ jobs:
 
     - name: Run ESLint
       run: npm run lint
+      
 
-    - name: Configure ESLint rules
-      run: |
-        echo '{ "react/prop-types": "off" }' > .eslintrc.json
 
