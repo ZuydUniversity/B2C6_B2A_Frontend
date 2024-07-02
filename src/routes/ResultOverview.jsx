@@ -97,8 +97,8 @@ function ResultOverview() {
         <thead>
           <tr>
             <th onClick={() => requestSort('Type')}>Type</th>
-            <th onClick={() => requestSort('Date')}>Date</th>
-            <th>Download</th>
+            <th onClick={() => requestSort('Date')}>Datum</th>
+            <th>Download (PDF) </th>
           </tr>
         </thead>
         <tbody>

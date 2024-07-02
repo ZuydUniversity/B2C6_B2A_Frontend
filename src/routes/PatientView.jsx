@@ -81,8 +81,8 @@ function PatientView() {
     return (
         <>
             <Navbar />
+            <TopPage headerName="Patiënt" patientId={patientId} imageSrc={imageSrc} patientName={patientName} />
             <div className="container">
-                <TopPage headerName="Patiënt" patientId={patientId} imageSrc={imageSrc} patientName={patientName} />
                 <div className="row mt-4">
                     <div className="col-md-4 mb-3">
                         <div className="card">
@@ -126,7 +126,7 @@ function PatientView() {
                                     <p>Mail: {mail}</p>
                                     <p>Diagnose: {Array.isArray(diagnosis) ? diagnosis.map(diag => diag.Diagnosis).join(', ') : diagnosis.Diagnosis}</p>
                                 </div>
-                                <Link to={`/patientsettingspage/${patientId}`} className="btn btn-outline-primary mt-3">Alle gegevens</Link>
+                                <Link to={`/patientsettingspage/${patientId}`} className="btn btn-outline-primary">Alle gegevens</Link>
                             </div>
                         </div>
                     </div>
