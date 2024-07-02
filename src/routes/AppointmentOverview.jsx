@@ -31,7 +31,7 @@ const AppointmentOverview = () => {
   };
 
   const handleCreate = () => {
-    navigate('/appointment/create');
+    navigate('/appointmentview/create');
   };
 
   const handleEdit = (id) => {
@@ -61,19 +61,24 @@ const AppointmentOverview = () => {
             <tr>
               <th>Beschrijving</th>
               <th>Datum & tijd</th>
-              <th>Acties</th>
+              <th>
+              <button className="btn btn-outline-primary" onClick={handleCreate}>Nieuwe afspraak</button>
+              </th>
             </tr>
           </thead>
           <tbody>
             {Object.keys(data).map((id) => (
               <tr key={id}>
                 <td onClick={() => handleView(id)}>{data[id].Description}</td>
-                <td onClick={() => handleView(id)}>{new Date(data[id].Date).toLocaleString('nl-NL', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                  hour: '2-digit',
-                  minute: '2-digit'
+                <td onClick={() => handleView(id)}>
+                  {new Date(data[id].Date).toLocaleString('nl-NL', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false,
+                    timeZone: 'UTC'
                 })}</td>
                 <td>
                   <button className="btn btn-outline-primary btn-sm" onClick={() => handleEdit(id)}>
@@ -87,7 +92,6 @@ const AppointmentOverview = () => {
             ))}
           </tbody>
         </table>
-        <button className="btn btn-outline-primary" onClick={handleCreate}>Nieuwe afspraak</button>
       </div>
     </>
   );

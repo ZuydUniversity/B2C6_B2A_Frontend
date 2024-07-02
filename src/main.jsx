@@ -52,6 +52,7 @@ const router = createBrowserRouter([
     { path: "/profilepage/", element: <ProfilePage /> },
     { path: "/appointmentoverview", element: <AppointmentOverview /> },
     { path: "/appointmentview/:action/:id", element: <AppointmentView />},
+    { path: "/appointmentview/create", element: <AppointmentView />},
     { path: "*", element: <PageNotFound /> } // Add this line to catch all undefined routes
 ]);
 
