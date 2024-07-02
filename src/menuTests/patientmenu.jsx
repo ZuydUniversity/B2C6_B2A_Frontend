@@ -1,51 +1,42 @@
-import React, { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+
+
+
 
 function PatMenu() {
-
-    const location = useLocation();
     const navigate = useNavigate();
-    const message = "";
-    const { email, role } = location.state || {};
+    const [user_id, setUser_id] = useState(null);
+    const [role, setRole] = useState(null);
 
     useEffect(() => {
-        
-        if (!email || role != 2) {
+        const allCookies = Cookies.get();
+        if (Object.keys(allCookies).length === 0) {
+            console.log("No cookies found");
             navigate('/');
+        } else {
+            setUser_id(Cookies.get('user_id'));
+            setRole(Cookies.get('role'));
+        }
+    }, []);
+
+    useEffect(() => {
+        if (user_id === null || role === null) {
             return;
         }
+        if (user_id == null || role !== "2") { 
+            console.log('Redirecting due to invalid userid or role');
+            navigate('/');
+        }
+    }, [user_id, role]); 
 
-        const checkSession = async () => {
-            try {
-                const response = await fetch('http://127.0.0.1:5000/checksession', {
-                    method: 'POST',
-                    body: email,
-                    credentials: 'include',
-                });
-
-                if(!response.ok) {
-                    navigate('/')
-                }
-            }
-            catch (error) {
-                console.error('Error:', error);
-                navigate('/')
-
-            }
-        };
-
-        checkSession();
-    }, []);
-    
-    
-
-  return (
-    <>
-        <h1>PatMenu</h1>
-        <h1>{email} session valid</h1>
-    </>  
-  );
-
+    return (
+        <>
+            <h1>PatMenu</h1>
+            <h1> userid : {user_id} </h1>
+        </>
+    );
 }
 
 export default PatMenu;

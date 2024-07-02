@@ -24,14 +24,26 @@ function PatientOverview() {
 
     const navigate = useNavigate();
 
-    const DataRow = ({ imageSrc, name, birthdate, diagnosis, id }) => (
-        <tr onClick={() => navigate(`/patientview/${id}`)}>
-            <td><img src={imageSrc} alt="Profile" className="img-fluid rounded" /></td>
-            <td className="text-left">{name}</td>
-            <td className="text-left">{birthdate}</td>
-            <td className="text-left">{diagnosis}</td>
-        </tr>
-    );
+    const DataRow = ({ imageSrc, name, birthdate, diagnosis, id }) => {
+        // Functie om de geboortedatum te formatteren
+        const formatBirthdate = (dateString) => {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('nl-NL', {
+                year: 'numeric',
+                month: 'long', 
+                day: '2-digit',
+            });
+        };
+    
+        return (
+            <tr onClick={() => navigate(`/patientview/${id}`)}>
+                <td><img src={imageSrc} alt="Profile" className="img-fluid rounded" /></td>
+                <td className="text-left">{name}</td>
+                <td className="text-left">{formatBirthdate(birthdate)}</td>
+                <td className="text-left">{diagnosis}</td>
+            </tr>
+        );
+    };
 
     const DataTable = ({ data }) => (
         <div className="table-responsive">
@@ -39,9 +51,9 @@ function PatientOverview() {
                 <thead className="thead">
                     <tr>
                         <th scope="col" className="h5 bold"></th>
-                        <th scope="col" className="h5 bold">Naam</th>
+                        <th scope="col" className="h5 bold">Patiëntnaam</th>
                         <th scope="col" className="h5 bold">Geboortedatum</th>
-                        <th scope="col" className="h5 bold">Diagnosis</th>
+                        <th scope="col" className="h5 bold">Daignose</th>
                     </tr>
                 </thead>
                 <tbody>

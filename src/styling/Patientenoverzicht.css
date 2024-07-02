@@ -652,3 +652,9 @@
   .add-button {
     height: 183.6px !important;
   }
+
+  /* styles.css */
+.card-item:hover {
+    background-color: #f0f0f0; /* Andere kleur naar keuze */
+    cursor: pointer;
+}

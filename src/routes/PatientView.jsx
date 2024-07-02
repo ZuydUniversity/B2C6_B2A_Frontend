@@ -1,5 +1,4 @@
-import '../styling/Main.css';
-import '../styling/Patientenoverzicht.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from '../components/Navbar';
 import TopPage from '../components/TopPage';
 
@@ -23,13 +22,12 @@ function PatientView() {
                 }
                 const patientData = await response.json();
                 const patient = {
-                    "Birthdate": patientData.Birthdate,
-                    "Email": patientData.Email,
-                    "Lastname": patientData.Lastname,
-                    "Name": patientData.Name,
-                    "Phone_number": patientData.Phone_number,
+                    Birthdate: patientData.Birthdate,
+                    Email: patientData.Email,
+                    Lastname: patientData.Lastname,
+                    Name: patientData.Name,
+                    Phone_number: patientData.Phone_number,
                 };
-                console.log(patient);
                 setPatient(patient);
             } catch (error) {
                 console.error(`Failed to fetch patient: ${error}`);
@@ -83,42 +81,55 @@ function PatientView() {
     return (
         <>
             <Navbar />
-            <div className="PatientView">
-                <TopPage headerName="Patiënt" patientId={patientId} imageSrc={imageSrc} patientName={patientName} />
-                <div className='PageBottom'>
-                    <div className="ResultsBlock Block card">
-                        <h5>Resultaten</h5>
-                        <hr className="hr" />
-                        <div className="DataBlockData">
-                            {results.map((result, index) => (
-                                <div className="textual-data-row" key={index} onClick={() => handleNavigation(result.Type, result.Id)}>
-                                    <p>{index + 1}: {result.Type}</p>
+            <TopPage headerName="Patiënt" patientId={patientId} imageSrc={imageSrc} patientName={patientName} />
+            <div className="container">
+                <div className="row mt-4">
+                    <div className="col-md-4 mb-3">
+                        <div className="card">
+                            <div className="card-body">
+                            <h5>Resultaten</h5>
+                                    <hr />
+                                    <div>
+                                        {results.map((result, index) => (
+                                            <div className="card-item mb-2" key={index} onClick={() => handleNavigation(result.Type, result.Id)}>
+                                                <p className="mb-0">{index + 1}: {result.Type}</p>
+                                            </div>
+                                        ))}
                                 </div>
-                            ))}
+                                <Link to={`/resultoverview/${patientId}`} className="btn btn-outline-primary mt-3">Alle resultaten</Link>
+
+                            </div>
                         </div>
-                        <Link to={`/resultoverview/${patientId}`} className="btn btn-outline-primary">Alle resultaten</Link>
                     </div>
-                    <div className="VerslagenBlock Block card">
-                        <h5>Verslagen</h5>
-                        <hr className="hr" />
-                        <div className="DataBlockData">
-                            {Array.from({ length: 3 }, (_, i) => (
-                                <div className="mb-2" key={i + 1}>
-                                    <p>{i + 1}: Verslag {i + 1}</p>
+                    <div className="col-md-4 mb-3">
+                        <div className="card">
+                            <div className="card-body">
+                                <h5>Verslagen</h5>
+                                <hr />
+                                <div>
+                                    {Array.from({ length: 3 }, (_, i) => (
+                                        <div className="card-item mb-2" key={i + 1}>
+                                            <p className="mb-0">{i + 1}: Verslag {i + 1}</p>
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
+                                <Link to={`/essaypage/${patientId}`} className="btn btn-outline-primary mt-3">Alle verslagen</Link>
+                            </div>
                         </div>
-                        <Link to={`/essaypage/${patientId}`} className="btn btn-outline-primary">Alle verslagen</Link>
                     </div>
-                    <div className="GegevensBlock Block card">
-                        <h5>Gegevens</h5>
-                        <hr className="hr" />
-                        <div className="DataBlockData">
-                            <p>Nummer: {phoneNumber}</p>
-                            <p>Mail: {mail}</p>
-                            <p>Diagnose: {Array.isArray(diagnosis) ? diagnosis.map(diag => diag.Diagnosis).join(', ') : diagnosis.Diagnosis}</p>
+                    <div className="col-md-4 mb-3">
+                        <div className="card">
+                            <div className="card-body">
+                                <h5>Gegevens</h5>
+                                <hr />
+                                <div>
+                                    <p>Nummer: {phoneNumber}</p>
+                                    <p>Mail: {mail}</p>
+                                    <p>Diagnose: {Array.isArray(diagnosis) ? diagnosis.map(diag => diag.Diagnosis).join(', ') : diagnosis.Diagnosis}</p>
+                                </div>
+                                <Link to={`/patientsettingspage/${patientId}`} className="btn btn-outline-primary">Alle gegevens</Link>
+                            </div>
                         </div>
-                        <Link to={`/patientsettingspage/${patientId}`} className="btn btn-outline-primary">Alle gegevens</Link>
                     </div>
                 </div>
             </div>

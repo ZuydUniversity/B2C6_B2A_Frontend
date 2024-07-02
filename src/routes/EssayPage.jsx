@@ -1,8 +1,7 @@
-import Navbar from '../components/Navbar'; // Double period to go back one directory
-import TopPage from '../components/TopPage';
-import { useParams } from 'react-router-dom';
-import App from '../App';
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import Navbar from '../components/Navbar';
+import TopPage from '../components/TopPage';
 
 const EssayPage = () => {
     const { patientId } = useParams();
@@ -14,59 +13,56 @@ const EssayPage = () => {
             try {
                 const response = await fetch(`http://localhost:5000/user/${patientId}/appointment`);
                 const data = await response.json();
-                setAppointments(data);
+                if (Array.isArray(data)) {
+                    setAppointments(data);
+                } else {
+                    console.error('Error: API did not return an array');
+                    setAppointments([]);
+                }
             } catch (error) {
                 console.error('Error fetching patients:', error);
             }
         };
 
         getAppointments();
-    }, []);
+    }, [patientId]);
 
     const DataRow = ({ date, appointment, note }) => (
         <tr>
-            <td className="text-cell"><div className="rounded-left">{date}</div></td>
-            <td className="text-cell"><div className="middle-text-cell">{appointment}</div></td>
-            <td className="text-cell"><div className="rounded-right">{note}</div></td>
+            <td>{date}</td>
+            <td>{appointment}</td>
+            <td>{note}</td>
         </tr>
     );
 
-
-
     const DataTable = ({ data }) => (
         <>
-            <table className="patientoverview-datatable">
+            <table className="table table-striped">
                 <thead>
                     <tr>
-                        <th className="th-header-left"><div className="header-rounded-left header-item">Datum</div></th>
-                        <th className="th-header-middle"><div className="header-rounded-middle header-item">Afspraak</div></th>
-                        <th className="th-header-right"><div className="header-rounded-right header-item">Notitie</div></th>
+                        <th>Datum</th>
+                        <th>Afspraak</th>
+                        <th>Notitie</th>
                     </tr>
                 </thead>
+                <tbody>
+                    {data.map((row, index) => <DataRow key={index} {...row} />)}
+                </tbody>
             </table>
-
-
-            <div className="patientoverview-scrollable-table">
-                <table>
-                    <tbody>
-                        {data.map((row, index) => <DataRow key={index} {...row} />)}
-                    </tbody>
-                </table>
-            </div>
         </>
     );
 
-    const data = Appointments.map(appointment => ({
-        date: new Date(appointment.Date).toLocaleDateString('en-CA'), // Converts to 'YYYY-MM-DD' format
+    const data = Array.isArray(Appointments) ? Appointments.map(appointment => ({
+        date: new Date(appointment.Date).toLocaleDateString('en-CA'),
         appointment: appointment.Description,
         note: appointment.Note
-    }));
+    })) : [];
 
     return (
         <>
             <Navbar />
             <TopPage headerName="Verslagen" patientId={patientId} imageSrc={imageSrc} />
-            <div className="content">
+            <div className="container mt-4">
                 <DataTable data={data} />
             </div>
         </>
