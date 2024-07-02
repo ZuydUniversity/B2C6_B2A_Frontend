@@ -51,9 +51,9 @@ function PatientOverview() {
                 <thead className="thead">
                     <tr>
                         <th scope="col" className="h5 bold"></th>
-                        <th scope="col" className="h5 bold">Naam</th>
+                        <th scope="col" className="h5 bold">Patiëntnaam</th>
                         <th scope="col" className="h5 bold">Geboortedatum</th>
-                        <th scope="col" className="h5 bold">Diagnosis</th>
+                        <th scope="col" className="h5 bold">Daignose</th>
                     </tr>
                 </thead>
                 <tbody>
