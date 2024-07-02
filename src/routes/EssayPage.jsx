@@ -1,8 +1,7 @@
-import '../styling/Main.css';
-import Navbar from '../components/Navbar'; // Double period to go back one directory
-import TopPage from '../components/TopPage';
-import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import Navbar from '../components/Navbar';
+import TopPage from '../components/TopPage';
 
 const EssayPage = () => {
     const { patientId } = useParams();
@@ -30,36 +29,31 @@ const EssayPage = () => {
 
     const DataRow = ({ date, appointment, note }) => (
         <tr>
-            <td className="text-cell"><div className="rounded-left">{date}</div></td>
-            <td className="text-cell"><div className="middle-text-cell">{appointment}</div></td>
-            <td className="text-cell"><div className="rounded-right">{note}</div></td>
+            <td>{date}</td>
+            <td>{appointment}</td>
+            <td>{note}</td>
         </tr>
     );
 
     const DataTable = ({ data }) => (
         <>
-            <table className="patientoverview-datatable">
+            <table className="table table-striped">
                 <thead>
                     <tr>
-                        <th className="th-header-left"><div className="header-rounded-left header-item">Datum</div></th>
-                        <th className="th-header-middle"><div className="header-rounded-middle header-item">Afspraak</div></th>
-                        <th className="th-header-right"><div className="header-rounded-right header-item">Notitie</div></th>
+                        <th>Datum</th>
+                        <th>Afspraak</th>
+                        <th>Notitie</th>
                     </tr>
                 </thead>
+                <tbody>
+                    {data.map((row, index) => <DataRow key={index} {...row} />)}
+                </tbody>
             </table>
-
-            <div className="patientoverview-scrollable-table">
-                <table>
-                    <tbody>
-                        {data.map((row, index) => <DataRow key={index} {...row} />)}
-                    </tbody>
-                </table>
-            </div>
         </>
     );
 
     const data = Array.isArray(Appointments) ? Appointments.map(appointment => ({
-        date: new Date(appointment.Date).toLocaleDateString('en-CA'), // Converts to 'YYYY-MM-DD' format
+        date: new Date(appointment.Date).toLocaleDateString('en-CA'),
         appointment: appointment.Description,
         note: appointment.Note
     })) : [];
@@ -68,7 +62,7 @@ const EssayPage = () => {
         <>
             <Navbar />
             <TopPage headerName="Verslagen" patientId={patientId} imageSrc={imageSrc} />
-            <div className="content">
+            <div className="container mt-4">
                 <DataTable data={data} />
             </div>
         </>

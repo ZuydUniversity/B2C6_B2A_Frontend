@@ -111,7 +111,7 @@
     height: auto;
     max-height: 80%;
     color: white;
-    background-color: rgb(59, 107, 197);
+    background-color: var(--primary-color);
     border-radius: 20px;
     z-index: 1000;
     overflow: hidden;
