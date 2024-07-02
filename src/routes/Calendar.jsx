@@ -239,7 +239,7 @@ function Calendar() {
                 <div className="row">
                     <div className="col days-of-week">
                         {showDayCalendar ? (
-                            <div className="day">{days[(currentDayIndex - 3 + 7) % 7]}</div>
+                            <div className="day">{days[(new Date(displayDate)).getDay() - 1]}</div>
                         ) : (
                             days.map((day, index) => (
                                 <div key={index} className="day">
