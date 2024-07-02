@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - Soufjantje-patch-3
       
   pull_request:
     branches:
