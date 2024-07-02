@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Form, Button, Alert } from 'react-bootstrap';
+import { Form, Alert } from 'react-bootstrap';
 
 function ResetPassword() {
     const [new_password, setPassword] = useState('');
@@ -60,7 +60,7 @@ function ResetPassword() {
                         <Form.Label>Bevestig nieuw wachtwoord</Form.Label>
                         <Form.Control type="password" value={confirm_password} onChange={(e) => setConfirmPassword(e.target.value)} required />
                     </Form.Group>
-                    <button type="submit" class="login_button w-100 mb-3 btn"><i className="bi bi-check2-square"></i> Opslaan</button>
+                    <button type="submit" className="login_button w-100 mb-3 btn"><i className="bi bi-check2-square"></i> Opslaan</button>
                 </Form>
             </div>
             {message && (
