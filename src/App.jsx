@@ -47,7 +47,7 @@ const App = () => {
                 if (data.role == 1) {
                     navigate(`/doctordashboard/${user_id}`);
                 } else if (data.role == 2) {
-                    navigate(`/papatientdashboardtmenu/${user_id}`);
+                    navigate(`/patientdashboard/${user_id}`);
                 } else if (data.role == 3) {
                     navigate('/adminmenu');
                 } else if (data.role == 4) {
