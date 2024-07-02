@@ -5,12 +5,18 @@ import Navbar from '../components/Navbar';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import TopPage from '../components/TopPage';
 import { useParams } from 'react-router-dom';
+import { ButtonGroup, Button } from 'react-bootstrap';
 
 const PatientSettingsPage = () => {
     const { patientId } = useParams();
     const [patient, setPatient] = useState(null);
     const [diagnosis, setDiagnosis] = useState([]);
     const [medications, setMedications] = useState([]);
+    const [activeTab, setActiveTab] = useState('gegevens'); // Default to 'gegevens' tab
+
+    const handleTabChange = (tabName) => {
+        setActiveTab(tabName);
+    };
 
 
     //----------------------------------------------------------------//
@@ -621,277 +627,319 @@ const PatientSettingsPage = () => {
 
     return (
         <>
-          <Navbar />
-          <TopPage headerName="Patientgegevens" patientId={patientId} imageSrc={imageSrc} />
-          <div className="container">
-            <div className="row">
-              <div className="col-md-6">
-                <div className="card mb-3">
-                  <div className="card-header d-flex justify-content-between align-items-center">
-                    <p className="mb-0">Patientgegevens</p>
-                    {isEditing ? (
-                      <div>
-                        <button className="btn btn-outline-success btn-sm me-1" onClick={handleSaveClick}>
-                          <i className="bi bi-check-circle"></i>
-                        </button>
-                        <button className="btn btn-outline-danger btn-sm" onClick={handleCancelClick}>
-                          <i className="bi bi-x-circle"></i>
-                        </button>
-                      </div>
-                    ) : (
-                      <button className="btn btn-outline-primary btn-sm" onClick={handleEditClick}>
-                        <i className="bi bi-pencil-square"></i>
-                      </button>
-                    )}
-                  </div>
-                  <div className="card-body">
-                    {[
-                      { label: "Achternaam", value: lastName, editValue: editedLastName, onChange: setEditedLastName },
-                      { label: "Voornaam", value: firstName, editValue: editedFirstName, onChange: setEditedFirstName },
-                      { label: "Leeftijd", value: new Date().getFullYear() - new Date(birthdate).getFullYear() },
-                      { label: "Geslacht", value: gender, editValue: editedGender, onChange: setEditedGender },
-                      { label: "Diagnose(s)", value: Array.isArray(diagnosis) ? diagnosis.map(d => d.Diagnosis).join(', ') : '' },
-                      { label: "Geboortedatum", value: birthdate ? new Date(birthdate).toDateString() : '', editValue: editedBirthdate, onChange: setEditedBirthdate, isDate: true },
-                      { label: "Telefoonnummer", value: phone_number, editValue: editedPhoneNumber, onChange: setEditedPhoneNumber },
-                      { label: "Emailadres", value: email, editValue: editedEmail, onChange: setEditedEmail }
-                    ].map((field, index) => (
-                      <div key={index} className="mb-3 d-flex justify-content-between align-items-center">
-                        <p className="mb-0">{field.label}</p>
-                        {isEditing && field.editValue !== undefined ? (
-                          field.isDate ? (
-                            <input
-                              type="date"
-                              className="form-control uniform-input"
-                              value={field.editValue ? new Date(field.editValue).toISOString().split('T')[0] : ''}
-                              onChange={(e) => field.onChange(e.target.value)}
-                            />
-                          ) : (
-                            <input
-                              type="text"
-                              className="form-control uniform-input"
-                              value={field.editValue}
-                              onChange={(e) => field.onChange(e.target.value)}
-                            />
-                          )
-                        ) : (
-                          <p className="mb-0">{field.value}</p>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="card mb-3">
-                  <div className="card-header d-flex justify-content-between align-items-center">
-                    <p className="mb-0">Contactpersoon</p>
-                    {isEditingContact ? (
-                      <div>
-                        <button className="btn btn-outline-success btn-sm me-1" onClick={handleSaveContactClick}>
-                          <i className="bi bi-check-circle"></i>
-                        </button>
-                        <button className="btn btn-outline-danger btn-sm" onClick={handleCancelContactClick}>
-                          <i className="bi bi-x-circle"></i>
-                        </button>
-                      </div>
-                    ) : (
-                      <button className="btn btn-outline-primary btn-sm" onClick={handleEditContactClick}>
-                        <i className="bi bi-pencil-square"></i>
-                      </button>
-                    )}
-                  </div>
-                  <div className="card-body">
-                    {[
-                      { label: "Naam", value: lastNameContact, editValue: editedLastNameContact, onChange: setEditedLastNameContact },
-                      { label: "Voornaam", value: firstNameContact, editValue: editedFirstNameContact, onChange: setEditedFirstNameContact },
-                      { label: "Email", value: emailContact, editValue: editedEmailContact, onChange: setEditedEmailContact },
-                      { label: "Telefoonnummer", value: phoneNumberContact, editValue: editedPhoneNumberContact, onChange: setEditedPhoneNumberContact }
-                    ].map((field, index) => (
-                      <div key={index} className="mb-3 d-flex justify-content-between align-items-center">
-                        <p className="mb-0">{field.label}</p>
-                        {isEditingContact && field.editValue !== undefined ? (
-                          <input
-                            type="text"
-                            className="form-control uniform-input"
-                            value={field.editValue}
-                            onChange={(e) => field.onChange(e.target.value)}
-                          />
-                        ) : (
-                          <p className="mb-0">{field.value}</p>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-                <div className="col-md-6">
-                    <div className="card mb-3">
-                        <p className="mb-3 text-center">Nieuwe medicijn</p>
-                        <button className="add-button btn btn-outline-primary mb-3"  onClick={handleAddNewMedication}>
-                            <i className="bi bi-plus h1"></i>
-                        </button>
+            <Navbar />
+            <TopPage headerName="Patientgegevens" patientId={patientId} imageSrc={imageSrc} />
+            <div className="container">
+                <div className="row">
+                    <div className="col">
+                        <ButtonGroup className="mb-3 d-flex justify-content-center">
+                            <Button
+                                variant={activeTab === 'gegevens' ? 'active outline-active' : 'outline-primary'}
+                                onClick={() => handleTabChange('gegevens')}
+                            >
+                                Gegevens
+                            </Button>
+                            <Button
+                                variant={activeTab === 'medicatie' ? 'active outline-active' : 'outline-primary'}
+                                onClick={() => handleTabChange('medicatie')}
+                            >
+                                Medicatie
+                            </Button>
+                            <Button
+                                variant={activeTab === 'diagnose' ? 'active outline-active' : 'outline-primary'}
+                                onClick={() => handleTabChange('diagnose')}
+                            >
+                                Diagnose
+                            </Button>
+                        </ButtonGroup>
                     </div>
                 </div>
-                {Array.isArray(medications) && medications.length > 0 && (
-                  medications.map((medication, index) => (
-                    <div className="col-md-6">
-                        <div key={index} className="card mb-3">
-                        <div className="card-header d-flex justify-content-between align-items-center">
-                            <p className="mb-0">Medicatie</p>
-                            <div>
-                            {medication.isEditing ? (
-                                <div>
-                                <button className="btn btn-outline-success btn-sm me-1" onClick={() => handleSaveMedicationClick(medication.Id)}>
-                                    <i className="bi bi-check-circle"></i>
-                                </button>
-                                <button className="btn btn-outline-danger btn-sm" onClick={() => handleCancelMedicationClick(medication.Id)}>
-                                    <i className="bi bi-x-circle"></i>
-                                </button>
+                {activeTab === 'gegevens' && (
+                    <div className="row">
+                        {
+                            <div className="row">
+                              <div className="col-md-6">
+                                <div className="card mb-3">
+                                  <div className="card-header d-flex justify-content-between align-items-center">
+                                    <p className="mb-0">Patientgegevens</p>
+                                    {isEditing ? (
+                                      <div>
+                                        <button className="btn btn-outline-success btn-sm me-1" onClick={handleSaveClick}>
+                                          <i className="bi bi-check-circle"></i>
+                                        </button>
+                                        <button className="btn btn-outline-danger btn-sm" onClick={handleCancelClick}>
+                                          <i className="bi bi-x-circle"></i>
+                                        </button>
+                                      </div>
+                                    ) : (
+                                      <button className="btn btn-outline-primary btn-sm" onClick={handleEditClick}>
+                                        <i className="bi bi-pencil-square"></i>
+                                      </button>
+                                    )}
+                                  </div>
+                                  <div className="card-body">
+                                    {[
+                                      { label: "Achternaam", value: lastName, editValue: editedLastName, onChange: setEditedLastName },
+                                      { label: "Voornaam", value: firstName, editValue: editedFirstName, onChange: setEditedFirstName },
+                                      { label: "Leeftijd", value: new Date().getFullYear() - new Date(birthdate).getFullYear() },
+                                      { label: "Geslacht", value: gender, editValue: editedGender, onChange: setEditedGender },
+                                      { label: "Diagnose(s)", value: Array.isArray(diagnosis) ? diagnosis.map(d => d.Diagnosis).join(', ') : '' },
+                                      { label: "Geboortedatum", value: birthdate ? new Date(birthdate).toDateString() : '', editValue: editedBirthdate, onChange: setEditedBirthdate, isDate: true },
+                                      { label: "Telefoonnummer", value: phone_number, editValue: editedPhoneNumber, onChange: setEditedPhoneNumber },
+                                      { label: "Emailadres", value: email, editValue: editedEmail, onChange: setEditedEmail }
+                                    ].map((field, index) => (
+                                      <div key={index} className="mb-3 d-flex justify-content-between align-items-center">
+                                        <p className="mb-0">{field.label}</p>
+                                        {isEditing && field.editValue !== undefined ? (
+                                          field.isDate ? (
+                                            <input
+                                              type="date"
+                                              className="form-control uniform-input"
+                                              value={field.editValue ? new Date(field.editValue).toISOString().split('T')[0] : ''}
+                                              onChange={(e) => field.onChange(e.target.value)}
+                                            />
+                                          ) : (
+                                            <input
+                                              type="text"
+                                              className="form-control uniform-input"
+                                              value={field.editValue}
+                                              onChange={(e) => field.onChange(e.target.value)}
+                                            />
+                                          )
+                                        ) : (
+                                          <p className="mb-0">{field.value}</p>
+                                        )}
+                                      </div>
+                                    ))}
+                                  </div>
                                 </div>
-                            ) : medication.isDeleting ? (
-                                <div>
-                                <button className="btn btn-outline-success btn-sm me-1" onClick={() => confirmDelete(medication.Id)}>
-                                    <i className="bi bi-check-circle"></i>
-                                </button>
-                                <button className="btn btn-outline-danger btn-sm" onClick={() => cancelDelete(medication.Id)}>
-                                    <i className="bi bi-x-circle"></i>
-                                </button>
+                              </div>
+                              <div className="col-md-6">
+                                <div className="card mb-3">
+                                  <div className="card-header d-flex justify-content-between align-items-center">
+                                    <p className="mb-0">Contactpersoon</p>
+                                    {isEditingContact ? (
+                                      <div>
+                                        <button className="btn btn-outline-success btn-sm me-1" onClick={handleSaveContactClick}>
+                                          <i className="bi bi-check-circle"></i>
+                                        </button>
+                                        <button className="btn btn-outline-danger btn-sm" onClick={handleCancelContactClick}>
+                                          <i className="bi bi-x-circle"></i>
+                                        </button>
+                                      </div>
+                                    ) : (
+                                      <button className="btn btn-outline-primary btn-sm" onClick={handleEditContactClick}>
+                                        <i className="bi bi-pencil-square"></i>
+                                      </button>
+                                    )}
+                                  </div>
+                                  <div className="card-body">
+                                    {[
+                                      { label: "Naam", value: lastNameContact, editValue: editedLastNameContact, onChange: setEditedLastNameContact },
+                                      { label: "Voornaam", value: firstNameContact, editValue: editedFirstNameContact, onChange: setEditedFirstNameContact },
+                                      { label: "Email", value: emailContact, editValue: editedEmailContact, onChange: setEditedEmailContact },
+                                      { label: "Telefoonnummer", value: phoneNumberContact, editValue: editedPhoneNumberContact, onChange: setEditedPhoneNumberContact }
+                                    ].map((field, index) => (
+                                      <div key={index} className="mb-3 d-flex justify-content-between align-items-center">
+                                        <p className="mb-0">{field.label}</p>
+                                        {isEditingContact && field.editValue !== undefined ? (
+                                          <input
+                                            type="text"
+                                            className="form-control uniform-input"
+                                            value={field.editValue}
+                                            onChange={(e) => field.onChange(e.target.value)}
+                                          />
+                                        ) : (
+                                          <p className="mb-0">{field.value}</p>
+                                        )}
+                                      </div>
+                                    ))}
+                                  </div>
                                 </div>
-                            ) : (
-                                <div>
-                                <button className="btn btn-outline-primary btn-sm me-1" onClick={() => handleEditMedicationClick(medication.Id)}>
-                                    <i className="bi bi-pencil-square"></i>
-                                </button>
-                                <button className="btn btn-outline-danger btn-sm" onClick={() => handleDeleteButtonClick(medication.Id)}>
-                                    <i className="bi bi-trash"></i>
-                                </button>
-                                </div>
-                            )}
+                              </div>
                             </div>
-                        </div>
-                        <div className="card-body">
-                            {[
-                            { label: "Medicijn", value: medication.Name, editValue: medication.Name, onChange: (e) => handleInputChange(medication.Id, 'Name', e.target.value) },
-                            { label: "Gebruik", value: medication.Dose, editValue: medication.Dose, onChange: (e) => handleInputChange(medication.Id, 'Dose', e.target.value) },
-                            { label: "Frequentie", value: medication.Frequency, editValue: medication.Frequency, onChange: (e) => handleInputChange(medication.Id, 'Frequency', e.target.value) },
-                            { label: "Startdatum", value: medication.Start_date ? new Date(medication.Start_date).toDateString() : '', editValue: medication.Start_date, onChange: (e) => handleInputChange(medication.Id, 'Start_date', e.target.value), isDate: true }
-                            ].map((field, index) => (
-                            <div key={index} className="mb-3 d-flex justify-content-between align-items-center">
-                                <p className="mb-0">{field.label}</p>
-                                {medication.isEditing ? (
-                                field.isDate ? (
-                                    <input
-                                    type="date"
-                                    className="form-control uniform-input"
-                                    value={field.editValue ? new Date(field.editValue).toISOString().split('T')[0] : ''}
-                                    onChange={field.onChange}
-                                    />
-                                ) : (
-                                    <input
-                                    type="text"
-                                    className="form-control uniform-input"
-                                    value={field.editValue}
-                                    onChange={field.onChange}
-                                    />
-                                )
-                                ) : (
-                                <p className="mb-0">{field.value}</p>
-                                )}
-                            </div>
-                            ))}
-                        </div>
-                        </div>
+                        }
                     </div>
-                  ))
                 )}
-            </div>
-            <div className="row">
-                <div className="col-md-6">
-                    <div className="card mb-3">
-                        <p className="mb-3 text-center">Nieuwe diagnosis</p>
-                        <button className="add-button btn btn-outline-primary mb-3" onClick={handleAddNewDiagnosis}>
-                            <i className="bi bi-plus h1"></i>
-                        </button>
-                    </div>
-                </div>
-                {Array.isArray(diagnosis) && diagnosis.length > 0 && (
-                  diagnosis.map((diag, index) => (
-                <div className="col-md-6">
-                    <div key={index} className="card mb-3">
-                      <div className="card-header d-flex justify-content-between align-items-center">
-                        <p className="mb-0">Diagnose</p>
-                        <div>
-                          {diag.isEditing ? (
-                            <div>
-                              <button className="btn btn-outline-success btn-sm me-1" onClick={() => handleSaveDiagnosisClick(diag.Id)}>
-                                <i className="bi bi-check-circle"></i>
-                              </button>
-                              <button className="btn btn-outline-danger btn-sm" onClick={() => handleCancelDiagnosisClick(diag.Id)}>
-                                <i className="bi bi-x-circle"></i>
-                              </button>
+                {activeTab === 'medicatie' && (
+                    <div className="row">
+                        {
+                            <div className="row">
+                            <div className="col-md-6">
+                                <div className="card mb-3">
+                                    <p className="mb-3 text-center">Nieuwe medicijn</p>
+                                    <button className="add-button btn btn-outline-primary mb-3"  onClick={handleAddNewMedication}>
+                                        <i className="bi bi-plus h1"></i>
+                                    </button>
+                                </div>
                             </div>
-                          ) : diag.isDeleting ? (
-                            <div>
-                              <button className="btn btn-outline-success btn-sm me-1" onClick={() => confirmDiagDelete(diag.Id)}>
-                                <i className="bi bi-check-circle"></i>
-                              </button>
-                              <button className="btn btn-outline-danger btn-sm" onClick={() => cancelDiagDelete(diag.Id)}>
-                                <i className="bi bi-x-circle"></i>
-                              </button>
-                            </div>
-                          ) : (
-                            <div>
-                              <button className="btn btn-outline-primary btn-sm me-1" onClick={() => handleEditDiagnosisClick(diag.Id)}>
-                                <i className="bi bi-pencil-square"></i>
-                              </button>
-                              <button className="btn btn-outline-danger btn-sm" onClick={() => handleDiagDeleteButtonClick(diag.Id)}>
-                                <i className="bi bi-trash"></i>
-                              </button>
-                            </div>
-                          )}
+                            {Array.isArray(medications) && medications.length > 0 && (
+                              medications.map((medication, index) => (
+                                <div className="col-md-6">
+                                    <div key={index} className="card mb-3">
+                                    <div className="card-header d-flex justify-content-between align-items-center">
+                                        <p className="mb-0">Medicatie</p>
+                                        <div>
+                                        {medication.isEditing ? (
+                                            <div>
+                                            <button className="btn btn-outline-success btn-sm me-1" onClick={() => handleSaveMedicationClick(medication.Id)}>
+                                                <i className="bi bi-check-circle"></i>
+                                            </button>
+                                            <button className="btn btn-outline-danger btn-sm" onClick={() => handleCancelMedicationClick(medication.Id)}>
+                                                <i className="bi bi-x-circle"></i>
+                                            </button>
+                                            </div>
+                                        ) : medication.isDeleting ? (
+                                            <div>
+                                            <button className="btn btn-outline-success btn-sm me-1" onClick={() => confirmDelete(medication.Id)}>
+                                                <i className="bi bi-check-circle"></i>
+                                            </button>
+                                            <button className="btn btn-outline-danger btn-sm" onClick={() => cancelDelete(medication.Id)}>
+                                                <i className="bi bi-x-circle"></i>
+                                            </button>
+                                            </div>
+                                        ) : (
+                                            <div>
+                                            <button className="btn btn-outline-primary btn-sm me-1" onClick={() => handleEditMedicationClick(medication.Id)}>
+                                                <i className="bi bi-pencil-square"></i>
+                                            </button>
+                                            <button className="btn btn-outline-danger btn-sm" onClick={() => handleDeleteButtonClick(medication.Id)}>
+                                                <i className="bi bi-trash"></i>
+                                            </button>
+                                            </div>
+                                        )}
+                                        </div>
+                                    </div>
+                                    <div className="card-body">
+                                        {[
+                                        { label: "Medicijn", value: medication.Name, editValue: medication.Name, onChange: (e) => handleInputChange(medication.Id, 'Name', e.target.value) },
+                                        { label: "Gebruik", value: medication.Dose, editValue: medication.Dose, onChange: (e) => handleInputChange(medication.Id, 'Dose', e.target.value) },
+                                        { label: "Frequentie", value: medication.Frequency, editValue: medication.Frequency, onChange: (e) => handleInputChange(medication.Id, 'Frequency', e.target.value) },
+                                        { label: "Startdatum", value: medication.Start_date ? new Date(medication.Start_date).toDateString() : '', editValue: medication.Start_date, onChange: (e) => handleInputChange(medication.Id, 'Start_date', e.target.value), isDate: true }
+                                        ].map((field, index) => (
+                                        <div key={index} className="mb-3 d-flex justify-content-between align-items-center">
+                                            <p className="mb-0">{field.label}</p>
+                                            {medication.isEditing ? (
+                                            field.isDate ? (
+                                                <input
+                                                type="date"
+                                                className="form-control uniform-input"
+                                                value={field.editValue ? new Date(field.editValue).toISOString().split('T')[0] : ''}
+                                                onChange={field.onChange}
+                                                />
+                                            ) : (
+                                                <input
+                                                type="text"
+                                                className="form-control uniform-input"
+                                                value={field.editValue}
+                                                onChange={field.onChange}
+                                                />
+                                            )
+                                            ) : (
+                                            <p className="mb-0">{field.value}</p>
+                                            )}
+                                        </div>
+                                        ))}
+                                    </div>
+                                    </div>
+                                </div>
+                              ))
+                            )}
                         </div>
-                      </div>
-                      <div className="card-body">
-                        {[
-                          { label: "Dokter ID", value: diag.DoctorId, editValue: diag.DoctorId, onChange: (e) => handleInputChangeForDiagnosis(diag.Id, 'DoctorId', e.target.value) },
-                          { label: "Diagnose", value: diag.Diagnosis, editValue: diag.Diagnosis, onChange: (e) => handleInputChangeForDiagnosis(diag.Id, 'Diagnosis', e.target.value) },
-                          { label: "Beschrijving", value: diag.Description, editValue: diag.Description, onChange: (e) => handleInputChangeForDiagnosis(diag.Id, 'Description', e.target.value) },
-                          { label: "Datum", value: diag.Date ? new Date(diag.Date).toDateString() : '', editValue: diag.Date, onChange: (e) => handleInputChangeForDiagnosis(diag.Id, 'Date', e.target.value), isDate: true }
-                        ].map((field, index) => (
-                          <div key={index} className="mb-3 d-flex justify-content-between align-items-center">
-                            <p className="mb-0">{field.label}</p>
-                            {diag.isEditing ? (
-                              field.isDate ? (
-                                <input
-                                  type="date"
-                                  className="form-control uniform-input"
-                                  value={field.editValue ? new Date(field.editValue).toISOString().split('T')[0] : ''}
-                                  onChange={field.onChange}
-                                />
-                              ) : (
-                                <input
-                                  type="text"
-                                  className="form-control uniform-input"
-                                  value={field.editValue}
-                                  onChange={field.onChange}
-                                />
-                              )
-                            ) : (
-                              <p className="mb-0">{field.value}</p>
+                        }
+                    </div>
+                )}
+                {activeTab === 'diagnose' && (
+                    <div className="row">
+                        {
+                            <div className="row">
+                            <div className="col-md-6">
+                                <div className="card mb-3">
+                                    <p className="mb-3 text-center">Nieuwe diagnosis</p>
+                                    <button className="add-button btn btn-outline-primary mb-3" onClick={handleAddNewDiagnosis}>
+                                        <i className="bi bi-plus h1"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            {Array.isArray(diagnosis) && diagnosis.length > 0 && (
+                              diagnosis.map((diag, index) => (
+                            <div className="col-md-6">
+                                <div key={index} className="card mb-3">
+                                  <div className="card-header d-flex justify-content-between align-items-center">
+                                    <p className="mb-0">Diagnose</p>
+                                    <div>
+                                      {diag.isEditing ? (
+                                        <div>
+                                          <button className="btn btn-outline-success btn-sm me-1" onClick={() => handleSaveDiagnosisClick(diag.Id)}>
+                                            <i className="bi bi-check-circle"></i>
+                                          </button>
+                                          <button className="btn btn-outline-danger btn-sm" onClick={() => handleCancelDiagnosisClick(diag.Id)}>
+                                            <i className="bi bi-x-circle"></i>
+                                          </button>
+                                        </div>
+                                      ) : diag.isDeleting ? (
+                                        <div>
+                                          <button className="btn btn-outline-success btn-sm me-1" onClick={() => confirmDiagDelete(diag.Id)}>
+                                            <i className="bi bi-check-circle"></i>
+                                          </button>
+                                          <button className="btn btn-outline-danger btn-sm" onClick={() => cancelDiagDelete(diag.Id)}>
+                                            <i className="bi bi-x-circle"></i>
+                                          </button>
+                                        </div>
+                                      ) : (
+                                        <div>
+                                          <button className="btn btn-outline-primary btn-sm me-1" onClick={() => handleEditDiagnosisClick(diag.Id)}>
+                                            <i className="bi bi-pencil-square"></i>
+                                          </button>
+                                          <button className="btn btn-outline-danger btn-sm" onClick={() => handleDiagDeleteButtonClick(diag.Id)}>
+                                            <i className="bi bi-trash"></i>
+                                          </button>
+                                        </div>
+                                      )}
+                                    </div>
+                                  </div>
+                                  <div className="card-body">
+                                    {[
+                                      { label: "Dokter ID", value: diag.DoctorId, editValue: diag.DoctorId, onChange: (e) => handleInputChangeForDiagnosis(diag.Id, 'DoctorId', e.target.value) },
+                                      { label: "Diagnose", value: diag.Diagnosis, editValue: diag.Diagnosis, onChange: (e) => handleInputChangeForDiagnosis(diag.Id, 'Diagnosis', e.target.value) },
+                                      { label: "Beschrijving", value: diag.Description, editValue: diag.Description, onChange: (e) => handleInputChangeForDiagnosis(diag.Id, 'Description', e.target.value) },
+                                      { label: "Datum", value: diag.Date ? new Date(diag.Date).toDateString() : '', editValue: diag.Date, onChange: (e) => handleInputChangeForDiagnosis(diag.Id, 'Date', e.target.value), isDate: true }
+                                    ].map((field, index) => (
+                                      <div key={index} className="mb-3 d-flex justify-content-between align-items-center">
+                                        <p className="mb-0">{field.label}</p>
+                                        {diag.isEditing ? (
+                                          field.isDate ? (
+                                            <input
+                                              type="date"
+                                              className="form-control uniform-input"
+                                              value={field.editValue ? new Date(field.editValue).toISOString().split('T')[0] : ''}
+                                              onChange={field.onChange}
+                                            />
+                                          ) : (
+                                            <input
+                                              type="text"
+                                              className="form-control uniform-input"
+                                              value={field.editValue}
+                                              onChange={field.onChange}
+                                            />
+                                          )
+                                        ) : (
+                                          <p className="mb-0">{field.value}</p>
+                                        )}
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+                            </div>
+                              ))
                             )}
                           </div>
-                        ))}
-                      </div>
+                        }
                     </div>
-                </div>
-                  ))
                 )}
-              </div>
             </div>
         </>
-      );
-    };
-    
-    export default PatientSettingsPage;
+    );
+};
+
+export default PatientSettingsPage;
