@@ -3,6 +3,8 @@ import Navbar from '../components/Navbar';
 import { useNavigate, useParams } from 'react-router-dom';
 import TopPage from '../components/TopPage';
 import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 function ResultOverview() {
   const { patientId } = useParams();
@@ -27,10 +29,21 @@ function ResultOverview() {
     let sortableData = [...data];
     if (sortConfig.key) {
       sortableData.sort((a, b) => {
-        if (a[sortConfig.key] < b[sortConfig.key]) {
+        let aValue = a[sortConfig.key];
+        let bValue = b[sortConfig.key];
+
+        if (sortConfig.key === 'Date') {
+          aValue = new Date(aValue);
+          bValue = new Date(bValue);
+        } else if (!isNaN(aValue) && !isNaN(bValue)) {
+          aValue = parseFloat(aValue);
+          bValue = parseFloat(bValue);
+        }
+
+        if (aValue < bValue) {
           return sortConfig.direction === 'ascending' ? -1 : 1;
         }
-        if (a[sortConfig.key] > b[sortConfig.key]) {
+        if (aValue > bValue) {
           return sortConfig.direction === 'ascending' ? 1 : -1;
         }
         return 0;
@@ -38,13 +51,24 @@ function ResultOverview() {
     }
     return sortableData;
   }, [data, sortConfig]);
-
+  
   const requestSort = (key) => {
     let direction = 'ascending';
     if (sortConfig.key === key && sortConfig.direction === 'ascending') {
       direction = 'descending';
     }
     setSortConfig({ key, direction });
+  };
+
+  const getSortIcon = (key) => {
+    if (sortConfig.key === key) {
+      if (sortConfig.direction === 'ascending') {
+        return <i class="bi bi-sort-down ps-2"></i>;
+      } else {
+        return <i class="bi bi-sort-up ps-2"></i>;
+      }
+    }
+    return <i class=" bi bi-sort-up ps-2"></i>;
   };
 
   const DataRow = ({ Type, Date, Id }) => {
@@ -96,8 +120,12 @@ function ResultOverview() {
       <table className="table table-hover">
         <thead>
           <tr>
-            <th onClick={() => requestSort('Type')}>Type</th>
-            <th onClick={() => requestSort('Date')}>Datum</th>
+            <th onClick={() => requestSort('Type')} style={{ position: 'relative' }}>
+              Type{getSortIcon('Type')}
+            </th>
+            <th onClick={() => requestSort('Date')} style={{ position: 'relative' }}>
+              Datum{getSortIcon('Date')}
+            </th>
             <th>Download (PDF) </th>
           </tr>
         </thead>
