@@ -8,9 +8,9 @@ import { useParams } from 'react-router-dom';
 
 function RadiologyPage() {
     const { patientId } = useParams();
-    const shoulder_1 = '../src/assets/shoulder_1.jpg';
-    const shoulder_2 = '../src/assets/shoulder_2.jpg';
-    const imageSrc = '../src/assets/kid_1.png';
+    const shoulder_1 = '../../src/assets/shoulder_1.jpg';
+    const shoulder_2 = '../../src/assets/shoulder_2.jpg';
+    const imageSrc = '../../src/assets/kid_1.png';
     const patientName = 'John Doe';
 
     const images = [
