@@ -53,7 +53,9 @@ function Calendar() {
     }, [displayDate, showWeekCalendar]);
 
     const handleNewAppointmentButtonClick = () => {
-        // Redirect to the new appointment page
+        // Use history to navigate to the new appointment page
+        // In order to return to this page
+        // history.push('/appointment/create');
     };
 
     const handleWeekButtonClick = () => {
