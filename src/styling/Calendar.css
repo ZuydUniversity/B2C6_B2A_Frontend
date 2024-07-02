@@ -3,7 +3,7 @@
   /*----------------------------------*/
 
 
-  .calendar-datatable {
+.calendar-datatable {
     width: 1000px;
 }
 
@@ -128,13 +128,7 @@
     width: 75%; 
 }
 
-.month-display {
-    font-weight: bold;
-    color: black;
-    font-size: 1.2em;
-}
-
-.year-display {
+.month-year-display {
     font-weight: bold;
     color: black;
     font-size: 1.2em;
