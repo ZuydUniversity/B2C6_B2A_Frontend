@@ -1,9 +1,9 @@
-import React from 'react';
-import BackButton from './BackButton'; // Make sure to import the BackButton component
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import BackButton from './BackButton';
 
 const TopPage = ({ headerName, imageSrc, patientId }) => {
     const [patientName, setPatientName] = useState('');
+
     useEffect(() => {
         const fetchPatientName = async (patientId) => {
             try {
@@ -17,19 +17,22 @@ const TopPage = ({ headerName, imageSrc, patientId }) => {
                 console.error(`Failed to fetch patient: ${error}`);
             }
         };
-
-        fetchPatientName(patientId);
+    
+        if (patientId) { // Check if patientId is provided before making the API call because for example patientoverview doesnt use a patientId but still made a call.
+            fetchPatientName(patientId);
+        }
     }, [patientId]);
 
     return (
-        <div className="top-page">
-            <div className="top-page-nav-info">
+        <div className="container formwidth">
+            <div className="d-flex justify-content-between align-items-center mb-4">
                 <BackButton />
-                <h1>{headerName}</h1>
-            </div>
-            <div className="patient-data-block">
-                <h3 className="patient-results">{patientName}</h3>
-                <img className="patient-image-results" src={imageSrc} alt="patient" />
+                    <div>
+                    <div className="d-flex align-items-center mt-4">
+                            <h3 className="me-3 ms-3">{patientName}</h3>
+                            <img src={imageSrc} alt="Patient" className="img-thumbnail" style={{ width: '100px', height: '100px' }} />
+                    </div>
+                </div>
             </div>
         </div>
     );

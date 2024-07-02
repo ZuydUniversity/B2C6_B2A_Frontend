@@ -1,51 +1,60 @@
-import React from 'react';
-import './Navbar.css';
+import React, { useState } from 'react';
+import '../styling/Navbar.css';
+import '../styling/Main.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { Navbar, Nav, Form, FormControl, Button, Dropdown } from 'react-bootstrap';
 
-const Navbar = () => {
+const CustomNavbar = () => {
+    const [searchQuery, setSearchQuery] = useState('');
+    const navigate = useNavigate();
+
+    const handleSearchSubmit = (e) => {
+        e.preventDefault();
+        if (searchQuery.trim()) {
+            navigate(`/${encodeURIComponent(searchQuery)}`);
+        }
+    };
+
     return (
-        <nav className="navbar navbar-expand-lg border-bottom">
-            <div className="navbar-container"> {/* Voeg deze regel toe */}
-                <a className="navbar-brand" href="#">
-                    Logo
-                </a>
-                <button className="btn btn-outline-primary navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <i className="bi bi-list custom-icon"></i>
-                </button>
-
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav mr-auto">
-                        <Link to="/"><button type="button" className="btn btn-outline-primary"><i className="bi bi-house-fill"></i> Home</button></Link>
-                        <Link to="/PatientOverview"><button type="button" className="btn btn-outline-primary"><i className="bi bi-people-fill"></i> Patiëntenoverzicht</button></Link>
-                        <button type="button" className="btn btn-outline-primary"><i className="bi bi-file-check-fill"></i> Resultaten</button>
-                        <Link to="/Kalender"><button type="button" className="btn btn-outline-primary"><i className="bi bi-calendar-event-fill"></i> Kalender</button></Link>
-                    </ul>
-                    <ul className="navbar-nav mr-5">
-                        <div className="dropdown">
-                            <button type="button" className="btn btn-outline-primary" id="dropdownSearchButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="bi bi-search"></i> Zoeken</button>
-                            <div className="dropdown-menu p-3" aria-labelledby="dropdownSearchButton">
-                                <form className="form-inline d-flex">
-                                    <input className="form-control mr-1" type="search" placeholder="Zoeken..." aria-label="Zoeken" />
-                                    <button className="btn btn-outline-primary mr-0" type="submit"><i className="bi bi-search"></i></button>
-                                </form>
-                            </div>
-                        </div>
-                        <div className="dropdown">
-                            <button type="button" className="btn btn-outline-primary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i className="bi bi-person-circle"></i> Profiel</button>
-                            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a className="dropdown-item" href="#"><i className="bi bi-person-bounding-box"></i> Profielweergave</a>
-                                <a className="dropdown-item" href="#"><i className="bi bi-gear-fill"></i> Profielinstellingen</a>
-                                <div className="dropdown-divider"></div>
-                                <a className="dropdown-item" href="#"><i className="bi bi-box-arrow-left"></i> Uitloggen</a>
-                            </div>
-                        </div>
-                    </ul>
-                </div>
-            </div> {/* Voeg deze regel toe */}
-        </nav>
+        <Navbar expand="lg" className="border-bottom">
+            <div className="navbar-container">
+                <Navbar.Toggle aria-controls="navbarSupportedContent" />
+                <Navbar.Collapse id="navbarSupportedContent">
+                    <Nav className="me-auto">
+                        <Button as={Link} to="/DoctorDashboard" className="btn btn-outline-primary"><i className="bi bi-house-fill"></i> Home</Button>
+                        <Button as={Link} to="/PatientOverview" className="btn btn-outline-primary"><i className="bi bi-people-fill"></i> Patiëntenoverzicht</Button>
+                        <Button as={Link} to="/Kalender" className="btn btn-outline-primary"><i className="bi bi-calendar-event-fill"></i> Kalender</Button>
+                    </Nav>
+                    <Nav>
+                        <Form className="d-flex" onSubmit={handleSearchSubmit}>
+                            <FormControl
+                                type="search"
+                                placeholder="Zoeken..."
+                                className="form-control input-border-navbar mr-1"
+                                aria-label="Zoeken"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                            />
+                            <Button variant="outline-primary" type="submit"><i className="bi bi-search"></i></Button>
+                        </Form>
+                        <Dropdown>
+                            <Dropdown.Toggle variant="outline-primary" id="dropdownMenuButton">
+                                <i className="bi bi-person-circle"></i> Profiel
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                <Dropdown.Item as={Link} to="/"><i className="bi bi-person-bounding-box"></i> Profielweergave</Dropdown.Item>
+                                <Dropdown.Item as={Link} to="/ProfilePage"><i className="bi bi-person-fill-gear"></i> Profielinstellingen</Dropdown.Item>
+                                <Dropdown.Divider />
+                                <Dropdown.Item as={Link} to="/"><i className="bi bi-box-arrow-left"></i> Uitloggen</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </Nav>
+                </Navbar.Collapse>
+            </div>
+        </Navbar>
     );
 }
 
-export default Navbar;
+export default CustomNavbar;
