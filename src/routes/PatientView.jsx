@@ -81,22 +81,23 @@ function PatientView() {
     return (
         <>
             <Navbar />
+            <TopPage headerName="Patiënt" patientId={patientId} imageSrc={imageSrc} patientName={patientName} />
             <div className="container">
-                <TopPage headerName="Patiënt" patientId={patientId} imageSrc={imageSrc} patientName={patientName} />
                 <div className="row mt-4">
                     <div className="col-md-4 mb-3">
                         <div className="card">
                             <div className="card-body">
-                                <h5>Resultaten</h5>
-                                <hr />
-                                <div>
-                                    {results.map((result, index) => (
-                                        <div className="mb-2" key={index} onClick={() => handleNavigation(result.Type, result.Id)}>
-                                            <p className="mb-0">{index + 1}: {result.Type}</p>
-                                        </div>
-                                    ))}
+                            <h5>Resultaten</h5>
+                                    <hr />
+                                    <div>
+                                        {results.map((result, index) => (
+                                            <div className="card-item mb-2" key={index} onClick={() => handleNavigation(result.Type, result.Id)}>
+                                                <p className="mb-0">{index + 1}: {result.Type}</p>
+                                            </div>
+                                        ))}
                                 </div>
                                 <Link to={`/resultoverview/${patientId}`} className="btn btn-outline-primary mt-3">Alle resultaten</Link>
+
                             </div>
                         </div>
                     </div>
@@ -107,7 +108,7 @@ function PatientView() {
                                 <hr />
                                 <div>
                                     {Array.from({ length: 3 }, (_, i) => (
-                                        <div className="mb-2" key={i + 1}>
+                                        <div className="card-item mb-2" key={i + 1}>
                                             <p className="mb-0">{i + 1}: Verslag {i + 1}</p>
                                         </div>
                                     ))}
@@ -126,7 +127,7 @@ function PatientView() {
                                     <p>Mail: {mail}</p>
                                     <p>Diagnose: {Array.isArray(diagnosis) ? diagnosis.map(diag => diag.Diagnosis).join(', ') : diagnosis.Diagnosis}</p>
                                 </div>
-                                <Link to={`/patientsettingspage/${patientId}`} className="btn btn-outline-primary mt-3">Alle gegevens</Link>
+                                <Link to={`/patientsettingspage/${patientId}`} className="btn btn-outline-primary">Alle gegevens</Link>
                             </div>
                         </div>
                     </div>
