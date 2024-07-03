@@ -774,8 +774,8 @@ const PatientSettingsPage = () => {
                             </div>
                             {Array.isArray(medications) && medications.length > 0 && (
                               medications.map((medication, index) => (
-                                <div className="col-md-6">
-                                    <div key={index} className="card mb-3">
+                                <div key={index} className="col-md-6">
+                                    <div className="card mb-3">
                                     <div className="card-header d-flex justify-content-between align-items-center">
                                         <p className="mb-0">Medicatie</p>
                                         <div>
@@ -862,8 +862,8 @@ const PatientSettingsPage = () => {
                             </div>
                             {Array.isArray(diagnosis) && diagnosis.length > 0 && (
                               diagnosis.map((diag, index) => (
-                            <div className="col-md-6">
-                                <div key={index} className="card mb-3">
+                            <div key={index} className="col-md-6">
+                                <div className="card mb-3">
                                   <div className="card-header d-flex justify-content-between align-items-center">
                                     <p className="mb-0">Diagnose</p>
                                     <div>

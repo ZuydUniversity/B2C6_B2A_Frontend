@@ -63,12 +63,12 @@ function ResultOverview() {
   const getSortIcon = (key) => {
     if (sortConfig.key === key) {
       if (sortConfig.direction === 'ascending') {
-        return <i class="bi bi-sort-down ps-2"></i>;
+        return <i className="bi bi-sort-down ps-2"></i>;
       } else {
-        return <i class="bi bi-sort-up ps-2"></i>;
+        return <i className="bi bi-sort-up ps-2"></i>;
       }
     }
-    return <i class=" bi bi-sort-up ps-2"></i>;
+    return <i className=" bi bi-sort-up ps-2"></i>;
   };
 
   const DataRow = ({ Type, Date, Id }) => {

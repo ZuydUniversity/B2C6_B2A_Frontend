@@ -10,7 +10,7 @@ function RadiologyPage() {
     const shoulder_1 = '../../src/assets/shoulder_1.jpg';
     const shoulder_2 = '../../src/assets/shoulder_2.jpg';
     const imageSrc = '../../src/assets/kid_1.png';
-    const patientName = 'John Doe';
+    
 
     const images = [
         shoulder_1, shoulder_2,
