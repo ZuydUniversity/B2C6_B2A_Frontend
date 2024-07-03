@@ -8,28 +8,47 @@ import Cookies from 'js-cookie';
 function DocMenu() {
     const navigate = useNavigate();
     const [user_id, setUser_id] = useState(null);
-    const [role, setRole] = useState(null);
 
     useEffect(() => {
-        const allCookies = Cookies.get();
-        if (Object.keys(allCookies).length === 0) {
-            console.log("No cookies found");
-            navigate('/');
-        } else {
-            setUser_id(Cookies.get('user_id'));
-            setRole(Cookies.get('role'));
+        async function GetAccountInfo(){
+            try {
+                const authToken = Cookies.get('auth_token');
+                if (!authToken) {
+                    throw new Error('Not authenticated');
+                }
+                const response = await fetch('http://127.0.0.1:5000/get_account_info', {
+                    method: 'POST',  // Changed to POST method
+                    headers: {
+                        'Content-Type': 'application/json',
+                        credentials: "include"
+                    },
+                    body: JSON.stringify({ auth_token: authToken })
+                });
+    
+                if (!response.ok) {
+                    if(response.status === 500) {
+                        throw new Error('Server error, probeer het later opnieuw');
+                    }
+                    throw new Error('Error met het authenticeren, probeer het later opniew');
+                }
+    
+                if (response.ok) {
+                   let data = await response.json();
+                   let role = data.role;
+                   setUser_id(data.user_id);
+                   if(role != 1) {
+                       throw new Error('Geen toegang tot deze pagina');
+                   }
+                }
+            } catch (error) {
+                console.error('Auth error:', error);
+                navigate('/');
+            }
         }
+        GetAccountInfo();
     }, []);
 
-    useEffect(() => {
-        if (user_id === null || role === null) {
-            return;
-        }
-        if (user_id == null || role !== "1") { 
-            console.log('Redirecting due to invalid userid or role');
-            navigate('/');
-        }
-    }, [user_id, role]); 
+    
 
     return (
         <>
