@@ -1,6 +1,6 @@
 import '../styling/Main.css';
 import '../styling/Patientenoverzicht.css';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import TopPage from '../components/TopPage';
@@ -140,8 +140,7 @@ const PatientSettingsPage = () => {
 
     // General state for editing
     const [isEditing, setIsEditing] = useState(false);
-    const [isDeleting, setIsDeleting] = useState(false);
-    const [deletingMedicationId, setDeletingMedicationId] = useState(null);
+
 
     //----------------------------------------------------------------//
     //-------Logic for handling UI-patient changes upon editing-------//
@@ -736,8 +735,8 @@ const PatientSettingsPage = () => {
                 </div>
                 {Array.isArray(medications) && medications.length > 0 && (
                   medications.map((medication, index) => (
-                    <div className="col-md-6">
-                        <div key={index} className="card mb-3">
+                    <div key={index} className="col-md-6">
+                        <div className="card mb-3">
                         <div className="card-header d-flex justify-content-between align-items-center">
                             <p className="mb-0">Medicatie</p>
                             <div>
@@ -818,8 +817,8 @@ const PatientSettingsPage = () => {
                 </div>
                 {Array.isArray(diagnosis) && diagnosis.length > 0 && (
                   diagnosis.map((diag, index) => (
-                <div className="col-md-6">
-                    <div key={index} className="card mb-3">
+                <div key={index} className="col-md-6">
+                    <div className="card mb-3">
                       <div className="card-header d-flex justify-content-between align-items-center">
                         <p className="mb-0">Diagnose</p>
                         <div>

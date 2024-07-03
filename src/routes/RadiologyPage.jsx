@@ -1,7 +1,6 @@
 import '../styling/Main.css';
 import '../styling/Patientenoverzicht.css';
 import Navbar from '../components/Navbar';
-import React from 'react';
 import Carousel from '../components/Carousel';
 import TopPage from '../components/TopPage';
 import { useParams } from 'react-router-dom';

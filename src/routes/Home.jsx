@@ -2,8 +2,7 @@ import '../styling/Main.css';
 import '../styling/Home.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from '../components/Navbar';
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import  { useState, useEffect } from 'react';
 import { Table, Card, Button } from 'react-bootstrap';
 
 const DoctorDashboard = () => {

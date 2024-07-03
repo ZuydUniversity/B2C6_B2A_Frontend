@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar';
 import { useNavigate } from 'react-router-dom';
 import kid_1 from '../assets/kid_1.png';
 import { useParams } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const PatientDashboard = () => {
     const [patientName, setPatientName] = useState('');

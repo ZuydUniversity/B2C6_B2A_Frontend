@@ -1,11 +1,11 @@
 import '../styling/Main.css';
 import '../styling/Login.css';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 
 function Register() {
-    const [accountType, setAccountType]= useState('Patient');
+    const [accountType]= useState('Patient');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
