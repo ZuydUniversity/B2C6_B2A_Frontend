@@ -36,6 +36,12 @@ jobs:
           chmod 600 private_key
           ls -l private_key
 
+      - name: Set up SSH key2
+        run: |
+          echo "${{ secrets.ANSIBLE_SSH_CONVERTED2 }}" > private_key2
+          chmod 600 private_key2
+          ls -l private_key2
+
       - name: Test SSH connection to Ansible controller
         run: |
           ssh -o StrictHostKeyChecking=accept-new -i ./private_key ${{ secrets.AZURE_USER_ID }}@${{ secrets.Ansible_Controller_IP }} "echo SSH connection successful"
@@ -114,8 +120,8 @@ jobs:
 
       - name: Transfer playbook.yml to remote VM
         run: |
-          scp -o StrictHostKeyChecking=accept-new -i ./private_key playbook.yml ${{ secrets.AZURE_USER_ID }}@${{ secrets.Ansible_Controller_IP }}:/home/${{ secrets.AZURE_USER_ID }}/playbook.yml
+          scp -o StrictHostKeyChecking=accept-new -i ./private_key2 playbook.yml ${{ secrets.AZURE_USER_ID }}@${{ secrets.Ansible_Controller_IP }}:/home/${{ secrets.AZURE_USER_ID }}/playbook.yml
 
       - name: Run Ansible playbook on remote VM
         run: |
-          ssh -o StrictHostKeyChecking=accept-new -i ./private_key ${{ secrets.AZURE_USER_ID }}@${{ secrets.Ansible_Controller_IP }} "ansible-playbook -i inventory /home/${{ secrets.AZURE_USER_ID }}/playbook.yml"
+          ssh -o StrictHostKeyChecking=accept-new -i ./private_key2 ${{ secrets.AZURE_USER_ID }}@${{ secrets.Ansible_Controller_IP }} "ansible-playbook -i inventory /home/${{ secrets.AZURE_USER_ID }}/playbook.yml"
