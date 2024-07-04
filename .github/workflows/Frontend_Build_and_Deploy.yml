@@ -49,79 +49,51 @@ jobs:
       - name: Deploy and configure VM on Azure
         run: |
           ssh -o StrictHostKeyChecking=accept-new -i ./private_key ${{ secrets.AZURE_USER_ID }}@${{ secrets.Ansible_Controller_IP }} << 'EOF'
+            set -e
+
+            # Login to Azure
             az login --service-principal -u ${{ secrets.CLIENT_ID }} -p ${{ secrets.CLIENT_SECRET }} --tenant ${{ secrets.TENANT_ID }}
+            
+            # Create the VM
             az vm create --resource-group B2C6A --name frontendvm1 \
               --image "Canonical:0001-com-ubuntu-minimal-jammy:minimal-22_04-lts-gen2:latest" \
               --admin-username ${{ secrets.AZURE_USER_ID }} --assign-identity --generate-ssh-keys \
               --public-ip-sku Standard --location westeurope --size Standard_B1s \
               --storage-sku Standard_LRS --nic-delete-option delete --os-disk-delete-option delete
+              
+            # Open the port
             az vm open-port --resource-group B2C6A --name frontendvm1 --port 3000 --priority 1100
+
+            # Wait for the VM to be ready
             sleep 120
+            
+            # Get the VM's public IP address
             vm_ip=$(az vm list-ip-addresses --resource-group B2C6A --name frontendvm1 --query "[].virtualMachine.network.publicIpAddresses[].ipAddress" -o tsv)
-            echo "[frontendvm1]" > inventory
-            echo "$vm_ip ansible_user=${{ secrets.AZURE_USER_ID }} ansible_ssh_private_key_file=/home/${{ secrets.AZURE_USER_ID }}/ansibleproject/backup-frontend-private-key" >> inventory
+            echo "VM IP Address: $vm_ip"
+            
+            # SSH into the new VM and run setup tasks
+            ssh -o StrictHostKeyChecking=accept-new -i /home/${{ secrets.AZURE_USER_ID }}/.ssh/id_rsa ${{ secrets.AZURE_USER_ID }}@$vm_ip << 'VM_EOF'
+              sudo apt-get update
+              sudo apt-get install -y git curl
+              curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+              sudo apt-get install -y nodejs
+
+              mkdir -p /home/${{ secrets.AZURE_USER_ID }}/backup
+              git clone https://github.com/ZuydUniversity/B2C6_B2A_Frontend /home/${{ secrets.AZURE_USER_ID }}/backup/B2C6_B2A_Frontend
+              
+              cd /home/${{ secrets.AZURE_USER_ID }}/backup/B2C6_B2A_Frontend
+              npm install
+              
+              cat << 'CONFIG_EOF' > vite.config.js
+              import { defineConfig } from 'vite';
+              export default defineConfig({
+                server: {
+                  host: '0.0.0.0',
+                  port: 3000,
+                  strictPort: true,
+                  cors: true
+                }
+              });
+              CONFIG_EOF
+            VM_EOF
           EOF
-
-      - name: Write Ansible playbook to file
-        run: |
-          cat << 'EOF' > playbook.yml
-          ---
-          - name: Automate frontend setup
-            hosts: frontendvm1
-            gather_facts: false
-            tasks:
-              - name: Check if frontend is reachable
-                ping:
-              - name: Install git
-                become: true
-                apt:
-                  name: git
-                  state: present
-                  update_cache: yes
-              - name: Install Node.js and npm
-                become: true
-                shell: |
-                  curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-                  apt-get install -y nodejs
-              - name: Create backup directory
-                become: true
-                become_user: "{{ secrets.AZURE_USER_ID }}"
-                file:
-                  path: /home/{{ secrets.AZURE_USER_ID }}/backup
-                  state: directory
-              - name: Clone repository B2C6_B2A_Frontend into backup directory
-                become: true
-                become_user: "{{ secrets.AZURE_USER_ID }}"
-                git:
-                  repo: https://github.com/ZuydUniversity/B2C6_B2A_Frontend
-                  dest: /home/{{ secrets.AZURE_USER_ID }}/backup/B2C6_B2A_Frontend
-              - name: Run npm install
-                become: true
-                become_user: "{{ secrets.AZURE_USER_ID }}"
-                shell:
-                  cmd: npm install
-                  chdir: /home/{{ secrets.AZURE_USER_ID }}/backup/B2C6_B2A_Frontend/
-              - name: Replace vite.config.js with custom configuration
-                become: true
-                become_user: "{{ secrets.AZURE_USER_ID }}"
-                ansible.builtin.copy:
-                  content: |
-                    import { defineConfig } from 'vite';
-                    export default defineConfig({
-                      server: {
-                        host: '0.0.0.0',
-                        port: 3000,
-                        strictPort: true,
-                        cors: true
-                      }
-                    });
-                  dest: /home/{{ secrets.AZURE_USER_ID }}/backup/B2C6_B2A_Frontend/vite.config.js
-          EOF
-
-      - name: Transfer playbook.yml to remote VM
-        run: |
-          scp -o StrictHostKeyChecking=accept-new -i sudo ./private_key2 playbook.yml ${{ secrets.AZURE_USER_ID }}@${{ secrets.Ansible_Controller_IP }}:/home/${{ secrets.AZURE_USER_ID }}/playbook.yml
-
-      - name: Run Ansible playbook on remote VM
-        run: |
-          ssh -o StrictHostKeyChecking=accept-new -i sudo./private_key2 ${{ secrets.AZURE_USER_ID }}@${{ secrets.Ansible_Controller_IP }} "ansible-playbook -i inventory /home/${{ secrets.AZURE_USER_ID }}/playbook.yml"
