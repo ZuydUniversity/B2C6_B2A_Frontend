@@ -46,7 +46,7 @@ const Settings = () => {
         const id = data.user_id; // Assuming user_id is available in the response
         setUserId(id); // Set userId in state after fetching it
       } catch (error) {
-
+        throw error;
       }
     }
 
