@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styling/Main.css';
 import '../styling/Patientenoverzicht.css';
 import Navbar from '../components/Navbar';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function PatientOverview() {

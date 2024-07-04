@@ -9,9 +9,11 @@ module.exports = {
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-  settings: { react: { version: '18.2' } },
-  plugins: ['react-refresh'],
+  settings: { react: { version: '18.3' } },
+  plugins: ['react-refresh', 'react'],
   rules: {
+    "react/jsx-uses-react": "error",   
+    "react/jsx-uses-vars": "error" ,
     "react/prop-types": "off",
     'react/jsx-no-target-blank': 'off',
     'react-refresh/only-export-components': [
@@ -20,6 +22,7 @@ module.exports = {
     ],
   },
   globals: {
-    global: 'readonly', // Add this line
+    React: 'writable',
+    global: 'readonly',
   },
 }

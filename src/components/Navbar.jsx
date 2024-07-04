@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import '../styling/Navbar.css';
 import '../styling/Main.css';
 import 'bootstrap/dist/css/bootstrap.min.css';

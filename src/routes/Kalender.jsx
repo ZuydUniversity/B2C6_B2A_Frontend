@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import '../styling/Main.css';
 import '../styling/Kalender.css';
 import Navbar from '../components/Navbar';
