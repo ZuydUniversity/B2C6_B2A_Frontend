@@ -10,8 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 const App = () => {
     useEffect(() => {
-        Cookies.remove('user_id');
-        Cookies.remove('role');
+        Cookies.remove('auth_token');
     }, []);
 
     const [email, setEmail] = useState('');
@@ -43,13 +42,12 @@ const App = () => {
             if (response.ok) {
                 setLoginError('Inloggen succesvol');
                 const data = await response.json();
-                Cookies.set('user_id', data.user_id, { expires: 1 / 24 });
-                Cookies.set('role', data.role, { expires: 1 / 24 });
-
+                Cookies.set('auth_token', data.auth_token, { expires: 1/24 });
+                const user_id = data.user_id;
                 if (data.role == 1) {
-                    navigate('/docmenu');
+                    navigate(`/doctordashboard/${user_id}`);
                 } else if (data.role == 2) {
-                    navigate('/patmenu');
+                    navigate(`/patientdashboard/${user_id}`);
                 } else if (data.role == 3) {
                     navigate('/adminmenu');
                 } else if (data.role == 4) {
