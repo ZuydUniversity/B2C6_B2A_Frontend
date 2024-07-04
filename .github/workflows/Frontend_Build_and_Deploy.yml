@@ -78,7 +78,7 @@ jobs:
               cd /home/${{ secrets.AZURE_USER_ID }}/backup/B2C6_B2A_Frontend
               npm install
               
-              cat <<- 'CONFIG_EOF' > vite.config.js
+              cat << 'CONFIG_EOF' > vite.config.js
               import { defineConfig } from 'vite';
               export default defineConfig({
                 server: {
@@ -88,7 +88,7 @@ jobs:
                   cors: true
                   }
                 });
-              -CONFIG_EOF
+                CONFIG_EOF
 
               cd /home/${{ secrets.AZURE_USER_ID }}/backup/B2C6_B2A_Frontend
               npm run dev
