@@ -45,14 +45,13 @@ const Settings = () => {
         const data = await response.json();
         const id = data.user_id; // Assuming user_id is available in the response
         setUserId(id); // Set userId in state after fetching it
-        await fetchUser(id); // Fetch user data after setting the userId
       } catch (error) {
 
       }
     }
 
     GetAccountInfo();
-  }, [navigate]); // Depend on navigate instead of userId and setUserId
+  }, [navigate]); 
 
   useEffect(() => {
     const fetchUser = async (id) => {
