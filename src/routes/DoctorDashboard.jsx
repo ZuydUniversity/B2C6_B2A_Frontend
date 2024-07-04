@@ -45,7 +45,7 @@ const DoctorDashboard = () => {
                    if(role != 1) {
                        throw new Error('Geen toegang tot deze pagina (rol)');
                    }
-                   else if(patientID != id){
+                   else if(patientId != id){
                     throw new Error('Geen toegang tot deze pagina (id)');
                    }
                 }
