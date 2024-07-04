@@ -49,20 +49,20 @@ jobs:
             az login --service-principal -u ${{ secrets.CLIENT_ID }} -p ${{ secrets.CLIENT_SECRET }} --tenant ${{ secrets.TENANT_ID }}
             
             # Create the VM
-            az vm create --resource-group B2C6A --name frontendvm2 \
+            az vm create --resource-group B2C6A --name frontendvm3 \
               --image "Canonical:0001-com-ubuntu-minimal-jammy:minimal-22_04-lts-gen2:latest" \
               --admin-username ${{ secrets.AZURE_USER_ID }} --assign-identity --generate-ssh-keys \
               --public-ip-sku Standard --location westeurope --size Standard_B1s \
               --storage-sku Standard_LRS --nic-delete-option delete --os-disk-delete-option delete
               
             # Open the port
-            az vm open-port --resource-group B2C6A --name frontendvm2 --port 3000 --priority 1100
+            az vm open-port --resource-group B2C6A --name frontendvm3 --port 3000 --priority 1100
 
             # Wait for the VM to be ready
             sleep 120
             
             # Get the VM's public IP address
-            vm_ip=$(az vm list-ip-addresses --resource-group B2C6A --name frontendvm2 --query "[].virtualMachine.network.publicIpAddresses[].ipAddress" -o tsv)
+            vm_ip=$(az vm list-ip-addresses --resource-group B2C6A --name frontendvm3 --query "[].virtualMachine.network.publicIpAddresses[].ipAddress" -o tsv)
             echo "VM IP Address: $vm_ip"
             
             # SSH into the new VM and run setup tasks
@@ -86,9 +86,8 @@ jobs:
                   port: 3000,
                   strictPort: true,
                   cors: true
-                }
-                });
-            CONFIG_EOF
+                  }});
+             CONFIG_EOF
 
               cd /home/${{ secrets.AZURE_USER_ID }}/backup/B2C6_B2A_Frontend
               npm run dev
