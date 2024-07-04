@@ -13,8 +13,7 @@ function Calendar() {
     const navigate = useNavigate();
     const [showWeekCalendar, setShowWeekCalendar] = useState(false);
     const [showDayCalendar, setShowDayCalendar] = useState(false);
-    const [selectedAppointment, setSelectedAppointment] = useState(null);
-    const [currentDate, setCurrentDate] = useState(new Date());
+    const [currentDate] = useState(new Date());
     const [displayDate, setDisplayDate] = useState(new Date());
     const [currentWeekStartDate, setCurrentWeekStartDate] = useState(new Date());
     const [currentDayIndex, setCurrentDayIndex] = useState(currentDate.getDate());
@@ -150,7 +149,6 @@ function Calendar() {
             items.push(
                 <div key={currentDayIndex} className="grid-item day-view-item">
                     <div className="day-number">{currentDayIndex}</div>
-                    <button className="small-button" onClick={() => handleDaySwitch(currentDayIndex)}>v</button>
                     <div className="greybutton-container">
                         {appointments && appointments[currentDayIndex.toString()] && appointments[currentDayIndex.toString()].map((appointment, idx) => (
                             <div key={idx} className="appointment-item">
@@ -171,7 +169,6 @@ function Calendar() {
                         items.push(
                             <div key={index} className="grid-item">
                                 <div className="day-number">{dayNumber}</div>
-                                <button className="small-button" onClick={() => handleDaySwitch(dayNumber)}>v</button>
                                 {appointmentsForDay.map((appointment) => (
                                     <div key={appointment.id} className="greybutton-container">
                                         <div className="appointment-item">
