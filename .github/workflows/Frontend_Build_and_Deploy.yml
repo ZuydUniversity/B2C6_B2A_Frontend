@@ -77,8 +77,6 @@ jobs:
               
               cd /home/${{ secrets.AZURE_USER_ID }}/backup/B2C6_B2A_Frontend
               npm install
-
-              cd /home/${{ secrets.AZURE_USER_ID }}/backup/B2C6_B2A_Frontend
               npm run dev
             VM_EOF
           EOF
