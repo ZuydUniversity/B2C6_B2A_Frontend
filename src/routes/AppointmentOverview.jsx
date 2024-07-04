@@ -1,8 +1,8 @@
 import {useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import "../styling/Main.css"
-import "../styling/Appointment.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import axios from 'axios';
 
 const api = axios.create({
@@ -10,13 +10,13 @@ const api = axios.create({
 });
 
 const AppointmentOverview = () => {
- const navigate = useNavigate();
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
 
   useEffect(() => {
     fetchData();
   }, []);
-  
+
   const fetchData = async () => {
     try {
       const response = await api.get('/appointment/get_all');
@@ -54,15 +54,14 @@ const AppointmentOverview = () => {
   return (
     <>
       <Navbar />
-      <div className="container">
-        <table className='appointment_table'>
-          <caption>Afsprakenlijst</caption>
+      <div className="container formwidth">
+        <table className="table table-hover">
           <thead>
             <tr>
-              <th>Beschrijving</th>
-              <th>Datum & tijd</th>
-              <th>
-              <button className="btn btn-outline-primary" onClick={handleCreate}>Nieuwe afspraak</button>
+              <th scope="col">Beschrijving</th>
+              <th scope="col">Datum & tijd</th>
+              <th scope="col">
+                <button className="btn btn-outline-primary" onClick={handleCreate}>Nieuwe afspraak</button>
               </th>
             </tr>
           </thead>
@@ -79,13 +78,14 @@ const AppointmentOverview = () => {
                     minute: '2-digit',
                     hour12: false,
                     timeZone: 'UTC'
-                })}</td>
+                  })}
+                </td>
                 <td>
-                  <button className="btn btn-outline-primary btn-sm" onClick={() => handleEdit(id)}>
-                    <i className="bi bi-pencil-square custom-icon"></i>
+                  <button className="btn btn-outline-primary btn-sm me-2" onClick={() => handleEdit(id)}>
+                    <i className="bi bi-pencil-square"></i>
                   </button>
                   <button className="btn btn-outline-primary btn-sm" onClick={() => handleDelete(id)}>
-                    <i className="bi bi-trash3-fill custom-icon"></i>
+                    <i className="bi bi-trash3-fill"></i>
                   </button>
                 </td>
               </tr>
@@ -96,7 +96,5 @@ const AppointmentOverview = () => {
     </>
   );
 }
-
-
 
 export default AppointmentOverview;
