@@ -1,3 +1,5 @@
+import React from "react";
+
 module.exports = {
   root: true,
   env: { browser: true, es2020: true },
@@ -20,6 +22,7 @@ module.exports = {
     ],
   },
   globals: {
-    global: 'readonly', // Add this line
+    React: 'writable',
+    global: 'readonly',
   },
 }
