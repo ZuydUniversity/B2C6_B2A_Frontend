@@ -59,7 +59,7 @@ const AppointmentView = () => {
         api.post(`/user/search`, { search_string: inputValue }).then((response) => {
             const fetchedOptions = response.data.map((user) => ({
                 value: user[0],  // ID
-                label: `${user[1]} ${user[2]}`  // firstName + lastName
+                label: `${user[1]} ${user[2]}`
             }));
             callback(fetchedOptions);
         }).catch((error) => {
@@ -154,10 +154,10 @@ const AppointmentView = () => {
                         />
                     </div>
                     {!isViewing && <button className="btn btn-outline-primary" type="submit">{isEditing ? 'Afspraak bijwerken' : 'Afspraak maken'}</button>}
-                    <br/><button className="btn btn-outline-primary mt-1" onClick={() => window.history.back()}>
+                </form>
+                <br/><button className="btn btn-outline-primary mt-1" onClick={() => window.history.back()}>
                         <i className="bi bi-arrow-left"></i> Terug
                     </button>
-                </form>
             </div>
         </>
     );

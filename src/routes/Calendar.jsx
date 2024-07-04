@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styling/Main.css';
 import '../styling/Calendar.css';
@@ -9,6 +10,7 @@ const api = axios.create({
 });
 
 function Calendar() {
+    const navigate = useNavigate();
     const [showWeekCalendar, setShowWeekCalendar] = useState(false);
     const [showDayCalendar, setShowDayCalendar] = useState(false);
     const [selectedAppointment, setSelectedAppointment] = useState(null);
@@ -53,9 +55,7 @@ function Calendar() {
     }, [displayDate, showWeekCalendar]);
 
     const handleNewAppointmentButtonClick = () => {
-        // Use history to navigate to the new appointment page
-        // In order to return to this page
-        // history.push('/appointment/create');
+        navigate(`/appointmentview/create`);
     };
 
     const handleWeekButtonClick = () => {
@@ -95,28 +95,8 @@ function Calendar() {
         setDisplayDate(newDate);
     };
 
-    const handleDaySwitch = (dayIndex) => {
-        const newDate = new Date(displayDate.getFullYear(), displayDate.getMonth(), dayIndex);
-        setDisplayDate(newDate);
-        setShowDayCalendar(true);
-        setShowWeekCalendar(false);
-        setCurrentDayIndex(dayIndex);
-    };
-
     const handleAppointmentClick = (day, appointment) => {
-        const startTime = appointment.Date.split(' ')[1];
-        const cleanedPatient = `${appointment.participants[10].name} ${appointment.participants[10].lastname}`;
-        const userId = appointment.participants[10].id;
-
-        setSelectedAppointment({
-            day,
-            startTime,
-            patient: cleanedPatient,
-            staff: userId,
-            type: appointment.Description,
-            userId,
-            date: appointment.Date,
-        });
+        navigate(`/appointmentview/view/${appointment.id}`);
     };
 
     const parseAppointments = (data) => {
@@ -154,7 +134,6 @@ function Calendar() {
                 items.push(
                     <div key={day} className="grid-item week-view-item">
                         <div className="day-number">{day}</div>
-                        <button className="small-button" onClick={() => handleDaySwitch(day)}>v</button>
                         <div className="greybutton-container">
                             {appointments && appointments[day.toString()] && appointments[day.toString()].map((appointment, idx) => (
                                 <div key={idx} className="appointment-item">
@@ -254,24 +233,6 @@ function Calendar() {
                 <div className="row calendar-grid">
                     {renderGridItems()}
                 </div>
-                {selectedAppointment && (
-                    <div className="container mt-4">
-                        <div className="row">
-                            <div className="col">
-                                <div className="rounded-square">
-                                    <div className="appointment-details">
-                                        <p><strong>Afspraak details</strong></p>
-                                        <p><strong>Datum:</strong> {selectedAppointment.day} juni 2024</p>
-                                        <p><strong>Begintijd:</strong> {selectedAppointment.startTime}</p>
-                                        <p><strong>Patiënt:</strong> {selectedAppointment.patient}</p>
-                                        <p><strong>Medewerker:</strong> {selectedAppointment.staff}</p>
-                                        <p><strong>Type:</strong> {selectedAppointment.type}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                )}
             </div>
         </>
     );
