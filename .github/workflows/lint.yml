@@ -1,25 +1,33 @@
-name: Run Tests on Pull Request
+name: Lint
 
 on:
+  push:
+    branches:
+      - main
+      - Soufjantje-patch-3
+      
   pull_request:
     branches:
       - main
 
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Set up Node.js
+    - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '20'
+        node-version: '14'
 
     - name: Install dependencies
       run: npm install
 
-    - name: Run tests
-      run: npm test
+    - name: Run ESLint
+      run: npm run lint
+      
+
+

@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar';
 import { useNavigate } from 'react-router-dom';
 import kid_1 from '../assets/kid_1.png';
 import { useParams } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 
 //Doctordashboard hergebruikt voor het grootste deel het patientdashboard, het enige verschil is de manier waarop notities opgehaald worden (via doctorid en met patientnaam erbij)
@@ -45,7 +45,7 @@ const DoctorDashboard = () => {
                    if(role != 1) {
                        throw new Error('Geen toegang tot deze pagina (rol)');
                    }
-                   else if(patientID != id){
+                   else if(patientId != id){
                     throw new Error('Geen toegang tot deze pagina (id)');
                    }
                 }
