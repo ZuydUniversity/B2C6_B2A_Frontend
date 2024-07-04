@@ -1,7 +1,6 @@
 import '../styling/Main.css';
 import '../styling/Patientenoverzicht.css';
 import Navbar from '../components/Navbar';
-import React from 'react';
 import Carousel from '../components/Carousel';
 import TopPage from '../components/TopPage';
 import { useParams } from 'react-router-dom';
@@ -11,7 +10,7 @@ function RadiologyPage() {
     const shoulder_1 = '../../src/assets/shoulder_1.jpg';
     const shoulder_2 = '../../src/assets/shoulder_2.jpg';
     const imageSrc = '../../src/assets/kid_1.png';
-    const patientName = 'John Doe';
+    
 
     const images = [
         shoulder_1, shoulder_2,

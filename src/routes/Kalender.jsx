@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import '../styling/Main.css';
 import '../styling/Kalender.css';
 import Navbar from '../components/Navbar';
@@ -6,7 +6,7 @@ import Navbar from '../components/Navbar';
 function Kalender() {
     const [showWeekCalendar, setShowWeekCalendar] = useState(false);
     const [showDayCalendar, setShowDayCalendar] = useState(false);
-    const [showNewAppointment, setShowNewAppointment] = useState(false);
+    const [setShowNewAppointment] = useState(false);
     const [selectedAppointment, setSelectedAppointment] = useState(null);
     const [currentWeekStartIndex, setCurrentWeekStartIndex] = useState(3);
     const [currentDayIndex, setCurrentDayIndex] = useState(5);
@@ -58,9 +58,6 @@ function Kalender() {
         setCurrentWeekStartIndex(currentWeekStartIndex - 7);
     };
 
-    const handleNewAppointmentButtonClick = () => {
-        setShowNewAppointment(true);
-    };
 
     const handleDaySwitch = (dayIndex) => {
         setCurrentDayIndex(dayIndex);

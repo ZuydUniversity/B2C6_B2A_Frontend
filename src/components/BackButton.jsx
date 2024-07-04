@@ -1,6 +1,5 @@
 import '../styling/Main.css';
 import '../styling/Patientenoverzicht.css';
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const BackButton = () => {

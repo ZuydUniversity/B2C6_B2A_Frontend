@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import Navbar from '../components/Navbar';
+import '../styling/Main.css';
+import Navbar from '../components/Navbar'; // Double period to go back one directory
 import TopPage from '../components/TopPage';
+import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 const EssayPage = () => {
     const { patientId } = useParams();
