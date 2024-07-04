@@ -54,7 +54,7 @@ const Settings = () => {
   }, [navigate]); 
 
   useEffect(() => {
-    const fetchUser = async (id) => {
+    const fetchUser = async () => {
       try {
         const response = await fetch(`http://localhost:5000/get_user/${userId}`);
         if (!response.ok) {
