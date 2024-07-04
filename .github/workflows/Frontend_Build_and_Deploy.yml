@@ -86,7 +86,8 @@ jobs:
                   port: 3000,
                   strictPort: true,
                   cors: true
-                  }});
+                  }
+                });
              CONFIG_EOF
 
               cd /home/${{ secrets.AZURE_USER_ID }}/backup/B2C6_B2A_Frontend
