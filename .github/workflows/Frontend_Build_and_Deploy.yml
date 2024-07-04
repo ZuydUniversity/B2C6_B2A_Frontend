@@ -3,7 +3,7 @@ name: Frontend_Build_and_Deploy
 on:
   push:
     branches:
-      - Frontend_Build_And_Deploy
+      - build_and_deploy
 
 jobs:
   test:
