@@ -64,8 +64,10 @@ jobs:
             # Get the VM's public IP address
             vm_ip=$(az vm list-ip-addresses --resource-group B2C6A --name frontendvm3 --query "[].virtualMachine.network.publicIpAddresses[].ipAddress" -o tsv)
             echo "VM IP Address: $vm_ip"
-            
-            # SSH into the new VM and run setup tasks
+          EOF
+          
+      - name: SSH into the new VM and run setup tasks
+        run: |
             ssh -o StrictHostKeyChecking=accept-new -i /home/${{ secrets.AZURE_USER_ID }}/.ssh/id_rsa ${{ secrets.AZURE_USER_ID }}@$vm_ip << 'VM_EOF'
               sudo apt-get update
               sudo apt-get install -y git curl
@@ -81,4 +83,3 @@ jobs:
               cd /home/${{ secrets.AZURE_USER_ID }}/backup/B2C6_B2A_Frontend
               npm run dev
             VM_EOF
-          EOF
