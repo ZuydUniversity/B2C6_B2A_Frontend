@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AsyncSelect from 'react-select/async';
 import { useNavigate, useParams } from 'react-router-dom';
-import "../styling/Main.css";
-import "../styling/Appointment.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from '../components/Navbar';
 import axios from 'axios';
 
@@ -72,7 +71,6 @@ const AppointmentView = () => {
     const handleFormSubmit = (e) => {
         e.preventDefault();
 
-        // Combine date and time into a single dateTime object
         const dateTime = `${date} ${time}:00`;
 
         const appointmentData = {
@@ -87,7 +85,7 @@ const AppointmentView = () => {
 
         request.then((response) => {
             console.log('Appointment saved successfully:', response.data);
-            navigate('/appointmentoverview');  // Navigate to the appointments page or any other route
+            navigate('/appointmentoverview');
         }).catch((error) => {
             console.error('Error saving appointment:', error);
         });
@@ -97,40 +95,54 @@ const AppointmentView = () => {
         <>
             <Navbar />
             <div className="container formwidth">
-                <h1>{isEditing ? 'Afspraak bewerken' : isViewing ? 'Afspraak bekijken' : 'Afspraak maken'}</h1>
+                <h1 className="centered_title">{isEditing ? 'Afspraak bewerken' : isViewing ? 'Afspraak bekijken' : 'Afspraak maken'}</h1>
                 <form onSubmit={handleFormSubmit}>
-                    <div>
-                        <label htmlFor="description">Beschrijving:</label>
-                        <input
-                            type="text"
-                            id="description"
-                            name="description"
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                            readOnly={isViewing}
-                        />
+                    <div className="mb-3">
+                        <label htmlFor="description" className="form-label">Beschrijving:</label>
+                        {isViewing ? (
+                            <p className="form-control-plaintext">{description}</p>
+                        ) : (
+                            <input
+                                type="text"
+                                id="description"
+                                name="description"
+                                className="form-control"
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                            />
+                        )}
                     </div>
-                    <div>
-                        <label htmlFor="date">Datum:</label>
-                        <input
-                            type="date"
-                            id="date"
-                            name="date"
-                            value={date}
-                            onChange={(e) => setDate(e.target.value)}
-                            readOnly={isViewing}
-                        />
-                        <label htmlFor="time">Tijd:</label>
-                        <input
-                            type="time"
-                            id="time"
-                            name="time"
-                            value={time}
-                            onChange={(e) => setTime(e.target.value)}
-                            readOnly={isViewing}
-                        />
+                    <div className="mb-3">
+                        <label htmlFor="date" className="form-label">Datum:</label>
+                        {isViewing ? (
+                            <p className="form-control-plaintext">{date}</p>
+                        ) : (
+                            <input
+                                type="date"
+                                id="date"
+                                name="date"
+                                className="form-control"
+                                value={date}
+                                onChange={(e) => setDate(e.target.value)}
+                            />
+                        )}
                     </div>
-                    <div>
+                    <div className="mb-3">
+                        <label htmlFor="time" className="form-label">Tijd:</label>
+                        {isViewing ? (
+                            <p className="form-control-plaintext">{time}</p>
+                        ) : (
+                            <input
+                                type="time"
+                                id="time"
+                                name="time"
+                                className="form-control"
+                                value={time}
+                                onChange={(e) => setTime(e.target.value)}
+                            />
+                        )}
+                    </div>
+                    <div className="mb-3">
                         <AsyncSelect
                             isMulti
                             cacheOptions
@@ -142,6 +154,9 @@ const AppointmentView = () => {
                         />
                     </div>
                     {!isViewing && <button className="btn btn-outline-primary" type="submit">{isEditing ? 'Afspraak bijwerken' : 'Afspraak maken'}</button>}
+                    <br/><button className="btn btn-outline-primary mt-1" onClick={() => window.history.back()}>
+                        <i className="bi bi-arrow-left"></i> Terug
+                    </button>
                 </form>
             </div>
         </>
