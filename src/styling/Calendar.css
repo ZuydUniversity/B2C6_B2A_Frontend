@@ -3,7 +3,7 @@
   /*----------------------------------*/
 
 
-  .calendar-datatable {
+.calendar-datatable {
     width: 1000px;
 }
 
@@ -67,7 +67,7 @@
     gap: 5px;
     width: 100%;
     max-width: 1400px;
-    padding-left: 60px;
+    padding-left: 30px;
 }
 
 .grid-item {
@@ -121,18 +121,14 @@
 
 .month-year-container {
     display: flex;
-    text-align: center;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
     margin-top: 10px;
-    flex-direction: row;
+    width: 75%; 
 }
 
-.month-display {
-    font-weight: bold;
-    color: black;
-    font-size: 1.2em;
-}
-
-.year-display {
+.month-year-display {
     font-weight: bold;
     color: black;
     font-size: 1.2em;

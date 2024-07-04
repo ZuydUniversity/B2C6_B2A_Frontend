@@ -12,7 +12,7 @@ import EssayPage from './routes/EssayPage.jsx';
 import RadiologyPage from './routes/RadiologyPage.jsx';
 import PatientSettingsPage from './routes/PatientSettingsPage.jsx';
 import PatientList from './components/PatientList.jsx';
-import Kalender from './routes/Kalender.jsx';
+import Calendar from './routes/Calendar.jsx';
 import PatientDashboard from './routes/PatientDashboard.jsx';
 import DocMenuTest from './menuTests/doctormenu.jsx';
 import PatMenuTest from './menuTests/patientmenu.jsx';
@@ -36,7 +36,7 @@ const router = createBrowserRouter([
     { path: "/radiologypage/:patientId/:resultId", element: <RadiologyPage /> },
     { path: "/patientsettingspage/:patientId", element: <PatientSettingsPage /> },
     { path: "/patientlist", element: <PatientList /> },
-    { path: "/kalender", element: <Kalender /> },
+    { path: "/kalender", element: <Calendar /> },
     { path: "/", element: <App /> },
     { path: "/register", element: <Register /> },
     { path: "/forgot-password", element: <ForgotPassword /> },
