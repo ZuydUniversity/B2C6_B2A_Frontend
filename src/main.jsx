@@ -19,6 +19,8 @@ import PatMenuTest from './menuTests/patientmenu.jsx';
 import ResMenuTest from './menuTests/researchermenu.jsx';
 import AdminMenu from './menuTests/adminmenu.jsx';
 import ResetPassword from './routes/resetpassword.jsx';
+import AppointmentOverview from './routes/AppointmentOverview.jsx';
+import AppointmentView from './routes/AppointmentView.jsx';
 import ProfilePage from './routes/ProfilePage.jsx';
 import DoctorDashboard from './routes/Home.jsx';
 import PageNotFound from './routes/404Page.jsx'; // Import the 404Page component
@@ -48,6 +50,9 @@ const router = createBrowserRouter([
     { path: "/adminmenu", element: <AdminMenu />},
     { path: "/reset-password/:token", element: <ResetPassword /> },
     { path: "/profilepage/", element: <ProfilePage /> },
+    { path: "/appointmentoverview", element: <AppointmentOverview /> },
+    { path: "/appointmentview/:action/:id", element: <AppointmentView />},
+    { path: "/appointmentview/create", element: <AppointmentView />},
     { path: "*", element: <PageNotFound /> } // Add this line to catch all undefined routes
 ]);
 
