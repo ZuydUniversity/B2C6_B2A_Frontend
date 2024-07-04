@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import kid_1 from '../assets/kid_1.png';
 import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
 
 //Doctordashboard hergebruikt voor het grootste deel het patientdashboard, het enige verschil is de manier waarop notities opgehaald worden (via doctorid en met patientnaam erbij)
 const DoctorDashboard = () => {
@@ -14,6 +15,47 @@ const DoctorDashboard = () => {
     const { patientId } = useParams();
 
     useEffect(() => {
+        async function GetAccountInfo(){
+            try {
+                const authToken = Cookies.get('auth_token');
+                if (!authToken) {
+                    throw new Error('Not authenticated');
+                }
+                const response = await fetch('http://127.0.0.1:5000/get_account_info', {
+                    method: 'POST', 
+                    headers: {
+                        'Content-Type': 'application/json',
+                        credentials: "include"
+                    },
+                    body: JSON.stringify({ auth_token: authToken })
+                });
+    
+                if (!response.ok) {
+                    if(response.status === 500) {
+                        throw new Error('Server error, probeer het later opnieuw');
+                    }
+                    throw new Error('Error met het authenticeren, probeer het later opniew');
+                }
+    
+                if (response.ok) {
+                
+                   let data = await response.json();
+                   let role = data.role;
+                   let id = data.user_id;
+                   if(role != 1) {
+                       throw new Error('Geen toegang tot deze pagina (rol)');
+                   }
+                   else if(patientId != id){
+                    throw new Error('Geen toegang tot deze pagina (id)');
+                   }
+                }
+            } catch (error) {
+                console.error('Auth error:', error);
+                navigate('/');
+            }
+        }
+        GetAccountInfo();
+
         const fetchPatientName = async () => { // Functie om de naam van de gebruiker op te halen (werkt ook voor dokter)
             try {
                 const response = await fetch(`http://localhost:5000/getuserfirstnamelastname/${patientId}`);

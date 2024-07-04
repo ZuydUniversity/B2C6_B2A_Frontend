@@ -17,7 +17,7 @@ const Settings = ({ userId }) => {
   useEffect(() => {
     const fetchUser = async (userId) => {
       try {
-        const response = await fetch(`http://localhost:5000/get_user/3`);
+        const response = await fetch(`http://localhost:5000/get_user/${userId}`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

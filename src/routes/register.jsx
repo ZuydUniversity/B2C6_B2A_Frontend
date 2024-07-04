@@ -2,10 +2,10 @@ import '../styling/Main.css';
 import '../styling/Login.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Form, Button, Alert } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 function Register() {
-    const [accountType, setAccountType]= useState('Patient');
+    const [accountType]= useState('Patient');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [firstName, setFirstName] = useState('');
@@ -70,18 +70,6 @@ function Register() {
         }
     };
 
-    const changeAccount = (e) => {
-        setAccountType(e.target.value);
-        setSpecialization('');
-        setGender('');
-        setBirthDate('');
-        setPhoneNumber('');
-        setPhoto('');
-        setContactEmail('');
-        setContactName('');
-        setContactPhone('');
-        setContactLastName('');
-    };
 
     const renderDoctorFields = () => {
         return (

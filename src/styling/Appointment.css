@@ -1,0 +1,50 @@
+
+  /* ------------------------------ */
+  /* Appointment overview table css */
+  /* ------------------------------ */
+  
+  .appointment_table {
+    color:black;
+    background: var(--secundary-color);
+    width: 100%;
+    caption-side: top;
+    border-collapse: collapse;
+  }
+
+  .appointment_table caption,
+  .appointment_table th,
+  .appointment_table td {
+    padding: 1rem;
+    text-align: left;
+  }
+
+  .appointment_table caption {
+    color:black;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  .appointment_table th {
+    background-color: var(--primary-color);
+    color: white;
+  }
+
+  .appointment_table tr {
+    background-color: var(--secundary-color);
+    font-size: 1rem;
+  }
+
+  .appointment_table tr:nth-of-type(2n) {
+    background: var(--secundary-half-color);
+  }
+
+  .appointment_table td:last-child,
+  .appointment_table th:last-child{
+    text-align: right;
+  }
+
+  .appointment_table button {
+    background-color: white;
+    color: black;
+    margin-right: 0.3em;
+  }

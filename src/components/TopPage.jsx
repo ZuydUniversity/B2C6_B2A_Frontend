@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import BackButton from './BackButton';
 
-const TopPage = ({ headerName, imageSrc, patientId }) => {
+const TopPage = ({ imageSrc, patientId }) => {
     const [patientName, setPatientName] = useState('');
 
     useEffect(() => {
