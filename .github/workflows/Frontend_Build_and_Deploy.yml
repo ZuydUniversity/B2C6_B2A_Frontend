@@ -88,7 +88,7 @@ jobs:
                   cors: true
                   }
                 });
-              CONFIG_EOF
+            CONFIG_EOF
 
               cd /home/${{ secrets.AZURE_USER_ID }}/backup/B2C6_B2A_Frontend
               npm run dev
