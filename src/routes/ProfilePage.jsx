@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import axios from 'axios';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
-const Settings = ({ userId }) => {
+const Settings = () => {
+  const [userId, setUserId] = useState(null); // Initialize userId state
   const [emailNotifications, setEmailNotifications] = useState(false);
   const [accessibilityMode, setAccessibilityMode] = useState(1);
   const [profileInfo, setProfileInfo] = useState({
@@ -13,9 +16,45 @@ const Settings = ({ userId }) => {
     phone: '',
   });
   const [isEditingProfile, setIsEditingProfile] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchUser = async (userId) => {
+    async function GetAccountInfo() {
+      const authToken = Cookies.get('auth_token');
+      if (!authToken) {
+        throw new Error('Not authenticated');
+      }
+      
+      const response = await fetch('http://127.0.0.1:5000/get_account_info', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          credentials: 'include',
+        },
+        body: JSON.stringify({ auth_token: authToken }),
+      });
+  
+      if (!response.ok) {
+        if (response.status === 500) {
+          throw new Error('Server error, probeer het later opnieuw');
+        }
+        throw new Error('Error met het authenticeren, probeer het later opnieuw');
+      }
+  
+      const data = await response.json();
+      const id = data.user_id; // Assuming user_id is available in the response
+      setUserId(id); // Set userId in state after fetching it
+    }
+  
+    GetAccountInfo().catch(error => {
+      // Handle error here, e.g., log it or show an error message
+      console.error('Error fetching account info:', error);
+      // Optionally, you can set a state variable to indicate an error occurred
+    });
+  }, [navigate]);
+
+  useEffect(() => {
+    const fetchUser = async () => {
       try {
         const response = await fetch(`http://localhost:5000/get_user/${userId}`);
         if (!response.ok) {
@@ -37,7 +76,9 @@ const Settings = ({ userId }) => {
       }
     };
 
-    fetchUser(userId);
+    if (userId) {
+      fetchUser(userId);
+    }
   }, [userId]);
 
   const handleInputChange = (e) => {
@@ -58,7 +99,7 @@ const Settings = ({ userId }) => {
 
   const handleSaveProfile = async () => {
     try {
-      const response = await axios.post(`http://localhost:5000/update_user/3`, {
+      const response = await axios.post(`http://localhost:5000/update_user/${userId}`, {
         Name: profileInfo.name,
         Lastname: profileInfo.lastname,
         Gender: profileInfo.gender,
