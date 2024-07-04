@@ -3,7 +3,7 @@ name: Frontend
 on:
   push:
     branches:
-      - CI-deployment
+      - 
 
 jobs:
   test:
@@ -44,15 +44,15 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=accept-new -i ./private_key ${{ secrets.AZURE_USER_ID }}@${{ secrets.Ansible_Controller_IP }} << 'EOF'
             az login --service-principal -u {{ secrets.CLIENT_ID }} -p {{ secrets.CLIENT_SECRET }} --tenant {{ secrets.TENANT_ID }}
-            az vm create --resource-group B2C6A --name frontendlasse4 \
+            az vm create --resource-group B2C6A --name frontendvm1 \
               --image "Canonical:0001-com-ubuntu-minimal-jammy:minimal-22_04-lts-gen2:latest" \
               --admin-username {{ secrets.AZURE_USER_ID }} --assign-identity --generate-ssh-keys \
               --public-ip-sku Standard --location westeurope --size Standard_B1s \
               --storage-sku Standard_LRS --nic-delete-option delete --os-disk-delete-option delete
-            az vm open-port --resource-group B2C6A --name frontendlasse4 --port 3000 --priority 1100
+            az vm open-port --resource-group B2C6A --name frontendvm1 --port 3000 --priority 1100
             sleep 120
-            vm_ip=$(az vm list-ip-addresses --resource-group B2C6A --name frontendlasse4 --query "[].virtualMachine.network.publicIpAddresses[].ipAddress" -o tsv)
-            echo "[frontendlasse4]" > inventory
+            vm_ip=$(az vm list-ip-addresses --resource-group B2C6A --name frontendvm1 --query "[].virtualMachine.network.publicIpAddresses[].ipAddress" -o tsv)
+            echo "[frontendvm1]" > inventory
             echo "$vm_ip ansible_user={{ secrets.AZURE_USER_ID }} ansible_ssh_private_key_file=/home/{{ secrets.AZURE_USER_ID }}/ansibleproject/backup-frontend-private-key" >> inventory
           EOF
 
@@ -61,7 +61,7 @@ jobs:
           cat << 'EOF' > playbook.yml
           ---
           - name: Automate frontend setup
-            hosts: frontendlasse4
+            hosts: frontendvm1
             gather_facts: false
             tasks:
               - name: Check if frontend is reachable
