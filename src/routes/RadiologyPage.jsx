@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar';
 import Carousel from '../components/Carousel';
 import TopPage from '../components/TopPage';
 import { useParams } from 'react-router-dom';
+import React from 'react';
 
 function RadiologyPage() {
     const { patientId } = useParams();

@@ -1,6 +1,7 @@
 // src/Carousel.js
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Carousel as BootstrapCarousel } from 'react-bootstrap';
+import React from 'react';
 
 const Carousel = ({ images }) => {
     return (
